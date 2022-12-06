@@ -3,27 +3,36 @@
     <nav>
       <NavBar />
     </nav>
-    <div>
-      <GMapMap
-        :center="getPos()"
-        :zoom="18"
-        map-type-id="terrain"
-        style="width: 500px; height: 300px">
-        <GMapMarker :key="index" v-for="(m, index) in markers" />
-        <GMapCluster>
-          <GMapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            :clickable="true"
-            :draggable="true"
-            @click="center = m.position"
-          />
-        </GMapCluster>
-      </GMapMap>
-    </div>
+    <v-container class="grey lighten-5">
+      <v-row no-gutters>
+        <v-col cols="12" sm="6">
+          <h1>Ecopontos</h1>
+        </v-col>
+        <v-col cols="12" sm="6">
+          <div>
+            <GMapMap
+              :center="getPos()"
+              :zoom="18"
+              map-type-id="hybrid"
+              style="width: 500px; height: 300px"
+            >
+              <GMapMarker :key="index" v-for="(m, index) in markers" />
+              <GMapCluster>
+                <GMapMarker
+                  :key="index"
+                  v-for="(m, index) in markers"
+                  :position="m.position"
+                  :clickable="true"
+                  :draggable="true"
+                  @click="center = m.position"
+                />
+              </GMapCluster>
+            </GMapMap>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
-  
 </template>
 
 <script setup>
@@ -56,38 +65,38 @@ function getPos() {
 </script>
 
 <style>
-  #background {
-    background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
-    min-height: 1080px;
+#background {
+  background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
+  min-height: 1080px;
+}
+@media (max-width: 576px) {
+  nav {
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  @media (max-width: 576px) {
-    nav{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
+}
+@media (max-width: 768px) {
+  nav {
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  @media (max-width: 768px) {
-    nav{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
+}
+@media (min-width: 992px) {
+  nav {
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  @media (min-width: 992px) {
-    nav{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
+}
+@media (max-width: 1200px) {
+  nav {
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  @media (max-width: 1200px) {
-    nav{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
+}
+@media (min-width: 1400px) {
+  nav {
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  @media (min-width: 1400px) {
-    nav{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  }
+}
 </style>
