@@ -1,27 +1,33 @@
 <template>
-  <div>
-    <GMapMap
-      :center="getPos()"
-      :zoom="18"
-      map-type-id="terrain"
-      style="width: 500px; height: 300px"
-    >
-      <GMapMarker :key="index" v-for="(m, index) in markers" />
-      <GMapCluster>
-        <GMapMarker
-          :key="index"
-          v-for="(m, index) in markers"
-          :position="m.position"
-          :clickable="true"
-          :draggable="true"
-          @click="center = m.position"
-        />
-      </GMapCluster>
-    </GMapMap>
+  <div id="background">
+    <nav>
+      <NavBar />
+    </nav>
+    <div>
+      <GMapMap
+        :center="getPos()"
+        :zoom="18"
+        map-type-id="terrain"
+        style="width: 500px; height: 300px">
+        <GMapMarker :key="index" v-for="(m, index) in markers" />
+        <GMapCluster>
+          <GMapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="center = m.position"
+          />
+        </GMapCluster>
+      </GMapMap>
+    </div>
   </div>
+  
 </template>
 
 <script setup>
+import NavBar from "@/src/components/NavBar.vue";
 markers: [
   {
     position: {
@@ -48,3 +54,10 @@ function getPos() {
   }
 }
 </script>
+
+<style>
+  #background {
+    background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
+    min-height: 1080px;
+  }
+</style>
