@@ -24,7 +24,7 @@ app.use(router);
 app.use(vuetify);
 app.use(VueGoogleMaps, {
   load: {
-    key: "",
+    key: "AIzaSyApL3tNB2xZRdCBVU-UGatvU0Dolh5Owo0",
   },
 });
 
