@@ -21,14 +21,8 @@ export default {};
     
 <style>
     #nav{
-        width: 1080px;
         border-radius: 10px;
         background-color: #114B5F;
         color: #FDFCF8;
-    }
-    #main{
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 </style>

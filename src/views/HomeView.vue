@@ -60,4 +60,34 @@ function getPos() {
     background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
     min-height: 1080px;
   }
+  @media (max-width: 576px) {
+    nav{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  @media (max-width: 768px) {
+    nav{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  @media (min-width: 992px) {
+    nav{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  @media (max-width: 1200px) {
+    nav{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  @media (min-width: 1400px) {
+    nav{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
 </style>
