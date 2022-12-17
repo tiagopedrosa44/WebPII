@@ -6,7 +6,7 @@
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <div id="navLeft">
-            <v-btn text>Mapa</v-btn>
+            <v-btn text @click="$router.push('/home')">Mapa</v-btn>
             <v-btn text>Rankings</v-btn>
             <v-btn text>Loja</v-btn>
           </div>
@@ -15,6 +15,7 @@
           </div>
           <div id="navRight">
             <v-btn icon="">a</v-btn>
+            <v-btn icon="" @click="this.store.logout()">Logout</v-btn>
           </div>
         </v-toolbar-items>
       </v-toolbar>
@@ -23,7 +24,14 @@
 </template>
 
 <script>
-export default {};
+import { userStore } from "../stores/userStore.js";
+export default {
+  data() {
+    return {
+      store: userStore(),
+    }
+  },
+};
 </script>
 
 <style>

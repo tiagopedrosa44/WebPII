@@ -14,6 +14,33 @@ export const userStore = defineStore("user", {
         moedas: 0,
         utilizacoes: 0,
       },
+      {
+        id: 2,
+        tipo: "admin",
+        nome: "fabio",
+        email: "fabio@gmail.com",
+        password: "123",
+        pontos: 0,
+        moedas: 0,
+        utilizacoes: 0,
+      },
+
+      {
+        id: 3,
+        tipo: "admin",
+        nome: "daniel",
+        email: "daniel@gmail.com",
+        password: "123",
+        pontos: 0,
+        moedas: 0,
+        utilizacoes: 0,
+      },
+    ],
+    logado: [
+      {
+        bool: false,
+        nome: "",
+      },
     ],
   }),
   getters: {
@@ -25,12 +52,13 @@ export const userStore = defineStore("user", {
     login(username, password) {
       if (this.users.find((user) => user.nome == username)) {
         if (this.users.find((user) => user.password == password)) {
-          localStorage.setItem("userLogado", username);
+          this.logado = { bool: true, nome: username };
           console.log("Login efetuado com sucesso");
           router.push("/home");
         } else throw Error("Password incorreta");
       } else throw Error("Utilizador não encontrado");
     },
+
     registar(username, email, password, password2) {
       if (this.users.find((user) => user.nome == username)) {
         throw Error("Utilizador já existe");
@@ -48,11 +76,17 @@ export const userStore = defineStore("user", {
             moedas: 0,
             utilizacoes: 0,
           });
-          localStorage.setItem("userLogado", username);
+          this.logado = { bool: true, nome: username };
           console.log("Registo efetuado com sucesso");
           router.push("/home");
         }
       }
+    },
+
+    logout() {
+      this.logado = { bool: false, nome: "" };
+      console.log("Logout efetuado com sucesso");
+      router.push("/");
     },
   },
 });
