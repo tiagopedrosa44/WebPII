@@ -6,8 +6,8 @@
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <div id="navLeft">
-            <v-btn text>Reciclagem</v-btn>
-            <v-btn text>Começar</v-btn>
+            <v-btn text >Reciclagem</v-btn>
+            <v-btn text @click="$router.push('/login')">Começar</v-btn>
           </div>
         </v-toolbar-items>
       </v-toolbar>
