@@ -6,7 +6,7 @@
                     <h1>Login</h1><br>
                     <input type="text" placeholder="Utilizador" v-model="username"><br>
                     <input type="password" placeholder="Password" v-model="password"><br><br>
-                    <v-btn text @click="login(user,pass)" id="botaoLogin">Login</v-btn><br><br>
+                    <v-btn text @click="login(username,password)" id="botaoLogin">Login</v-btn><br><br>
                     <a @click="$router.push('/registo')">Ainda não tem conta? Registe-se!</a>
                 </div>
             </div>
@@ -29,7 +29,7 @@ export default {
     },
 
     methods: {
-        login(user, pass) {
+        login(username, password) {
             
         }
     }

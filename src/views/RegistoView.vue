@@ -13,7 +13,8 @@
                         <input type="password" placeholder="Password*" v-model="password"><br>
                         <input type="password" placeholder="Confirmar Password*" v-model="password2"><br>
                         <input type="text" placeholder="Referral Code" v-model="referralCode"><br><br>
-                        <v-btn text @click="login(user, pass)" id="botaoRegisto">Login</v-btn><br><br>
+                        <v-btn text @click="registo(username, email, password, password2, referralCode)"
+                            id="botaoRegisto">Login</v-btn><br><br>
                         <a @click="$router.push('/login')">Já tem conta? Faça login!</a>
                     </div>
                 </div>
@@ -33,6 +34,11 @@ export default {
             referralCode: "",
         }
     },
+
+    methods: {
+        registo(username, email, password, password2, referralCode) {
+        }
+    }
 }
 </script>
 
