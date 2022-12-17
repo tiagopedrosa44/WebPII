@@ -4,7 +4,7 @@ import LandingView from '../views/LandingPageView.vue'
 import RegistoView from '../views/RegistoView.vue'
 import LoginView from '../views/LoginView.vue'
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
@@ -13,7 +13,7 @@ const router = createRouter({
       component: LandingView
     },
     {
-      path: '/Mapa',
+      path: '/Home',
       name: 'home',
       component: HomeView
     },
