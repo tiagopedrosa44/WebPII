@@ -43,16 +43,12 @@ export const userStore = defineStore("user", {
       },
     ],
   }),
-  getters: {
-    utilizadorLogado() {
-      return this.logado.bool;
-    }
-  },
   actions: {
     login(username, password) {
       if (this.users.find((user) => user.nome == username)) {
         if (this.users.find((user) => user.password == password)) {
           this.logado = { bool: true, nome: username };
+          localStorage.setItem("logado", JSON.stringify(this.logado.bool));
           console.log("Login efetuado com sucesso");
           router.push("/home");
         } else throw Error("Password incorreta");
@@ -77,6 +73,7 @@ export const userStore = defineStore("user", {
             utilizacoes: 0,
           });
           this.logado = { bool: true, nome: username };
+          localStorage.setItem("logado", JSON.stringify(this.logado.bool));
           console.log("Registo efetuado com sucesso");
           router.push("/home");
         }
@@ -85,6 +82,7 @@ export const userStore = defineStore("user", {
 
     logout() {
       this.logado = { bool: false, nome: "" };
+      localStorage.setItem("logado", JSON.stringify(this.logado.bool));
       console.log("Logout efetuado com sucesso");
       router.push("/");
     },

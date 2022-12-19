@@ -14,32 +14,31 @@ export const router = createRouter({
       component: LandingView
     },
     {
-      path: '/Home',
+      path: '/home',
       name: 'home',
       component: HomeView
     },
     {
-      path: '/Registo',
+      path: '/registo',
       name: 'registo',
       component: RegistoView
     },
     {
-      path: '/Login',
+      path: '/login',
       name: 'login',
       component: LoginView
     }
   ]
 })
 
+//navigation guard
 router.beforeEach((to, from, next) => {
-  const paginasAbertas = ['/', '/Registo', '/Login'];
+  const paginasAbertas = ['/', '/registo', '/login'];
   const requerLogin = !paginasAbertas.includes(to.path);
-  const logado = userStore.utilizadorLogado;
 
-  if (requerLogin && !logado) {
-    return next('/Login');
+  if (requerLogin && localStorage.getItem("logado") == "false") {
+    return next('/login')
   }
-
   next();
 })
 
