@@ -44,9 +44,9 @@ export const userStore = defineStore("user", {
     ],
   }),
   getters: {
-    getUserById: (state) => (id) => {
-      return state.users.find((user) => user.id == id);
-    },
+    utilizadorLogado() {
+      return this.logado.bool;
+    }
   },
   actions: {
     login(username, password) {
