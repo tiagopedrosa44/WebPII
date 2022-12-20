@@ -11,17 +11,20 @@
             <br /><br />
             <input
               type="text"
+              required
               placeholder="Utilizador*"
               v-model="username"
             /><br />
             <input type="email" placeholder="Email*" v-model="email" /><br />
             <input
               type="password"
+              required
               placeholder="Password*"
               v-model="password"
             /><br />
             <input
               type="password"
+              required
               placeholder="Confirmar Password*"
               v-model="password2"
             /><br />

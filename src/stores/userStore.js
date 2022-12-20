@@ -45,14 +45,28 @@ export const userStore = defineStore("user", {
   }),
   actions: {
     login(username, password) {
+      const inputUsername = document.querySelector("#username");
+      const inputPassword = document.querySelector("#password");
+      function resetBorder() {
+        inputUsername.style.border = "none";
+        inputPassword.style.border = "none";
+        inputPassword.removeEventListener("click", resetBorder);
+        inputUsername.removeEventListener("click", resetBorder);
+      }
       if (this.users.find((user) => user.nome == username)) {
         if (this.users.find((user) => user.password == password)) {
           this.logado = { bool: true, nome: username };
           localStorage.setItem("logado", JSON.stringify(this.logado.bool));
           console.log("Login efetuado com sucesso");
           router.push("/home");
-        } else throw Error("Password incorreta");
-      } else throw Error("Utilizador não encontrado");
+        } else {
+          document.querySelector("#password").style.border = "3px solid red";
+          inputPassword.addEventListener("click", resetBorder);
+        }
+      } else {
+        document.querySelector("#username").style.border = "3px solid red";
+        inputUsername.addEventListener("click", resetBorder);
+      }
     },
 
     registar(username, email, password, password2) {
