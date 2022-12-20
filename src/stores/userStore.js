@@ -70,11 +70,22 @@ export const userStore = defineStore("user", {
     },
 
     registar(username, email, password, password2) {
+      const inputUsername = document.querySelector("#username");
+      const inputPassword2 = document.querySelector("#password2");
+
+      function resetBorder() {
+        inputUsername.style.border = "none";
+        inputPassword2.style.border = "none";
+        inputPassword2.removeEventListener("click", resetBorder);
+        inputUsername.removeEventListener("click", resetBorder);
+      }
       if (this.users.find((user) => user.nome == username)) {
-        throw Error("Utilizador já existe");
+        inputUsername.style.border = "3px solid red";
+        inputUsername.addEventListener("click", resetBorder);
       } else {
         if (password != password2) {
-          throw Error("Passwords não coincidem");
+          inputPassword2.style.border = "3px solid red";
+          inputPassword2.addEventListener("click", resetBorder);
         } else {
           this.users.push({
             id: this.users.length + 1,

@@ -11,6 +11,7 @@
             <br /><br />
             <input
               type="text"
+              id="username"
               required
               placeholder="Utilizador*"
               v-model="username"
@@ -18,18 +19,21 @@
             <input type="email" placeholder="Email*" v-model="email" /><br />
             <input
               type="password"
+              id="password"
               required
               placeholder="Password*"
               v-model="password"
             /><br />
             <input
               type="password"
+              id="password2"
               required
               placeholder="Confirmar Password*"
               v-model="password2"
             /><br />
             <input
               type="text"
+              id="referralCode"
               placeholder="Referral Code"
               v-model="referralCode"
             /><br /><br />
