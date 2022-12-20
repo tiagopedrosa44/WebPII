@@ -14,8 +14,9 @@
             <v-btn icon="">a</v-btn>
           </div>
           <div id="navRight">
-            <v-btn icon="">a</v-btn>
-            <v-btn icon="" @click="this.store.logout()">Logout</v-btn>
+            <v-btn text>Perfil</v-btn>
+            <v-btn text>Desafios</v-btn>
+            <v-btn text @click="this.store.logout()">Logout</v-btn>
           </div>
         </v-toolbar-items>
       </v-toolbar>
@@ -29,7 +30,7 @@ export default {
   data() {
     return {
       store: userStore(),
-    }
+    };
   },
 };
 </script>
@@ -53,7 +54,7 @@ export default {
 }
 #navRight {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
 }
 </style>
