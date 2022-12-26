@@ -1,12 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <form>
-      <v-text-field label="Username" v-model="username" />
-      <v-text-field label="Password" v-model="password" type="password" />
-      <v-btn @click="login">Login</v-btn>
-    </form>
-=======
     <div class="left">
       <div class="left-content">
         <div class="left-content-text">
@@ -43,21 +36,17 @@
         </div>
       </div>
     </div>
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
 import { userStore } from "../stores/userStore.js";
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
 export default {
   data() {
     return {
       username: "",
       password: "",
-<<<<<<< HEAD
+      store: userStore(),
     };
   },
   methods: {
@@ -65,19 +54,11 @@ export default {
       console.log("login");
     },
   },
-=======
-      store: userStore(),
-    };
-  },
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
+
 };
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-input {
-  border: 1px solid #114b5f;
-=======
 h1 {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -162,6 +143,5 @@ a {
   font-size: 18px;
   line-height: 21px;
   padding-left: 20px;
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
 }
 </style>

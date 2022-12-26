@@ -1,14 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LandingView from '../views/LandingPageView.vue'
-<<<<<<< HEAD
 import LoginView from '../views/LoginView.vue'
 import RegistoView from '../views/RegistoView.vue'
-=======
-import RegistoView from '../views/RegistoView.vue'
-import LoginView from '../views/LoginView.vue'
-import { userStore } from "../stores/userStore.js";
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
+//import { userStore } from "../stores/userStore.js";
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +19,6 @@ export const router = createRouter({
       component: HomeView
     },
     {
-<<<<<<< HEAD
       path: '/login',
       name: 'login',
       component: LoginView,
@@ -33,10 +27,9 @@ export const router = createRouter({
       path:'/registar',
       name:'registar',
       component: RegistoView,
-    }
-
+    },
+    {
     
-=======
       path: '/registo',
       name: 'registo',
       component: RegistoView
@@ -46,7 +39,6 @@ export const router = createRouter({
       name: 'login',
       component: LoginView
     }
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
   ]
 })
 

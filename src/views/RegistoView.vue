@@ -1,13 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <form>
-      <v-text-field label="Username" v-model="username" />
-      <v-text-field label="Email" v-model="email" />
-      <v-text-field label="Password" v-model="password" type="password" />
-      <v-btn @click="registar">Registar</v-btn>
-    </form>
-=======
     <div class="left">
       <div class="left-content">
         <img src="../assets/imgs/imgPagLogin.png" alt="" />
@@ -56,32 +48,10 @@
         </div>
       </div>
     </div>
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-import { userStore } from "@/stores/userStore.js";
-export default {
-  data() {
-    return {
-      store: userStore(),
-      username: "",
-      email: "",
-      password: "",
-    };
-  },
-  methods: {
-    registar() {
-        this.store.addUser(this.username, this.email, this.password)
-    },
-  },
-};
-</script>
-
-<style scoped></style>
-=======
 import { userStore } from "../stores/userStore.js";
 export default {
   data() {
@@ -184,4 +154,3 @@ a {
   padding-left: 20px;
 }
 </style>
->>>>>>> 7acbd910148223c82142058367319cce07a437d3
