@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
+import { router } from "../router";
 
-export const userStore = defineStore("user", {
+export const userStore = defineStore("userStore", {
   state: () => ({
     users: [
       {
@@ -24,7 +25,13 @@ export const userStore = defineStore("user", {
         utilizacoes: 0,
       },
     ],
-    currentUser: "",
+
+    logado: [
+      {
+        bool: false,
+        nome: "",
+      },
+    ],
   }),
 
   getters: {
@@ -53,14 +60,45 @@ export const userStore = defineStore("user", {
     },
 
     login(username, password) {
-      const user = this.users.find(
-        (user) => user.username == username && user.password == password
-      );
-      if (user) {
-        this.currentUser = user;
-        return true;
+      if (this.users.find((user) => user.nome == username)) {
+        if (this.users.find((user) => user.password == password)) {
+          localStorage.setItem("userLogado", username);
+          this.logado = { bool: true, nome: username };
+          console.log("Login efetuado com sucesso");
+          router.push("/home");
+        } else throw Error("Password incorreta");
+      } else throw Error("Utilizador não encontrado");
+    },
+
+    registar(username, email, password, password2) {
+      if (this.users.find((user) => user.nome == username)) {
+        throw Error("Utilizador já existe");
+      } else {
+        if (password != password2) {
+          throw Error("Passwords não coincidem");
+        } else {
+          this.users.push({
+            id: this.users.length + 1,
+            tipo: "user",
+            nome: username,
+            email: email,
+            password: password,
+            pontos: 0,
+            moedas: 0,
+            utilizacoes: 0,
+          });
+          localStorage.setItem("userLogado", username);
+          this.logado = { bool: true, nome: username };
+          console.log("Registo efetuado com sucesso");
+          router.push("/home");
+        }
       }
-      return false;
+    },
+
+    logout() {
+      this.logado = { bool: false, nome: "" };
+      console.log("Logout efetuado com sucesso");
+      router.push("/");
     },
   },
 });
