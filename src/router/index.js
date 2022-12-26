@@ -24,21 +24,10 @@ export const router = createRouter({
       component: LoginView,
     },
     {
-      path:'/registar',
-      name:'registar',
+      path: '/registar',
+      name: 'registar',
       component: RegistoView,
     },
-    {
-    
-      path: '/registo',
-      name: 'registo',
-      component: RegistoView
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: LoginView
-    }
   ]
 })
 
