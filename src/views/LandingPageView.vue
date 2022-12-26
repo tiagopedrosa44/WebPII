@@ -17,11 +17,11 @@
                     </div>
                 </v-col>
                 <v-col cols="12">
-                    
+                    <h1>O que é a reciclagem</h1>
                 </v-col>
             </v-row>
         </v-container>
-        <h1>O que é a reciclagem</h1>
+        
     </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 body {
     background-image: url('src/assets/imgs/background-landing.png');
     background-size: cover;

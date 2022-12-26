@@ -8,6 +8,8 @@
           <div id="navLeft">
             <v-btn text>Reciclagem</v-btn>
             <v-btn text>Começar</v-btn>
+            <v-btn text id="login" @click="($router.push('login'))">Login</v-btn>
+            <v-btn text id="registar" @click="($router.push('registar'))">Registar</v-btn>
           </div>
         </v-toolbar-items>
       </v-toolbar>
@@ -41,4 +43,5 @@ export default {};
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
 }
+
 </style>

@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 body {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
   min-height: 1080px;
