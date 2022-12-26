@@ -15,12 +15,7 @@
         </v-col>
         <v-col cols="12" sm="6" md="6" responsive>
           <div id="main">
-            <img
-              id="img"
-              src="src/assets/imgs/imagem1.png"
-              alt="landing"
-              class="v-img"
-            />
+            <v-img id="img" src="src/assets/imgs/imagem1.png" ></v-img>
           </div>
         </v-col>
       </v-row>
