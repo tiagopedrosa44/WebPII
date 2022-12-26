@@ -8,8 +8,14 @@
           <div id="navLeft">
             <v-btn text>Reciclagem</v-btn>
             <v-btn text>Começar</v-btn>
-            <v-btn text id="login" @click="($router.push('login'))">Login</v-btn>
-            <v-btn text id="registar" @click="($router.push('registar'))">Registar</v-btn>
+            <v-img src="src\assets\imgs\logo_nav.png"></v-img>
+          </div>
+          <div id="navCenter">
+          
+          </div>
+          <div id="navRight">
+            <v-btn text id="login" @click="$router.push('login')">Login</v-btn>
+            <v-btn text id="registar" @click="$router.push('registar')">Registar</v-btn>
           </div>
         </v-toolbar-items>
       </v-toolbar>
@@ -42,6 +48,7 @@ export default {};
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
+  justify-self: end;
+  margin-right: 10px;
 }
-
 </style>

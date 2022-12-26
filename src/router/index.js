@@ -42,6 +42,7 @@ export const router = createRouter({
   ]
 })
 
+/*
 //navigation guard
 router.beforeEach((to, from, next) => {
   const paginasAbertas = ['/', '/registo', '/login'];
@@ -52,5 +53,5 @@ router.beforeEach((to, from, next) => {
   }
   next();
 })
-
+*/
 export default router
