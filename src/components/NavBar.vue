@@ -6,7 +6,7 @@
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <div id="navLeft">
-            <v-btn text>Mapa</v-btn>
+            <v-btn text @click="$router.push('/home')">Mapa</v-btn>
             <v-btn text>Rankings</v-btn>
             <v-btn text>Loja</v-btn>
           </div>
@@ -14,7 +14,9 @@
             <v-btn icon="">a</v-btn>
           </div>
           <div id="navRight">
-            <v-btn icon="">a</v-btn>
+            <v-btn text>Perfil</v-btn>
+            <v-btn text>Desafios</v-btn>
+            <v-btn text @click="this.store.logout()">Logout</v-btn>
           </div>
         </v-toolbar-items>
       </v-toolbar>
@@ -23,7 +25,14 @@
 </template>
 
 <script>
-export default {};
+import { userStore } from "../stores/userStore.js";
+export default {
+  data() {
+    return {
+      store: userStore(),
+    };
+  },
+};
 </script>
 
 <style>
@@ -45,7 +54,7 @@ export default {};
 }
 #navRight {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
 }
 </style>
