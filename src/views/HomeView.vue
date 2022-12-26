@@ -26,11 +26,7 @@
         <v-col cols="12" lg="8" class="col-mapa" align="center">
           <div>
             <GMapMap :center="getPos()" :zoom="18" map-type-id="hybrid" style="width: 100%; height: 550px; border: 10px solid #FDFCF8; border-radius: 10px;">
-              <GMapMarker :key="index" v-for="(m, index) in markers" />
-              <GMapCluster>
-                <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true"
-                  :draggable="true" @click="center = m.position" />
-              </GMapCluster>
+              <GMapMarker v-for="marker in markers" :key="marker.position" :position="marker.position"/>
             </GMapMap>
           </div>
         </v-col>
