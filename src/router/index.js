@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LandingView from '../views/LandingPageView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegistoView from '../views/RegistoView.vue'
+import RankingsView from '../views/RankingsView.vue'
 //import { userStore } from "../stores/userStore.js";
 
 export const router = createRouter({
@@ -28,10 +29,16 @@ export const router = createRouter({
       name: 'registar',
       component: RegistoView,
     },
+    {
+      path: '/rankings',
+      name: 'rankings',
+      component: RankingsView,
+
+    }
   ]
 })
 
-/*
+
 //navigation guard
 router.beforeEach((to, from, next) => {
   const paginasAbertas = ['/', '/registo', '/login'];
@@ -42,5 +49,5 @@ router.beforeEach((to, from, next) => {
   }
   next();
 })
-*/
+
 export default router

@@ -15,7 +15,7 @@
         </v-col>
         <v-col cols="12" sm="6" md="6" responsive>
           <div id="main">
-            <v-img id="img" src="src/assets/imgs/imagem1.png" ></v-img>
+            <v-img id="img" src="src/assets/imgs/imagem1.png"></v-img>
           </div>
         </v-col>
       </v-row>
@@ -64,11 +64,10 @@
             <v-expand-transition>
               <div v-show="showReutilizar">
                 <v-card-text>
-                  Reduzir consiste em ações que reduzam o consumo de bens e
-                  serviços, visando à diminuição da geração de resíduos e
-                  consequente redução do desperdício.
+                  A ação de reutilizar um produto é poder dar uma nova utilidade
+                  para algo que, normalmente, iria ser deitado fora.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reduzir.png" height="200px"></v-img>
+                <v-img src="src\assets\imgs\reutilizar.png" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -87,11 +86,11 @@
             <v-expand-transition>
               <div v-show="showReciclar">
                 <v-card-text>
-                  Reduzir consiste em ações que reduzam o consumo de bens e
-                  serviços, visando à diminuição da geração de resíduos e
-                  consequente redução do desperdício.
+                  Promover uma reciclagem é a transformação de um produto que
+                  não pode ser mais utilizado em um novo produto ou
+                  matéria-prima.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reduzir.png" height="200px"></v-img>
+                <v-img src="src\assets\imgs\reciclar.png" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -107,34 +106,54 @@
       </v-row>
       <v-row id="number1">
         <v-col cols="12" lg="8">
-            <h1>Cria uma conta para começares o teu progresso</h1>
-            <p>Vê todo o teu progresso no teu perfil.</p>
+          <h1>Cria uma conta para começares o teu progresso</h1>
+          <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-            <v-img src="src\assets\imgs\img_perfil.png" width="215px" height="239px" ></v-img>
+          <v-img
+            src="src\assets\imgs\img_perfil.png"
+            width="215px"
+            height="239px"
+          ></v-img>
         </v-col>
       </v-row>
       <v-row id="number2">
         <v-col cols="12" lg="4">
-            <v-img src="src\assets\imgs\img_map.png" width="240px" height="208px" ></v-img>
+          <v-img
+            src="src\assets\imgs\img_map.png"
+            width="240px"
+            height="208px"
+          ></v-img>
         </v-col>
         <v-col cols="12" lg="8">
-            <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
-            <p>Seleciona o ecoponto para obteres o caminho até ele.</p>
+          <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
+          <p>Seleciona o ecoponto para obteres o caminho até ele.</p>
         </v-col>
       </v-row>
       <v-row id="number3">
         <v-col cols="12" lg="8">
-            <h1>Cria uma conta para começares o teu progresso</h1>
-            <p>Vê todo o teu progresso no teu perfil.</p>
+          <h1>Cria uma conta para começares o teu progresso</h1>
+          <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-            <v-img src="src\assets\imgs\img_perfil.png" width="215px" height="239px" ></v-img>
+          <v-img
+            src="src\assets\imgs\img_perfil.png"
+            width="215px"
+            height="239px"
+          ></v-img>
         </v-col>
       </v-row>
       <v-img id="começar" src="src\assets\imgs\Group 15.png"></v-img>
+      <v-row id="registo">
+        <v-col>
+          <v-btn>Registar</v-btn>
+        </v-col>
+      </v-row>
     </v-container>
   </main>
+  <footer id="footer">
+    <v-img src="src\assets\imgs\footer.svg" id="backgroundFooter"></v-img>
+  </footer>
 </template>
 
 <script>
@@ -223,51 +242,52 @@ nav {
   font-style: Bold;
 }
 
-#number1{
-    position: absolute;
-    top: 1930px;
-    left: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fdfcf8;
-    font-family: "Exo";
-    font-style: Bold;
+#number1 {
+  position: absolute;
+  top: 1930px;
+  left: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fdfcf8;
+  font-family: "Exo";
+  font-style: Bold;
 }
-#number2{
-    position: absolute;
-    top: 2680px;
-    left: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fdfcf8;
-    font-family: "Exo";
-    font-style: Bold;
-}
-
-#number3{
-    position: absolute;
-    top: 3400px;
-    left: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fdfcf8;
-    font-family: "Exo";
-    font-style: Bold;
+#number2 {
+  position: absolute;
+  top: 2680px;
+  left: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fdfcf8;
+  font-family: "Exo";
+  font-style: Bold;
 }
 
-
-
-#começar{
-    top: 700px;
-    width: 1090px;
-    height: 1703px;
-    z-index: -1;
+#number3 {
+  position: absolute;
+  top: 3400px;
+  left: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fdfcf8;
+  font-family: "Exo";
+  font-style: Bold;
 }
 
+#começar {
+  top: 700px;
+  width: 1090px;
+  height: 1703px;
+  z-index: -1;
+}
 
+#registo{
+  position: absolute;
+  top: 3000px;
+}
 
 #img {
   position: absolute;
@@ -277,4 +297,14 @@ nav {
   height: 521px;
   object-fit: contain;
 }
+
+
+#backgroundFooter{
+  position: relative;
+  top: 1310px;
+}
+
+
+
+
 </style>

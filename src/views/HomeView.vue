@@ -5,7 +5,9 @@
         <NavBar />
       </nav>
     </div>
-
+    <br>
+    <br>
+    <br>
     <v-container class="grey lighten-5">
       <v-row no-gutters>
         <v-col cols="12" lg="4" class="col-ecopontos">
@@ -79,6 +81,11 @@ export default {
 body {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
   min-height: 1080px;
+}
+
+.title {
+  font-family: 'Exo';
+  color: #FDFCF8;
 }
 
 .col-mapa {

@@ -7,11 +7,11 @@
         <v-toolbar-items>
           <div id="navLeft">
             <v-btn text @click="$router.push('/home')">Mapa</v-btn>
-            <v-btn text>Rankings</v-btn>
+            <v-btn text @click="$router.push('/rankings')" >Rankings</v-btn>
             <v-btn text>Loja</v-btn>
+            <v-btn text>Faq</v-btn>
           </div>
           <div id="navCenter">
-            <v-btn icon="">a</v-btn>
           </div>
           <div id="navRight">
             <v-btn text>Perfil</v-btn>
@@ -42,19 +42,24 @@ export default {
   background-color: #114b5f;
   color: #fdfcf8;
 }
+
+
 #navLeft {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1px;
 }
 #navCenter {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
+  
 }
 #navRight {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
+  margin-left: 700px;
 }
+
 </style>

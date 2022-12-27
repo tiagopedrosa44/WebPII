@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        <h1>Leaderboards</h1>
     </div>
 </template>
 
