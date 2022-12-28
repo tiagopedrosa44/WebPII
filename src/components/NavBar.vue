@@ -7,15 +7,18 @@
         <v-toolbar-items>
           <div id="navLeft">
             <v-btn text @click="$router.push('/home')">Mapa</v-btn>
-            <v-btn text @click="$router.push('/rankings')" >Rankings</v-btn>
+            <v-btn text @click="$router.push('/rankings')">Rankings</v-btn>
             <v-btn text>Loja</v-btn>
             <v-btn text @click="$router.push('/faq')">Faq</v-btn>
           </div>
           <div id="navCenter">
+            <v-btn text @click="$router.push('/home')">
+              <v-img src="src\assets\imgs\logo_nav.png"></v-img>
+            </v-btn>
           </div>
           <div id="navRight">
-            <v-btn text>Perfil</v-btn>
             <v-btn text>Desafios</v-btn>
+            <v-btn text>Perfil</v-btn>
             <v-btn text @click="this.store.logout()">Logout</v-btn>
           </div>
         </v-toolbar-items>
@@ -41,25 +44,25 @@ export default {
   border-radius: 10px;
   background-color: #114b5f;
   color: #fdfcf8;
+  margin: 0 auto;
 }
-
-
-#navLeft {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 1px;
-}
-#navCenter {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 10px;
-  
-}
+#navLeft,
+#navCenter,
 #navRight {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  margin-left: 700px;
+  grid-gap: 10px; /* adiciona espaço de 10px entre as colunas */
 }
+#navLeft {
+  grid-template-columns: 90px 90px 90px 90px;
+}
+#navCenter {
+  grid-template-columns: 1fr;
+}
+#navRight {
+  grid-template-columns: 90px 90px 90px 90px;
+  justify-self: end;
+  margin-right: 10px;
+}
+
 
 </style>
