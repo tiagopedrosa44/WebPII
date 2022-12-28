@@ -137,7 +137,7 @@
         </v-col>
         <v-col cols="12" lg="4">
           <v-img
-            src="src\assets\imgs\img_perfil.png"
+            src="src\assets\imgs\img_moedas.png"
             width="215px"
             height="239px"
           ></v-img>
@@ -172,7 +172,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 body {
   background-image: url("src/assets/imgs/background-landing.png");
   background-size: cover;

@@ -4,6 +4,7 @@ import LandingView from '../views/LandingPageView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegistoView from '../views/RegistoView.vue'
 import RankingsView from '../views/RankingsView.vue'
+import faqView from '../views/faqView.vue'
 //import { userStore } from "../stores/userStore.js";
 
 export const router = createRouter({
@@ -34,6 +35,11 @@ export const router = createRouter({
       name: 'rankings',
       component: RankingsView,
 
+    },
+    {
+      path: '/faq',
+      name: 'faq',
+      component: faqView,
     }
   ]
 })

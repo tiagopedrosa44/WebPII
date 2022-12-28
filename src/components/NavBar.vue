@@ -9,7 +9,7 @@
             <v-btn text @click="$router.push('/home')">Mapa</v-btn>
             <v-btn text @click="$router.push('/rankings')" >Rankings</v-btn>
             <v-btn text>Loja</v-btn>
-            <v-btn text>Faq</v-btn>
+            <v-btn text @click="$router.push('/faq')">Faq</v-btn>
           </div>
           <div id="navCenter">
           </div>
