@@ -60,14 +60,31 @@ export const userStore = defineStore("userStore", {
     },
 
     login(username, password) {
+      const inputUsername = document.querySelector("#username");
+      const inputPassword = document.querySelector("#password");
+
+      function resetBorder() {
+        inputUsername.style.border = "none";
+        inputPassword.style.border = "none";
+        inputPassword.removeEventListener("click", resetBorder);
+        inputUsername.removeEventListener("click", resetBorder);
+      }
+
       if (this.users.find((user) => user.nome == username)) {
         if (this.users.find((user) => user.password == password)) {
           localStorage.setItem("userLogado", username);
+          localStorage.setItem("logado", true);
           this.logado = { bool: true, nome: username };
           console.log("Login efetuado com sucesso");
           router.push("/home");
-        } else throw Error("Password incorreta");
-      } else throw Error("Utilizador não encontrado");
+        } else {
+          document.querySelector("#password").style.border = "3px solid red";
+          inputPassword.addEventListener("click", resetBorder);
+        }
+      } else {
+        document.querySelector("#username").style.border = "3px solid red";
+        inputUsername.addEventListener("click", resetBorder);
+      }
     },
 
     registar(username, email, password, password2) {
@@ -88,6 +105,7 @@ export const userStore = defineStore("userStore", {
             utilizacoes: 0,
           });
           localStorage.setItem("userLogado", username);
+          localStorage.setItem("logado", true);
           this.logado = { bool: true, nome: username };
           console.log("Registo efetuado com sucesso");
           router.push("/home");
@@ -97,6 +115,8 @@ export const userStore = defineStore("userStore", {
 
     logout() {
       this.logado = { bool: false, nome: "" };
+      localStorage.setItem("userLogado", "");
+      localStorage.setItem("logado", false);
       console.log("Logout efetuado com sucesso");
       router.push("/");
     },

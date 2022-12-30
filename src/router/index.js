@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import RegistoView from '../views/RegistoView.vue'
 import RankingsView from '../views/RankingsView.vue'
 import faqView from '../views/faqView.vue'
+import PerfilView from '../views/PerfilView.vue'
 //import { userStore } from "../stores/userStore.js";
 
 export const router = createRouter({
@@ -40,14 +41,19 @@ export const router = createRouter({
       path: '/faq',
       name: 'faq',
       component: faqView,
-    }
+    },
+    {
+      path: '/perfil',
+      name: 'perfil',
+      component: PerfilView,
+    },
   ]
 })
 
 
 //navigation guard
 router.beforeEach((to, from, next) => {
-  const paginasAbertas = ['/', '/registo', '/login'];
+  const paginasAbertas = ['/', '/registar', '/login'];
   const requerLogin = !paginasAbertas.includes(to.path);
 
   if (requerLogin && localStorage.getItem("logado") == "false") {

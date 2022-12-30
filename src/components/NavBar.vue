@@ -18,7 +18,7 @@
           </div>
           <div id="navRight">
             <v-btn text>Desafios</v-btn>
-            <v-btn text>Perfil</v-btn>
+            <v-btn text @click="$router.push('/perfil')">Perfil</v-btn>
             <v-btn text @click="this.store.logout()">Logout</v-btn>
           </div>
         </v-toolbar-items>
