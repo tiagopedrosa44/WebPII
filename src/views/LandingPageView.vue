@@ -172,7 +172,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 body {
   background-image: url("src/assets/imgs/background-landing.png");
   background-size: cover;

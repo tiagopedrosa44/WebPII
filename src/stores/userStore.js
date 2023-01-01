@@ -13,16 +13,18 @@ export const userStore = defineStore("userStore", {
         pontos: 0,
         moedas: 0,
         utilizacoes: 0,
+        biografia:""
       },
       {
         id: 1,
         tipo: "user",
-        nome: "user",
+        nome: "RicardoSilva",
         email: "user@gmail.com",
         password: "1234",
         pontos: 0,
         moedas: 0,
         utilizacoes: 0,
+        biografia:"Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre."
       },
     ],
 
@@ -38,6 +40,9 @@ export const userStore = defineStore("userStore", {
     getUserById: (state) => (id) => {
       return state.users.find((user) => user.id == id);
     },
+    getLoggedInUser: (state) => {
+      return state.users.find((user) => user.nome == state.logado.nome);
+    }
   },
 
   actions: {
