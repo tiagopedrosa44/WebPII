@@ -27,9 +27,7 @@
         </v-col>
         <v-col cols="12" lg="8" class="col-mapa" align="center">
           <div>
-            <GMapMap :center="getPos()" :zoom="18" map-type-id="hybrid" style="width: 100%; height: 550px; border: 10px solid #FDFCF8; border-radius: 10px;">
-              <GMapMarker v-for="marker in markers" :key="marker.position" :position="marker.position"/>
-            </GMapMap>
+            <Mapa :markers="markers" />
           </div>
         </v-col>
       </v-row>
@@ -39,40 +37,16 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import Mapa from "@/components/Mapa.vue";
 
 export default {
   components: {
     NavBar,
+    Mapa,
   },
   data() {
     return {
-      markers: [
-        {
-          position: {
-            lat: 41.36611,
-            lng: -8.739542,
-          },
-        },
-      ],
     };
-  },
-  methods: {
-    getPos() {
-      if (
-        navigator.geolocation.getCurrentPosition((position) => {
-          return {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-        })
-      );
-      else {
-        return {
-          lat: 41.36611,
-          lng: -8.739542,
-        };
-      }
-    },
   },
 };
 </script>
