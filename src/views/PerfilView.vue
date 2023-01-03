@@ -20,10 +20,34 @@
         </div>
 
         <span id="nome">{{ user.nome }}</span>
+        <v-progress-linear model-value="50" id="progresso" class="perfil-info"></v-progress-linear>
+        <p class="perfil-info">Nivel: {{ user.nivel }}</p>
       </div>
       <h3>Biografia</h3>
       <p>{{ user.biografia }}</p>
       <button id="editar">Editar perfil</button>
+    </div>
+    <div>
+      <v-container>
+        <v-row>
+          <v-col align="center">
+            <h1>Referral code</h1>
+            <p>
+              Compartilhe o referral code abaixo com os seus amigos e ganhem
+              ambos moedas virtuais para poderem usar na nossa loja.
+            </p>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+    <div>
+      <v-container>
+        <v-row>
+          <v-col>
+            <h1>As minhas badges</h1>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
   </div>
 </template>
@@ -42,7 +66,6 @@ export default {
     };
   },
   created() {
-    //get user from pinia store
     this.user = this.store.getLoggedInUser;
   },
 };
@@ -74,8 +97,8 @@ export default {
   grid-column: 1 / 3;
   grid-row: 1;
   display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 10px;
+  grid-template-columns: 0.2fr 2fr;
+  grid-gap: 0px;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -86,6 +109,8 @@ export default {
 #nome {
   font-weight: bold;
 }
+
+
 
 h3 {
   grid-column: 1 / 3;
@@ -98,6 +123,9 @@ h3 {
   font-size: 20px;
   color: #f0cd6e;
 }
+h1{
+  color: #fdfcf8;
+}
 
 p {
   grid-column: 1 / 3;
@@ -108,6 +136,7 @@ p {
   margin-left: 10px;
   margin-right: 10px;
   font-size: 15px;
+  color: #fdfcf8;
 }
 
 #editar {
@@ -129,5 +158,17 @@ p {
   display: inline-block;
   font-size: 16px;
   border-radius: 10px;
+}
+
+#background {
+  background-image: url("src/assets/imgs/fundo_perfil.jpg");
+  background-position: center;
+  background-size: cover;
+  min-height: 100%;
+}
+
+
+.perfil-info{
+  grid-row: 2;
 }
 </style>

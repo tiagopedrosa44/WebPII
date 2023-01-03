@@ -11,6 +11,7 @@ export const userStore = defineStore("userStore", {
         email: "admin@gmail.com",
         password: "1234",
         pontos: 0,
+        nivel: 0,
         moedas: 0,
         utilizacoes: 0,
         biografia:""
@@ -22,6 +23,7 @@ export const userStore = defineStore("userStore", {
         email: "user@gmail.com",
         password: "1234",
         pontos: 0,
+        nivel: 0,
         moedas: 0,
         utilizacoes: 0,
         biografia:"Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre."
