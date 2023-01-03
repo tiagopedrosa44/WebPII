@@ -2,6 +2,7 @@
   <GoogleMap
     api-key="AIzaSyAYi2BJ0UcEc3zgu2s6g9UFV-6JHuSkyxE"
     style="width: 100%; height: 500px"
+    mapTypeId="hybrid"
     :center="center"
     :zoom="18"
   >
