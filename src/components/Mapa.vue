@@ -15,6 +15,10 @@
           lat: ecoponto.coordenadas.lat,
           lng: ecoponto.coordenadas.lng,
         },
+        icon: {
+          url: '/src/assets/imgs/iconeEcoponto.png',
+          scaledSize: { width: 29, height: 40 },
+        },
       }"
     />
   </GoogleMap>
