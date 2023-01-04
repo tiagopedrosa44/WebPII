@@ -7,18 +7,31 @@
     :zoom="18"
   >
     <Marker :options="currentPosMarkerOptions" />
+    <Marker
+      v-for="ecoponto in ecopontos"
+      :key="ecoponto.id"
+      :options="{
+        position: {
+          lat: ecoponto.coordenadas.lat,
+          lng: ecoponto.coordenadas.lng,
+        },
+      }"
+    />
   </GoogleMap>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { GoogleMap, Marker } from "vue3-google-map";
+import { ecopontoStore } from "../stores/ecopontoStore";
 
 export default defineComponent({
   components: { GoogleMap, Marker },
   data() {
     return {
       //center: { lat: 41.36611, lng: -8.739542 },
+      store: ecopontoStore(),
+      ecopontos: [],
       center: { lat: 0, lng: 0 },
       currentPosMarkerOptions: {
         position: { lat: 0, lng: 0 },
@@ -45,6 +58,7 @@ export default defineComponent({
       this.center = { lat: 41.36611, lng: -8.739542 };
       this.currentPosMarkerOptions.position = { lat: 41.36611, lng: -8.739542 };
     }
+    this.ecopontos = this.store.ecopontos;
   },
 });
 </script>
