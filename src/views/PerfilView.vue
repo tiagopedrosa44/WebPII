@@ -67,6 +67,7 @@ export default {
   },
   created() {
     this.user = this.store.getLoggedInUser;
+    
   },
 };
 </script>
