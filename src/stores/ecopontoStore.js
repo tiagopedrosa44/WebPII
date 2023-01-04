@@ -15,6 +15,18 @@ export const ecopontoStore = defineStore("ecoponto", {
         dataCriacao: "",
         foto: "@/src/assets/imgs/ecoponto/0.png",
       },
+      {
+        id: 1,
+        coordenadas: {
+          lat: 41.346347,
+          lng: -8.732945,
+        },
+        utilizacoes: 0,
+        vezesRegistado: 0,
+        quemAdicionou: 0,
+        dataCriacao: "",
+        foto: "@/src/assets/imgs/ecoponto/1.png",
+      },
     ],
   }),
   getters: {
