@@ -14,7 +14,8 @@ export const userStore = defineStore("userStore", {
         nivel: 0,
         moedas: 0,
         utilizacoes: 0,
-        biografia:""
+        biografia:"",
+        badges:[]
       },
       {
         id: 1,
@@ -26,7 +27,8 @@ export const userStore = defineStore("userStore", {
         nivel: 0,
         moedas: 0,
         utilizacoes: 0,
-        biografia:"Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre."
+        biografia:"Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+        badges: []
       },
     ],
 
