@@ -1,5 +1,5 @@
 <template>
-  <div id="background">
+  <div class="home">
     <div align="center">
       <nav>
         <NavBar />
@@ -51,8 +51,8 @@ export default {
 };
 </script>
 
-<style scoped>
-body {
+<style>
+.home {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
   min-height: 1080px;
 }

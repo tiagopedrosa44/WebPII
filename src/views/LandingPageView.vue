@@ -1,159 +1,167 @@
 <template>
-  <div>
-    <nav>
-      <NavBar />
-    </nav>
+  <div class="landingpage">
+    <div>
+      <nav>
+        <NavBar />
+      </nav>
+    </div>
+    <main>
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="6" md="6" responsive>
+            <div id="main">
+              <h1 id="title" class="v-title">Venha</h1>
+              <h1 id="title2" class="v-title">Reciclar!</h1>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="6" md="6" responsive>
+            <div id="main">
+              <v-img id="img" src="src/assets/imgs/imagem1.png"></v-img>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-container>
+        <v-row>
+          <v-col cols="12">
+            <div id="tittle3">
+              <h1>O que é a reciclagem?</h1>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row id="cards">
+          <v-col cols="12" lg="4" id="reduzir">
+            <v-card class="mx-auto" max-width="344" id="Card">
+              <v-card-title>
+                Reduzir
+                <v-btn
+                  :icon="showReduzir ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                  @click="showReduzir = !showReduzir"
+                ></v-btn>
+              </v-card-title>
+
+              <v-expand-transition>
+                <div v-show="showReduzir">
+                  <v-card-text>
+                    Reduzir consiste em ações que reduzam o consumo de bens e
+                    serviços, visando à diminuição da geração de resíduos e
+                    consequente redução do desperdício.
+                  </v-card-text>
+                  <v-img src="src\assets\imgs\reduzir.png" height="200px"></v-img>
+                </div>
+              </v-expand-transition>
+            </v-card>
+          </v-col>
+          <v-col cols="12" lg="4" id="reutilizar">
+            <v-card class="mx-auto" max-width="344" id="Card">
+              <v-card-title>
+                Reutilizar
+                <v-btn
+                  :icon="showReutilizar ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                  @click="showReutilizar = !showReutilizar"
+                ></v-btn
+              ></v-card-title>
+
+              <v-expand-transition>
+                <div v-show="showReutilizar">
+                  <v-card-text>
+                    A ação de reutilizar um produto é poder dar uma nova utilidade
+                    para algo que, normalmente, iria ser deitado fora.
+                  </v-card-text>
+                  <v-img
+                    src="src\assets\imgs\reutilizar.png"
+                    height="200px"
+                  ></v-img>
+                </div>
+              </v-expand-transition>
+            </v-card>
+          </v-col>
+          <v-col cols="12" lg="4" id="reciclar">
+            <v-card class="mx-auto" max-width="344" id="Card">
+              <v-card-title>
+                Reciclar
+                <v-btn
+                  color="white"
+                  :icon="showReciclar ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                  @click="showReciclar = !showReciclar"
+                ></v-btn>
+              </v-card-title>
+
+              <v-expand-transition>
+                <div v-show="showReciclar">
+                  <v-card-text>
+                    Promover uma reciclagem é a transformação de um produto que
+                    não pode ser mais utilizado em um novo produto ou
+                    matéria-prima.
+                  </v-card-text>
+                  <v-img
+                    src="src\assets\imgs\reciclar.png"
+                    height="200px"
+                  ></v-img>
+                </div>
+              </v-expand-transition>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="12">
+            <div id="tittle4">
+              <h1>Como Começar?</h1>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row id="number1">
+          <v-col cols="12" lg="8">
+            <h1>Cria uma conta para começares o teu progresso</h1>
+            <p>Vê todo o teu progresso no teu perfil.</p>
+          </v-col>
+          <v-col cols="12" lg="4">
+            <v-img
+              src="src\assets\imgs\img_perfil.png"
+              width="215px"
+              height="239px"
+            ></v-img>
+          </v-col>
+        </v-row>
+        <v-row id="number2">
+          <v-col cols="12" lg="4">
+            <v-img
+              src="src\assets\imgs\img_map.png"
+              width="240px"
+              height="208px"
+            ></v-img>
+          </v-col>
+          <v-col cols="12" lg="8">
+            <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
+            <p>Seleciona o ecoponto para obteres o caminho até ele.</p>
+          </v-col>
+        </v-row>
+        <v-row id="number3">
+          <v-col cols="12" lg="8">
+            <h1>Cria uma conta para começares o teu progresso</h1>
+            <p>Vê todo o teu progresso no teu perfil.</p>
+          </v-col>
+          <v-col cols="12" lg="4">
+            <v-img
+              src="src\assets\imgs\img_moedas.png"
+              width="215px"
+              height="239px"
+            ></v-img>
+          </v-col>
+        </v-row>
+        <v-img id="começar" src="src\assets\imgs\Group 15.png"></v-img>
+        <v-row id="registo">
+          <v-col>
+            <v-btn>Registar</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </main>
+    <footer id="footer">
+      <v-img src="src\assets\imgs\footer.svg" id="backgroundFooter"></v-img>
+    </footer>
   </div>
-  <main>
-    <v-container>
-      <v-row>
-        <v-col cols="12" sm="6" md="6" responsive>
-          <div id="main">
-            <h1 id="title" class="v-title">Venha</h1>
-            <h1 id="title2" class="v-title">Reciclar!</h1>
-          </div>
-        </v-col>
-        <v-col cols="12" sm="6" md="6" responsive>
-          <div id="main">
-            <v-img id="img" src="src/assets/imgs/imagem1.png"></v-img>
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <div id="tittle3">
-            <h1>O que é a reciclagem?</h1>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row id="cards">
-        <v-col cols="12" lg="4" id="reduzir">
-          <v-card class="mx-auto" max-width="344" id="Card">
-            <v-card-title>
-              Reduzir
-              <v-btn
-                :icon="showReduzir ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                @click="showReduzir = !showReduzir"
-              ></v-btn>
-            </v-card-title>
-
-            <v-expand-transition>
-              <div v-show="showReduzir">
-                <v-card-text>
-                  Reduzir consiste em ações que reduzam o consumo de bens e
-                  serviços, visando à diminuição da geração de resíduos e
-                  consequente redução do desperdício.
-                </v-card-text>
-                <v-img src="src\assets\imgs\reduzir.png" height="200px"></v-img>
-              </div>
-            </v-expand-transition>
-          </v-card>
-        </v-col>
-        <v-col cols="12" lg="4" id="reutilizar">
-          <v-card class="mx-auto" max-width="344" id="Card">
-            <v-card-title>
-              Reutilizar
-              <v-btn
-                :icon="showReutilizar ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                @click="showReutilizar = !showReutilizar"
-              ></v-btn
-            ></v-card-title>
-
-            <v-expand-transition>
-              <div v-show="showReutilizar">
-                <v-card-text>
-                  A ação de reutilizar um produto é poder dar uma nova utilidade
-                  para algo que, normalmente, iria ser deitado fora.
-                </v-card-text>
-                <v-img src="src\assets\imgs\reutilizar.png" height="200px"></v-img>
-              </div>
-            </v-expand-transition>
-          </v-card>
-        </v-col>
-        <v-col cols="12" lg="4" id="reciclar">
-          <v-card class="mx-auto" max-width="344" id="Card">
-            <v-card-title>
-              Reciclar
-              <v-btn
-                color="white"
-                :icon="showReciclar ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                @click="showReciclar = !showReciclar"
-              ></v-btn>
-            </v-card-title>
-
-            <v-expand-transition>
-              <div v-show="showReciclar">
-                <v-card-text>
-                  Promover uma reciclagem é a transformação de um produto que
-                  não pode ser mais utilizado em um novo produto ou
-                  matéria-prima.
-                </v-card-text>
-                <v-img src="src\assets\imgs\reciclar.png" height="200px"></v-img>
-              </div>
-            </v-expand-transition>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col cols="12">
-          <div id="tittle4">
-            <h1>Como Começar?</h1>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row id="number1">
-        <v-col cols="12" lg="8">
-          <h1>Cria uma conta para começares o teu progresso</h1>
-          <p>Vê todo o teu progresso no teu perfil.</p>
-        </v-col>
-        <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_perfil.png"
-            width="215px"
-            height="239px"
-          ></v-img>
-        </v-col>
-      </v-row>
-      <v-row id="number2">
-        <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_map.png"
-            width="240px"
-            height="208px"
-          ></v-img>
-        </v-col>
-        <v-col cols="12" lg="8">
-          <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
-          <p>Seleciona o ecoponto para obteres o caminho até ele.</p>
-        </v-col>
-      </v-row>
-      <v-row id="number3">
-        <v-col cols="12" lg="8">
-          <h1>Cria uma conta para começares o teu progresso</h1>
-          <p>Vê todo o teu progresso no teu perfil.</p>
-        </v-col>
-        <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_moedas.png"
-            width="215px"
-            height="239px"
-          ></v-img>
-        </v-col>
-      </v-row>
-      <v-img id="começar" src="src\assets\imgs\Group 15.png"></v-img>
-      <v-row id="registo">
-        <v-col>
-          <v-btn>Registar</v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </main>
-  <footer id="footer">
-    <v-img src="src\assets\imgs\footer.svg" id="backgroundFooter"></v-img>
-  </footer>
 </template>
 
 <script>
@@ -173,7 +181,7 @@ export default {
 </script>
 
 <style>
-body {
+.landingpage {
   background-image: url("src/assets/imgs/background-landing.png");
   background-size: cover;
   height: 4709px;
@@ -284,7 +292,7 @@ nav {
   z-index: -1;
 }
 
-#registo{
+#registo {
   position: absolute;
   top: 3000px;
 }
@@ -298,13 +306,8 @@ nav {
   object-fit: contain;
 }
 
-
-#backgroundFooter{
+#backgroundFooter {
   position: relative;
   top: 1310px;
 }
-
-
-
-
 </style>

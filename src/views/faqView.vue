@@ -59,7 +59,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 body {
   background-image: url("src/assets/imgs/faqbackground.svg");
   min-height: 1080px;

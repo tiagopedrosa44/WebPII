@@ -6,6 +6,7 @@ import RegistoView from '../views/RegistoView.vue'
 import RankingsView from '../views/RankingsView.vue'
 import faqView from '../views/faqView.vue'
 import PerfilView from '../views/PerfilView.vue'
+import AdminView from '../views/AdminView.vue'
 //import { userStore } from "../stores/userStore.js";
 
 export const router = createRouter({
@@ -47,6 +48,11 @@ export const router = createRouter({
       name: 'perfil',
       component: PerfilView,
     },
+    {
+      path:'/admin',
+      name:'admin',
+      component: AdminView,
+    }
   ]
 })
 

@@ -3,34 +3,39 @@ import { router } from "../router";
 
 export const userStore = defineStore("userStore", {
   state: () => ({
-    users: [
-      {
-        id: 0,
-        tipo: "admin",
-        nome: "admin",
-        email: "admin@gmail.com",
-        password: "1234",
-        pontos: 0,
-        nivel: 0,
-        moedas: 0,
-        utilizacoes: 0,
-        biografia:"",
-        badges:[]
-      },
-      {
-        id: 1,
-        tipo: "user",
-        nome: "RicardoSilva",
-        email: "user@gmail.com",
-        password: "1234",
-        pontos: 0,
-        nivel: 0,
-        moedas: 0,
-        utilizacoes: 0,
-        biografia:"Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
-        badges: []
-      },
-    ],
+    users: localStorage.users
+      ? JSON.parse(localStorage.users)
+      : [
+          {
+            id: 0,
+            tipo: "admin",
+            nome: "admin",
+            email: "admin@gmail.com",
+            password: "1234",
+            pontos: 0,
+            nivel: 0,
+            moedas: 0,
+            utilizacoes: 0,
+            biografia: "",
+            badges: [],
+            referral: "",
+          },
+          {
+            id: 1,
+            tipo: "user",
+            nome: "RicardoSilva",
+            email: "user@gmail.com",
+            password: "1234",
+            pontos: 0,
+            nivel: 0,
+            moedas: 0,
+            utilizacoes: 0,
+            biografia:
+              "Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+            badges: [],
+            referral: "",
+          },
+        ],
 
     logado: [
       {
@@ -41,12 +46,13 @@ export const userStore = defineStore("userStore", {
   }),
 
   getters: {
+    getUsers: (state) => state.users,
     getUserById: (state) => (id) => {
       return state.users.find((user) => user.id == id);
     },
     getLoggedInUser: (state) => {
       return state.users.find((user) => user.nome == state.logado.nome);
-    }
+    },
   },
 
   actions: {
@@ -63,9 +69,14 @@ export const userStore = defineStore("userStore", {
         email: email,
         password: password,
         pontos: 0,
+        nivel: 0,
         moedas: 0,
         utilizacoes: 0,
+        biografias: "",
+        badges: [],
+        referral: "",
       });
+      localStorage.setItem("users", JSON.stringify(this.users));
     },
 
     login(username, password) {
@@ -95,29 +106,96 @@ export const userStore = defineStore("userStore", {
         inputUsername.addEventListener("click", resetBorder);
       }
     },
+    generateReferralCode() {
+      let referralCode = "";
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (let i = 0; i < 6; i++) {
+        referralCode += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+      }
+      return referralCode;
+    },
+    checkReferralCode(referralCode) {
+      //verifica se o codigo existe devolve true e o id do user que tiver esse codigo
+      if (this.users.find((user) => user.referral == referralCode)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
 
-    registar(username, email, password, password2) {
+    registar(username, email, password, password2, referralCode) {
       if (this.users.find((user) => user.nome == username)) {
         throw Error("Utilizador já existe");
       } else {
         if (password != password2) {
           throw Error("Passwords não coincidem");
         } else {
-          this.users.push({
-            id: this.users.length + 1,
-            tipo: "user",
-            nome: username,
-            email: email,
-            password: password,
-            pontos: 0,
-            moedas: 0,
-            utilizacoes: 0,
-          });
-          localStorage.setItem("userLogado", username);
-          localStorage.setItem("logado", true);
-          this.logado = { bool: true, nome: username };
-          console.log("Registo efetuado com sucesso");
-          router.push("/home");
+          if (referralCode != "") {
+            if (this.checkReferralCode(referralCode)) {
+              //adicionar moedas ao user que tiver esse codigo e ao que se registou
+              let referralCodeUser = this.users.find(
+                (user) => user.referral == referralCode
+              );
+              referralCodeUser.moedas += 100;
+
+              let novoReferralCode = this.generateReferralCode();
+              while (this.users.find((user) => user.referral == novoReferralCode)) {
+                novoReferralCode = this.generateReferralCode();
+              }
+              this.users.push({
+                id: this.users.length + 1,
+                tipo: "user",
+                nome: username,
+                email: email,
+                password: password,
+                pontos: 0,
+                nivel: 0,
+                moedas: 100,
+                utilizacoes: 0,
+                biografia: "",
+                badges: [],
+                referral: novoReferralCode,
+              });
+              localStorage.setItem("users", JSON.stringify(this.users));
+              localStorage.setItem("userLogado", username);
+              localStorage.setItem("logado", true);
+              this.logado = {
+                bool: true,
+                nome: username,
+              };
+              router.push("/home");
+            } else {
+              throw Error("Código de referência inválido");
+            }
+          } else {
+            let novoReferralCode = this.generateReferralCode();
+            while (this.users.find((user) => user.referral == novoReferralCode)) {
+              novoReferralCode = this.generateReferralCode();
+            }
+            this.users.push({
+              id: this.users.length + 1,
+              tipo: "user",
+              nome: username,
+              email: email,
+              password: password,
+              pontos: 0,
+              nivel: 0,
+              moedas: 0,
+              utilizacoes: 0,
+              biografia: "",
+              badges: [],
+              referral: novoReferralCode,
+            });
+            localStorage.setItem("users", JSON.stringify(this.users));
+            localStorage.setItem("userLogado", username);
+            localStorage.setItem("logado", true);
+            this.logado = { bool: true, nome: username };
+            console.log("Registo efetuado com sucesso");
+            router.push("/home");
+          }
         }
       }
     },
@@ -128,6 +206,11 @@ export const userStore = defineStore("userStore", {
       localStorage.setItem("logado", false);
       console.log("Logout efetuado com sucesso");
       router.push("/");
+    },
+    deleteUser(id) {
+      const index = this.users.findIndex((user) => user.id === id);
+      this.users.splice(index, 1);
+      localStorage.setItem("users", JSON.stringify(this.users));
     },
   },
 });

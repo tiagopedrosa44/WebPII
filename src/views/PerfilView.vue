@@ -1,5 +1,5 @@
 <template>
-  <div id="background">
+  <div class="perfil">
     <div align="center">
       <nav>
         <NavBar />
@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
 export default {
@@ -73,6 +73,11 @@ export default {
 </script>
 
 <style>
+.perfil{
+  background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
+  min-height: 1080px;
+}
+
 .container {
   background-image: url("src/assets/imgs/fundo_div_perfil.jpg");
   border-radius: 10px;
