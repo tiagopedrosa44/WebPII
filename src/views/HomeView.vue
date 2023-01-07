@@ -27,7 +27,7 @@
         </v-col>
         <v-col cols="12" lg="8" class="col-mapa" align="center">
           <div>
-            <Mapa :markers="markers" />
+            <Mapa/>
           </div>
         </v-col>
       </v-row>
