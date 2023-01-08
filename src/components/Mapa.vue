@@ -1,27 +1,17 @@
 <template>
-  <GoogleMap
-    api-key="AIzaSyAYi2BJ0UcEc3zgu2s6g9UFV-6JHuSkyxE"
-    style="width: 100%; height: 500px"
-    mapTypeId="hybrid"
-    :center="center"
-    :zoom="18"
-  >
+  <GoogleMap api-key="AIzaSyAYi2BJ0UcEc3zgu2s6g9UFV-6JHuSkyxE" style="width: 100%; height: 500px" mapTypeId="hybrid"
+    :center="center" :zoom="18">
     <Marker :options="currentPosMarkerOptions" />
-    <Marker
-      v-for="ecoponto in ecopontos"
-      @click="$router.push('/ecoponto/' + ecoponto.id)"
-      :key="ecoponto.id"
-      :options="{
-        position: {
-          lat: ecoponto.coordenadas.lat,
-          lng: ecoponto.coordenadas.lng,
-        },
-        icon: {
-          url: '/src/assets/imgs/iconeEcoponto.png',
-          scaledSize: { width: 29, height: 40 },
-        },
-      }"
-    />
+    <Marker v-for="ecoponto in ecopontos" @click="$router.push('/ecoponto/' + ecoponto.id)" :key="ecoponto.id" :options="{
+      position: {
+        lat: ecoponto.coordenadas.lat,
+        lng: ecoponto.coordenadas.lng,
+      },
+      icon: {
+        url: '/src/assets/imgs/iconeEcoponto.png',
+        scaledSize: { width: 29, height: 40 },
+      },
+    }" />
   </GoogleMap>
 </template>
 
@@ -31,6 +21,10 @@ import { GoogleMap, Marker } from "vue3-google-map";
 import { ecopontoStore } from "../stores/ecopontoStore";
 
 export default defineComponent({
+  //recebe o id do ecoponto
+  props: {
+    id: Number,
+  },
   components: { GoogleMap, Marker },
   data() {
     return {
@@ -48,20 +42,32 @@ export default defineComponent({
     };
   },
   mounted() {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((position) => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        this.currentPosMarkerOptions.position = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-      });
+    console.log(this.id);
+    if (this.id) {
+      this.center = {
+        lat: this.store.getEcopontoById(this.id).coordenadas.lat,
+        lng: this.store.getEcopontoById(this.id).coordenadas.lng,
+      };
+      this.currentPosMarkerOptions.position = {
+        lat: this.store.getEcopontoById(this.id).coordenadas.lat,
+        lng: this.store.getEcopontoById(this.id).coordenadas.lng,
+      };
     } else {
-      this.center = { lat: 41.36611, lng: -8.739542 };
-      this.currentPosMarkerOptions.position = { lat: 41.36611, lng: -8.739542 };
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition((position) => {
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          this.currentPosMarkerOptions.position = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+        });
+      } else {
+        this.center = { lat: 41.36611, lng: -8.739542 };
+        this.currentPosMarkerOptions.position = { lat: 41.36611, lng: -8.739542 };
+      }
     }
     this.ecopontos = this.store.ecopontos;
   },

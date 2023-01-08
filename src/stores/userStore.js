@@ -6,36 +6,36 @@ export const userStore = defineStore("userStore", {
     users: localStorage.users
       ? JSON.parse(localStorage.users)
       : [
-          {
-            id: 0,
-            tipo: "admin",
-            nome: "admin",
-            email: "admin@gmail.com",
-            password: "1234",
-            pontos: 0,
-            nivel: 0,
-            moedas: 0,
-            utilizacoes: 0,
-            biografia: "",
-            badges: [],
-            referral: "",
-          },
-          {
-            id: 1,
-            tipo: "user",
-            nome: "RicardoSilva",
-            email: "user@gmail.com",
-            password: "1234",
-            pontos: 0,
-            nivel: 0,
-            moedas: 0,
-            utilizacoes: 0,
-            biografia:
-              "Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
-            badges: [],
-            referral: "",
-          },
-        ],
+        {
+          id: 0,
+          tipo: "admin",
+          nome: "admin",
+          email: "admin@gmail.com",
+          password: "1234",
+          pontos: 0,
+          nivel: 0,
+          moedas: 0,
+          utilizacoes: 0,
+          biografia: "",
+          badges: [],
+          referral: "",
+        },
+        {
+          id: 1,
+          tipo: "user",
+          nome: "RicardoSilva",
+          email: "user@gmail.com",
+          password: "1234",
+          pontos: 0,
+          nivel: 0,
+          moedas: 0,
+          utilizacoes: 0,
+          biografia:
+            "Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+          badges: [],
+          referral: "",
+        },
+      ],
 
     logado: [
       {
@@ -212,5 +212,36 @@ export const userStore = defineStore("userStore", {
       this.users.splice(index, 1);
       localStorage.setItem("users", JSON.stringify(this.users));
     },
+  },
+
+  //save users to local storage
+  created() {
+    if (localStorage.getItem("users")) {
+      this.users = JSON.parse(localStorage.getItem("users"));
+    } else {
+      localStorage.setItem("users", JSON.stringify(this.users));
+    }
+    if (localStorage.getItem("logado") == "true") {
+      this.logado = {
+        bool: true,
+        nome: localStorage.getItem("userLogado"),
+      };
+    } else {
+      this.logado = {
+        bool: false,
+        nome: "",
+      };
+    }
+    if (localStorage.getItem("logado") == "false") {
+      this.logado = {
+        bool: false,
+        nome: "",
+      };
+    } else {
+      this.logado = {
+        bool: true,
+        nome: localStorage.getItem("userLogado"),
+      };
+    }
   },
 });
