@@ -13,7 +13,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/0.png",
+        foto: "../src/assets/imgs/ecopontos/0.png",
       },
       {
         id: 1,
@@ -25,7 +25,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/1.png",
+        foto: "../src/assets/imgs/ecopontos/1.png",
       },
       {
         id: 2,
@@ -37,7 +37,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/2.png",
+        foto: "../src/assets/imgs/ecopontos/2.png",
       },
       {
         id: 3,
@@ -49,7 +49,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/3.png",
+        foto: "../src/assets/imgs/ecopontos/3.png",
       },
       {
         id: 4,
@@ -61,7 +61,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/4.png",
+        foto: "../src/assets/imgs/ecopontos/4.png",
       },
       {
         id: 5,
@@ -73,7 +73,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/5.png",
+        foto: "../src/assets/imgs/ecopontos/5.png",
       },
       {
         id: 6,
@@ -85,7 +85,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/6.png",
+        foto: "../src/assets/imgs/ecopontos/6.png",
       },
       {
         id: 7,
@@ -97,7 +97,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/7.png",
+        foto: "../src/assets/imgs/ecopontos/7.png",
       },
       {
         id: 8,
@@ -109,7 +109,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         vezesRegistado: 0,
         quemAdicionou: 0,
         dataCriacao: "",
-        foto: "@/src/assets/imgs/ecoponto/8.png",
+        foto: "../src/assets/imgs/ecopontos/8.png",
       },
     ],
   }),
@@ -117,5 +117,8 @@ export const ecopontoStore = defineStore("ecoponto", {
     getEcopontos: (state) => {
       return state.ecopontos;
     },
+    getEcopontoById: (state) => (id) => {
+      return state.ecopontos.find((ecoponto) => ecoponto.id == id);
+    }
   },
 });
