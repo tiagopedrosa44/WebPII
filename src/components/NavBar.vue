@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar :fluid="false" rounded color="#114B5F" id="nav">
+  <v-toolbar rounded color="#114B5F" id="nav">
     <!-- Links da esquerda -->
     <v-btn v-for="link in leftLinks" :key="link.text" :to="link.route">
       {{ link.text }}
