@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+  
     <div align="center">
       <nav>
         <NavBar />
@@ -16,12 +17,9 @@
           </div>
 
           <br>
-          <div>
-            <div class="ecopontos">
-            </div>
-            <br>
-            <div class="ecopontos">
-            </div>
+          <div class="ecoponto">
+            
+            
           </div>
 
         </v-col>
@@ -38,6 +36,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import Mapa from "@/components/Mapa.vue";
+import { ecopontoStore } from "../stores/ecopontoStore";
 
 export default {
   components: {
@@ -46,8 +45,11 @@ export default {
   },
   data() {
     return {
+      store: ecopontoStore(),
+
     };
   },
+  
 };
 </script>
 
@@ -82,33 +84,5 @@ export default {
   }
 }
 
-@media (max-width: 576px) {
-  nav {
-    width: 97%;
-  }
-}
 
-@media (max-width: 768px) {
-  nav {
-    width: 97%;
-  }
-}
-
-@media (min-width: 992px) {
-  nav {
-    width: 97%;
-  }
-}
-
-@media (max-width: 1200px) {
-  nav {
-    width: 97%;
-  }
-}
-
-@media (min-width: 1400px) {
-  nav {
-    width: 88%;
-  }
-}
 </style>
