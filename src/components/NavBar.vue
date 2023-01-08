@@ -6,29 +6,29 @@
     </v-btn>
 
     <!-- Logo -->
-    <v-toolbar-title>Logo</v-toolbar-title>
+    <v-toolbar-title>
+      <v-img src="src\assets\imgs\logo_nav.png" height="91px" width="91px"></v-img>
+    </v-toolbar-title>
 
     <!-- Links da direita -->
-    <v-btn v-for="link in rightLinks" :key="link.text" :to="link.route">
-      {{ link.text }}
-    </v-btn>
+    <v-btn>Desafios</v-btn>
+    <v-btn @click="$router.push('perfil')">Perfil</v-btn>
+    <v-btn @click="store.logout">Logout</v-btn>
+    
   </v-toolbar>
 </template>
 
 <script>
+import {userStore} from '../stores/userStore.js'
 export default {
   data() {
     return {
+      store:userStore(),
       leftLinks: [
         { text: "Home", route: "/home" },
         { text: "Rankings", route: "/rankings" },
         { text: "Loja", route: "/loja" },
         { text: "Faq", route: "/faq" },
-      ],
-      rightLinks: [
-        { text: "Desafios", route: "/link-5" },
-        { text: "Perfil", route: "/perfil" },
-        { text: "Logout", route: "/link-7" },
       ],
     };
   },
