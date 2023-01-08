@@ -9,6 +9,7 @@
     <Marker :options="currentPosMarkerOptions" />
     <Marker
       v-for="ecoponto in ecopontos"
+      @click="$router.push('/ecoponto/' + ecoponto.id)"
       :key="ecoponto.id"
       :options="{
         position: {
