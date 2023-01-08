@@ -8,25 +8,33 @@
     <br />
     <br />
     <br />
-    <div class="container">
-      <div id="perfil">
-        <div id="divavatar">
-          <v-img
-            src="/src/assets/imgs/avatar2.png"
-            id="avatar"
-            width="83px"
-            height="90px"
-          ></v-img>
-        </div>
+    <v-layout wrap>
+      <v-flex xs12 md12>
+        <div class="container">
+          <div id="perfil">
+            <div id="divavatar">
+              <v-img
+                src="/src/assets/imgs/avatar2.png"
+                id="avatar"
+                width="83px"
+                height="90px"
+              ></v-img>
+            </div>
 
-        <span id="nome">{{ user.nome }}</span>
-        <v-progress-linear model-value="50" id="progresso" class="perfil-info"></v-progress-linear>
-        <p class="perfil-info">Nivel: {{ user.nivel }}</p>
-      </div>
-      <h3>Biografia</h3>
-      <p>{{ user.biografia }}</p>
-      <button id="editar">Editar perfil</button>
-    </div>
+            <span id="nome">{{ user.nome }}</span>
+            <v-progress-linear
+              model-value="50"
+              id="progresso"
+              class="perfil-info"
+            ></v-progress-linear>
+            <p class="perfil-info">Nivel: {{ user.nivel }}</p>
+          </div>
+          <h3>Biografia</h3>
+          <p>{{ user.biografia }}</p>
+          <button id="editar">Editar perfil</button>
+        </div>
+      </v-flex>
+    </v-layout>
     <div>
       <v-container>
         <v-row>
@@ -42,11 +50,11 @@
     </div>
     <div>
       <v-container>
-        <v-row>
-          <v-col>
+        <v-layout wrap>
+          <v-flex xs12 md6>
             <h1>As minhas badges</h1>
-          </v-col>
-        </v-row>
+          </v-flex>
+        </v-layout>
       </v-container>
     </div>
   </div>
@@ -67,13 +75,12 @@ export default {
   },
   created() {
     this.user = this.store.getLoggedInUser;
-    
   },
 };
 </script>
 
 <style>
-.perfil{
+.perfil {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
   min-height: 1080px;
 }
@@ -116,8 +123,6 @@ export default {
   font-weight: bold;
 }
 
-
-
 h3 {
   grid-column: 1 / 3;
   grid-row: 2;
@@ -129,7 +134,7 @@ h3 {
   font-size: 20px;
   color: #f0cd6e;
 }
-h1{
+h1 {
   color: #fdfcf8;
 }
 
@@ -173,8 +178,7 @@ p {
   min-height: 100%;
 }
 
-
-.perfil-info{
+.perfil-info {
   grid-row: 2;
 }
 </style>
