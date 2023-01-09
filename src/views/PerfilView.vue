@@ -31,7 +31,7 @@
           </div>
           <h3>Biografia</h3>
           <p>{{ user.biografia }}</p>
-          <button id="editar">Editar perfil</button>
+          <v-btn @click="$router.push('editarPerfil')" id="editar">Editar perfil</v-btn>
         </div>
       </v-flex>
     </v-layout>

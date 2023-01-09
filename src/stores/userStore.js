@@ -12,7 +12,7 @@ export const userStore = defineStore("userStore", {
           nome: "admin",
           email: "admin@gmail.com",
           password: "1234",
-          pontos: 0,
+          pontos: 1000,
           nivel: 0,
           moedas: 0,
           utilizacoes: 0,
@@ -26,7 +26,7 @@ export const userStore = defineStore("userStore", {
           nome: "RicardoSilva",
           email: "user@gmail.com",
           password: "1234",
-          pontos: 0,
+          pontos: 2000,
           nivel: 0,
           moedas: 0,
           utilizacoes: 0,
@@ -53,6 +53,10 @@ export const userStore = defineStore("userStore", {
     getLoggedInUser: (state) => {
       return state.users.find((user) => user.nome == state.logado.nome);
     },
+    getSortedUsers: (state) => {
+      return state.users.sort((a,b)=> b.pontos - a.pontos);
+    }
+    
   },
 
   actions: {
@@ -212,6 +216,13 @@ export const userStore = defineStore("userStore", {
       this.users.splice(index, 1);
       localStorage.setItem("users", JSON.stringify(this.users));
     },
+    editUser(biografia,password){
+      let user = this.users.find((user) => user.nome == this.logado.nome);
+      user.biografia = biografia;
+      user.password = password;
+      localStorage.setItem("users", JSON.stringify(this.users));
+    }
+    
   },
 
   //save users to local storage

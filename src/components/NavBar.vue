@@ -11,9 +11,9 @@
     </v-toolbar-title>
 
     <!-- Links da direita -->
-    <v-btn>Desafios</v-btn>
-    <v-btn @click="$router.push('perfil')">Perfil</v-btn>
-    <v-btn @click="store.logout">Logout</v-btn>
+    <v-btn @click="$router.push('desafios')"><v-img src="/src/assets/imgs/icones/desafios.svg" height="34px" width="34px"></v-img></v-btn>
+    <v-btn @click="$router.push('perfil')"><v-img src="/src/assets/imgs/icones/perfil.svg" height="34px" width="34px"></v-img></v-btn>
+    <v-btn @click="store.logout"><v-img src="/src/assets/imgs/icones/Logout.svg" height="34px" width="34px"></v-img></v-btn>
     
   </v-toolbar>
 </template>

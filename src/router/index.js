@@ -9,6 +9,8 @@ import PerfilView from '../views/PerfilView.vue'
 import AdminView from '../views/AdminView.vue'
 //import { userStore } from "../stores/userStore.js";
 import EcopontoView from '../views/EcopontoView.vue'
+import DesafiosView from '../views/desafiosView.vue'
+import editarPerfilView from '../views/editarPerfilView.vue'
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,6 +60,16 @@ export const router = createRouter({
       path: '/ecoponto/:id',
       name: 'ecoponto',
       component: EcopontoView,
+    },
+    {
+      path: '/desafios',
+      name: 'desafios',
+      component: DesafiosView,
+    },
+    {
+      path: '/editarPerfil',
+      name: 'editarPerfil',
+      component: editarPerfilView,
     }
   ]
 })
