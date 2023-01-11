@@ -14,15 +14,24 @@
           <div class="title" align="center">
             <h1>Ecoponto</h1>
           </div>
-
           <br />
           <div id="left">
-            <img :src="ecoponto.foto" />
+            <v-container class="grey lighten-5">
+              <div id="infoEcoponto">
+                <img :src="ecoponto.foto" height="350" width="550" />
+                <br />
+                <p>
+                  <b>{{ ecoponto.morada }}</b>
+                </p>
+              </div>
+            </v-container>
           </div>
         </v-col>
         <v-col cols="12" lg="8" class="col-mapa" align="center">
           <div id="right">
-            <Mapa />
+            <div id="mapa">
+              <Mapa />
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -64,13 +73,33 @@ export default {
 </script>
 
 <style scoped>
-/**id left aligned to the left and id right aligned to the right */
+.home {
+  background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
+  min-height: 1080px;
+}
+
 #left {
   float: left;
   width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 10px;
 }
+
 #right {
   float: right;
-  width: 50%;
+  width: 80%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#infoEcoponto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 100px;
+  width: 100%;
 }
 </style>
