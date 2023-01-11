@@ -56,53 +56,37 @@ export default defineComponent({
         lat: this.store.getEcopontoById(this.id).coordenadas.lat,
         lng: this.store.getEcopontoById(this.id).coordenadas.lng,
       };
-      if (navigator.geolocation) {
-        navigator.geolocation.watchPosition((position) => {
-          this.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          this.currentPosMarkerOptions.position = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-        });
-      } else {
-        this.center = { lat: 41.36611, lng: -8.739542 };
-        this.currentPosMarkerOptions.position = {
-          lat: 41.36611,
-          lng: -8.739542,
-        };
-      }
-    } else {
-      if (navigator.geolocation) {
-        navigator.geolocation.watchPosition((position) => {
-          this.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          this.currentPosMarkerOptions.position = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-        });
-      } else {
-        this.center = { lat: 41.36611, lng: -8.739542 };
-        this.currentPosMarkerOptions.position = {
-          lat: 41.36611,
-          lng: -8.739542,
-        };
-      }
-    }
+      this.verificarLoc();
+    } else this.verificarLoc();
     this.ecopontos = this.store.ecopontos;
   },
   methods: {
     focarEcoponto(id) {
-      this.$router.push('/ecoponto/' + id)
+      this.$router.push("/ecoponto/" + id);
       this.center = {
         lat: this.store.getEcopontoById(id).coordenadas.lat,
         lng: this.store.getEcopontoById(id).coordenadas.lng,
       };
+    },
+    verificarLoc() {
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition((position) => {
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          this.currentPosMarkerOptions.position = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+        });
+      } else {
+        this.center = { lat: 41.36611, lng: -8.739542 };
+        this.currentPosMarkerOptions.position = {
+          lat: 41.36611,
+          lng: -8.739542,
+        };
+      }
     },
   },
 });
