@@ -51,7 +51,7 @@ export default defineComponent({
   },
   created() {
     this.id = this.$route.params.id;
-    if (this.id) {
+    if (!isNaN(this.id)) {
       this.center = {
         lat: this.store.getEcopontoById(this.id).coordenadas.lat,
         lng: this.store.getEcopontoById(this.id).coordenadas.lng,
@@ -70,7 +70,7 @@ export default defineComponent({
     },
     verificarLoc() {
       if (navigator.geolocation) {
-        navigator.geolocation.watchPosition((position) => {
+        navigator.geolocation.getCurrentPosition((position) => {
           this.center = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
