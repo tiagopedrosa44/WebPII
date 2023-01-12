@@ -73,7 +73,7 @@ export const router = createRouter({
       component: editarPerfilView,
     },
     {
-      path: '/registarEcoponto',
+      path: '/registarEcoponto/:id',
       name: 'registarEcoponto',
       component: RegistarEcopontoView,
     },

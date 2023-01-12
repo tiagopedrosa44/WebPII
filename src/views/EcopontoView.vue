@@ -28,9 +28,15 @@
                   {{ ecoponto.coordenadas.lng }}
                 </p>
                 <br />
-                <v-btn class="botaoAmarelo" @click="$router.push('/registarEcoponto')">Registar</v-btn>
+                <v-btn
+                  class="botaoAmarelo"
+                  @click="$router.push('/registarEcoponto/' + ecoponto.id)"
+                  >Registar</v-btn
+                >
                 <br />
-                <v-btn class="botaoAmarelo" @click="$router.go(-1)">Voltar</v-btn>
+                <v-btn class="botaoAmarelo" @click="$router.push('/home')"
+                  >Voltar</v-btn
+                >
               </div>
             </v-container>
           </div>
