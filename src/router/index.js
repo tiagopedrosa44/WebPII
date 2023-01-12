@@ -11,6 +11,7 @@ import AdminView from '../views/AdminView.vue'
 import EcopontoView from '../views/EcopontoView.vue'
 import DesafiosView from '../views/desafiosView.vue'
 import editarPerfilView from '../views/editarPerfilView.vue'
+import RegistarEcopontoView from '../views/RegistarEcopontoView.vue'
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -70,7 +71,12 @@ export const router = createRouter({
       path: '/editarPerfil',
       name: 'editarPerfil',
       component: editarPerfilView,
-    }
+    },
+    {
+      path: '/registarEcoponto',
+      name: 'registarEcoponto',
+      component: RegistarEcopontoView,
+    },
   ]
 })
 

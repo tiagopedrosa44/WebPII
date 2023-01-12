@@ -11,10 +11,10 @@
     <v-container class="grey lighten-5">
       <v-row no-gutters>
         <v-col cols="12" lg="4" class="col-ecopontos">
-          <div class="title" align="center">
+          <br />
+          <div class="title">
             <h1>Ecoponto</h1>
           </div>
-          <br />
           <div id="left">
             <v-container class="grey lighten-5">
               <div id="infoEcoponto">
@@ -23,6 +23,14 @@
                 <p>
                   <b>{{ ecoponto.morada }}</b>
                 </p>
+                <p>
+                  Coordenadas: {{ ecoponto.coordenadas.lat }},
+                  {{ ecoponto.coordenadas.lng }}
+                </p>
+                <br />
+                <v-btn class="botaoAmarelo" @click="$router.push('/registarEcoponto')">Registar</v-btn>
+                <br />
+                <v-btn class="botaoAmarelo" @click="$router.go(-1)">Voltar</v-btn>
               </div>
             </v-container>
           </div>
@@ -100,6 +108,10 @@ export default {
   align-items: center;
   flex-direction: column;
   margin-left: 100px;
-  width: 100%;
+  width: 200%;
+}
+
+.botaoAmarelo {
+  background-color: #f0cd6e;
 }
 </style>
