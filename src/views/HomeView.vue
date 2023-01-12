@@ -93,6 +93,7 @@ export default {
   width: 90%;
   height: 450px;
   overflow-y: scroll;
+  cursor: pointer;
 }
 
 .ecoponto {
