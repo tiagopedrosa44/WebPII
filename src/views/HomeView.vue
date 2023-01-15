@@ -17,8 +17,18 @@
 
           <br />
           <div class="ecopontos" @scroll="showEcopontos">
-            <div v-for="(ecoponto, index) in store.getEcopontos" :key="ecoponto.id" class="ecoponto" v-if="index < 4">
-              <v-img src="src\assets\imgs\ecoponto.png" width="50px" height="50px"></v-img>
+            <div
+              v-for="(ecoponto, index) in store.getEcopontos"
+              :key="ecoponto.id"
+              class="ecoponto"
+              v-if="index < 4"
+              @click="mostrarEcoponto(index)"
+            >
+              <v-img
+                src="src\assets\imgs\ecoponto.png"
+                width="50px"
+                height="50px"
+              ></v-img>
               <p>{{ ecoponto.morada }}</p>
             </div>
           </div>
@@ -53,6 +63,9 @@ export default {
     showEcopontos() {
       this.showEcopontos = true;
     },
+    mostrarEcoponto(index) {
+      this.$router.push("/ecoponto/" + index);
+    },
   },
 };
 </script>
@@ -80,12 +93,13 @@ export default {
   width: 90%;
   height: 450px;
   overflow-y: scroll;
+  cursor: pointer;
 }
 
-.ecoponto{
+.ecoponto {
   margin-bottom: 30px;
   display: flex;
-  flex:start;
+  flex: start;
 }
 
 @media (max-width: 700px) {
