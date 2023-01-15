@@ -1,10 +1,12 @@
 <template>
   <div class="landingpage">
-    <div>
-      <nav>
-        <NavBar />
-      </nav>
-    </div>
+    <v-container>
+      <v-row>
+        <v-col>
+          <NavBar />
+        </v-col>
+      </v-row>
+    </v-container>
     <main>
       <v-container>
         <v-row>

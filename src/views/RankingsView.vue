@@ -1,13 +1,12 @@
 <template>
   <div class="Ranking">
-    <div align="center">
-      <nav>
-        <NavBar />
-      </nav>
-    </div>
-    <br />
-    <br />
-    <br />
+    <v-container>
+      <v-row>
+        <v-col>
+          <NavBar />
+        </v-col>
+      </v-row>
+    </v-container>
 
     <div align="center">
       <h1 class="text-xs-h6 text-md-h3 text-lg-h2" id="titulo">Leaderboard</h1>

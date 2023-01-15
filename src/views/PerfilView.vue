@@ -1,6 +1,12 @@
 <template>
   <div class="perfil">
-    <NavBar />
+    <v-container>
+      <v-row>
+        <v-col>
+          <NavBar />
+        </v-col>
+      </v-row>
+    </v-container>
     <v-container fluid id="informacoes">
       <div class="responsive-background-image">
         <v-row>

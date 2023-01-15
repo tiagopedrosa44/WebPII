@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <div align="center">
-      <nav>
-        <NavBar />
-      </nav>
-    </div>
+  <div class="faq">
+    <v-container>
+      <v-row>
+        <v-col>
+          <NavBar />
+        </v-col>
+      </v-row>
+    </v-container>
     <main>
       <h1 id="tittle">Perguntas mais frequentes</h1>
       <br />
@@ -60,7 +62,7 @@ export default {
 </script>
 
 <style scoped>
-body {
+.faq {
   background-image: url("src/assets/imgs/faqbackground.svg");
   min-height: 1080px;
 }
