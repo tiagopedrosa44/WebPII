@@ -39,7 +39,15 @@
             /><br /><br />
             <v-btn
               text
-              @click="this.store.registar(username, email, password, password2, referralCode)"
+              @click="
+                this.store.registar(
+                  username,
+                  email,
+                  password,
+                  password2,
+                  referralCode
+                )
+              "
               id="botaoRegisto"
               >Registar</v-btn
             ><br /><br />
@@ -64,8 +72,8 @@ export default {
       store: userStore(),
     };
   },
-  
-  mounted () {
+
+  mounted() {
     window.scrollTo(0, 0);
   },
 };

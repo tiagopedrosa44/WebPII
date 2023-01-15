@@ -1,66 +1,116 @@
 <template>
   <div class="perfil">
-    <div align="center">
-      <nav>
-        <NavBar />
-      </nav>
-    </div>
-    <br />
-    <br />
-    <br />
-    <v-layout wrap>
-      <v-flex xs12 md12>
-        <div class="container">
-          <div id="perfil">
-            <div id="divavatar">
-              <v-img
-                src="/src/assets/imgs/avatar2.png"
-                id="avatar"
-                width="83px"
-                height="90px"
-              ></v-img>
-            </div>
-
-            <span id="nome">{{ user.nome }}</span>
+    <NavBar />
+    <v-container fluid id="informacoes">
+      <div class="responsive-background-image">
+        <v-row>
+          <v-col cols="1" align="center">
+            <v-img
+              src="/src/assets/imgs/avatar2.png"
+              id="avatar"
+              width="83px"
+              height="90px"
+            ></v-img>
+          </v-col>
+          <v-col cols="2" id="perfilInfo">
+            <p class="user-name">Nome</p>
+            <p class="user-level">Nível</p>
             <v-progress-linear
               model-value="50"
               id="progresso"
               class="perfil-info"
             ></v-progress-linear>
-            <p class="perfil-info">Nivel: {{ user.nivel }}</p>
-          </div>
-          <h3>Biografia</h3>
-          <p>{{ user.biografia }}</p>
-          <v-btn @click="$router.push('editarPerfil')" id="editar">Editar perfil</v-btn>
-        </div>
-      </v-flex>
-    </v-layout>
-    <div>
-      <v-container>
-        <v-row>
-          <v-col align="center">
-            <h1>Referral code</h1>
-            <p>
-              Compartilhe o referral code abaixo com os seus amigos e ganhem
-              ambos moedas virtuais para poderem usar na nossa loja.
-            </p>
+          </v-col>
+          <v-col cols="2"></v-col>
+          <v-col
+            cols="3"
+            class="d-flex justify-space-between align-center mb-6 bg-surface-variant"
+            id="infos"
+          >
+            <div id="infosdiv" align="center">
+              <p>Ecopontos Registados</p>
+            </div>
+            <v-divider class="mx-4"></v-divider>
+            <div id="infosdiv" align="center">
+              <p>Ecopontos Utilizados</p>
+            </div>
+            <v-divider class="mx-4"></v-divider>
+            <div id="infosdiv" align="center">
+              <p>Moedas</p>
+            </div>
+          </v-col>
+          <v-col cols="3"></v-col>
+        </v-row>
+        <v-row class="my-4">
+          <v-col cols="9" id="biografia">
+            <h3>Biografia</h3>
+            <p>uasshfiausfijalsjfalskf.ksafkljaklfjwja</p>
           </v-col>
         </v-row>
-      </v-container>
+        <v-row class="my-10">
+          <v-col cols="3">
+            <v-btn @click="$router.push('editarPerfil')" id="editar"
+              >Editar perfil</v-btn
+            >
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+    <v-container>
+      <!-- <div class="tk-blob" style="--time: 20s; --amount: 5; --fill: #15795b">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 747.2 726.7">
+          <path
+            d="M539.8 137.6c98.3 69 183.5 124 203 198.4 19.3 74.4-27.1 168.2-93.8 245-66.8 76.8-153.8 136.6-254.2 144.9-100.6 8.2-214.7-35.1-292.7-122.5S-18.1 384.1 7.4 259.8C33 135.6 126.3 19 228.5 2.2c102.1-16.8 213.2 66.3 311.3 135.4z"
+          ></path>
+        </svg>
+      </div> -->
+
+      <v-row>
+        <v-col class="d-flex justify-center mb-6 bg-surface-variant">
+          <h1 id="titleRef">Referral Code</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col class="d-flex justify-center mb-6 bg-surface-variant">
+          <p id="expRef">
+            Compartilhe o referral code abaixo com os seus amigos e ganhem ambos
+            moedas virtuais para poderem usar na nossa loja.
+          </p>
+        </v-col>
+      </v-row>
+    </v-container>
+    <div v-if="width > 1500">
+      <v-img
+        src="src\assets\imgs\linha_referral.svg"
+        width="422.57px"
+        heigth="376.5px"
+        id="linha"
+      ></v-img>
     </div>
-    <div>
-      <v-container>
-        <v-layout wrap>
-          <v-flex xs12 md6>
-            <h1>As minhas badges</h1>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </div>
+
+    <v-container>
+      <v-row>
+        <v-col cols="4"></v-col>
+        <v-col cols="4" class="d-flex justify-center mb-6 bg-surface-variant">
+          <v-card text="37yhh8" id="refCard"></v-card>
+        </v-col>
+        <v-col cols="4"></v-col>
+      </v-row>
+    </v-container>
+    <v-container>
+      <v-row>
+        <v-col class="d-flex justify-center mb-6 bg-surface-variant">
+          <h1 id="titleBadge">As minhas Badges</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col> </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
-<script scoped>
+<script>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
 export default {
@@ -71,114 +121,132 @@ export default {
     return {
       store: userStore(),
       user: [],
+      width: window.innerWidth,
+      height: window.innerHeight,
+      length: 3,
+      window: 0,
     };
   },
   created() {
     this.user = this.store.getLoggedInUser;
+    window.addEventListener("resize", () => {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      console.log(this.width, this.height);
+    });
   },
 };
 </script>
 
-<style>
+<style scoped>
 .perfil {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
   min-height: 1080px;
+  z-index: -1;
 }
-
-.container {
+.responsive-background-image {
   background-image: url("src/assets/imgs/fundo_div_perfil.jpg");
+  background-size: cover;
+  background-position: center;
   border-radius: 10px;
-  color: #fdfcf8;
-  margin: 0 auto;
-  width: 80%;
-  display: grid;
+  height: 300px;
 }
-
+#informacoes {
+  margin-top: 20px;
+}
 #divavatar {
   border-radius: 10px;
   background-color: #fdfcf8;
   width: 83px;
   height: 90px;
+  margin: 10px;
 }
-
-#avatar {
-  border-radius: 10px;
-}
-
-/**in perfil, the image and the name must be touching eachother */
-#perfil {
-  grid-column: 1 / 3;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: 0.2fr 2fr;
-  grid-gap: 0px;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-#nome {
+#perfilInfo {
+  color: #fdfcf8;
+  font-family: "Exo";
   font-weight: bold;
 }
-
-h3 {
-  grid-column: 1 / 3;
-  grid-row: 2;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: 20px;
-  color: #f0cd6e;
-}
-h1 {
+#titleRef {
   color: #fdfcf8;
+  font-family: "Exo";
+  font-weight: bold;
+  z-index: 1;
 }
 
-p {
-  grid-column: 1 / 3;
-  grid-row: 3;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: 15px;
+#titleBadge {
   color: #fdfcf8;
+  font-family: "Exo";
+  font-weight: bold;
+}
+#expRef {
+  color: #fdfcf8;
+  font-family: "Spinnaker";
+  z-index: 1;
 }
 
-#editar {
-  grid-column: 1 / 1;
-  grid-row: 4;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+#refCard {
   background-color: #f0cd6e;
-  border: none;
-  color: white;
+  color: #fdfcf8;
+}
+#linha {
+  left: 400px;
+  bottom: 10px;
+}
+.tk-blob {
+  --amount: 0.5;
+  width: 1000px;
+  height: 1000px;
+  position: absolute;
+  z-index: 0;
+}
+#editar {
+  background-color: #f0cd6e;
+  color: #fdfcf8;
+  font-family: "Exo";
   font-weight: bold;
-  font-size: large;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 10px;
 }
 
-#background {
-  background-image: url("src/assets/imgs/fundo_perfil.jpg");
-  background-position: center;
-  background-size: cover;
-  min-height: 100%;
+#biografia h3 {
+  color: #f0cd6e;
+  font-family: "Exo";
+  font-weight: bold;
+}
+#biografia p {
+  color: #fdfcf8;
+  font-family: "Spinnaker";
 }
 
-.perfil-info {
-  grid-row: 2;
+#infos p {
+  color: #fdfcf8;
+  font-family: "Exo";
+  font-weight: bold;
+}
+#infosdiv {
+  background-color: #0c3745;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7px 63px;
+  gap: 7px;
+}
+
+@media only screen and (max-width: 600px) {
+  .tk-blob {
+    max-height: calc(
+      40vw * 726.7 / 747.2
+    ); /* Altura menor para telas até 600px */
+    position: absolute;
+    z-index: 0;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .tk-blob {
+    max-height: calc(
+      30vw * 726.7 / 747.2
+    ); /* Altura menor para telas até 400px */
+    position: absolute;
+    z-index: 0;
+  }
 }
 </style>
