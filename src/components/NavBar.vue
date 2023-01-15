@@ -6,7 +6,7 @@
     </v-btn>
 
     <!-- Logo -->
-    <v-toolbar-title>
+    <v-toolbar-title id="centro">
       <v-img src="src\assets\imgs\logo_nav.png" height="91px" width="91px"></v-img>
     </v-toolbar-title>
 
@@ -35,9 +35,15 @@ export default {
 };
 </script>
 <style>
+/**make the toolbar ocuppy all the width of the page */
 #nav {
   color: #fdfcf8;
   font-family: "exo";
   font-weight: bold;
 }
+
+/* #centro {
+  margin-left: 20%;
+  margin-right: 20%;
+} */
 </style>
