@@ -230,9 +230,7 @@ export default {
 #infosdiv {
   background-color: #0c3745;
   border-radius: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
   padding: 7px 63px;
   gap: 7px;
 }
