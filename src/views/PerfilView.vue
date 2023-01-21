@@ -7,7 +7,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container fluid id="informacoes">
+    <v-container id="informacoes">
       <div class="responsive-background-image">
         <v-row>
           <v-col cols="1" align="center">
@@ -27,20 +27,20 @@
               class="perfil-info"
             ></v-progress-linear>
           </v-col>
-          <v-col cols="2"></v-col>
+        
           <v-col
-            cols="3"
-            class="d-flex justify-space-between align-center mb-6 bg-surface-variant"
+            cols="5"
+            class="d-flex justify-space-between align-center mb-6 bg-surface-variant "
             id="infos"
           >
             <div id="infosdiv" align="center">
               <p>Ecopontos Registados</p>
             </div>
-            <v-divider class="mx-4"></v-divider>
+            
             <div id="infosdiv" align="center">
               <p>Ecopontos Utilizados</p>
             </div>
-            <v-divider class="mx-4"></v-divider>
+            
             <div id="infosdiv" align="center">
               <p>Moedas</p>
             </div>
@@ -227,13 +227,7 @@ export default {
   font-family: "Exo";
   font-weight: bold;
 }
-#infosdiv {
-  background-color: #0c3745;
-  border-radius: 100px;
 
-  padding: 7px 63px;
-  gap: 7px;
-}
 
 @media only screen and (max-width: 600px) {
   .tk-blob {
