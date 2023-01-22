@@ -8,7 +8,7 @@ import faqView from '../views/faqView.vue'
 import PerfilView from '../views/PerfilView.vue'
 import AdminView from '../views/AdminView.vue'
 //import { userStore } from "../stores/userStore.js";
-import EcopontoView from '../views/EcopontoView.vue'
+import EcopontoView from '../views/EcopontoNew.vue'
 import DesafiosView from '../views/desafiosView.vue'
 import editarPerfilView from '../views/editarPerfilView.vue'
 import RegistarEcopontoView from '../views/RegistarEcopontoView.vue'
