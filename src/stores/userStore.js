@@ -65,6 +65,9 @@ export const userStore = defineStore("userStore", {
   },
 
   actions: {
+    updateLocalStorage() {
+      localStorage.setItem("users", JSON.stringify(this.users))
+    },
     addUser(username, email, password) {
       if (
         this.users.find((user) => user.email == email) ||
@@ -86,7 +89,7 @@ export const userStore = defineStore("userStore", {
         badges: [],
         referral: "",
       });
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
     },
 
     login(username, password) {
@@ -170,7 +173,7 @@ export const userStore = defineStore("userStore", {
                 badges: [],
                 referral: novoReferralCode,
               });
-              localStorage.setItem("users", JSON.stringify(this.users));
+              updateLocalStorage();
               localStorage.setItem("userLogado", username);
               localStorage.setItem("logado", true);
               this.logado = {
@@ -200,7 +203,7 @@ export const userStore = defineStore("userStore", {
               badges: [],
               referral: novoReferralCode,
             });
-            localStorage.setItem("users", JSON.stringify(this.users));
+            updateLocalStorage();
             localStorage.setItem("userLogado", username);
             localStorage.setItem("logado", true);
             this.logado = { bool: true, nome: username };
@@ -221,15 +224,15 @@ export const userStore = defineStore("userStore", {
     deleteUser(id) {
       const index = this.users.findIndex((user) => user.id === id);
       this.users.splice(index, 1);
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
     },
     editUser(biografia, password) {
       let user = this.users.find((user) => user.nome == this.logado.nome);
       user.biografia = biografia;
       user.password = password;
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
     },
-    registarUtilizacao(username,idEcoponto,foto){
+    registarUtilizacao(username, idEcoponto, foto) {
       let idUser
       this.users.forEach(element => {
         if (element.nome == username) idUser = element.id;
@@ -237,7 +240,9 @@ export const userStore = defineStore("userStore", {
       this.users[idUser].utilizacoes.push({
         idEcoponto: idEcoponto,
         foto: foto,
+        aprovado: false,
       })
+      this.updateLocalStorage();
       console.log(this.users[idUser]);
     }
   },
@@ -247,7 +252,7 @@ export const userStore = defineStore("userStore", {
     if (localStorage.getItem("users")) {
       this.users = JSON.parse(localStorage.getItem("users"));
     } else {
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
     }
     if (localStorage.getItem("logado") == "true") {
       this.logado = {

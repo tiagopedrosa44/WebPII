@@ -168,6 +168,7 @@
 
 <script>
 import NavBar from "@/components/NavBar-landing.vue";
+import { userStore } from "../stores/userStore.js";
 export default {
   components: {
     NavBar,
@@ -177,7 +178,11 @@ export default {
       showReduzir: false,
       showReutilizar: false,
       showReciclar: false,
+      store: userStore(),
     };
+  },
+  created () {
+    this.store.updateLocalStorage();
   },
 };
 </script>
