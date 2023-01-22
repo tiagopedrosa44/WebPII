@@ -14,6 +14,7 @@ import editarPerfilView from '../views/editarPerfilView.vue'
 import RegistarEcopontoView from '../views/RegistarEcopontoView.vue'
 import LojaView from '../views/LojaView.vue'
 
+
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
