@@ -256,6 +256,7 @@
 
 <script>
 import NavBar from "@/components/NavBar-landing.vue";
+import { userStore } from "../stores/userStore.js";
 export default {
   components: {
     NavBar,
@@ -267,6 +268,7 @@ export default {
       showReciclar: false,
       width: window.innerWidth,
       height: window.innerHeight,
+      store: userStore(),
     };
   },
   methods: {
@@ -280,6 +282,7 @@ export default {
       this.height = window.innerHeight;
       console.log(this.width, this.height);
     });
+    this.store.updateLocalStorage();
   },
 };
 </script>

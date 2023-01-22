@@ -15,7 +15,8 @@ export const userStore = defineStore("userStore", {
           pontos: 1000,
           nivel: 0,
           moedas: 0,
-          utilizacoes: 0,
+          utilizacoes: [],
+          nUtilizacoes: 0,
           biografia: "",
           badges: [],
           referral: "",
@@ -29,7 +30,8 @@ export const userStore = defineStore("userStore", {
           pontos: 2000,
           nivel: 0,
           moedas: 0,
-          utilizacoes: 0,
+          utilizacoes: [],
+          nUtilizacoes: 0,
           biografia:
             "Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
           badges: [],
@@ -50,16 +52,22 @@ export const userStore = defineStore("userStore", {
     getUserById: (state) => (id) => {
       return state.users.find((user) => user.id == id);
     },
+    /* getUserByUsername: (state) => (username) => {
+      return state.users.find((user) => user.nome == username);
+    }, */
     getLoggedInUser: (state) => {
       return state.users.find((user) => user.nome == state.logado.nome);
     },
     getSortedUsers: (state) => {
-      return state.users.sort((a,b)=> b.pontos - a.pontos);
+      return state.users.sort((a, b) => b.pontos - a.pontos);
     }
-    
+
   },
 
   actions: {
+    updateLocalStorage() {
+      localStorage.setItem("users", JSON.stringify(this.users))
+    },
     addUser(username, email, password) {
       if (
         this.users.find((user) => user.email == email) ||
@@ -75,12 +83,13 @@ export const userStore = defineStore("userStore", {
         pontos: 0,
         nivel: 0,
         moedas: 0,
-        utilizacoes: 0,
+        utilizacoes: [],
+        nUtilizacoes: 0,
         biografias: "",
         badges: [],
         referral: "",
       });
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
     },
 
     login(username, password) {
@@ -158,12 +167,13 @@ export const userStore = defineStore("userStore", {
                 pontos: 0,
                 nivel: 0,
                 moedas: 100,
-                utilizacoes: 0,
+                utilizacoes: [],
+                nUtilizacoes: 0,
                 biografia: "",
                 badges: [],
                 referral: novoReferralCode,
               });
-              localStorage.setItem("users", JSON.stringify(this.users));
+              updateLocalStorage();
               localStorage.setItem("userLogado", username);
               localStorage.setItem("logado", true);
               this.logado = {
@@ -193,7 +203,7 @@ export const userStore = defineStore("userStore", {
               badges: [],
               referral: novoReferralCode,
             });
-            localStorage.setItem("users", JSON.stringify(this.users));
+            updateLocalStorage();
             localStorage.setItem("userLogado", username);
             localStorage.setItem("logado", true);
             this.logado = { bool: true, nome: username };
@@ -214,15 +224,27 @@ export const userStore = defineStore("userStore", {
     deleteUser(id) {
       const index = this.users.findIndex((user) => user.id === id);
       this.users.splice(index, 1);
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
     },
-    editUser(biografia,password){
+    editUser(biografia, password) {
       let user = this.users.find((user) => user.nome == this.logado.nome);
       user.biografia = biografia;
       user.password = password;
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
+    },
+    registarUtilizacao(username, idEcoponto, foto) {
+      let idUser
+      this.users.forEach(element => {
+        if (element.nome == username) idUser = element.id;
+      });
+      this.users[idUser].utilizacoes.push({
+        idEcoponto: idEcoponto,
+        foto: foto,
+        aprovado: false,
+      })
+      this.updateLocalStorage();
+      console.log(this.users[idUser]);
     }
-    
   },
 
   //save users to local storage
@@ -230,7 +252,7 @@ export const userStore = defineStore("userStore", {
     if (localStorage.getItem("users")) {
       this.users = JSON.parse(localStorage.getItem("users"));
     } else {
-      localStorage.setItem("users", JSON.stringify(this.users));
+      updateLocalStorage();
     }
     if (localStorage.getItem("logado") == "true") {
       this.logado = {

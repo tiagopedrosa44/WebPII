@@ -29,15 +29,18 @@
           <td>{{ user.pontos }}</td>
           <td>{{ user.nivel }}</td>
           <td>{{ user.moedas }}</td>
-          <td>{{ user.utilizacoes }}</td>
+          <td>{{ user.nUtilizacoes }}</td>
           <td>
-            <v-btn color="error" @click="store.deleteUser(user.id)"
-              >Remover</v-btn
-            >
+            <v-btn color="error" @click="store.deleteUser(user.id)">Remover</v-btn>
           </td>
         </tr>
       </tbody>
     </v-table>
+  </div>
+  <div>
+    <h1>Utilizações por aprovar</h1>
+    <v-divider></v-divider>
+    <img src="" id="teste">
   </div>
 </template>
 
@@ -47,13 +50,30 @@ export default {
   data() {
     return {
       store: userStore(),
+      utilizacoes: [],
+      foto: "",
     };
+  },
+  mounted() {
+    const users = this.store.getUsers;
+    console.log(users);
+    users.forEach(user => {
+      user.utilizacoes.forEach(utilizacao => {
+        if (utilizacao.aprovado == false) {
+          this.utilizacoes.push(utilizacao);
+        }
+      });
+    });
+    this.foto = this.utilizacoes[0].foto;
+    console.log(this.foto);
+    document.querySelector("#teste").src = this.foto;
+    console.log(this.utilizacoes);
   },
 };
 </script>
 
 <style scoped>
-  h1{
-    color: black;
-  }
+h1 {
+  color: black;
+}
 </style>

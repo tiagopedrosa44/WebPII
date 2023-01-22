@@ -12,13 +12,10 @@
         <h1 align="center">Registar utilização do ecoponto</h1>
         <br /><br />
         <input type="file" accept="image/*" ref="foto" style="display: none" />
-        <img
-          src="../assets/imgs/adFoto.png"
-          id="adFoto"
-          @click="uploadFoto()"
-        />
+        <img src="../assets/imgs/adFoto.png" id="adFoto" @click="uploadFoto()" />
         <br />
-        <v-btn style="background-color: #f0cd6e">Registar</v-btn>
+        <v-btn style="background-color: #f0cd6e"
+          @click="this.store.registarUtilizacao(this.userAtual, this.ecoponto, this.filePath)">Registar</v-btn>
       </v-container>
     </div>
   </div>
@@ -26,20 +23,35 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import { userStore } from "../stores/userStore.js";
 export default {
   components: {
     NavBar,
   },
   data() {
     return {
-      key: 0,
+      store: userStore(),
+      ecoponto: this.$route.params.id,
+      userAtual: "",
+      filePath: "",
     };
+  },
+  created() {
+    this.userAtual = localStorage.getItem("userLogado");
+    console.log(this.userAtual);
   },
   methods: {
     uploadFoto() {
       this.$refs.foto.click();
       this.$refs.foto.onchange = (e) => {
         const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+          this.filePath = e.target.result;
+          console.log(this.filePath);
+        }
+
         document.getElementById("adFoto").src = URL.createObjectURL(file);
       };
     },
