@@ -1,5 +1,7 @@
 <template>
   <div class="divs">
+    <v-btn @click="$router.push('home')" color="primary">Voltar</v-btn>
+
     <h1>Utilizadores</h1>
     <v-divider></v-divider>
     <br>
