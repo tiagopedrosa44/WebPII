@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in store.getUsers">
+        <tr v-for="user in userStore.getUsers">
           <td>{{ user.id }}</td>
           <td>{{ user.tipo }}</td>
           <td>{{ user.nome }}</td>
@@ -48,23 +48,17 @@
 
 <script>
 import { userStore } from "../stores/userStore.js";
+import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
 export default {
   data() {
     return {
-      store: userStore(),
+      userStore: userStore(),
+      utilizacaoStore: utilizacaoStore(),
       utilizacoes: [],
     };
   },
   created() {
-    const users = this.store.getUsers;
-    console.log(users);
-    users.forEach(user => {
-      user.utilizacoes.forEach(utilizacao => {
-        if (utilizacao.aprovado == false) {
-          this.utilizacoes.push(utilizacao);
-        }
-      });
-    });
+    this.utilizacoes = this.utilizacaoStore.getUtilizacoesPorAprovar;
     console.log(this.utilizacoes);
   },
 };

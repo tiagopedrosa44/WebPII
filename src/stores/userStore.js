@@ -15,8 +15,7 @@ export const userStore = defineStore("userStore", {
           pontos: 1000,
           nivel: 0,
           moedas: 0,
-          utilizacoes: [],
-          nUtilizacoes: 0,
+          utilizacoes: 0,
           biografia: "",
           badges: [],
           referral: "",
@@ -30,8 +29,7 @@ export const userStore = defineStore("userStore", {
           pontos: 2000,
           nivel: 0,
           moedas: 0,
-          utilizacoes: [],
-          nUtilizacoes: 0,
+          utilizacoes: 0,
           biografia:
             "Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
           badges: [],
@@ -83,8 +81,7 @@ export const userStore = defineStore("userStore", {
         pontos: 0,
         nivel: 0,
         moedas: 0,
-        utilizacoes: [],
-        nUtilizacoes: 0,
+        utilizacoes: 0,
         biografias: "",
         badges: [],
         referral: "",
@@ -167,8 +164,7 @@ export const userStore = defineStore("userStore", {
                 pontos: 0,
                 nivel: 0,
                 moedas: 100,
-                utilizacoes: [],
-                nUtilizacoes: 0,
+                utilizacoes: 0,
                 biografia: "",
                 badges: [],
                 referral: novoReferralCode,
@@ -232,19 +228,6 @@ export const userStore = defineStore("userStore", {
       user.password = password;
       updateLocalStorage();
     },
-    registarUtilizacao(username, idEcoponto, foto) {
-      let idUser
-      this.users.forEach(element => {
-        if (element.nome == username) idUser = element.id;
-      });
-      this.users[idUser].utilizacoes.push({
-        idEcoponto: idEcoponto,
-        foto: foto,
-        aprovado: false,
-      })
-      this.updateLocalStorage();
-      console.log(this.users[idUser]);
-    }
   },
 
   //save users to local storage

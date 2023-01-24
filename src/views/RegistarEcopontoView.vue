@@ -15,7 +15,7 @@
         <img src="../assets/imgs/adFoto.png" id="adFoto" @click="uploadFoto()" />
         <br />
         <v-btn style="background-color: #f0cd6e"
-          @click="this.store.registarUtilizacao(this.userAtual, this.ecoponto, this.filePath)">Registar</v-btn>
+          @click="this.utilizacaoStore.registarUtilizacao(this.userAtual, this.ecoponto, this.filePath)">Registar</v-btn>
       </v-container>
     </div>
   </div>
@@ -24,13 +24,15 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
+import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
 export default {
   components: {
     NavBar,
   },
   data() {
     return {
-      store: userStore(),
+      userStore: userStore(),
+      utilizacaoStore: utilizacaoStore(),
       ecoponto: this.$route.params.id,
       userAtual: "",
       filePath: "",
