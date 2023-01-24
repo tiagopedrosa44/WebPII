@@ -6,36 +6,36 @@ export const userStore = defineStore("userStore", {
     users: localStorage.users
       ? JSON.parse(localStorage.users)
       : [
-          {
-            id: 0,
-            tipo: "admin",
-            nome: "Admin",
-            email: "admin@gmail.com",
-            password: "Esmad_2223",
-            pontos: 1000,
-            nivel: 0,
-            moedas: 0,
-            utilizacoes: 0,
-            biografia: "",
-            badges: [],
-            referral: "",
-          },
-          {
-            id: 1,
-            tipo: "user",
-            nome: "User",
-            email: "user@gmail.com",
-            password: "Esmad_2223",
-            pontos: 2500,
-            nivel: 0,
-            moedas: 0,
-            utilizacoes: 0,
-            biografia:
-              "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
-            badges: [],
-            referral: "",
-          },
-        ],
+        {
+          id: 0,
+          tipo: "admin",
+          nome: "Admin",
+          email: "admin@gmail.com",
+          password: "Esmad_2223",
+          pontos: 1000,
+          nivel: 0,
+          moedas: 0,
+          utilizacoes: 0,
+          biografia: "",
+          badges: [],
+          referral: "",
+        },
+        {
+          id: 1,
+          tipo: "user",
+          nome: "User",
+          email: "user@gmail.com",
+          password: "Esmad_2223",
+          pontos: 2500,
+          nivel: 0,
+          moedas: 0,
+          utilizacoes: 0,
+          biografia:
+            "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+          badges: [],
+          referral: "",
+        },
+      ],
 
     logado: [
       {
@@ -247,7 +247,23 @@ export const userStore = defineStore("userStore", {
       this.updateLocalStorage();
     },
     calculateProgress(currentPoints) {
-      return (currentPoints %1000)/10;
+      return (currentPoints % 1000) / 10;
+    },
+    addPontos(idUser, pontos) {
+      let user = this.users.find((user) => user.id == idUser);
+      console.log(user.pontos);
+      user.pontos += pontos;
+      if (user.pontos >= 1000) {
+        user.nivel += 1;
+        user.pontos = user.pontos - 1000;
+      }
+      console.log(user.pontos);
+      this.updateLocalStorage();
+    },
+    addMoedas(idUser, moedas) {
+      let user = this.users.find((user) => user.id == idUser);
+      user.moedas += moedas;
+      this.updateLocalStorage();
     },
   },
 

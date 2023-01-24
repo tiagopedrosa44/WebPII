@@ -63,8 +63,7 @@ export const utilizacaoStore = defineStore('utilizacao', {
       //dar pontos ao user e moedas ao user
       userStore.addPontos(utilizacao.idUser, 10)
       userStore.addMoedas(utilizacao.idUser, 10)
-      //this.updateLocalStorage()
-      //userStore.updateLocalStorage()
+      this.updateLocalStorage()
     },
 
     rejeitarUtilizacao(id) {
@@ -72,7 +71,7 @@ export const utilizacaoStore = defineStore('utilizacao', {
       console.log(utilizacao);
       utilizacao.rejeitado = true
       console.log(utilizacao);
-      //this.updateLocalStorage()
+      this.updateLocalStorage()
     }
   },
 })
