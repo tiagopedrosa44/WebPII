@@ -66,7 +66,7 @@ export const userStore = defineStore("userStore", {
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users))
     },
-    addUser(username, email, password) {
+    /* addUser(username, email, password) {
       if (
         this.users.find((user) => user.email == email) ||
         this.users.find((user) => user.username == username)
@@ -86,8 +86,8 @@ export const userStore = defineStore("userStore", {
         badges: [],
         referral: "",
       });
-      updateLocalStorage();
-    },
+      this.updateLocalStorage();
+    }, */
 
     login(username, password) {
       const inputUsername = document.querySelector("#username");
@@ -169,7 +169,7 @@ export const userStore = defineStore("userStore", {
                 badges: [],
                 referral: novoReferralCode,
               });
-              updateLocalStorage();
+              this.updateLocalStorage();
               localStorage.setItem("userLogado", username);
               localStorage.setItem("logado", true);
               this.logado = {
@@ -199,7 +199,7 @@ export const userStore = defineStore("userStore", {
               badges: [],
               referral: novoReferralCode,
             });
-            updateLocalStorage();
+            this.updateLocalStorage();
             localStorage.setItem("userLogado", username);
             localStorage.setItem("logado", true);
             this.logado = { bool: true, nome: username };
@@ -220,13 +220,15 @@ export const userStore = defineStore("userStore", {
     deleteUser(id) {
       const index = this.users.findIndex((user) => user.id === id);
       this.users.splice(index, 1);
-      updateLocalStorage();
+      this.updateLocalStorage();
     },
-    editUser(biografia, password) {
-      let user = this.users.find((user) => user.nome == localStorage.getItem("userLogado"));
+    editUser(idUser, biografia, password) {
+      console.log(biografia, password);
+      let user = this.users.find((user) => user.id == idUser);
+      console.log(user);
       user.biografia = biografia;
       user.password = password;
-      updateLocalStorage();
+      this.updateLocalStorage();
     },
   },
 
@@ -235,7 +237,7 @@ export const userStore = defineStore("userStore", {
     if (localStorage.getItem("users")) {
       this.users = JSON.parse(localStorage.getItem("users"));
     } else {
-      updateLocalStorage();
+      this.updateLocalStorage();
     }
     if (localStorage.getItem("logado") == "true") {
       this.logado = {

@@ -28,11 +28,16 @@
               v-model="confirmarSenha"
               type="password"
             ></v-text-field>
-            <v-btn
-              id="alterarDados"
-              @click="store.editUser(biografia, novaSenha)"
-            >
-              Alterar dados
+            <v-btn color="primary" @click="store.editUser(idUser,biografia,novaSenha)"> Alterar dados </v-btn>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-avatar size="120" v-bind:color="color">
+              <template v-slot:placeholder>
+                <v-icon>mdi-camera</v-icon>
+              </template>
+            </v-avatar>
+            <v-btn color="primary" @click="alterarImagem">
+              Alterar imagem
             </v-btn>
           </v-col>
         </v-row>
@@ -56,6 +61,11 @@ export default {
       confirmarSenha: "",
       color: "primary",
     };
+  },
+  computed: {
+    idUser() {
+      return this.store.getLoggedInUser.id;
+    }
   },
 };
 </script>

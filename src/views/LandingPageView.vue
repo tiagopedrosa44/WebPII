@@ -28,15 +28,11 @@
           <v-card class="mx-auto" max-width="344" id="Card">
             <v-card-title>
               Reduzir
-              <v-btn
-                id="iconBtn"
-                :icon="
-                  showReduzir
-                    ? 'fa-solid fa-arrow-up'
-                    : 'fa-solid fa-arrow-down'
-                "
-                @click="showReduzir = !showReduzir"
-              ></v-btn>
+              <v-btn id="iconBtn" :icon="
+                showReduzir
+                  ? 'fa-solid fa-arrow-up'
+                  : 'fa-solid fa-arrow-down'
+              " @click="showReduzir = !showReduzir"></v-btn>
             </v-card-title>
 
             <v-expand-transition>
@@ -55,16 +51,11 @@
           <v-card class="mx-auto" max-width="344" id="Card">
             <v-card-title>
               Reutilizar
-              <v-btn
-                id="iconBtn"
-                :icon="
-                  showReutilizar
-                    ? 'fa-solid fa-arrow-up'
-                    : 'fa-solid fa-arrow-down'
-                "
-                @click="showReutilizar = !showReutilizar"
-              ></v-btn
-            ></v-card-title>
+              <v-btn id="iconBtn" :icon="
+                showReutilizar
+                  ? 'fa-solid fa-arrow-up'
+                  : 'fa-solid fa-arrow-down'
+              " @click="showReutilizar = !showReutilizar"></v-btn></v-card-title>
 
             <v-expand-transition>
               <div v-show="showReutilizar">
@@ -72,10 +63,7 @@
                   A ação de reutilizar um produto é poder dar uma nova utilidade
                   para algo que, normalmente, iria ser deitado fora.
                 </v-card-text>
-                <v-img
-                  src="src\assets\imgs\reutilizar.png"
-                  height="200px"
-                ></v-img>
+                <v-img src="src\assets\imgs\reutilizar.png" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -84,15 +72,11 @@
           <v-card class="mx-auto" max-width="344" id="Card">
             <v-card-title>
               Reciclar
-              <v-btn
-                id="iconBtn"
-                :icon="
-                  showReciclar
-                    ? 'fa-solid fa-arrow-up'
-                    : 'fa-solid fa-arrow-down'
-                "
-                @click="showReciclar = !showReciclar"
-              ></v-btn>
+              <v-btn id="iconBtn" :icon="
+                showReciclar
+                  ? 'fa-solid fa-arrow-up'
+                  : 'fa-solid fa-arrow-down'
+              " @click="showReciclar = !showReciclar"></v-btn>
             </v-card-title>
 
             <v-expand-transition>
@@ -102,10 +86,7 @@
                   não pode ser mais utilizado em um novo produto ou
                   matéria-prima.
                 </v-card-text>
-                <v-img
-                  src="src\assets\imgs\reciclar.png"
-                  height="200px"
-                ></v-img>
+                <v-img src="src\assets\imgs\reciclar.png" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -127,20 +108,12 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_perfil.png"
-            width="215px"
-            height="239px"
-          ></v-img>
+          <v-img src="src\assets\imgs\img_perfil.png" width="215px" height="239px"></v-img>
         </v-col>
       </v-row>
       <v-row id="number2">
         <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_map.png"
-            width="240px"
-            height="208px"
-          ></v-img>
+          <v-img src="src\assets\imgs\img_map.png" width="240px" height="208px"></v-img>
         </v-col>
         <v-col cols="12" lg="8">
           <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
@@ -153,32 +126,19 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_moedas.png"
-            width="215px"
-            height="239px"
-          ></v-img>
+          <v-img src="src\assets\imgs\img_moedas.png" width="215px" height="239px"></v-img>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <div class="d-flex justify-center mb-6 bg-surface-variant">
-            <v-btn
-              id="registarbtn"
-              variant="flat"
-              @click="$router.push('registar')"
-            >
+            <v-btn id="registarbtn" variant="flat" @click="$router.push('registar')">
               Registar
             </v-btn>
           </div>
         </v-col>
       </v-row>
-      <v-img
-        src="src\assets\imgs\Group 15.png"
-        height="1703px"
-        width="1090px"
-        id="linhaimg"
-      ></v-img>
+      <v-img src="src\assets\imgs\Group 15.png" height="1703px" width="1090px" id="linhaimg"></v-img>
     </v-container>
     <v-container v-else="width < 1300">
       <v-row>
@@ -241,12 +201,7 @@
             <p><b>Telefone:</b> +351 252 291 700</p>
           </v-col>
           <v-col cols="1">
-            <v-btn
-              icon="fa-solid fa-arrow-down"
-              color="#F0CD6E"
-              id="arrow"
-              @click="goToTop"
-            ></v-btn>
+            <v-btn icon="fa-solid fa-arrow-down" color="#F0CD6E" id="arrow" @click="goToTop"></v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -257,6 +212,8 @@
 <script>
 import NavBar from "@/components/NavBar-landing.vue";
 import { userStore } from "../stores/userStore.js";
+import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+
 export default {
   components: {
     NavBar,
@@ -268,7 +225,8 @@ export default {
       showReciclar: false,
       width: window.innerWidth,
       height: window.innerHeight,
-      store: userStore(),
+      userStore: userStore(),
+      utilizacaoStore: utilizacaoStore(),
     };
   },
   methods: {
@@ -277,13 +235,15 @@ export default {
     },
   },
   created() {
+    /*     this.userStore.$reset();
+        this.utilizacaoStore.$reset(); */
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
       console.log(this.width, this.height);
     });
-    this.store.updateLocalStorage();
-    this.store.$reset();
+    this.userStore.updateLocalStorage();
+    this.utilizacaoStore.updateLocalStorage();
   },
 };
 </script>
@@ -333,6 +293,7 @@ export default {
   font-family: "Exo";
   font-style: Bold;
 }
+
 #number2 {
   position: relative;
   top: 550px;
@@ -341,6 +302,7 @@ export default {
   font-family: "Exo";
   font-style: Bold;
 }
+
 #number3 {
   position: relative;
   top: 1100px;
@@ -349,6 +311,7 @@ export default {
   font-family: "Exo";
   font-style: Bold;
 }
+
 #linhaimg {
   position: relative;
   top: -750px;
@@ -366,11 +329,13 @@ export default {
   font-style: Bold;
   font-size: 48px;
 }
+
 h1 {
   color: #fdfcf8;
   font-family: "Exo";
   font-style: Bold;
 }
+
 p {
   color: #fdfcf8;
   font-family: "Exo";
@@ -386,10 +351,12 @@ p {
   font-family: "Exo";
   font-style: Bold;
 }
+
 #backgroundFooter {
   position: relative;
   top: 1310px;
 }
+
 #logofooter {
   position: relative;
   top: 900px;
@@ -421,22 +388,26 @@ p {
 }
 
 @media (max-width: 600px) {
+
   #tittle3,
   #tittle4 h1 {
     font-size: 30px;
   }
+
   h1 {
     color: #fdfcf8;
     font-family: "Exo";
     font-style: Bold;
     font-size: 20px;
   }
+
   p {
     color: #fdfcf8;
     font-family: "Exo";
     font-style: normal;
     font-size: 15px;
   }
+
   #img {
     position: relative;
     width: 194.39px;
@@ -444,6 +415,7 @@ p {
     object-fit: contain;
     left: 130px;
   }
+
   #titulo1 {
     font-family: "exo";
     font-size: 25px;
@@ -452,6 +424,7 @@ p {
     left: 20px;
     top: 170px;
   }
+
   #titulo2 {
     position: absolute;
     font-family: "Exo";
@@ -463,6 +436,7 @@ p {
     top: 200px;
   }
 }
+
 @media (min-width: 601px) and (max-width: 768px) {
   #img {
     position: relative;
@@ -471,6 +445,7 @@ p {
     object-fit: contain;
     left: 300px;
   }
+
   #titulo1 {
     font-family: "exo";
     font-size: 50px;
@@ -479,6 +454,7 @@ p {
     left: 100px;
     top: 200px;
   }
+
   #titulo2 {
     position: absolute;
     font-family: "Exo";
@@ -490,6 +466,7 @@ p {
     top: 250px;
   }
 }
+
 @media (min-width: 769px) and (max-width: 992px) {
   #img {
     position: relative;
@@ -498,6 +475,7 @@ p {
     object-fit: contain;
     left: 300px;
   }
+
   #titulo1 {
     font-family: "exo";
     font-size: 50px;
@@ -506,6 +484,7 @@ p {
     left: 100px;
     top: 200px;
   }
+
   #titulo2 {
     position: absolute;
     font-family: "Exo";
@@ -517,6 +496,7 @@ p {
     top: 250px;
   }
 }
+
 @media (min-width: 992px) {
   #img {
     position: relative;
@@ -525,6 +505,7 @@ p {
     object-fit: contain;
     left: 500px;
   }
+
   #titulo1 {
     font-family: "exo";
     font-size: 70px;
@@ -533,6 +514,7 @@ p {
     left: 180px;
     top: 200px;
   }
+
   #titulo2 {
     position: absolute;
     font-family: "Exo";
@@ -544,6 +526,7 @@ p {
     top: 300px;
   }
 }
+
 @media (min-width: 1200px) {
   #img {
     position: relative;
@@ -553,6 +536,7 @@ p {
     top: 50px;
     left: 500px;
   }
+
   #titulo1 {
     font-family: "exo";
     font-size: 90px;
@@ -561,6 +545,7 @@ p {
     left: 180px;
     top: 200px;
   }
+
   #titulo2 {
     position: absolute;
     font-family: "Exo";
