@@ -6,36 +6,36 @@ export const userStore = defineStore("userStore", {
     users: localStorage.users
       ? JSON.parse(localStorage.users)
       : [
-        {
-          id: 0,
-          tipo: "admin",
-          nome: "Admin",
-          email: "admin@gmail.com",
-          password: "Esmad_2223",
-          pontos: 1000,
-          nivel: 0,
-          moedas: 0,
-          utilizacoes: 0,
-          biografia: "",
-          badges: [],
-          referral: "",
-        },
-        {
-          id: 1,
-          tipo: "user",
-          nome: "User",
-          email: "user@gmail.com",
-          password: "Esmad_2223",
-          pontos: 2000,
-          nivel: 0,
-          moedas: 0,
-          utilizacoes: 0,
-          biografia:
-            "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
-          badges: [],
-          referral: "",
-        },
-      ],
+          {
+            id: 0,
+            tipo: "admin",
+            nome: "Admin",
+            email: "admin@gmail.com",
+            password: "Esmad_2223",
+            pontos: 1000,
+            nivel: 0,
+            moedas: 0,
+            utilizacoes: 0,
+            biografia: "",
+            badges: [],
+            referral: "",
+          },
+          {
+            id: 1,
+            tipo: "user",
+            nome: "User",
+            email: "user@gmail.com",
+            password: "Esmad_2223",
+            pontos: 2500,
+            nivel: 0,
+            moedas: 0,
+            utilizacoes: 0,
+            biografia:
+              "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+            badges: [],
+            referral: "",
+          },
+        ],
 
     logado: [
       {
@@ -54,17 +54,29 @@ export const userStore = defineStore("userStore", {
       return state.users.find((user) => user.nome == username);
     }, */
     getLoggedInUser: (state) => {
-      return state.users.find((user) => user.nome == localStorage.getItem('userLogado'))
+      return state.users.find(
+        (user) => user.nome == localStorage.getItem("userLogado")
+      );
     },
     getSortedUsers: (state) => {
       return state.users.sort((a, b) => b.pontos - a.pontos);
-    }
-
+    },
   },
 
   actions: {
     updateLocalStorage() {
-      localStorage.setItem("users", JSON.stringify(this.users))
+      localStorage.setItem("users", JSON.stringify(this.users));
+    },
+    updateLevel(userId, points) {
+      // Find the user by id
+      let user = this.users.find((user) => user.id == userId);
+
+      // calculate the new level based on the points
+      let newLevel = Math.floor(points / 1000);
+
+      //update the user level
+      user.nivel = newLevel;
+      localStorage.setItem("users", JSON.stringify(this.users));
     },
     /* addUser(username, email, password) {
       if (
@@ -152,7 +164,9 @@ export const userStore = defineStore("userStore", {
               referralCodeUser.moedas += 100;
 
               let novoReferralCode = this.generateReferralCode();
-              while (this.users.find((user) => user.referral == novoReferralCode)) {
+              while (
+                this.users.find((user) => user.referral == novoReferralCode)
+              ) {
                 novoReferralCode = this.generateReferralCode();
               }
               this.users.push({
@@ -182,7 +196,9 @@ export const userStore = defineStore("userStore", {
             }
           } else {
             let novoReferralCode = this.generateReferralCode();
-            while (this.users.find((user) => user.referral == novoReferralCode)) {
+            while (
+              this.users.find((user) => user.referral == novoReferralCode)
+            ) {
               novoReferralCode = this.generateReferralCode();
             }
             this.users.push({
@@ -229,6 +245,9 @@ export const userStore = defineStore("userStore", {
       user.biografia = biografia;
       user.password = password;
       this.updateLocalStorage();
+    },
+    calculateProgress(currentPoints) {
+      return (currentPoints %1000)/10;
     },
   },
 

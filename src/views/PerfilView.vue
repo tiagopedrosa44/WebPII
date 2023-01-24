@@ -22,7 +22,8 @@
             <p class="user-name">{{ user.nome }}</p>
             <p class="user-level">Nível: {{ user.nivel }}</p>
             <v-progress-linear
-              model-value="50"
+              v-model="progresso"
+              max="100"
               id="progresso"
               class="perfil-info"
             ></v-progress-linear>
@@ -171,16 +172,20 @@ export default {
       height: window.innerHeight,
       length: 3,
       window: 0,
+      progresso: 0,
     };
   },
   created() {
     this.user = this.store.getLoggedInUser;
+    this.store.updateLevel(this.user.id, this.user.pontos);
+    this.progresso = this.store.calculateProgress(this.user.pontos);
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
       console.log(this.width, this.height);
     });
     console.log(this.user);
+
   },
 };
 </script>
