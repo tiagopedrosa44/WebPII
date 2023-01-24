@@ -7,8 +7,17 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col align="center">
+        <v-col align="center" cols="11">
           <h1 id="tituloLoja">Loja</h1>
+        </v-col>
+        <v-col>
+          <p id="moedas">{{ user.moedas }}</p>
+          <v-img
+            id="moedaIcon"
+            src="src/assets/imgs/imagensLoja/moedaIcon.png"
+            width="20px"
+            heigth="20px"
+          ></v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -17,28 +26,34 @@
         <v-col v-for="item in items" lg="3" md="4" xs="5">
           <v-card width="247px" height="290px" color="#114B5F" id="cardItem">
             <v-img
-              :src="item.foto" 
+              :src="item.foto"
               width="247px"
               height="229px"
               class="white--text align-end"
             >
-              
             </v-img>
             <v-card-text id="titulo">{{ item.nome }}</v-card-text>
             <v-card-text id="pontos">{{ item.preço }}</v-card-text>
             <v-card-actions>
-              <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar"></v-btn>
+              <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar" @click="comprar(item)"></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
+    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
+      {{ snackbarMessage }}
+    </v-snackbar>
+    <v-snackbar v-model="snackbar2" :timeout="2000" color="success">
+      {{ snackbarMessage2 }}
+     </v-snackbar>
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import {lojaStore} from "../stores/lojaStore.js";
+import { lojaStore } from "../stores/lojaStore.js";
+import { userStore } from "../stores/userStore.js";
 export default {
   components: {
     NavBar,
@@ -46,11 +61,31 @@ export default {
   data() {
     return {
       store: lojaStore(),
-      items:[]
+      userStore: userStore(),
+      items: [],
+      user: [],
+      snackbar: false,
+      snackbarMessage: "Não tem moedas suficientes para comprar este item",
+      snackbar2: false,
+      snackbarMessage2: "Item comprado com sucesso",
+    };
+  },
+  methods: {
+    comprar(item) {
+      if(this.user.moedas >= item.preço){
+        this.user.moedas -= item.preço;
+        this.userStore.updateLocalStorage()
+        this.snackbar2 = true;
+      }
+      else{
+        this.snackbar = true;
+      }
     }
   },
-  created () {
+
+  created() {
     this.items = this.store.getItens;
+    this.user = this.userStore.getLoggedInUser;
     console.log(this.items);
   },
 };
@@ -75,14 +110,14 @@ export default {
   font-family: "Exo";
   font-weight: bold;
   font-size: 15px;
-  color:#FDFCF8;
+  color: #fdfcf8;
   position: relative;
   top: 0px;
 }
 #pontos {
   font-family: "Exo";
   font-weight: regular;
-  color: #FDFCF8;
+  color: #fdfcf8;
   font-size: 15px;
   position: relative;
   top: -30px;
@@ -92,10 +127,20 @@ export default {
   position: relative;
   top: -105px;
   left: 190px;
-  color: #FDFCF8;
+  color: #fdfcf8;
 }
 
 #btncomprar:hover {
-  color: #F0CD6E;
+  color: #f0cd6e;
+}
+#moedas {
+  font-family: "exo";
+  color: #fdfcf8;
+  font-weight: bold;
+}
+#moedaIcon {
+  position: relative;
+  top: -23px;
+  left: 70px;
 }
 </style>

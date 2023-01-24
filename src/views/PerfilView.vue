@@ -7,7 +7,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container id="informacoes">
+    <v-container id="informacoes" v-if="width > 1000">
       <div class="responsive-background-image">
         <v-row>
           <v-col cols="1" align="center">
@@ -29,7 +29,7 @@
             ></v-progress-linear>
           </v-col>
           <v-col cols="2" align="center">
-            <p id="info">Ecopontos Registados</p>
+            <p id="info">Ecopontos Registados <br />{{ user.ecopontosRegistados }} </p>
           </v-col>
           <v-col cols="2" align="center">
             <p id="info">Ecopontos Utilizados <br />{{ user.utilizacoes }}</p>
@@ -53,10 +53,71 @@
         </v-row>
       </div>
     </v-container>
+    <v-container v-else="width < 999">
+      <div id="backgorunSmaller">
+        <v-container>
+          <v-row>
+            <v-col align="center">
+              <v-img
+                src="/src/assets/imgs/avatar2.png"
+                id="avatarSmaller"
+                width="40px"
+                height="40px"
+              ></v-img>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <p class="user-name">{{ user.nome }}</p>
+              <p>Nivel: {{ user.nivel }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <v-progress-linear
+                v-model="progresso"
+                max="100"
+                width="10px"
+                id="progresso-smaller"
+                class="perfil-info"
+              ></v-progress-linear>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <p id="infoSmaller">Biografia</p>
+              <p id="infoSmallerP">{{ user.biografia }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <p id="infoSmaller">Ecopontos Registados <br />{{ user.ecopontosRegistados }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <p id="infoSmaller">
+                Ecopontos Utilizados <br />{{ user.utilizacoes }}
+              </p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col align="center">
+              <p id="infoSmaller">Moedas <br />{{ user.moedas }}</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn @click="$router.push('editarPerfil')" id="editarSmall"
+                >Editar perfil</v-btn
+              >
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
+    </v-container>
+
     <v-container>
-      <v-row>
-        <v-col></v-col>
-      </v-row>
       <div id="blobdiv" align="center">
         <svg
           version="1.1"
@@ -185,7 +246,6 @@ export default {
       console.log(this.width, this.height);
     });
     console.log(this.user);
-
   },
 };
 </script>
@@ -203,6 +263,45 @@ export default {
   border-radius: 10px;
   height: 300px;
 }
+#backgorunSmaller {
+  background-image: url("src/assets/imgs/fundo_div_perfil.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  height: 500px;
+  z-index: 2;
+  color: #fdfcf8;
+  font-family: 'exo';
+  font-weight: bold;
+}
+
+#editarSmall{
+  background-color: #f0cd6e;
+  color: #fdfcf8;
+  font-family: 'exo';
+  font-weight: bold;
+}
+
+#progresso-smaller {
+  width: 40%;
+  height: 100%;
+  color: #f0cd6e;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+#infoSmaller{
+  color: #f0cd6e;
+}
+
+#infoSmallerP{
+  color: #fdfcf8;
+  font-family: 'exo';
+  font-weight: normal;
+}
+
+
+
 #informacoes {
   margin-top: 20px;
 }
@@ -229,6 +328,7 @@ export default {
   color: #fdfcf8;
   font-family: "Exo";
   font-weight: bold;
+  z-index: 1;
 }
 #expRef {
   color: #fdfcf8;
@@ -285,11 +385,38 @@ export default {
 #blobdiv {
   position: absolute;
   z-index: 0;
-  left: 460px;
-  top: 400px;
+  left: 30%;
+  top: 60%;
 }
 #blobSvg {
   width: 700px;
   height: 700px;
+}
+
+/* Media queries */
+@media (max-width: 600px) {
+  #blobdiv {
+    position: absolute;
+    z-index: 0;
+    left: 10%;
+    top: 90%;
+  }
+  #blobSvg {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (min-with: 600px) and (max-width: 1000px) {
+  #blobdiv {
+    position: absolute;
+    z-index: 0;
+    left: 20%;
+    top: 80%;
+  }
+  #blobSvg {
+    width: 400px;
+    height: 400px;
+  }
 }
 </style>
