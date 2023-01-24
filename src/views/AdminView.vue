@@ -43,7 +43,7 @@
     <div v-for="utilizacao in utilizacoes">
       <img :src="utilizacao.foto" width="600" height="300" /><br>
       <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
-      <p>ID do Utilizador: {{ getUsername(utilizacao.idUser) }}</p>
+      <p>Nome do Utilizador: {{ getUsername(utilizacao.idUser) }}</p>
       <p>Data: {{ utilizacao.data }}</p>
       <v-btn color="success" @click="utilizacaoStore.aprovarUtilizacao(utilizacao.id)">
         Aprovar
