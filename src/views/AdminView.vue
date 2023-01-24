@@ -40,7 +40,9 @@
   <div>
     <h1>Utilizações por aprovar</h1>
     <v-divider></v-divider>
-    <img src="" id="teste">
+    <div v-for="utilizacao in utilizacoes">
+      <img :src="utilizacao.foto" width="600" height="300" />
+    </div>
   </div>
 </template>
 
@@ -51,10 +53,9 @@ export default {
     return {
       store: userStore(),
       utilizacoes: [],
-      foto: "",
     };
   },
-  mounted() {
+  created() {
     const users = this.store.getUsers;
     console.log(users);
     users.forEach(user => {
@@ -64,9 +65,6 @@ export default {
         }
       });
     });
-    this.foto = this.utilizacoes[0].foto;
-    console.log(this.foto);
-    document.querySelector("#teste").src = this.foto;
     console.log(this.utilizacoes);
   },
 };
