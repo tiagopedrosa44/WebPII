@@ -54,7 +54,7 @@ export const userStore = defineStore("userStore", {
       return state.users.find((user) => user.nome == username);
     }, */
     getLoggedInUser: (state) => {
-      return state.users.find((user) => user.nome == state.logado.nome);
+      return state.users.find((user) => user.nome == localStorage.getItem('userLogado'))
     },
     getSortedUsers: (state) => {
       return state.users.sort((a, b) => b.pontos - a.pontos);

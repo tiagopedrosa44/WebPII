@@ -19,38 +19,29 @@
             ></v-img>
           </v-col>
           <v-col cols="2" id="perfilInfo">
-            <p class="user-name">Nome</p>
-            <p class="user-level">Nível</p>
+            <p class="user-name">{{ user.nome }}</p>
+            <p class="user-level">Nível: {{ user.nivel }}</p>
             <v-progress-linear
               model-value="50"
               id="progresso"
               class="perfil-info"
             ></v-progress-linear>
           </v-col>
-        
-          <v-col
-            cols="5"
-            class="d-flex justify-space-between align-center mb-6 bg-surface-variant "
-            id="infos"
-          >
-            <div id="infosdiv" align="center">
-              <p>Ecopontos Registados</p>
-            </div>
+          <v-col cols="2" align="center">
+            <p id="info">Ecopontos Registados</p>
             
-            <div id="infosdiv" align="center">
-              <p>Ecopontos Utilizados</p>
-            </div>
-            
-            <div id="infosdiv" align="center">
-              <p>Moedas</p>
-            </div>
           </v-col>
-          <v-col cols="3"></v-col>
+          <v-col cols="2" align="center">
+            <p id="info">Ecopontos Utilizados <br>{{ user.utilizacoes }}</p>        
+          </v-col>
+          <v-col cols="2" align="center">
+            <p id="info">Moedas <br>{{ user.moedas }}</p>
+          </v-col>
         </v-row>
         <v-row class="my-4">
           <v-col cols="9" id="biografia">
             <h3>Biografia</h3>
-            <p>uasshfiausfijalsjfalskf.ksafkljaklfjwja</p>
+            <p>{{user.biografia}}</p>
           </v-col>
         </v-row>
         <v-row class="my-10">
@@ -140,6 +131,7 @@ export default {
       this.height = window.innerHeight;
       console.log(this.width, this.height);
     });
+    console.log(this.user);
   },
 };
 </script>
@@ -210,22 +202,37 @@ export default {
   color: #fdfcf8;
   font-family: "Exo";
   font-weight: bold;
+  position: relative;
+  left: 10px;
+  top: -20px;
 }
 
 #biografia h3 {
   color: #f0cd6e;
   font-family: "Exo";
   font-weight: bold;
+  position: relative;
+  left: 10px;
 }
 #biografia p {
   color: #fdfcf8;
   font-family: "Spinnaker";
+  position: relative;
+  left: 10px;
 }
 
 #infos p {
   color: #fdfcf8;
   font-family: "Exo";
   font-weight: bold;
+}
+
+#info{
+  color: #fdfcf8;
+  font-family: "Exo";
+  font-weight: bold;
+  background-color: #0C3745;
+  border-radius: 10px;
 }
 
 
