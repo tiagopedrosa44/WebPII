@@ -40,7 +40,6 @@ export default {
   },
   created() {
     this.userAtual = localStorage.getItem("userLogado");
-    this.userStore.$reset();
     console.log(this.userAtual);
   },
   methods: {
