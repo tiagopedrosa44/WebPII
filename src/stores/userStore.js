@@ -9,9 +9,9 @@ export const userStore = defineStore("userStore", {
         {
           id: 0,
           tipo: "admin",
-          nome: "admin",
+          nome: "Admin",
           email: "admin@gmail.com",
-          password: "1234",
+          password: "Esmad_2223",
           pontos: 1000,
           nivel: 0,
           moedas: 0,
@@ -24,9 +24,9 @@ export const userStore = defineStore("userStore", {
         {
           id: 1,
           tipo: "user",
-          nome: "RicardoSilva",
+          nome: "User",
           email: "user@gmail.com",
-          password: "1234",
+          password: "Esmad_2223",
           pontos: 2000,
           nivel: 0,
           moedas: 0,
