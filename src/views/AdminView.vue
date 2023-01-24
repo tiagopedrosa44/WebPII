@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="divs">
     <h1>Utilizadores</h1>
     <v-divider></v-divider>
     <br>
@@ -29,7 +29,7 @@
           <td>{{ user.pontos }}</td>
           <td>{{ user.nivel }}</td>
           <td>{{ user.moedas }}</td>
-          <td>{{ user.nUtilizacoes }}</td>
+          <td>{{ user.utilizacoes }}</td>
           <td>
             <v-btn color="error" @click="store.deleteUser(user.id)">Remover</v-btn>
           </td>
@@ -37,7 +37,7 @@
       </tbody>
     </v-table>
   </div>
-  <div>
+  <div class="divs">
     <h1>Utilizações por aprovar</h1>
     <v-divider></v-divider>
     <div v-for="utilizacao in utilizacoes">
@@ -64,12 +64,16 @@ export default {
     return {
       userStore: userStore(),
       utilizacaoStore: utilizacaoStore(),
-      utilizacoes: [],
     };
   },
   created() {
     this.utilizacoes = this.utilizacaoStore.getUtilizacoesPorAprovar;
     console.log(this.utilizacoes);
+  },
+  computed: {
+    utilizacoes() {
+      return this.utilizacaoStore.getUtilizacoesPorAprovar;
+    }
   },
   methods: {
     getUsername(idUser) {
@@ -82,5 +86,9 @@ export default {
 <style scoped>
 h1 {
   color: black;
+}
+
+.divs {
+  margin-left: 10px;
 }
 </style>

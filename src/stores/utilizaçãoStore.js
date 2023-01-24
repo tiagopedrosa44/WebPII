@@ -7,6 +7,7 @@ export const utilizacaoStore = defineStore('utilizacao', {
       ? JSON.parse(localStorage.utilizacoes)
       : [
         /* {
+          id: 0,
           idUser: 0,
           idEcoponto: 0,
           foto: "",
@@ -40,6 +41,7 @@ export const utilizacaoStore = defineStore('utilizacao', {
       });
       try {
         this.utilizacoes.push({
+          id: this.utilizacoes.length,
           idUser: idUser,
           idEcoponto: idEcoponto,
           foto: foto,
@@ -53,5 +55,24 @@ export const utilizacaoStore = defineStore('utilizacao', {
         throw error
       }
     },
+
+    aprovarUtilizacao(id) {
+      let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
+      utilizacao.aprovado = true
+      console.log(utilizacao);
+      //dar pontos ao user e moedas ao user
+      userStore.addPontos(utilizacao.idUser, 10)
+      userStore.addMoedas(utilizacao.idUser, 10)
+      //this.updateLocalStorage()
+      //userStore.updateLocalStorage()
+    },
+
+    rejeitarUtilizacao(id) {
+      let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
+      console.log(utilizacao);
+      utilizacao.rejeitado = true
+      console.log(utilizacao);
+      //this.updateLocalStorage()
+    }
   },
 })

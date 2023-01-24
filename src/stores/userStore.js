@@ -66,7 +66,7 @@ export const userStore = defineStore("userStore", {
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users))
     },
-    addUser(username, email, password) {
+    /* addUser(username, email, password) {
       if (
         this.users.find((user) => user.email == email) ||
         this.users.find((user) => user.username == username)
@@ -87,7 +87,7 @@ export const userStore = defineStore("userStore", {
         referral: "",
       });
       updateLocalStorage();
-    },
+    }, */
 
     login(username, password) {
       const inputUsername = document.querySelector("#username");
