@@ -41,7 +41,17 @@
     <h1>Utilizações por aprovar</h1>
     <v-divider></v-divider>
     <div v-for="utilizacao in utilizacoes">
-      <img :src="utilizacao.foto" width="600" height="300" />
+      <img :src="utilizacao.foto" width="600" height="300" /><br>
+      <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
+      <p>ID do Utilizador: {{ getUsername(utilizacao.idUser) }}</p>
+      <p>Data: {{ utilizacao.data }}</p>
+      <v-btn color="success" @click="utilizacaoStore.aprovarUtilizacao(utilizacao.id)">
+        Aprovar
+      </v-btn>
+      <v-btn color="error" @click="utilizacaoStore.rejeitarUtilizacao(utilizacao.id)">
+        Rejeitar
+      </v-btn>
+      <br><br><br><br>
     </div>
   </div>
 </template>
@@ -60,6 +70,11 @@ export default {
   created() {
     this.utilizacoes = this.utilizacaoStore.getUtilizacoesPorAprovar;
     console.log(this.utilizacoes);
+  },
+  methods: {
+    getUsername(idUser) {
+      return this.userStore.getUsers.filter(user => user.id == idUser)[0].nome;
+    }
   },
 };
 </script>
