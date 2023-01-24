@@ -28,7 +28,7 @@
               v-model="confirmarSenha"
               type="password"
             ></v-text-field>
-            <v-btn color="primary" @click="store.editUser(biografia,novaSenha)"> Alterar dados </v-btn>
+            <v-btn color="primary" @click="store.editUser(idUser,biografia,novaSenha)"> Alterar dados </v-btn>
           </v-col>
           <v-col cols="12" md="6">
             <v-avatar size="120" v-bind:color="color">
@@ -61,6 +61,11 @@ export default {
       confirmarSenha: "",
       color: "primary",
     };
+  },
+  computed: {
+    idUser() {
+      return this.store.getLoggedInUser.id;
+    }
   },
 };
 </script>
