@@ -283,6 +283,7 @@ export default {
       console.log(this.width, this.height);
     });
     this.store.updateLocalStorage();
+    this.store.$reset();
   },
 };
 </script>

@@ -29,19 +29,18 @@
           </v-col>
           <v-col cols="2" align="center">
             <p id="info">Ecopontos Registados</p>
-            
           </v-col>
           <v-col cols="2" align="center">
-            <p id="info">Ecopontos Utilizados <br>{{ user.utilizacoes }}</p>        
+            <p id="info">Ecopontos Utilizados <br />{{ user.utilizacoes }}</p>
           </v-col>
           <v-col cols="2" align="center">
-            <p id="info">Moedas <br>{{ user.moedas }}</p>
+            <p id="info">Moedas <br />{{ user.moedas }}</p>
           </v-col>
         </v-row>
         <v-row class="my-4">
           <v-col cols="9" id="biografia">
             <h3>Biografia</h3>
-            <p>{{user.biografia}}</p>
+            <p>{{ user.biografia }}</p>
           </v-col>
         </v-row>
         <v-row class="my-10">
@@ -54,13 +53,36 @@
       </div>
     </v-container>
     <v-container>
-      <!-- <div class="tk-blob" style="--time: 20s; --amount: 5; --fill: #15795b">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 747.2 726.7">
-          <path
-            d="M539.8 137.6c98.3 69 183.5 124 203 198.4 19.3 74.4-27.1 168.2-93.8 245-66.8 76.8-153.8 136.6-254.2 144.9-100.6 8.2-214.7-35.1-292.7-122.5S-18.1 384.1 7.4 259.8C33 135.6 126.3 19 228.5 2.2c102.1-16.8 213.2 66.3 311.3 135.4z"
-          ></path>
+      <v-row>
+        <v-col></v-col>
+      </v-row>
+      <div id="blobdiv" align="center">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 500 500"
+          width="100%"
+          id="blobSvg"
+          style="opacity: 1"
+          filter="blur(0px)"
+          transform="rotate(54)"
+        >
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color: rgb(21, 121, 91)"></stop>
+              <stop offset="100%" style="stop-color: rgb(21, 121, 91)"></stop>
+            </linearGradient>
+          </defs>
+          <path id="blob" fill="url(#gradient)" style="opacity: 1">
+            <animate
+              attributeName="d"
+              dur="19.7s"
+              repeatCount="indefinite"
+              values="M463.5,311.5Q441,373,396,422Q351,471,287,455Q223,439,179,411Q135,383,79,350Q23,317,51.5,258.5Q80,200,94,143.5Q108,87,162,49.5Q216,12,281.5,24.5Q347,37,383.5,89Q420,141,453,195.5Q486,250,463.5,311.5Z;M440.79254,295.90011Q393.21514,341.80021,357.53347,375.20746Q321.85181,408.61471,271.82218,427.01866Q221.79254,445.4226,171.55544,422.09659Q121.31834,398.77057,68.79254,358.84083Q16.26674,318.91109,38.15202,256.60373Q60.03731,194.29637,79.65586,134.88912Q99.27441,75.48187,157.19648,42.12622Q215.11855,8.77057,268.67782,50.11855Q322.2371,91.46653,362.16684,121.87761Q402.09659,152.2887,445.23326,201.14435Q488.36994,250,440.79254,295.90011Z;M415.01911,310.8863Q439.5452,371.7726,388.0904,405.2945Q336.6356,438.8164,280.7726,433.452Q224.9096,428.08761,185.95759,398.74511Q147.00559,369.40261,129.05219,330.15471Q111.09878,290.9068,102.89189,247.863Q94.68499,204.8192,97.4315,140.3164Q100.17801,75.81361,160.4068,60.51771Q220.6356,45.22181,275.226,60.1356Q329.8164,75.04939,372.9534,109.3658Q416.0904,143.6822,403.29171,196.8411Q390.49301,250,415.01911,310.8863Z;M456.0768,303.76136Q418.13543,357.52271,379.98225,404.29316Q341.82907,451.0636,284.01817,433.65772Q226.20727,416.25185,163.99091,418.54046Q101.77456,420.82907,62.72047,368.86953Q23.66638,316.90999,61.99091,261.65772Q100.31545,206.40545,118.97771,163.62635Q137.63998,120.84725,179.51817,86.26136Q221.39637,51.67547,267.19818,81.83773Q313,112,367.68455,125.86045Q422.36911,139.7209,458.19364,194.86045Q494.01817,250,456.0768,303.76136Z;M394.89432,291.86359Q379.96349,333.72718,354.5999,379.04899Q329.23631,424.37079,274.96542,439.22911Q220.69452,454.08742,185.59462,409.0927Q150.49472,364.09798,125.7075,328.96349Q100.92028,293.82901,59.42363,237.80355Q17.92698,181.77809,66.30163,137.5999Q114.67627,93.42171,168.36359,75.4145Q222.05091,57.4073,282.76369,51.5999Q343.47647,45.7925,374.93276,97.57444Q406.38905,149.35639,408.1071,199.67819Q409.82516,250,394.89432,291.86359Z;M432.03478,297.56957Q398.46218,345.13914,356.36479,367.83696Q314.26739,390.53478,267.26739,423.085Q220.26739,455.63521,175.78826,421.28282Q131.30913,386.93043,88.83152,348.48609Q46.35391,310.04174,68.21174,256.28131Q90.06957,202.52087,95.17544,139.65457Q100.28131,76.78826,162.38717,74.23956Q224.49304,71.69087,270.52087,88.04326Q316.5487,104.39565,381.35239,113.97913Q446.15608,123.56261,455.88173,186.78131Q465.60739,250,432.03478,297.56957Z;M463.5,311.5Q441,373,396,422Q351,471,287,455Q223,439,179,411Q135,383,79,350Q23,317,51.5,258.5Q80,200,94,143.5Q108,87,162,49.5Q216,12,281.5,24.5Q347,37,383.5,89Q420,141,453,195.5Q486,250,463.5,311.5Z"
+            ></animate>
+          </path>
         </svg>
-      </div> -->
+      </div>
 
       <v-row>
         <v-col class="d-flex justify-center mb-6 bg-surface-variant">
@@ -102,6 +124,33 @@
       </v-row>
       <v-row>
         <v-col> </v-col>
+      </v-row>
+    </v-container>
+    <v-container>
+      <v-row>
+        <v-col>
+          <h1 align="center" id="titulo">Utilizações</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-table id="tabela">
+            <thead>
+              <tr>
+                <th class="text-left">Posição</th>
+                <th class="text-left">Nomes</th>
+                <th class="text-left">Pontos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(user, index) in store.getSortedUsers">
+                <td>{{ index + 1 }}</td>
+                <td>{{ user.nome }}</td>
+                <td>{{ user.pontos }}</td>
+              </tr>
+            </tbody>
+          </v-table>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -190,13 +239,6 @@ export default {
   left: 400px;
   bottom: 10px;
 }
-.tk-blob {
-  --amount: 0.5;
-  width: 1000px;
-  height: 1000px;
-  position: absolute;
-  z-index: 0;
-}
 #editar {
   background-color: #f0cd6e;
   color: #fdfcf8;
@@ -227,31 +269,22 @@ export default {
   font-weight: bold;
 }
 
-#info{
+#info {
   color: #fdfcf8;
   font-family: "Exo";
   font-weight: bold;
-  background-color: #0C3745;
+  background-color: #0c3745;
   border-radius: 10px;
 }
 
-
-@media only screen and (max-width: 600px) {
-  .tk-blob {
-    max-height: calc(
-      40vw * 726.7 / 747.2
-    ); /* Altura menor para telas até 600px */
-    position: absolute;
-    z-index: 0;
-  }
+#blobdiv {
+  position: absolute;
+  z-index: 0;
+  left: 460px;
+  top: 400px;
 }
-@media only screen and (max-width: 400px) {
-  .tk-blob {
-    max-height: calc(
-      30vw * 726.7 / 747.2
-    ); /* Altura menor para telas até 400px */
-    position: absolute;
-    z-index: 0;
-  }
+#blobSvg {
+  width: 700px;
+  height: 700px;
 }
 </style>

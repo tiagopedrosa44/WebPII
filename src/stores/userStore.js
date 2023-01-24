@@ -31,7 +31,7 @@ export const userStore = defineStore("userStore", {
           moedas: 0,
           utilizacoes: 0,
           biografia:
-            "Sou um educador de enfância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+            "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
           badges: [],
           referral: "",
         },
@@ -223,7 +223,7 @@ export const userStore = defineStore("userStore", {
       updateLocalStorage();
     },
     editUser(biografia, password) {
-      let user = this.users.find((user) => user.nome == this.logado.nome);
+      let user = this.users.find((user) => user.nome == localStorage.getItem("userLogado"));
       user.biografia = biografia;
       user.password = password;
       updateLocalStorage();

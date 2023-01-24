@@ -36,29 +36,6 @@
       </v-row>
     </v-container>
   </div>
-
-  <!--  <div align="center">
-      <h1 class="text-xs-h6 text-md-h3 text-lg-h2" id="titulo">Leaderboard</h1>
-    </div>
-    <div id="table" align="center">
-      <v-table fixed-header style="width: 80%">
-        <thead class="thead-light" color="#114B5F">
-          <tr>
-            <th class="text-left">Posição</th>
-            <th class="text-left">Nome</th>
-            <th class="text-left">Pontos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, index) in store.getSortedUsers">
-            <td>{{ index + 1 }}</td>
-            <td>{{ user.nome }}</td>
-            <td>{{ user.pontos }}</td>
-          </tr>
-        </tbody>
-      </v-table>
-    </div>
-  </div> -->
 </template>
 
 <script>
