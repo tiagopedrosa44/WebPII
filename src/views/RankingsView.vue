@@ -8,12 +8,41 @@
       </v-row>
     </v-container>
 
-    <div align="center">
+    <v-container>
+      <v-row>
+        <v-col>
+          <h1 align="center" id="titulo">Leaderboard</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-table id="tabela">
+            <thead>
+              <tr>
+                <th class="text-left">Posição</th>
+                <th class="text-left">Nomes</th>
+                <th class="text-left">Pontos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(user, index) in store.getSortedUsers">
+                <td>{{ index + 1 }}</td>
+                <td>{{ user.nome }}</td>
+                <td>{{ user.pontos }}</td>
+              </tr>
+            </tbody>
+          </v-table>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+
+  <!--  <div align="center">
       <h1 class="text-xs-h6 text-md-h3 text-lg-h2" id="titulo">Leaderboard</h1>
     </div>
     <div id="table" align="center">
       <v-table fixed-header style="width: 80%">
-        <thead class="thead-light">
+        <thead class="thead-light" color="#114B5F">
           <tr>
             <th class="text-left">Posição</th>
             <th class="text-left">Nome</th>
@@ -29,7 +58,7 @@
         </tbody>
       </v-table>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -54,11 +83,11 @@ export default {
   width: 100vw;
 }
 #titulo {
-  font-family: "exo-bold";
+  font-family: "Exo";
   font-weight: bold;
+  color: #fdfcf8;
 }
-#table {
-  margin-top: 5%;
+#tabela{
   border-radius: 10px;
 }
 .v-table {
