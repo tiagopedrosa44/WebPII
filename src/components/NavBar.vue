@@ -4,6 +4,9 @@
     <v-btn v-for="link in leftLinks" :key="link.text" :to="link.route">
       {{ link.text }}
     </v-btn>
+    <v-btn v-if="user.tipo == 'admin'" @click="$router.push('admin')"
+      >Menu Admin</v-btn
+    >
 
     <!-- Logo -->
     <v-toolbar-title id="centro">
@@ -15,26 +18,17 @@
     </v-toolbar-title>
 
     <!-- Links da direita -->
-    <v-btn @click="$router.push('desafios')"
-      ><v-img
-        src="/src/assets/imgs/icones/desafios.svg"
-        height="34px"
-        width="34px"
-      ></v-img
-    ></v-btn>
+    <v-btn id="iconDesafios"
+      @click="$router.push('desafios')"
+      icon="fa-sharp fa-solid fa-flag-checkered"
+      color="#fdfcf8"
+    >
+    </v-btn>
     <v-btn @click="$router.push('perfil')"
-      ><v-img
-        src="/src/assets/imgs/icones/perfil.svg"
-        height="34px"
-        width="34px"
-      ></v-img
+     icon="fa-regular fa-user"
     ></v-btn>
     <v-btn @click="store.logout"
-      ><v-img
-        src="/src/assets/imgs/icones/Logout.svg"
-        height="34px"
-        width="34px"
-      ></v-img
+      icon="fa-solid fa-arrow-right-from-bracket"
     ></v-btn>
   </v-toolbar>
   <v-toolbar
@@ -65,9 +59,11 @@ export default {
       width: window.innerWidth,
       height: window.innerHeight,
       expandNav: false,
+      user: [],
     };
   },
   created() {
+    this.user = this.store.getLoggedInUser;
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
@@ -77,7 +73,6 @@ export default {
 };
 </script>
 <style>
-
 #nav {
   color: #fdfcf8;
   font-family: "exo";

@@ -14,7 +14,7 @@
     </v-container>
     <v-container>
       <v-row>
-        <v-col v-for="item in items" cols="3">
+        <v-col v-for="item in items" lg="3" md="4" xs="5">
           <v-card width="247px" height="290px" color="#114B5F" id="cardItem">
             <v-img
               :src="item.foto" 
