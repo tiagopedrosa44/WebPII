@@ -1,5 +1,5 @@
-<template>
-  <div class="home">
+<template class="custom-scrollbar">
+  <div id="home">
     <v-container>
       <v-row>
         <v-col>
@@ -16,7 +16,7 @@
           </div>
 
           <br />
-          <div class="ecopontos" @scroll="showEcopontos">
+          <div class="custom-scrollbar" id="ecopontos" @scroll="showEcopontos">
             <br />
             <br />
             <div
@@ -77,14 +77,13 @@ export default {
       this.$router.push("/ecoponto/" + index);
     },
   },
+  
 };
 </script>
 
 <style scoped>
-body::-webkit-scrollbar {
-  width: 3px; /* width of the entire scrollbar */
-}
-.home {
+
+#home {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
   min-height: 1080px;
 }
@@ -98,12 +97,22 @@ body::-webkit-scrollbar {
   max-width: 100%;
   max-height: 550px;
   overflow: hidden;
+  position: relative;
+  left:20px
 }
 
-.ecopontos {
+#ecopontos {
   height: 450px;
   overflow: scroll;
   cursor: pointer;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #F0CD6E;
 }
 
 .ecoponto {
