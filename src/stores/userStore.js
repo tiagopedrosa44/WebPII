@@ -6,38 +6,38 @@ export const userStore = defineStore("userStore", {
     users: localStorage.users
       ? JSON.parse(localStorage.users)
       : [
-          {
-            id: 0,
-            tipo: "admin",
-            nome: "Admin",
-            email: "admin@gmail.com",
-            password: "Esmad_2223",
-            pontos: 1000,
-            nivel: 1,
-            moedas: 0,
-            utilizacoes: 0,
-            ecopontosRegistados: 0,
-            biografia: "",
-            badges: [],
-            referral: "",
-          },
-          {
-            id: 1,
-            tipo: "user",
-            nome: "User",
-            email: "user@gmail.com",
-            password: "Esmad_2223",
-            pontos: 2500,
-            nivel: 2,
-            moedas: 200000,
-            utilizacoes: 0,
-            ecopontosRegistados: 0,
-            biografia:
-              "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
-            badges: [],
-            referral: "",
-          },
-        ],
+        {
+          id: 0,
+          tipo: "admin",
+          nome: "Admin",
+          email: "admin@gmail.com",
+          password: "Esmad_2223",
+          pontos: 1000,
+          nivel: 1,
+          moedas: 0,
+          utilizacoes: 0,
+          ecopontosRegistados: 0,
+          biografia: "",
+          badges: [],
+          referral: "",
+        },
+        {
+          id: 1,
+          tipo: "user",
+          nome: "User",
+          email: "user@gmail.com",
+          password: "Esmad_2223",
+          pontos: 2500,
+          nivel: 2,
+          moedas: 200000,
+          utilizacoes: 0,
+          ecopontosRegistados: 0,
+          biografia:
+            "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+          badges: [],
+          referral: "",
+        },
+      ],
 
     logado: [
       {
@@ -80,28 +80,6 @@ export const userStore = defineStore("userStore", {
       user.nivel = newLevel;
       localStorage.setItem("users", JSON.stringify(this.users));
     },
-    /* addUser(username, email, password) {
-      if (
-        this.users.find((user) => user.email == email) ||
-        this.users.find((user) => user.username == username)
-      ) {
-        return console.log("utilizador já registado");
-      }
-      this.users.push({
-        id: this.users.length,
-        username: username,
-        email: email,
-        password: password,
-        pontos: 0,
-        nivel: 0,
-        moedas: 0,
-        utilizacoes: 0,
-        biografias: "",
-        badges: [],
-        referral: "",
-      });
-      this.updateLocalStorage();
-    }, */
 
     login(username, password) {
       const inputUsername = document.querySelector("#username");
@@ -181,7 +159,7 @@ export const userStore = defineStore("userStore", {
                 nivel: 0,
                 moedas: 100,
                 utilizacoes: 0,
-                ecopontosRegistados: 0, 
+                ecopontosRegistados: 0,
                 biografia: "",
                 badges: [],
                 referral: novoReferralCode,
@@ -262,7 +240,9 @@ export const userStore = defineStore("userStore", {
     },
     addMoedas(idUser, moedas) {
       let user = this.users.find((user) => user.id == idUser);
+      console.log(user.moedas);
       user.moedas += moedas;
+      console.log(user.moedas);
       this.updateLocalStorage();
     },
   },

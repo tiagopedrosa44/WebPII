@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia'
-import { userStore } from "../stores/userStore.js"
-
 
 export const utilizacaoStore = defineStore('utilizacao', {
   state: () => ({
@@ -56,24 +54,5 @@ export const utilizacaoStore = defineStore('utilizacao', {
         throw error
       }
     },
-
-    aprovarUtilizacao(id) {
-      const userStore = userStore()
-      let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
-      utilizacao.aprovado = true
-      console.log(utilizacao);
-      //dar pontos ao user e moedas ao user
-      userStore.addPontos(utilizacao.idUser, 300)
-      userStore.addMoedas(utilizacao.idUser, 1000)
-      this.updateLocalStorage()
-    },
-
-    rejeitarUtilizacao(id) {
-      let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
-      console.log(utilizacao);
-      utilizacao.rejeitado = true
-      console.log(utilizacao);
-      this.updateLocalStorage()
-    }
   },
 })

@@ -47,10 +47,10 @@
       <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
       <p>Nome do Utilizador: {{ getUsername(utilizacao.idUser) }}</p>
       <p>Data: {{ utilizacao.data }}</p>
-      <v-btn color="success" @click="utilizacaoStore.aprovarUtilizacao(utilizacao.id)">
+      <v-btn color="success" @click="aprovarUtilizacao(utilizacao.id)">
         Aprovar
       </v-btn>
-      <v-btn color="error" @click="utilizacaoStore.rejeitarUtilizacao(utilizacao.id)">
+      <v-btn color="error" @click="rejeitarUtilizacao(utilizacao.id)">
         Rejeitar
       </v-btn>
       <br><br><br><br>
@@ -80,6 +80,19 @@ export default {
   methods: {
     getUsername(idUser) {
       return this.userStore.getUsers.filter(user => user.id == idUser)[0].nome;
+    },
+    aprovarUtilizacao(id) {
+      let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
+      utilizacao.aprovado = true
+      this.userStore.addPontos(utilizacao.idUser, 300)
+      this.userStore.addMoedas(utilizacao.idUser, 1000)
+      this.utilizacaoStore.updateLocalStorage()
+    },
+
+    rejeitarUtilizacao(id) {
+      let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
+      utilizacao.rejeitado = true
+      this.utilizacaoStore.updateLocalStorage()
     }
   },
 };
