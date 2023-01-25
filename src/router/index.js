@@ -9,10 +9,10 @@ import PerfilView from '../views/PerfilView.vue'
 import AdminView from '../views/AdminView.vue'
 //import { userStore } from "../stores/userStore.js";
 import EcopontoView from '../views/EcopontoNew.vue'
-import DesafiosView from '../views/desafiosView.vue'
 import editarPerfilView from '../views/editarPerfilView.vue'
 import RegistarEcopontoView from '../views/RegistarEcopontoView.vue'
 import LojaView from '../views/LojaView.vue'
+import ad_ecopontoView from '../views/Ad_ecopontoView.vue'
 
 
 export const router = createRouter({
@@ -65,11 +65,6 @@ export const router = createRouter({
       component: EcopontoView,
     },
     {
-      path: '/desafios',
-      name: 'desafios',
-      component: DesafiosView,
-    },
-    {
       path: '/editarPerfil',
       name: 'editarPerfil',
       component: editarPerfilView,
@@ -83,6 +78,11 @@ export const router = createRouter({
       path: '/loja',
       name: 'loja',
       component: LojaView,
+    },
+    {
+      path: '/ad_ecoponto',
+      name: 'ad_ecoponto',
+      component: ad_ecopontoView,
     }
   ]
 })

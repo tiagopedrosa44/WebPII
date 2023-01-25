@@ -49,6 +49,11 @@
           </div>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col>
+          <v-btn id="adicionarBtn" @click="$router.push('ad_ecoponto')">Adicionar novo ecoponto</v-btn>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -134,6 +139,15 @@ export default {
 #morada {
   position: relative;
   top: 10px;
+}
+
+#adicionarBtn{
+  position: relative;
+  left: 20px;
+  top: 20px;
+  background-color: #F0CD6E;
+  border-radius: 10px;
+  color: #fdfcf8;
 }
 
 @media (max-width: 700px) {

@@ -29,7 +29,9 @@
             ></v-progress-linear>
           </v-col>
           <v-col cols="2" align="center">
-            <p id="info">Ecopontos Registados <br />{{ user.ecopontosRegistados }} </p>
+            <p id="info">
+              Ecopontos Registados <br />{{ user.ecopontosRegistados }}
+            </p>
           </v-col>
           <v-col cols="2" align="center">
             <p id="info">Ecopontos Utilizados <br />{{ user.utilizacoes }}</p>
@@ -91,7 +93,9 @@
           </v-row>
           <v-row>
             <v-col align="center">
-              <p id="infoSmaller">Ecopontos Registados <br />{{ user.ecopontosRegistados }}</p>
+              <p id="infoSmaller">
+                Ecopontos Registados <br />{{ user.ecopontosRegistados }}
+              </p>
             </v-col>
           </v-row>
           <v-row>
@@ -178,6 +182,27 @@
         <v-col cols="4"></v-col>
       </v-row>
     </v-container>
+    <br>
+    <br>
+    <br>
+    <v-container>
+      <v-row>
+        <v-col>
+          <h1 align="center" id="titulo">Utilizações</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-carousel show-arrows="hover" prev-icon="fa-solid fa-arrow-left" next-icon="fa-solid fa-arrow-right">
+            <v-carousel-item v-for="utilizacao in utilizacoesFiltradas"
+              :src="utilizacao.foto"
+              cover
+            ></v-carousel-item>
+
+          </v-carousel>
+        </v-col>
+      </v-row>
+    </v-container>
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center mb-6 bg-surface-variant">
@@ -188,39 +213,14 @@
         <v-col> </v-col>
       </v-row>
     </v-container>
-    <v-container>
-      <v-row>
-        <v-col>
-          <h1 align="center" id="titulo">Utilizações</h1>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-table id="tabela">
-            <thead>
-              <tr>
-                <th class="text-left">Posição</th>
-                <th class="text-left">Nomes</th>
-                <th class="text-left">Pontos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(user, index) in store.getSortedUsers">
-                <td>{{ index + 1 }}</td>
-                <td>{{ user.nome }}</td>
-                <td>{{ user.pontos }}</td>
-              </tr>
-            </tbody>
-          </v-table>
-        </v-col>
-      </v-row>
-    </v-container>
+   
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
+import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
 export default {
   components: {
     NavBar,
@@ -228,14 +228,21 @@ export default {
   data() {
     return {
       store: userStore(),
+      utilizacaoStore: utilizacaoStore(),
       user: [],
       width: window.innerWidth,
       height: window.innerHeight,
       length: 3,
       window: 0,
       progresso: 0,
-      referral: ""
+      referral: "",
     };
+  },
+  computed: {
+    utilizacoesFiltradas() {
+      const idUser = this.user.id;
+      return  this.utilizacaoStore.getUtilizacoes.filter(utilizacao => utilizacao.idUser === idUser)
+    }
   },
   created() {
     this.user = this.store.getLoggedInUser;
@@ -273,14 +280,14 @@ export default {
   height: 500px;
   z-index: 2;
   color: #fdfcf8;
-  font-family: 'exo';
+  font-family: "exo";
   font-weight: bold;
 }
 
-#editarSmall{
+#editarSmall {
   background-color: #f0cd6e;
   color: #fdfcf8;
-  font-family: 'exo';
+  font-family: "exo";
   font-weight: bold;
 }
 
@@ -292,17 +299,15 @@ export default {
   z-index: 1;
 }
 
-#infoSmaller{
+#infoSmaller {
   color: #f0cd6e;
 }
 
-#infoSmallerP{
+#infoSmallerP {
   color: #fdfcf8;
-  font-family: 'exo';
+  font-family: "exo";
   font-weight: normal;
 }
-
-
 
 #informacoes {
   margin-top: 20px;
@@ -393,6 +398,12 @@ export default {
 #blobSvg {
   width: 700px;
   height: 700px;
+}
+
+#titulo{
+  color: #fdfcf8;
+  font-family: "Exo";
+  font-weight: bold;
 }
 
 /* Media queries */

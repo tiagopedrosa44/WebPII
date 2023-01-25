@@ -12,9 +12,6 @@
     </v-toolbar-title>
 
     <!-- Links da direita -->
-    <v-btn id="iconDesafios" @click="$router.push('desafios')" icon="fa-sharp fa-solid fa-flag-checkered"
-      color="#fdfcf8">
-    </v-btn>
     <v-btn @click="$router.push('perfil')" icon="fa-regular fa-user"></v-btn>
     <v-btn @click="store.logout" icon="fa-solid fa-arrow-right-from-bracket"></v-btn>
   </v-toolbar>

@@ -9,7 +9,7 @@
     <div id="container">
       <v-container id="containerAzul">
         <span id="voltar" @click="$router.go(-1)"><b>X</b></span>
-        <h1 align="center">Registar utilização do ecoponto</h1>
+        <h1 align="center" id="titulo">Registar utilização do ecoponto</h1>
         <br /><br />
         <input type="file" accept="image/*" ref="foto" style="display: none" />
         <img src="../assets/imgs/adFoto.png" id="adFoto" @click="uploadFoto()" />
@@ -92,5 +92,10 @@ export default {
   cursor: pointer;
   align-self: flex-end;
   margin-right: 20px;
+}
+#titulo{
+  color: #FDFCF8;
+  font-family: 'exo';
+  font-weight: bold;
 }
 </style>
