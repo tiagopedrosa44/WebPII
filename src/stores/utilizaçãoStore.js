@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { userStore } from './userStore.js'
+import { userStore } from "../stores/userStore.js"
+
 
 export const utilizacaoStore = defineStore('utilizacao', {
   state: () => ({
@@ -57,12 +58,13 @@ export const utilizacaoStore = defineStore('utilizacao', {
     },
 
     aprovarUtilizacao(id) {
+      const userStore = userStore()
       let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
       utilizacao.aprovado = true
       console.log(utilizacao);
       //dar pontos ao user e moedas ao user
-      userStore.addPontos(utilizacao.idUser, 10)
-      userStore.addMoedas(utilizacao.idUser, 10)
+      userStore.addPontos(utilizacao.idUser, 300)
+      userStore.addMoedas(utilizacao.idUser, 1000)
       this.updateLocalStorage()
     },
 

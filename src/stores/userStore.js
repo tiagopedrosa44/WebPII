@@ -257,10 +257,6 @@ export const userStore = defineStore("userStore", {
       let user = this.users.find((user) => user.id == idUser);
       console.log(user.pontos);
       user.pontos += pontos;
-      if (user.pontos >= 1000) {
-        user.nivel += 1;
-        user.pontos = user.pontos - 1000;
-      }
       console.log(user.pontos);
       this.updateLocalStorage();
     },

@@ -173,7 +173,7 @@
       <v-row>
         <v-col cols="4"></v-col>
         <v-col cols="4" class="d-flex justify-center mb-6 bg-surface-variant">
-          <v-card text="37yhh8" id="refCard"></v-card>
+          <v-card :text="referral" id="refCard"></v-card>
         </v-col>
         <v-col cols="4"></v-col>
       </v-row>
@@ -234,12 +234,14 @@ export default {
       length: 3,
       window: 0,
       progresso: 0,
+      referral: ""
     };
   },
   created() {
     this.user = this.store.getLoggedInUser;
     this.store.updateLevel(this.user.id, this.user.pontos);
     this.progresso = this.store.calculateProgress(this.user.pontos);
+    this.referral = this.user.referral;
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
