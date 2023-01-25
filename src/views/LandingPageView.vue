@@ -28,11 +28,15 @@
           <v-card class="mx-auto" max-width="344" id="Card">
             <v-card-title>
               Reduzir
-              <v-btn id="iconBtn" :icon="
-                showReduzir
-                  ? 'fa-solid fa-arrow-up'
-                  : 'fa-solid fa-arrow-down'
-              " @click="showReduzir = !showReduzir"></v-btn>
+              <v-btn
+                id="iconBtn"
+                :icon="
+                  showReduzir
+                    ? 'fa-solid fa-arrow-up'
+                    : 'fa-solid fa-arrow-down'
+                "
+                @click="showReduzir = !showReduzir"
+              ></v-btn>
             </v-card-title>
 
             <v-expand-transition>
@@ -51,11 +55,16 @@
           <v-card class="mx-auto" max-width="344" id="Card">
             <v-card-title>
               Reutilizar
-              <v-btn id="iconBtn" :icon="
-                showReutilizar
-                  ? 'fa-solid fa-arrow-up'
-                  : 'fa-solid fa-arrow-down'
-              " @click="showReutilizar = !showReutilizar"></v-btn></v-card-title>
+              <v-btn
+                id="iconBtn"
+                :icon="
+                  showReutilizar
+                    ? 'fa-solid fa-arrow-up'
+                    : 'fa-solid fa-arrow-down'
+                "
+                @click="showReutilizar = !showReutilizar"
+              ></v-btn
+            ></v-card-title>
 
             <v-expand-transition>
               <div v-show="showReutilizar">
@@ -63,7 +72,10 @@
                   A ação de reutilizar um produto é poder dar uma nova utilidade
                   para algo que, normalmente, iria ser deitado fora.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reutilizar.png" height="200px"></v-img>
+                <v-img
+                  src="src\assets\imgs\reutilizar.png"
+                  height="200px"
+                ></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -72,11 +84,15 @@
           <v-card class="mx-auto" max-width="344" id="Card">
             <v-card-title>
               Reciclar
-              <v-btn id="iconBtn" :icon="
-                showReciclar
-                  ? 'fa-solid fa-arrow-up'
-                  : 'fa-solid fa-arrow-down'
-              " @click="showReciclar = !showReciclar"></v-btn>
+              <v-btn
+                id="iconBtn"
+                :icon="
+                  showReciclar
+                    ? 'fa-solid fa-arrow-up'
+                    : 'fa-solid fa-arrow-down'
+                "
+                @click="showReciclar = !showReciclar"
+              ></v-btn>
             </v-card-title>
 
             <v-expand-transition>
@@ -86,7 +102,10 @@
                   não pode ser mais utilizado em um novo produto ou
                   matéria-prima.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reciclar.png" height="200px"></v-img>
+                <v-img
+                  src="src\assets\imgs\reciclar.png"
+                  height="200px"
+                ></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -108,12 +127,20 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <v-img src="src\assets\imgs\img_perfil.png" width="215px" height="239px"></v-img>
+          <v-img
+            src="src\assets\imgs\img_perfil.png"
+            width="215px"
+            height="239px"
+          ></v-img>
         </v-col>
       </v-row>
       <v-row id="number2">
         <v-col cols="12" lg="4">
-          <v-img src="src\assets\imgs\img_map.png" width="240px" height="208px"></v-img>
+          <v-img
+            src="src\assets\imgs\img_map.png"
+            width="240px"
+            height="208px"
+          ></v-img>
         </v-col>
         <v-col cols="12" lg="8">
           <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
@@ -126,19 +153,32 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <v-img src="src\assets\imgs\img_moedas.png" width="215px" height="239px"></v-img>
+          <v-img
+            src="src\assets\imgs\img_moedas.png"
+            width="215px"
+            height="239px"
+          ></v-img>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <div class="d-flex justify-center mb-6 bg-surface-variant">
-            <v-btn id="registarbtn" variant="flat" @click="$router.push('registar')">
+            <v-btn
+              id="registarbtn"
+              variant="flat"
+              @click="$router.push('registar')"
+            >
               Registar
             </v-btn>
           </div>
         </v-col>
       </v-row>
-      <v-img src="src\assets\imgs\Group 15.png" height="1703px" width="1090px" id="linhaimg"></v-img>
+      <v-img
+        src="src\assets\imgs\Group 15.png"
+        height="1703px"
+        width="1090px"
+        id="linhaimg"
+      ></v-img>
     </v-container>
     <v-container v-else="width < 1300">
       <v-row>
@@ -182,14 +222,19 @@
         </v-row>
       </div>
     </v-container>
-    <footer id="footer">
-      <v-img src="src\assets\imgs\footer.svg" id="backgroundFooter"></v-img>
+    <div id="footer">
       <v-container>
         <v-row>
-          <v-col cols="6">
-            <v-img src="src\assets\imgs\Logo.png" id="logofooter"></v-img>
+          <v-col>
+            <v-img
+              src="src\assets\imgs\Logo.png"
+              width="300px"
+              height="300px"
+              id="logofooter"
+            >
+            </v-img>
           </v-col>
-          <v-col cols="5" id="contactos">
+          <v-col id="contactos">
             <h2>Contactos</h2>
             <p><b>Email:</b> geral@esmad.ipp.pt</p>
             <br />
@@ -200,12 +245,12 @@
             <br />
             <p><b>Telefone:</b> +351 252 291 700</p>
           </v-col>
-          <v-col cols="1">
+          <v-col>
             <v-btn icon="fa-solid fa-arrow-down" color="#F0CD6E" id="arrow" @click="goToTop"></v-btn>
           </v-col>
         </v-row>
       </v-container>
-    </footer>
+    </div>
   </div>
 </template>
 
@@ -235,7 +280,7 @@ export default {
     },
   },
   created() {
-    /*     this.userStore.$reset();
+    /* this.userStore.$reset();
         this.utilizacaoStore.$reset(); */
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
@@ -351,36 +396,33 @@ p {
   font-family: "Exo";
   font-style: Bold;
 }
-
-#backgroundFooter {
+#footer {
+  background-image: url("src/assets/imgs/footer.svg");
+  background-size: cover;
+  height: 400px;
   position: relative;
-  top: 1310px;
+  top: 60px;
 }
-
 #logofooter {
   position: relative;
-  top: 900px;
-  width: 370px;
-  height: 370px;
+  top: 50px;
 }
 
 #contactos {
   position: relative;
-  top: 1000px;
+  top: 90px;
+  left: 90px;
   color: #fdfcf8;
-  font-family: "Exo";
-  font-style: Bold;
-  width: 200px;
-  height: 200px;
 }
 
 #arrow {
-  position: relative;
-  top: 1200px;
   transition: transform 0.5s ease;
   box-shadow: none;
   text-shadow: none;
   color: #114b5f;
+  position: relative;
+  top: 300px;
+  left: 450px;
 }
 
 #arrow:hover {
@@ -388,7 +430,6 @@ p {
 }
 
 @media (max-width: 600px) {
-
   #tittle3,
   #tittle4 h1 {
     font-size: 30px;

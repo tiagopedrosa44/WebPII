@@ -1,10 +1,12 @@
 <template>
   <div class="home">
-    <div align="center">
-      <nav>
-        <NavBar />
-      </nav>
-    </div>
+    <v-container>
+      <v-row>
+        <v-col>
+          <NavBar />
+        </v-col>
+      </v-row>
+    </v-container>
     <br /><br /><br /><br /><br />
     <div id="container">
       <v-container id="containerAzul">
