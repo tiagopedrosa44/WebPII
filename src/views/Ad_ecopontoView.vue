@@ -1,15 +1,101 @@
 <template>
-    <div>
-
-    </div>
+  <div class="home">
+    <v-container>
+      <v-row>
+        <v-col>
+          <NavBar />
+        </v-col>
+      </v-row>
+    </v-container>
+    <h1>Adicionar ecoponto</h1>
+    <v-container class="grey lighten-5">
+      <div id="left">
+        <div id="mapa">
+          <Mapa />
+        </div>
+      </div>
+      <div id="right">
+        <span>
+          Para registar um novo ecoponto, clique no mapa e de seguida carregue
+          no botão de adicionar foto para colocar uma foto e assim registar um
+          ecoponto. Para o ecoponto ficar totalmente validado, é preciso que
+          três pessoas diferentes registem o mesmo ecoponto ou que um
+          administrador valide as coordenadas. Só depois disso serão atribuídos
+          os pontos correspondentes.
+        </span>
+        <br><br><br><br><br>
+        <v-btn class="botaoAmarelo" @click=""
+          >Adicionar foto</v-btn
+        ><br><br>
+        <v-btn class="botaoAmarelo" @click=""
+          >Registar</v-btn
+        >
+        <input type="file" accept="image/*" ref="foto" style="display: none" />
+      </div>
+    </v-container>
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+import NavBar from "@/components/NavBar.vue";
+import Mapa from "@/components/Mapa.vue";
+import { ecopontoStore } from "../stores/ecopontoStore.js";
+import { userStore } from "../stores/userStore.js";
+
+export default {
+  components: {
+    NavBar,
+    Mapa,
+  },
+  data() {
+    return {
+      ecopontoStore: ecopontoStore(),
+      userStore: userStore(),
+    };
+  },
+};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.home {
+  background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
+  min-height: 1080px;
+}
 
+#left {
+  float: left;
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#right {
+  float: right;
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.botaoAmarelo {
+  background-color: #f0cd6e;
+  color: white;
+  width: 50%;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  font-family: "Exo", sans-serif;
+  font-weight: bold;
+}
+
+span {
+  font-size: 23px;
+  color: white;
+  font-family: "Spinnaker", sans-serif;
+  font-weight: regular;
+}
 </style>
