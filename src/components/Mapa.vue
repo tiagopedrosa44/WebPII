@@ -5,6 +5,9 @@
     mapTypeId="hybrid"
     :center="center"
     :zoom="18"
+    ref="map"
+    :click="true"
+    @click="clickMarcador"
   >
     <Marker :options="currentPosMarkerOptions" />
     <Marker
@@ -47,6 +50,8 @@ export default defineComponent({
         },
         id: -1,
       },
+      pagAtual: this.$route.name,
+      jaAdicionado: false,
     };
   },
   created() {
@@ -86,6 +91,26 @@ export default defineComponent({
           lat: 41.36611,
           lng: -8.739542,
         };
+      }
+    },
+    clickMarcador(event) {
+      if (this.pagAtual == "ad_ecoponto") {
+        if (this.jaAdicionado) {
+          this.ecopontos.pop();
+          this.jaAdicionado = false;
+        }
+
+        const lat = event.latLng.lat();
+        const lng = event.latLng.lng();
+        console.log(lat, lng);
+
+        const marker = new google.maps.Marker({
+          coordenadas: { lat: lat, lng: lng },
+          map: this.$refs.map,
+        });
+
+        this.ecopontos.push(marker);
+        this.jaAdicionado = true;
       }
     },
   },

@@ -23,11 +23,18 @@
           administrador valide as coordenadas. Só depois disso serão atribuídos
           os pontos correspondentes.
         </span>
-        <br><br><br><br><br>
-        <v-btn class="botaoAmarelo" @click=""
+        <br /><br /><br /><br /><br />
+        <v-btn
+          class="botaoAmarelo"
+          @click="uploadFoto()"
+          :disabled="btnAdicionarDisable"
           >Adicionar foto</v-btn
-        ><br><br>
-        <v-btn class="botaoAmarelo" @click=""
+        ><br /><br />
+        <v-btn
+          class="botaoAmarelo"
+          id="btnRegistar"
+          @click=""
+          :disabled="btnRegistarDisable"
           >Registar</v-btn
         >
         <input type="file" accept="image/*" ref="foto" style="display: none" />
@@ -51,7 +58,24 @@ export default {
     return {
       ecopontoStore: ecopontoStore(),
       userStore: userStore(),
+      btnAdicionarDisable: true,
+      btnRegistarDisable: true,
     };
+  },
+  methods: {
+    uploadFoto() {
+      this.$refs.foto.click();
+      this.$refs.foto.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+          this.filePath = e.target.result;
+          console.log(this.filePath);
+        };
+        this.btnRegistarDisable = false;
+      };
+    },
   },
 };
 </script>
