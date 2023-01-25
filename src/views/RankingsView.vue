@@ -15,8 +15,14 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col align="center">
+          <v-btn @click="maisPontos" id="pontos">Mais pontos</v-btn>
+          <v-btn @click="ecopontos" id="ecopontos">Ecopontos usados</v-btn>
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col>
-          <v-table id="tabela">
+          <v-table id="tabela" v-if="tabela == 'maisPontos'">
             <thead>
               <tr>
                 <th class="text-left">Posição</th>
@@ -29,6 +35,22 @@
                 <td>{{ index + 1 }}</td>
                 <td>{{ user.nome }}</td>
                 <td>{{ user.pontos }}</td>
+              </tr>
+            </tbody>
+          </v-table>
+          <v-table id="tabela" v-else="tabela == 'ecopontos'">
+            <thead>
+              <tr>
+                <th class="text-left">Posição</th>
+                <th class="text-left">Nomes</th>
+                <th class="text-left">Ecopontos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(user, index) in store.getSortedUsersByUtilizacoes">
+                <td>{{ index + 1 }}</td>
+                <td>{{ user.nome }}</td>
+                <td>{{ user.utilizacoes }}</td>
               </tr>
             </tbody>
           </v-table>
@@ -48,7 +70,16 @@ export default {
   data() {
     return {
       store: userStore(),
+      tabela: "maisPontos",
     };
+  },
+  methods: {
+    maisPontos() {
+      this.tabela = "maisPontos";
+    },
+    ecopontos() {
+      this.tabela = "ecopontos";
+    },
   },
 };
 </script>
@@ -64,12 +95,23 @@ export default {
   font-weight: bold;
   color: #fdfcf8;
 }
-#tabela{
+#tabela {
   border-radius: 10px;
 }
 .v-table {
   background-color: #114b5f;
   background: #114b5f;
+  color: #fdfcf8;
+}
+
+#pontos{
+  background-color: #F0CD6E;
+  color: #fdfcf8;
+}
+#ecopontos{
+  position: relative;
+  left: 10px;
+  background-color: #F0CD6E;
   color: #fdfcf8;
 }
 </style>

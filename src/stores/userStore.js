@@ -30,7 +30,7 @@ export const userStore = defineStore("userStore", {
           pontos: 2500,
           nivel: 2,
           moedas: 200000,
-          utilizacoes: 0,
+          utilizacoes: 5,
           ecopontosRegistados: 0,
           biografia:
             "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
@@ -63,6 +63,9 @@ export const userStore = defineStore("userStore", {
     getSortedUsers: (state) => {
       return state.users.sort((a, b) => b.pontos - a.pontos);
     },
+    getSortedUsersByUtilizacoes:(state) =>{
+      return state.users.sort((a, b) => b.utilizacoes - a.utilizacoes);
+    }
   },
 
   actions: {
