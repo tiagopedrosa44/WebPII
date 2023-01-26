@@ -1,30 +1,17 @@
 <template>
-  <GoogleMap
-    api-key="AIzaSyAYi2BJ0UcEc3zgu2s6g9UFV-6JHuSkyxE"
-    style="width: 100%; height: 500px"
-    mapTypeId="hybrid"
-    :center="center"
-    :zoom="18"
-    ref="map"
-    :click="true"
-    @click="clickMarcador"
-  >
+  <GoogleMap api-key="AIzaSyAYi2BJ0UcEc3zgu2s6g9UFV-6JHuSkyxE" style="width: 100%; height: 500px" mapTypeId="hybrid"
+    :center="center" :zoom="18" ref="map" :click="true" @click="clickMarcador">
     <Marker :options="currentPosMarkerOptions" />
-    <Marker
-      v-for="ecoponto in ecopontos"
-      @click="focarEcoponto(ecoponto.id)"
-      :key="ecoponto.id"
-      :options="{
-        position: {
-          lat: ecoponto.coordenadas.lat,
-          lng: ecoponto.coordenadas.lng,
-        },
-        icon: {
-          url: '/src/assets/imgs/iconeEcoponto.png',
-          scaledSize: { width: 29, height: 40 },
-        },
-      }"
-    />
+    <Marker v-for="ecoponto in ecopontos" @click="focarEcoponto(ecoponto.id)" :key="ecoponto.id" :options="{
+      position: {
+        lat: ecoponto.coordenadas.lat,
+        lng: ecoponto.coordenadas.lng,
+      },
+      icon: {
+        url: '/src/assets/imgs/iconeEcoponto.png',
+        scaledSize: { width: 29, height: 40 },
+      },
+    }" />
   </GoogleMap>
 </template>
 
@@ -55,6 +42,7 @@ export default defineComponent({
     };
   },
   created() {
+    localStorage.removeItem("ecopontoMap");
     this.id = this.$route.params.id;
     if (!isNaN(this.id)) {
       this.center = {
@@ -97,6 +85,7 @@ export default defineComponent({
       if (this.pagAtual == "ad_ecoponto") {
         if (this.jaAdicionado) {
           this.ecopontos.pop();
+          localStorage.removeItem("ecopontoMap");
           this.jaAdicionado = false;
         }
 
@@ -110,6 +99,7 @@ export default defineComponent({
         });
 
         this.ecopontos.push(marker);
+        localStorage.setItem("ecopontoMap", JSON.stringify(marker.coordenadas));
         this.jaAdicionado = true;
       }
     },

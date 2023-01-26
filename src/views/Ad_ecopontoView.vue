@@ -24,19 +24,9 @@
           os pontos correspondentes.
         </span>
         <br /><br /><br /><br /><br />
-        <v-btn
-          class="botaoAmarelo"
-          @click="uploadFoto()"
-          :disabled="btnAdicionarDisable"
-          >Adicionar foto</v-btn
-        ><br /><br />
-        <v-btn
-          class="botaoAmarelo"
-          id="btnRegistar"
-          @click=""
-          :disabled="btnRegistarDisable"
-          >Registar</v-btn
-        >
+        <v-btn class="botaoAmarelo" @click="uploadFoto()" :disabled="btnAdicionarDisable">Adicionar
+          foto</v-btn><br /><br />
+        <v-btn class="botaoAmarelo" id="btnRegistar" @click="" :disabled="btnRegistarDisable">Registar</v-btn>
         <input type="file" accept="image/*" ref="foto" style="display: none" />
       </div>
     </v-container>
@@ -60,6 +50,7 @@ export default {
       userStore: userStore(),
       btnAdicionarDisable: true,
       btnRegistarDisable: true,
+      ecopontosMap: localStorage.getItem("ecopontosMap"),
     };
   },
   methods: {
@@ -76,6 +67,15 @@ export default {
         this.btnRegistarDisable = false;
       };
     },
+  },
+  mounted() {
+    setInterval(() => {
+      this.ecopontosMap = localStorage.getItem("ecopontoMap");
+      console.log(this.ecopontosMap);
+      if (this.ecopontosMap != null) {
+        this.btnAdicionarDisable = false;
+      }
+    }, 100);
   },
 };
 </script>
