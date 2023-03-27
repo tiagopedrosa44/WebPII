@@ -16,7 +16,7 @@
       </div>
       <div id="right">
         <span>
-          Para registar um novo ecoponto, clique no mapa e de seguida carregue
+          Para adicionar um novo ecoponto, clique no mapa e de seguida carregue
           no botão de adicionar foto para colocar uma foto e assim registar um
           ecoponto. Para o ecoponto ficar totalmente validado, é preciso que
           três pessoas diferentes registem o mesmo ecoponto ou que um
@@ -26,7 +26,7 @@
         <br /><br /><br /><br /><br />
         <v-btn class="botaoAmarelo" @click="uploadFoto()" :disabled="btnAdicionarDisable">Adicionar
           foto</v-btn><br /><br />
-        <v-btn class="botaoAmarelo" id="btnRegistar" @click="" :disabled="btnRegistarDisable">Registar</v-btn>
+        <v-btn class="botaoAmarelo" id="btnRegistar" @click="" :disabled="btnRegistarDisable">Confirmar</v-btn>
         <input type="file" accept="image/*" ref="foto" style="display: none" />
       </div>
     </v-container>

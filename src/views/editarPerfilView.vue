@@ -13,25 +13,13 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="6" id="textfields">
-            <v-text-field
-              label="Biografia"
-              v-model="biografia"
-              multi-line
-            ></v-text-field>
-            <v-text-field
-              label="Nova Senha"
-              v-model="novaSenha"
-              type="password"
-            ></v-text-field>
-            <v-text-field
-              label="Confirmar nova senha"
-              v-model="confirmarSenha"
-              type="password"
-            ></v-text-field>
-            <v-btn color="primary" @click="store.editUser(idUser,biografia,novaSenha)"> Alterar dados </v-btn>
+            <v-text-field label="Biografia" v-model="biografia" multi-line></v-text-field>
+            <v-text-field label="Nova Senha" v-model="novaSenha" type="password"></v-text-field>
+            <v-text-field label="Confirmar nova senha" v-model="confirmarSenha" type="password"></v-text-field>
+            <v-btn color="primary" @click="store.editUser(idUser, biografia, novaSenha)"> Alterar dados </v-btn>
           </v-col>
           <v-col cols="12" md="6">
-            <v-avatar size="120" v-bind:color="color">
+            <v-avatar size="120" v-bind:color="color" :src="store.getLoggedInUser.avatar">
               <template v-slot:placeholder>
                 <v-icon>mdi-camera</v-icon>
               </template>
@@ -42,6 +30,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <input type="file" accept="image/*" ref="foto" style="display: none" />
     </div>
   </div>
 </template>
@@ -67,6 +56,20 @@ export default {
       return this.store.getLoggedInUser.id;
     }
   },
+  methods: {
+    alterarImagem() {
+      this.$refs.foto.click();
+      this.$refs.foto.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+          this.filePath = e.target.result;
+          console.log(this.filePath);
+        };
+      };
+    }
+  },
 };
 </script>
 
@@ -76,11 +79,13 @@ export default {
   min-height: 1080px;
   font-family: "exo";
 }
+
 .blue-background {
   background-color: #114b5f;
   border-radius: 10px;
   width: 80%;
 }
+
 #alterarDados {
   background-color: #f0cd6e;
   color: #fdfcf8;

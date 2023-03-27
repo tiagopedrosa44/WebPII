@@ -99,6 +99,22 @@ export default defineComponent({
         });
 
         this.ecopontos.push(marker);
+        this.center = { lat: lat, lng: lng };
+
+        //--------------------NÃO FUNCIONA ENQUANTO A API NÃO ESTIVER PAGA--------------------//
+        /* const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ location: marker.coordenadas }).then((response) => {
+          if (response.results[0]) {
+            console.log(response.results[0].formatted_address);
+            localStorage.setItem(
+              "ecopontoMap",
+              JSON.stringify(response.results[0].formatted_address)
+            );
+          } else {
+            window.alert("No results found");
+          }
+        }).catch((e) => window.alert("Geocoder failed due to: " + e)); */
+
         localStorage.setItem("ecopontoMap", JSON.stringify(marker.coordenadas));
         this.jaAdicionado = true;
       }

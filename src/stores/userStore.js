@@ -20,6 +20,7 @@ export const userStore = defineStore("userStore", {
           biografia: "",
           badges: [],
           referral: "",
+          avatar: "../assets/imgs/avatar.png",
         },
         {
           id: 1,
@@ -36,6 +37,7 @@ export const userStore = defineStore("userStore", {
             "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
           badges: [],
           referral: "",
+          avatar: "../assets/imgs/avatar.png",
         },
       ],
 
