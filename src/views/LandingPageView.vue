@@ -30,11 +30,7 @@
               Reduzir
               <v-btn
                 id="iconBtn"
-                :icon="
-                  showReduzir
-                    ? 'fa-solid fa-arrow-up'
-                    : 'fa-solid fa-arrow-down'
-                "
+                :icon="showReduzir ? 'fa-solid fa-arrow-up' : 'fa-solid fa-arrow-down'"
                 @click="showReduzir = !showReduzir"
               ></v-btn>
             </v-card-title>
@@ -42,9 +38,9 @@
             <v-expand-transition>
               <div v-show="showReduzir">
                 <v-card-text>
-                  Reduzir consiste em ações que reduzam o consumo de bens e
-                  serviços, visando à diminuição da geração de resíduos e
-                  consequente redução do desperdício.
+                  Reduzir consiste em ações que reduzam o consumo de bens e serviços,
+                  visando à diminuição da geração de resíduos e consequente redução do
+                  desperdício.
                 </v-card-text>
                 <v-img src="src\assets\imgs\reduzir.webp" height="200px"></v-img>
               </div>
@@ -57,11 +53,7 @@
               Reutilizar
               <v-btn
                 id="iconBtn"
-                :icon="
-                  showReutilizar
-                    ? 'fa-solid fa-arrow-up'
-                    : 'fa-solid fa-arrow-down'
-                "
+                :icon="showReutilizar ? 'fa-solid fa-arrow-up' : 'fa-solid fa-arrow-down'"
                 @click="showReutilizar = !showReutilizar"
               ></v-btn
             ></v-card-title>
@@ -69,13 +61,10 @@
             <v-expand-transition>
               <div v-show="showReutilizar">
                 <v-card-text>
-                  A ação de reutilizar um produto é poder dar uma nova utilidade
-                  para algo que, normalmente, iria ser deitado fora.
+                  A ação de reutilizar um produto é poder dar uma nova utilidade para algo
+                  que, normalmente, iria ser deitado fora.
                 </v-card-text>
-                <v-img
-                  src="src\assets\imgs\reutilizar.webp"
-                  height="200px"
-                ></v-img>
+                <v-img src="src\assets\imgs\reutilizar.webp" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -86,11 +75,7 @@
               Reciclar
               <v-btn
                 id="iconBtn"
-                :icon="
-                  showReciclar
-                    ? 'fa-solid fa-arrow-up'
-                    : 'fa-solid fa-arrow-down'
-                "
+                :icon="showReciclar ? 'fa-solid fa-arrow-up' : 'fa-solid fa-arrow-down'"
                 @click="showReciclar = !showReciclar"
               ></v-btn>
             </v-card-title>
@@ -98,14 +83,10 @@
             <v-expand-transition>
               <div v-show="showReciclar">
                 <v-card-text>
-                  Promover uma reciclagem é a transformação de um produto que
-                  não pode ser mais utilizado em um novo produto ou
-                  matéria-prima.
+                  Promover uma reciclagem é a transformação de um produto que não pode ser
+                  mais utilizado em um novo produto ou matéria-prima.
                 </v-card-text>
-                <v-img
-                  src="src\assets\imgs\reciclar.webp"
-                  height="200px"
-                ></v-img>
+                <v-img src="src\assets\imgs\reciclar.webp" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -136,11 +117,7 @@
       </v-row>
       <v-row id="number2">
         <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_map.webp"
-            width="240px"
-            height="208px"
-          ></v-img>
+          <v-img src="src\assets\imgs\img_map.webp" width="240px" height="208px"></v-img>
         </v-col>
         <v-col cols="12" lg="8">
           <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
@@ -163,11 +140,7 @@
       <v-row>
         <v-col>
           <div class="d-flex justify-center mb-6 bg-surface-variant">
-            <v-btn
-              id="registarbtn"
-              variant="flat"
-              @click="$router.push('registar')"
-            >
+            <v-btn id="registarbtn" variant="flat" @click="$router.push('registar')">
               Registar
             </v-btn>
           </div>
@@ -194,9 +167,7 @@
             <h1 class="numeros" id="numero1">1</h1>
           </v-col>
           <v-col cols="11">
-            <h1 class="text-h5">
-              Cria uma conta para começares o teu progresso
-            </h1>
+            <h1 class="text-h5">Cria uma conta para começares o teu progresso</h1>
             <p>Vê todo o teu progresso no teu perfil.</p>
           </v-col>
         </v-row>
@@ -214,9 +185,7 @@
             <h1 class="numeros" id="numero3">3</h1>
           </v-col>
           <v-col cols="11">
-            <h1 class="text-h5">
-              Cria uma conta para começares o teu progresso
-            </h1>
+            <h1 class="text-h5">Cria uma conta para começares o teu progresso</h1>
             <p>Vê todo o teu progresso no teu perfil.</p>
           </v-col>
         </v-row>
@@ -246,7 +215,12 @@
             <p><b>Telefone:</b> +351 252 291 700</p>
           </v-col>
           <v-col>
-            <v-btn icon="fa-solid fa-arrow-down" color="#F0CD6E" id="arrow" @click="goToTop"></v-btn>
+            <v-btn
+              icon="fa-solid fa-arrow-down"
+              color="#F0CD6E"
+              id="arrow"
+              @click="goToTop"
+            ></v-btn>
           </v-col>
         </v-row>
       </v-container>

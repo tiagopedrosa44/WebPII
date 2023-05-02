@@ -28,19 +28,19 @@ export default {
     return {
       isImageLoaded: false,
       imageUrl: "src/assets/imgs/logo_nav.webp",
-    }
+    };
   },
   methods: {
     goToHeader(headerId) {
-        const header = document.getElementById(headerId);
-        if (header) {
-            header.scrollIntoView({behavior: 'smooth'});
-        }
+      const header = document.getElementById(headerId);
+      if (header) {
+        header.scrollIntoView({ behavior: "smooth" });
+      }
     },
     preloadImage(url) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
       link.href = url;
       document.head.appendChild(link);
 
@@ -51,7 +51,7 @@ export default {
       };
     },
   },
-  mounted () {
+  mounted() {
     this.preloadImage(this.imageUrl);
   },
 };
