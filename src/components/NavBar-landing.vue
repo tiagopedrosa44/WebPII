@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       isImageLoaded: false,
-      imageUrl: "src/assets/imgs/logo_nav.png",
+      imageUrl: "src/assets/imgs/logo_nav.webp",
     }
   },
   methods: {

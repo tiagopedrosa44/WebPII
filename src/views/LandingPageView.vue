@@ -12,7 +12,7 @@
         <v-col cols="12">
           <h1 id="titulo1">Venha</h1>
           <h1 id="titulo2">Reciclar!</h1>
-          <v-img id="img" src="src/assets/imgs/imagem1.png"></v-img>
+          <v-img id="img" src="src/assets/imgs/imagem1.webp"></v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -46,7 +46,7 @@
                   serviços, visando à diminuição da geração de resíduos e
                   consequente redução do desperdício.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reduzir.png" height="200px"></v-img>
+                <v-img src="src\assets\imgs\reduzir.webp" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -73,7 +73,7 @@
                   para algo que, normalmente, iria ser deitado fora.
                 </v-card-text>
                 <v-img
-                  src="src\assets\imgs\reutilizar.png"
+                  src="src\assets\imgs\reutilizar.webp"
                   height="200px"
                 ></v-img>
               </div>
@@ -103,7 +103,7 @@
                   matéria-prima.
                 </v-card-text>
                 <v-img
-                  src="src\assets\imgs\reciclar.png"
+                  src="src\assets\imgs\reciclar.webp"
                   height="200px"
                 ></v-img>
               </div>
@@ -128,7 +128,7 @@
         </v-col>
         <v-col cols="12" lg="4">
           <v-img
-            src="src\assets\imgs\img_perfil.png"
+            src="src\assets\imgs\img_perfil.webp"
             width="215px"
             height="239px"
           ></v-img>
@@ -137,7 +137,7 @@
       <v-row id="number2">
         <v-col cols="12" lg="4">
           <v-img
-            src="src\assets\imgs\img_map.png"
+            src="src\assets\imgs\img_map.webp"
             width="240px"
             height="208px"
           ></v-img>
@@ -154,7 +154,7 @@
         </v-col>
         <v-col cols="12" lg="4">
           <v-img
-            src="src\assets\imgs\img_moedas.png"
+            src="src\assets\imgs\img_moedas.webp"
             width="215px"
             height="239px"
           ></v-img>
@@ -174,7 +174,7 @@
         </v-col>
       </v-row>
       <v-img
-        src="src\assets\imgs\Group 15.png"
+        src="src\assets\imgs\Group 15.webp"
         height="1703px"
         width="1090px"
         id="linhaimg"
@@ -227,7 +227,7 @@
         <v-row>
           <v-col>
             <v-img
-              src="src\assets\imgs\Logo.png"
+              src="src\assets\imgs\Logo.webp"
               width="300px"
               height="300px"
               id="logofooter"
@@ -270,23 +270,28 @@ export default {
       showReciclar: false,
       width: window.innerWidth,
       height: window.innerHeight,
-      userStore: userStore(),
-      utilizacaoStore: utilizacaoStore(),
     };
   },
   methods: {
     goToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
-  },
-  created() {
-    window.addEventListener("resize", () => {
+    handleWindowResize() {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
       console.log(this.width, this.height);
-    });
-    this.userStore.updateLocalStorage();
-    this.utilizacaoStore.updateLocalStorage();
+    },
+    updateStores() {
+      userStore().updateLocalStorage();
+      utilizacaoStore().updateLocalStorage();
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.handleWindowResize);
+    this.updateStores();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleWindowResize);
   },
 };
 </script>
