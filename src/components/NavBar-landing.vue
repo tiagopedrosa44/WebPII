@@ -7,7 +7,8 @@
     <!-- Logo -->
     <v-toolbar-title id="centro">
       <v-img
-        src="src\assets\imgs\logo_nav.png"
+        v-if="isImageLoaded"
+        :src="imageUrl"
         height="91px"
         width="91px"
       ></v-img>
@@ -15,19 +16,43 @@
 
     <!-- Links da direita -->
     <v-btn @click="$router.push('login')" class="navlinks">Login</v-btn>
-    <v-btn @click="$router.push('registar')" class="navlinkRegistar">Registar</v-btn>
+    <v-btn @click="$router.push('registar')" class="navlinkRegistar"
+      >Registar</v-btn
+    >
   </v-toolbar>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isImageLoaded: false,
+      imageUrl: "src/assets/imgs/logo_nav.png",
+    }
+  },
   methods: {
     goToHeader(headerId) {
         const header = document.getElementById(headerId);
         if (header) {
             header.scrollIntoView({behavior: 'smooth'});
         }
-    }
+    },
+    preloadImage(url) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = url;
+      document.head.appendChild(link);
+
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        this.isImageLoaded = true;
+      };
+    },
+  },
+  mounted () {
+    this.preloadImage(this.imageUrl);
   },
 };
 </script>
@@ -42,7 +67,7 @@ export default {
 .navlinks:hover {
   color: #5582c9;
 }
-.navlinkRegistar{
+.navlinkRegistar {
   background-color: #5582c9;
   border-radius: 5px;
 }

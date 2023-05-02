@@ -280,8 +280,6 @@ export default {
     },
   },
   created() {
-    /* this.userStore.$reset();
-        this.utilizacaoStore.$reset(); */
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
