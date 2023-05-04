@@ -30,7 +30,7 @@
                 <v-row>
                   <v-col cols="2" id="ecoimg">
                     <v-img
-                      src="src/assets/imgs/ecoponto.png"
+                      src="src/assets/imgs/ecoponto.webp"
                       width="40px"
                       height="40px"
                     ></v-img>

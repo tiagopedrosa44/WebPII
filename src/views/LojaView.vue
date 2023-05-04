@@ -14,7 +14,7 @@
           <p id="moedas">{{ user.moedas }}</p>
           <v-img
             id="moedaIcon"
-            src="src/assets/imgs/imagensLoja/moedaIcon.png"
+            src="src/assets/imgs/imagensLoja/moedaIcon.webp"
             width="20px"
             heigth="20px"
           ></v-img>
