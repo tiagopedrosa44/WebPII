@@ -86,6 +86,7 @@ export default {
       utilizacao.aprovado = true
       this.userStore.addPontos(utilizacao.idUser, 300)
       this.userStore.addMoedas(utilizacao.idUser, 1000)
+      this.userStore.addUtilizacao(utilizacao.idUser)
       this.utilizacaoStore.updateLocalStorage()
     },
 
