@@ -130,4 +130,10 @@ export const ecopontoStore = defineStore("ecoponto", {
       return state.ecopontos.find((ecoponto) => ecoponto.id == id);
     }
   },
+  actions: {
+    addEcoponto(ecoponto) {
+      //this.ecopontos.push(ecoponto);
+      console.log(ecoponto);
+    }
+  }
 });

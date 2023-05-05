@@ -91,7 +91,7 @@ export default defineComponent({
 
         const lat = event.latLng.lat();
         const lng = event.latLng.lng();
-        console.log(lat, lng);
+        //console.log(lat, lng);
 
         const marker = new google.maps.Marker({
           coordenadas: { lat: lat, lng: lng },
@@ -115,7 +115,9 @@ export default defineComponent({
           }
         }).catch((e) => window.alert("Geocoder failed due to: " + e)); */
 
-        localStorage.setItem("ecopontoMap", JSON.stringify(marker.coordenadas));
+        const ecopontoMap = JSON.stringify(marker.coordenadas)
+        localStorage.setItem("ecopontoMap", ecopontoMap);
+        console.log(ecopontoMap);
         this.jaAdicionado = true;
       }
     },
