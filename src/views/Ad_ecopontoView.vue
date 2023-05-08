@@ -26,7 +26,7 @@
         <br /><br /><br /><br /><br />
         <v-btn class="botaoAmarelo" @click="uploadFoto()" :disabled="btnAdicionarDisable">Adicionar
           foto</v-btn><br /><br />
-        <v-btn class="botaoAmarelo" id="btnRegistar" @click="" :disabled="btnRegistarDisable">Confirmar</v-btn>
+        <v-btn class="botaoAmarelo" id="btnRegistar" @click="registar()" :disabled="btnRegistarDisable">Confirmar</v-btn>
         <input type="file" accept="image/*" ref="foto" style="display: none" />
       </div>
     </v-container>
@@ -67,11 +67,29 @@ export default {
         this.btnRegistarDisable = false;
       };
     },
+    registar() {
+      const ecoponto = [
+        {
+          id: this.ecopontoStore.ecopontos.length + 1,
+          morada: "",
+          coordenadas: {
+            lat: this.ecopontosMap.lat,
+            lng: this.ecopontosMap.lng
+          },
+          utilizacoes: 0,
+          vezesRegistado: 0,
+          quemAdicionou: this.userStore.getLoggedInUser.id,
+          dataCriacao: new Date().toLocaleDateString('pt-PT').split('/').reverse().join('-').substr(0, 10),
+          foto: "../src/assets/imgs/ecopontos/0.png",
+        },
+      ];
+      this.ecopontoStore.addEcoponto(ecoponto)
+    }
   },
   mounted() {
     setInterval(() => {
-      this.ecopontosMap = localStorage.getItem("ecopontoMap");
-      console.log(this.ecopontosMap);
+      this.ecopontosMap = JSON.parse(localStorage.getItem("ecopontoMap"));
+      //console.log(this.ecopontosMap);
       if (this.ecopontosMap != null) {
         this.btnAdicionarDisable = false;
       }

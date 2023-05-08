@@ -62,7 +62,7 @@ export const userStore = defineStore("userStore", {
     getSortedUsers: (state) => {
       return state.users.sort((a, b) => b.pontos - a.pontos);
     },
-    getSortedUsersByUtilizacoes:(state) =>{
+    getSortedUsersByUtilizacoes: (state) => {
       return state.users.sort((a, b) => b.utilizacoes - a.utilizacoes);
     }
   },
@@ -235,18 +235,36 @@ export const userStore = defineStore("userStore", {
     },
     addPontos(idUser, pontos) {
       let user = this.users.find((user) => user.id == idUser);
-      console.log(user.pontos);
       user.pontos += pontos;
       console.log(user.pontos);
       this.updateLocalStorage();
     },
     addMoedas(idUser, moedas) {
       let user = this.users.find((user) => user.id == idUser);
-      console.log(user.moedas);
       user.moedas += moedas;
       console.log(user.moedas);
       this.updateLocalStorage();
     },
+    addUtilizacao(idUser) {
+      let user = this.users.find((user) => user.id == idUser);
+      user.utilizacoes += 1;
+      console.log(user.utilizacoes);
+      this.updateLocalStorage();
+      this.verificarMedalha(user)
+    },
+    verificarMedalha(user) {
+      console.log(user.utilizacoes);
+      if (user.utilizacoes == 10) {
+        user.badges.push("Utilizador Regular");
+        console.log(user.badges);
+      }
+      if (user.utilizacoes == 50) {
+        user.badges.push("Utilizador Experiente");
+      }
+      if (user.utilizacoes == 100) {
+        user.badges.push("Utilizador Veterano");
+      }
+    }
   },
 
   //save users to local storage
