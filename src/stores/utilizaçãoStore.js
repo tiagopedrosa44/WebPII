@@ -5,15 +5,6 @@ export const utilizacaoStore = defineStore('utilizacao', {
     utilizacoes: localStorage.utilizacoes
       ? JSON.parse(localStorage.utilizacoes)
       : [
-        /* {
-          id: 0,
-          idUser: 0,
-          idEcoponto: 0,
-          foto: "",
-          data: "",
-          aprovado: false,
-          rejeitado: false,
-        } */
       ],
   }),
   getters: {
