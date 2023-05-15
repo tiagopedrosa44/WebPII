@@ -12,7 +12,7 @@
         <v-col cols="12">
           <h1 id="titulo1">Venha</h1>
           <h1 id="titulo2">Reciclar!</h1>
-          <img id="img" src="../assets/imgs/imagem1.webp">
+          <v-img id="img" src="src/assets/imgs/imagem1.webp"></v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -30,7 +30,11 @@
               Reduzir
               <v-btn
                 id="iconBtn"
-                :icon="showReduzir ? 'fa-solid fa-arrow-up' : 'fa-solid fa-arrow-down'"
+                :icon="
+                  showReduzir
+                    ? 'fa-solid fa-arrow-up'
+                    : 'fa-solid fa-arrow-down'
+                "
                 @click="showReduzir = !showReduzir"
               ></v-btn>
             </v-card-title>
@@ -38,11 +42,11 @@
             <v-expand-transition>
               <div v-show="showReduzir">
                 <v-card-text>
-                  Reduzir consiste em ações que reduzam o consumo de bens e serviços,
-                  visando à diminuição da geração de resíduos e consequente redução do
-                  desperdício.
+                  Reduzir consiste em ações que reduzam o consumo de bens e
+                  serviços, visando à diminuição da geração de resíduos e
+                  consequente redução do desperdício.
                 </v-card-text>
-                <img src="../assets/imgs/reduzir.webp" height="200px">
+                <v-img src="src/assets/imgs/reduzir.webp" height="200px"></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -53,7 +57,11 @@
               Reutilizar
               <v-btn
                 id="iconBtn"
-                :icon="showReutilizar ? 'fa-solid fa-arrow-up' : 'fa-solid fa-arrow-down'"
+                :icon="
+                  showReutilizar
+                    ? 'fa-solid fa-arrow-up'
+                    : 'fa-solid fa-arrow-down'
+                "
                 @click="showReutilizar = !showReutilizar"
               ></v-btn
             ></v-card-title>
@@ -61,10 +69,13 @@
             <v-expand-transition>
               <div v-show="showReutilizar">
                 <v-card-text>
-                  A ação de reutilizar um produto é poder dar uma nova utilidade para algo
-                  que, normalmente, iria ser deitado fora.
+                  A ação de reutilizar um produto é poder dar uma nova utilidade
+                  para algo que, normalmente, iria ser deitado fora.
                 </v-card-text>
-                <img src="../assets/imgs/reutilizar.webp" height="200px">
+                <v-img
+                  src="src/assets/imgs/reutilizar.webp"
+                  height="200px"
+                ></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -75,7 +86,11 @@
               Reciclar
               <v-btn
                 id="iconBtn"
-                :icon="showReciclar ? 'fa-solid fa-arrow-up' : 'fa-solid fa-arrow-down'"
+                :icon="
+                  showReciclar
+                    ? 'fa-solid fa-arrow-up'
+                    : 'fa-solid fa-arrow-down'
+                "
                 @click="showReciclar = !showReciclar"
               ></v-btn>
             </v-card-title>
@@ -83,10 +98,14 @@
             <v-expand-transition>
               <div v-show="showReciclar">
                 <v-card-text>
-                  Promover uma reciclagem é a transformação de um produto que não pode ser
-                  mais utilizado em um novo produto ou matéria-prima.
+                  Promover uma reciclagem é a transformação de um produto que
+                  não pode ser mais utilizado em um novo produto ou
+                  matéria-prima.
                 </v-card-text>
-                <img src="../assets/imgs/reciclar.webp" height="200px">
+                <v-img
+                  src="src/assets/imgs/reciclar.webp"
+                  height="200px"
+                ></v-img>
               </div>
             </v-expand-transition>
           </v-card>
@@ -108,16 +127,20 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <img
-            src="../assets/imgs/img_perfil.webp"
+          <v-img
+            src="src/assets/imgs/img_perfil.webp"
             width="215px"
             height="239px"
-          >
+          ></v-img>
         </v-col>
       </v-row>
       <v-row id="number2">
         <v-col cols="12" lg="4">
-          <img src="../assets/imgs/img_map.webp" width="240px" height="208px">
+          <v-img
+            src="src/assets/imgs/img_map.webp"
+            width="240px"
+            height="208px"
+          ></v-img>
         </v-col>
         <v-col cols="12" lg="8">
           <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
@@ -130,40 +153,86 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <img
-            src="../assets/imgs/img_moedas.webp"
+          <v-img
+            src="src/assets/imgs/img_moedas.webp"
             width="215px"
             height="239px"
-          >
+          ></v-img>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <div class="d-flex justify-center mb-6 bg-surface-variant">
-            <v-btn id="registarbtn" variant="flat" @click="$router.push('registar')">
+            <v-btn
+              id="registarbtn"
+              variant="flat"
+              @click="$router.push('registar')"
+            >
               Registar
             </v-btn>
           </div>
         </v-col>
       </v-row>
-      <img
-        src="../assets/imgs/Group15.webp"
+      <v-img
+        src="src/assets/imgs/Group15.webp"
         height="1703px"
         width="1090px"
         id="linhaimg"
-      >
+      ></v-img>
     </v-container>
-    
+    <v-container v-else="width < 1300">
+      <v-row>
+        <v-col cols="12">
+          <div id="tittle4">
+            <h1 align="center">Como Começar?</h1>
+          </div>
+        </v-col>
+      </v-row>
+      <div class="numsDiv">
+        <v-row class="my-8">
+          <v-col cols="1">
+            <h1 class="numeros" id="numero1">1</h1>
+          </v-col>
+          <v-col cols="11">
+            <h1 class="text-h5">
+              Cria uma conta para começares o teu progresso
+            </h1>
+            <p>Vê todo o teu progresso no teu perfil.</p>
+          </v-col>
+        </v-row>
+        <v-row class="my-8">
+          <v-col cols="1">
+            <h1 class="numeros" id="numero2">2</h1>
+          </v-col>
+          <v-col cols="11">
+            <h1 class="text-h5">Abre o mapa e vê os ecopontos perto de ti</h1>
+            <p>Seleciona o ecoponto para obteres o caminho até ele.</p>
+          </v-col>
+        </v-row>
+        <v-row class="my-8">
+          <v-col cols="1">
+            <h1 class="numeros" id="numero3">3</h1>
+          </v-col>
+          <v-col cols="11">
+            <h1 class="text-h5">
+              Cria uma conta para começares o teu progresso
+            </h1>
+            <p>Vê todo o teu progresso no teu perfil.</p>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
     <div id="footer">
       <v-container>
         <v-row>
           <v-col>
-            <img
-              src="../assets/imgs/Logo.webp"
+            <v-img
+              src="src/assets/imgs/Logo.webp"
               width="300px"
               height="300px"
               id="logofooter"
             >
+            </v-img>
           </v-col>
           <v-col id="contactos">
             <h2>Contactos</h2>
@@ -177,12 +246,7 @@
             <p><b>Telefone:</b> +351 252 291 700</p>
           </v-col>
           <v-col>
-            <v-btn
-              icon="fa-solid fa-arrow-down"
-              color="#F0CD6E"
-              id="arrow"
-              @click="goToTop"
-            ></v-btn>
+            <v-btn icon="fa-solid fa-arrow-down" color="#F0CD6E" id="arrow" @click="goToTop"></v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -206,27 +270,23 @@ export default {
       showReciclar: false,
       width: window.innerWidth,
       height: window.innerHeight,
+      userStore: userStore(),
+      utilizacaoStore: utilizacaoStore(),
     };
   },
   methods: {
     goToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
-    handleWindowResize() {
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
-    },
-    updateStores() {
-      userStore().updateLocalStorage();
-      utilizacaoStore().updateLocalStorage();
-    },
   },
   created() {
-    window.addEventListener("resize", this.handleWindowResize);
-    this.updateStores();
-  },
-  destroyed() {
-    window.removeEventListener("resize", this.handleWindowResize);
+    window.addEventListener("resize", () => {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      console.log(this.width, this.height);
+    });
+    this.userStore.updateLocalStorage();
+    this.utilizacaoStore.updateLocalStorage();
   },
 };
 </script>

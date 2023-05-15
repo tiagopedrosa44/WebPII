@@ -266,7 +266,7 @@ export default {
   z-index: -1;
 }
 .responsive-background-image {
-  background-image: url("src/assets/imgs/fundo_div_perfil.jpg");
+  background-image: url("../assets/imgs/fundo_div_perfil.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 10px;

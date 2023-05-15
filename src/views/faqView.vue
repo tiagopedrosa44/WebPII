@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 .faq {
-  background-image: url("src/assets/imgs/faqbackground.svg");
+  background-image: url("../assets/imgs/faqbackground.svg");
   min-height: 1080px;
 }
 #faqImage {

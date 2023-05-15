@@ -93,7 +93,7 @@ export default {
 
 <style scoped>
 .loja {
-  background-image: url("src/assets/imgs/Loja.jpg");
+  background-image: url("../assets/imgs/Loja.jpg");
   height: 100vh;
   background-size: cover;
 }
