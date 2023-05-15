@@ -30,6 +30,9 @@
         <input type="file" accept="image/*" ref="foto" style="display: none" />
       </div>
     </v-container>
+    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="success">
+      {{ snackbarMessage }}
+    </v-snackbar>
   </div>
 </template>
 
@@ -51,6 +54,8 @@ export default {
       btnAdicionarDisable: true,
       btnRegistarDisable: true,
       ecopontosMap: localStorage.getItem("ecopontosMap"),
+      snackbar: false,
+      snackbarMessage: "Ecoponto adicionado!"
     };
   },
   methods: {
@@ -84,6 +89,10 @@ export default {
         },
       ];
       this.ecopontoStore.addEcoponto(ecoponto)
+      this.snackbar = true;
+      setTimeout(() => {
+        this.$router.push("/home");
+      }, 2000);
     }
   },
   mounted() {
