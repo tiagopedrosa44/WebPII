@@ -99,7 +99,6 @@ export const userStore = defineStore("userStore", {
           localStorage.setItem("userLogado", username);
           localStorage.setItem("logado", true);
           this.logado = { bool: true, nome: username };
-          console.log("Login efetuado com sucesso");
           router.push("/home");
         } else {
           document.querySelector("#password").style.border = "3px solid red";
@@ -203,7 +202,6 @@ export const userStore = defineStore("userStore", {
             localStorage.setItem("userLogado", username);
             localStorage.setItem("logado", true);
             this.logado = { bool: true, nome: username };
-            console.log("Registo efetuado com sucesso");
             router.push("/home");
           }
         }
@@ -214,7 +212,6 @@ export const userStore = defineStore("userStore", {
       this.logado = { bool: false, nome: "" };
       localStorage.setItem("userLogado", "");
       localStorage.setItem("logado", false);
-      console.log("Logout efetuado com sucesso");
       router.push("/");
     },
     deleteUser(id) {
@@ -223,9 +220,7 @@ export const userStore = defineStore("userStore", {
       this.updateLocalStorage();
     },
     editUser(idUser, biografia, password) {
-      console.log(biografia, password);
       let user = this.users.find((user) => user.id == idUser);
-      console.log(user);
       user.biografia = biografia;
       user.password = password;
       this.updateLocalStorage();
@@ -236,27 +231,22 @@ export const userStore = defineStore("userStore", {
     addPontos(idUser, pontos) {
       let user = this.users.find((user) => user.id == idUser);
       user.pontos += pontos;
-      console.log(user.pontos);
       this.updateLocalStorage();
     },
     addMoedas(idUser, moedas) {
       let user = this.users.find((user) => user.id == idUser);
       user.moedas += moedas;
-      console.log(user.moedas);
       this.updateLocalStorage();
     },
     addUtilizacao(idUser) {
       let user = this.users.find((user) => user.id == idUser);
       user.utilizacoes += 1;
-      console.log(user.utilizacoes);
       this.updateLocalStorage();
       this.verificarMedalha(user)
     },
     verificarMedalha(user) {
-      console.log(user.utilizacoes);
       if (user.utilizacoes == 10) {
         user.badges.push("Utilizador Regular");
-        console.log(user.badges);
       }
       if (user.utilizacoes == 50) {
         user.badges.push("Utilizador Experiente");

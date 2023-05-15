@@ -12,7 +12,7 @@
         <v-col cols="12">
           <h1 id="titulo1">Venha</h1>
           <h1 id="titulo2">Reciclar!</h1>
-          <v-img id="img" src="src/assets/imgs/imagem1.webp"></v-img>
+          <img id="img" src="../assets/imgs/imagem1.webp">
         </v-col>
       </v-row>
     </v-container>
@@ -42,7 +42,7 @@
                   visando à diminuição da geração de resíduos e consequente redução do
                   desperdício.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reduzir.webp" height="200px"></v-img>
+                <img src="../assets/imgs/reduzir.webp" height="200px">
               </div>
             </v-expand-transition>
           </v-card>
@@ -64,7 +64,7 @@
                   A ação de reutilizar um produto é poder dar uma nova utilidade para algo
                   que, normalmente, iria ser deitado fora.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reutilizar.webp" height="200px"></v-img>
+                <img src="../assets/imgs/reutilizar.webp" height="200px">
               </div>
             </v-expand-transition>
           </v-card>
@@ -86,7 +86,7 @@
                   Promover uma reciclagem é a transformação de um produto que não pode ser
                   mais utilizado em um novo produto ou matéria-prima.
                 </v-card-text>
-                <v-img src="src\assets\imgs\reciclar.webp" height="200px"></v-img>
+                <img src="../assets/imgs/reciclar.webp" height="200px">
               </div>
             </v-expand-transition>
           </v-card>
@@ -108,16 +108,16 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_perfil.webp"
+          <img
+            src="../assets/imgs/img_perfil.webp"
             width="215px"
             height="239px"
-          ></v-img>
+          >
         </v-col>
       </v-row>
       <v-row id="number2">
         <v-col cols="12" lg="4">
-          <v-img src="src\assets\imgs\img_map.webp" width="240px" height="208px"></v-img>
+          <img src="../assets/imgs/img_map.webp" width="240px" height="208px">
         </v-col>
         <v-col cols="12" lg="8">
           <h1>Abre o mapa e vê os ecopontos perto de ti</h1>
@@ -130,11 +130,11 @@
           <p>Vê todo o teu progresso no teu perfil.</p>
         </v-col>
         <v-col cols="12" lg="4">
-          <v-img
-            src="src\assets\imgs\img_moedas.webp"
+          <img
+            src="../assets/imgs/img_moedas.webp"
             width="215px"
             height="239px"
-          ></v-img>
+          >
         </v-col>
       </v-row>
       <v-row>
@@ -146,62 +146,24 @@
           </div>
         </v-col>
       </v-row>
-      <v-img
-        src="src\assets\imgs\Group 15.webp"
+      <img
+        src="../assets/imgs/Group15.webp"
         height="1703px"
         width="1090px"
         id="linhaimg"
-      ></v-img>
+      >
     </v-container>
-    <v-container v-else="width < 1300">
-      <v-row>
-        <v-col cols="12">
-          <div id="tittle4">
-            <h1 align="center">Como Começar?</h1>
-          </div>
-        </v-col>
-      </v-row>
-      <div class="numsDiv">
-        <v-row class="my-8">
-          <v-col cols="1">
-            <h1 class="numeros" id="numero1">1</h1>
-          </v-col>
-          <v-col cols="11">
-            <h1 class="text-h5">Cria uma conta para começares o teu progresso</h1>
-            <p>Vê todo o teu progresso no teu perfil.</p>
-          </v-col>
-        </v-row>
-        <v-row class="my-8">
-          <v-col cols="1">
-            <h1 class="numeros" id="numero2">2</h1>
-          </v-col>
-          <v-col cols="11">
-            <h1 class="text-h5">Abre o mapa e vê os ecopontos perto de ti</h1>
-            <p>Seleciona o ecoponto para obteres o caminho até ele.</p>
-          </v-col>
-        </v-row>
-        <v-row class="my-8">
-          <v-col cols="1">
-            <h1 class="numeros" id="numero3">3</h1>
-          </v-col>
-          <v-col cols="11">
-            <h1 class="text-h5">Cria uma conta para começares o teu progresso</h1>
-            <p>Vê todo o teu progresso no teu perfil.</p>
-          </v-col>
-        </v-row>
-      </div>
-    </v-container>
+    
     <div id="footer">
       <v-container>
         <v-row>
           <v-col>
-            <v-img
-              src="src\assets\imgs\Logo.webp"
+            <img
+              src="../assets/imgs/Logo.webp"
               width="300px"
               height="300px"
               id="logofooter"
             >
-            </v-img>
           </v-col>
           <v-col id="contactos">
             <h2>Contactos</h2>
@@ -253,7 +215,6 @@ export default {
     handleWindowResize() {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
-      console.log(this.width, this.height);
     },
     updateStores() {
       userStore().updateLocalStorage();
@@ -272,7 +233,7 @@ export default {
 
 <style scoped>
 .landingpage {
-  background-image: url("src/assets/imgs/background-landing.png");
+  background-image: url("../assets/imgs/background-landing.png");
   background-size: cover;
   height: 4490px;
 }
@@ -374,7 +335,7 @@ p {
   font-style: Bold;
 }
 #footer {
-  background-image: url("src/assets/imgs/footer.svg");
+  background-image: url("../assets/imgs/footer.svg");
   background-size: cover;
   height: 400px;
   position: relative;
