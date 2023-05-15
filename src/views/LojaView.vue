@@ -86,7 +86,6 @@ export default {
   created() {
     this.items = this.store.getItens;
     this.user = this.userStore.getLoggedInUser;
-    console.log(this.items);
   },
 };
 </script>
