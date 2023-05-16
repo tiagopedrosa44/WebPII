@@ -55,7 +55,7 @@ export default {
       btnRegistarDisable: true,
       ecopontosMap: localStorage.getItem("ecopontosMap"),
       snackbar: false,
-      snackbarMessage: "Ecoponto adicionado!"
+      snackbarMessage: "Ecoponto adicionado com sucesso! A voltar à página inicial..."
     };
   },
   methods: {
