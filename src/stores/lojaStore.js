@@ -38,4 +38,9 @@ export const lojaStore = defineStore("loja", {
       return state.itens;
     },
   },
+  actions: {
+    deleteItem(id) {
+      this.itens = this.itens.filter((item) => item.idItem !== id);
+    }
+  }
 });

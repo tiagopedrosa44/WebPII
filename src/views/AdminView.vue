@@ -62,7 +62,7 @@
           <td>
             <v-btn color="success" @click="editarItem(item.idItem)" v-if="editar == item.idItem">Guardar</v-btn>
             <v-btn color="primary" @click="editarItem(item.idItem)" :id="'botao' + item.idItem" v-else>Editar</v-btn>
-            <v-btn color="error" @click="store.removerItem(item.idItem)">Remover</v-btn>
+            <v-btn color="error" @click="removerItem(item.idItem)">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -152,6 +152,10 @@ export default {
       }
     },
 
+    removerItem(id) {
+      this.lojaStore.deleteItem(id)
+      this.itensLoja = this.lojaStore.getItens
+    }
   },
 };
 </script>
