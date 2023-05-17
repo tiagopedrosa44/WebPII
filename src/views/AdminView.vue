@@ -141,6 +141,7 @@ export default {
 
         linhaPreco.innerHTML = `<input type="number" style="width:50%" value="${precoAtual}">`;
         linhaStock.innerHTML = `<input type="number" style="width:50%" value="${stockAtual}">`;
+
       } else {
         this.editar = null;
         const novoPreco = linhaPreco.querySelector("input").value;
