@@ -38,6 +38,35 @@
         </tr>
       </tbody>
     </v-table>
+
+    <h1>Itens da loja</h1>
+    <v-divider></v-divider>
+    <br>
+    <br>
+    <v-table fixed-header height="300px" style="width: 80%;">
+      <thead>
+        <tr>
+          <th class="text-left">Id</th>
+          <th class="text-left">Nome</th>
+          <th class="text-left">Preço</th>
+          <th class="text-left">Stock</th>
+          <th class="text-left">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in itensLoja">
+          <td>{{ item.idItem }}</td>
+          <td>{{ item.nome }}</td>
+          <td :id="'preco' + item.idItem">{{ item.preço }}</td>
+          <td :id="'stock' + item.idItem">{{ item.stock }}</td>
+          <td>
+            <v-btn color="success" @click="editarItem(item.idItem)" v-if="editar == item.idItem">Guardar</v-btn>
+            <v-btn color="primary" @click="editarItem(item.idItem)" :id="'botao' + item.idItem" v-else>Editar</v-btn>
+            <v-btn color="error" @click="store.removerItem(item.idItem)">Remover</v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
   </div>
   <div class="divs">
     <h1>Utilizações por aprovar</h1>
@@ -61,16 +90,20 @@
 <script>
 import { userStore } from "../stores/userStore.js";
 import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import { lojaStore } from "../stores/lojaStore.js";
 export default {
   data() {
     return {
       userStore: userStore(),
       utilizacaoStore: utilizacaoStore(),
+      lojaStore: lojaStore(),
+      itensLoja: [],
+      editar: null,
     };
   },
   created() {
     this.utilizacoes = this.utilizacaoStore.getUtilizacoesPorAprovar;
-    console.log(this.utilizacoes);
+    this.itensLoja = this.lojaStore.getItens;
   },
   computed: {
     utilizacoes() {
@@ -94,7 +127,30 @@ export default {
       let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
       utilizacao.rejeitado = true
       this.utilizacaoStore.updateLocalStorage()
-    }
+    },
+
+    editarItem(id) {
+      const linhaPreco = document.getElementById("preco" + id);
+      const linhaStock = document.getElementById("stock" + id);
+
+      if (this.editar === null) {
+        this.editar = id;
+
+        const precoAtual = linhaPreco.textContent;
+        const stockAtual = linhaStock.textContent;
+
+        linhaPreco.innerHTML = `<input type="number" style="width:50%" value="${precoAtual}">`;
+        linhaStock.innerHTML = `<input type="number" style="width:50%" value="${stockAtual}">`;
+      } else {
+        this.editar = null;
+        const novoPreco = linhaPreco.querySelector("input").value;
+        const novoStock = linhaStock.querySelector("input").value;
+
+        linhaPreco.textContent = novoPreco;
+        linhaStock.textContent = novoStock;
+      }
+    },
+
   },
 };
 </script>
