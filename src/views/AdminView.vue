@@ -61,8 +61,10 @@
           <td :id="'stock' + item.idItem">{{ item.stock }}</td>
           <td>
             <v-btn color="success" @click="editarItem(item.idItem)" v-if="editar == item.idItem">Guardar</v-btn>
-            <v-btn color="primary" @click="editarItem(item.idItem)" :id="'botao' + item.idItem" v-else>Editar</v-btn>
-            <v-btn color="error" @click="removerItem(item.idItem)">Remover</v-btn>
+            <v-btn color="primary" @click="editarItem(item.idItem)" :id="'botao' + item.idItem" v-else
+              :disabled="editar != null && editar != item.idItem">Editar</v-btn>
+            <v-btn color="error" @click="removerItem(item.idItem)" v-if="editar == item.idItem">Cancelar</v-btn>
+            <v-btn color="error" @click="removerItem(item.idItem)" v-else :disabled="editar != null">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -99,6 +101,8 @@ export default {
       lojaStore: lojaStore(),
       itensLoja: [],
       editar: null,
+      precoOriginal: null,
+      stockOriginal: null,
     };
   },
   created() {
@@ -131,9 +135,11 @@ export default {
 
     editarItem(id) {
       const linhaPreco = document.getElementById("preco" + id);
+      this.precoOriginal = linhaPreco.textContent
       const linhaStock = document.getElementById("stock" + id);
+      this.stockOriginal = linhaStock.textContent
 
-      if (this.editar === null) {
+      if (this.editar == null) {
         this.editar = id;
 
         const precoAtual = linhaPreco.textContent;
@@ -153,8 +159,19 @@ export default {
     },
 
     removerItem(id) {
-      this.lojaStore.deleteItem(id)
-      this.itensLoja = this.lojaStore.getItens
+      if (this.editar != null) {
+        const linhaPreco = document.getElementById("preco" + id);
+        const linhaStock = document.getElementById("stock" + id);
+
+        linhaPreco.textContent = this.precoOriginal
+        linhaStock.textContent = this.stockOriginal
+        
+        this.editar = null;
+      }
+      else {
+        this.lojaStore.deleteItem(id)
+        this.itensLoja = this.lojaStore.getItens
+      }
     }
   },
 };
