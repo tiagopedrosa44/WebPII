@@ -1,45 +1,46 @@
 import { defineStore } from "pinia";
 import { router } from "../router";
+import { AuthService } from "../services/auth.service";
 
 export const userStore = defineStore("userStore", {
   state: () => ({
     users: localStorage.users
       ? JSON.parse(localStorage.users)
       : [
-        {
-          id: 0,
-          tipo: "admin",
-          nome: "Admin",
-          email: "admin@gmail.com",
-          password: "Esmad_2223",
-          pontos: 1000,
-          nivel: 1,
-          moedas: 0,
-          utilizacoes: 0,
-          ecopontosRegistados: 0,
-          biografia: "",
-          badges: [],
-          referral: "",
-          avatar: "../assets/imgs/avatar.png",
-        },
-        {
-          id: 1,
-          tipo: "user",
-          nome: "User",
-          email: "user@gmail.com",
-          password: "Esmad_2223",
-          pontos: 2500,
-          nivel: 2,
-          moedas: 200000,
-          utilizacoes: 5,
-          ecopontosRegistados: 0,
-          biografia:
-            "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
-          badges: [],
-          referral: "",
-          avatar: "../assets/imgs/avatar.png",
-        },
-      ],
+          {
+            id: 0,
+            tipo: "admin",
+            nome: "Admin",
+            email: "admin@gmail.com",
+            password: "Esmad_2223",
+            pontos: 1000,
+            nivel: 1,
+            moedas: 0,
+            utilizacoes: 0,
+            ecopontosRegistados: 0,
+            biografia: "",
+            badges: [],
+            referral: "",
+            avatar: "../assets/imgs/avatar.png",
+          },
+          {
+            id: 1,
+            tipo: "user",
+            nome: "User",
+            email: "user@gmail.com",
+            password: "Esmad_2223",
+            pontos: 2500,
+            nivel: 2,
+            moedas: 200000,
+            utilizacoes: 5,
+            ecopontosRegistados: 0,
+            biografia:
+              "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
+            badges: [],
+            referral: "",
+            avatar: "../assets/imgs/avatar.png",
+          },
+        ],
 
     logado: [
       {
@@ -47,6 +48,8 @@ export const userStore = defineStore("userStore", {
         nome: "",
       },
     ],
+    loggedUser: null,
+    loggedIn: false,
   }),
 
   getters: {
@@ -64,10 +67,23 @@ export const userStore = defineStore("userStore", {
     },
     getSortedUsersByUtilizacoes: (state) => {
       return state.users.sort((a, b) => b.utilizacoes - a.utilizacoes);
-    }
+    },
   },
 
   actions: {
+    async login(user) {
+      const response = await AuthService.login(user);
+      if (response.accessToken) {
+        localStorage.setItem("user", JSON.stringify(response));
+        this.loggedIn = true;
+        router.push("/home");
+      }
+    },
+    logout() {
+      AuthService.logout();
+      this.loggedIn = false;
+      router.push("/");
+    },
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));
     },
@@ -83,7 +99,7 @@ export const userStore = defineStore("userStore", {
       localStorage.setItem("users", JSON.stringify(this.users));
     },
 
-    login(username, password) {
+    /* login(username, password) {
       const inputUsername = document.querySelector("#username");
       const inputPassword = document.querySelector("#password");
 
@@ -108,7 +124,7 @@ export const userStore = defineStore("userStore", {
         document.querySelector("#username").style.border = "3px solid red";
         inputUsername.addEventListener("click", resetBorder);
       }
-    },
+    }, */
     generateReferralCode() {
       let referralCode = "";
       const characters =
@@ -129,7 +145,7 @@ export const userStore = defineStore("userStore", {
       }
     },
 
-    registar(username, email, password, password2, referralCode) {
+    /* registar(username, email, password, password2, referralCode) {
       if (this.users.find((user) => user.nome == username)) {
         throw Error("Utilizador já existe");
       } else {
@@ -206,14 +222,14 @@ export const userStore = defineStore("userStore", {
           }
         }
       }
-    },
+    }, */
 
-    logout() {
+    /* logout() {
       this.logado = { bool: false, nome: "" };
       localStorage.setItem("userLogado", "");
       localStorage.setItem("logado", false);
       router.push("/");
-    },
+    }, */
     deleteUser(id) {
       const index = this.users.findIndex((user) => user.id === id);
       this.users.splice(index, 1);
@@ -242,7 +258,7 @@ export const userStore = defineStore("userStore", {
       let user = this.users.find((user) => user.id == idUser);
       user.utilizacoes += 1;
       this.updateLocalStorage();
-      this.verificarMedalha(user)
+      this.verificarMedalha(user);
     },
     verificarMedalha(user) {
       if (user.utilizacoes == 10) {
@@ -254,7 +270,7 @@ export const userStore = defineStore("userStore", {
       if (user.utilizacoes == 100) {
         user.badges.push("Utilizador Veterano");
       }
-    }
+    },
   },
 
   //save users to local storage

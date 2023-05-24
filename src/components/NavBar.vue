@@ -13,7 +13,7 @@
 
     <!-- Links da direita -->
     <v-btn @click="$router.push('perfil')" icon="fa-regular fa-user"></v-btn>
-    <v-btn @click="store.logout" icon="fa-solid fa-arrow-right-from-bracket"></v-btn>
+    <v-btn @click="logout" icon="fa-solid fa-arrow-right-from-bracket"></v-btn>
   </v-toolbar>
   <v-toolbar rounded color="#114B5F" id="nav2" v-bind:class="{ expanded: expandNav }" v-else-if="width < 900">
     <v-btn @click="expandNav = !expandNav">
@@ -69,11 +69,13 @@ export default {
   },
   methods: {
     logout() {
-      this.store.logout();
-      this.user = this.store.getLoggedInUser;
+      try {
+        this.store.logout();
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
-  ,
+  },
 };
 </script>
 <style>

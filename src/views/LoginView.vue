@@ -7,7 +7,7 @@
           <br />
           <input type="text" id="username" required placeholder="Utilizador" v-model="username" /><br />
           <input type="password" id="password" required placeholder="Password" v-model="password" /><br /><br />
-          <v-btn text @click="this.store.login(username, password)" id="botaoLogin">Login</v-btn><br /><br />
+          <v-btn text @click="login" id="botaoLogin">Login</v-btn><br /><br />
           <a @click="$router.push('/registar')">Ainda não tem conta? Registe-se!</a>
         </div>
       </div>
@@ -29,6 +29,18 @@ export default {
       password: "",
       store: userStore(),
     };
+  },
+  methods: {
+    async login() {
+      try{
+        await this.store.login({
+          username: this.username,
+          password: this.password,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   mounted() {
     window.scrollTo(0, 0);
