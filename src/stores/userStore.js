@@ -71,6 +71,13 @@ export const userStore = defineStore("userStore", {
   },
 
   actions: {
+    async register(user) {
+      const response = await AuthService.register(user);
+      if (response) {
+        router.push("/login");
+      }
+    },
+
     async login(user) {
       const response = await AuthService.login(user);
       if (response.accessToken) {

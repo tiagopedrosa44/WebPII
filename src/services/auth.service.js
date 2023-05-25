@@ -1,6 +1,37 @@
 import API_URL from "./config";
 
 export const AuthService = {
+
+  async register(user) {
+    console.log("referralCode:", user.referralCode);
+    const response = await fetch(`${API_URL}/utilizadores/registo`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify({
+        nome: user.username,
+        password: user.password,
+        confirmPassword: user.confirmPassword,
+        email: user.email,
+        referredBy: user.referredBy,
+        
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if(data){
+        return data;
+      } else {
+        throw Error(data.message);
+      }
+    } else {
+      const data = await response.json();
+      throw Error(data.message);
+    }
+  },
+
+
   async login(user) {
     const response = await fetch(`${API_URL}/utilizadores/login`, {
       method: "POST",

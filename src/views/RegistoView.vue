@@ -39,15 +39,7 @@
             /><br /><br />
             <v-btn
               text
-              @click="
-                this.store.registar(
-                  username,
-                  email,
-                  password,
-                  password2,
-                  referralCode
-                )
-              "
+              @click="registo"
               id="botaoRegisto"
               >Registar</v-btn
             ><br /><br />
@@ -71,6 +63,24 @@ export default {
       referralCode: "",
       store: userStore(),
     };
+  },
+  methods: {
+    async registo() {
+      try{
+        console.log("referralCode:", this.referralCode);
+        await this.store.register({
+          username :this.username,
+          email: this.email,
+          password: this.password,
+          confirmPassword : this.password2,
+          referredBy: this.referredBy
+        }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
   },
 
   mounted() {
