@@ -5,10 +5,24 @@
         <div class="left-content-text">
           <h1>Login</h1>
           <br />
-          <input type="text" id="username" required placeholder="Utilizador" v-model="username" /><br />
-          <input type="password" id="password" required placeholder="Password" v-model="password" /><br /><br />
+          <input
+            type="text"
+            id="username"
+            required
+            placeholder="Utilizador"
+            v-model="username"
+          /><br />
+          <input
+            type="password"
+            id="password"
+            required
+            placeholder="Password"
+            v-model="password"
+          /><br /><br />
           <v-btn text @click="login" id="botaoLogin">Login</v-btn><br /><br />
-          <a @click="$router.push('/registar')">Ainda não tem conta? Registe-se!</a>
+          <a @click="$router.push('/registar')"
+            >Ainda não tem conta? Registe-se!</a
+          >
         </div>
       </div>
       <div class="right">
@@ -17,6 +31,12 @@
         </div>
       </div>
     </div>
+    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
+      {{ snackbarMessage }}
+    </v-snackbar>
+    <v-snackbar v-model="snackbar2" :timeout="2000" color="success">
+      {{ snackbarMessage2 }}
+    </v-snackbar>
   </div>
 </template>
 
@@ -28,24 +48,30 @@ export default {
       username: "",
       password: "",
       store: userStore(),
+      snackbar: false,
+      snackbarMessage: "",
+      snackbar2: false,
+      snackbarMessage2: "",
     };
   },
   methods: {
     async login() {
-      try{
+      try {
         await this.store.login({
           username: this.username,
           password: this.password,
         });
+        this.snackbar2 = true;
+        this.snackbar2Message = "Login efetuado com sucesso"
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.snackbarMessage = error;
       }
     },
   },
   mounted() {
     window.scrollTo(0, 0);
   },
-
 };
 </script>
 

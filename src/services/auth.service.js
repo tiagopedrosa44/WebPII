@@ -5,7 +5,7 @@ export const AuthService = {
     const response = await fetch(`${API_URL}/utilizadores/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json;charset=utf-8"
       },
       body: JSON.stringify({
         nome: user.username,
@@ -17,9 +17,12 @@ export const AuthService = {
       if (data.accessToken) {
         localStorage.setItem("user", JSON.stringify(data));
         return data;
+      } else {
+        throw Error(data.message);
       }
     } else {
-      throw Error(handleResponses(response.status));
+      const data = await response.json();
+      throw Error(data.message);
     }
   },
   async logout() {
@@ -27,21 +30,3 @@ export const AuthService = {
   },
 };
 
-function handleResponses(code) {
-  let message = "";
-  switch (code) {
-    case 400:
-      message = "Username already exists.";
-      break;
-    case 401:
-      message = "Wrong credentials";
-      break;
-    case 404:
-      message = "User not found";
-      break;
-    default:
-      message = "Unkown message";
-      break;
-  }
-  return message;
-}
