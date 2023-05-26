@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
+import { AuthService } from "../services/auth.service";
 
 export const ecopontoStore = defineStore("ecoponto", {
   state: () => ({
     ecopontos: [
       {
         id: 0,
-        morada:"R. Dom Sancho I",
+        morada: "R. Dom Sancho I",
         coordenadas: {
           lat: 41.366709,
           lng: -8.738114,
@@ -18,7 +19,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 1,
-        morada:"R. das Figueiras",
+        morada: "R. das Figueiras",
         coordenadas: {
           lat: 41.346347,
           lng: -8.732945,
@@ -31,7 +32,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 2,
-        morada:'Azurara, Porto',
+        morada: 'Azurara, Porto',
         coordenadas: {
           lat: 41.349786,
           lng: -8.734727,
@@ -44,7 +45,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 3,
-        morada:'R. Nossa Sra. da Conceição',
+        morada: 'R. Nossa Sra. da Conceição',
         coordenadas: {
           lat: 41.345106,
           lng: -8.735819,
@@ -57,7 +58,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 4,
-        morada:'R. Padre Serafim das Neves',
+        morada: 'R. Padre Serafim das Neves',
         coordenadas: {
           lat: 41.343483,
           lng: -8.73501,
@@ -70,7 +71,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 5,
-        morada:'R. Cimo da Vila',
+        morada: 'R. Cimo da Vila',
         coordenadas: {
           lat: 41.343439,
           lng: -8.732748,
@@ -83,7 +84,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 6,
-        morada:'R. Eng. Eça Guimarães',
+        morada: 'R. Eng. Eça Guimarães',
         coordenadas: {
           lat: 41.364282,
           lng: -8.742483,
@@ -96,7 +97,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 7,
-        morada:'R. Casalinho',
+        morada: 'R. Casalinho',
         coordenadas: {
           lat: 41.356952,
           lng: -8.732851,
@@ -109,7 +110,7 @@ export const ecopontoStore = defineStore("ecoponto", {
       },
       {
         id: 8,
-        morada:'R. João de Deus',
+        morada: 'R. João de Deus',
         coordenadas: {
           lat: 41.357018,
           lng: -8.732181,
@@ -123,17 +124,32 @@ export const ecopontoStore = defineStore("ecoponto", {
     ],
   }),
   getters: {
-    getEcopontos: (state) => {
+    /* getEcopontos: (state) => {
       return state.ecopontos;
-    },
+    }, */
     getEcopontoById: (state) => (id) => {
       return state.ecopontos.find((ecoponto) => ecoponto.id == id);
     }
   },
   actions: {
+    async getEcopontos(token) {
+      const response = await AuthService.getEcopontos(token)
+      if (response.ok) {
+        const data = await response.json();
+        if (data) {
+          return data;
+        } else {
+          throw Error(data.message);
+        }
+      } else {
+        const data = await response.json();
+        throw Error(data.message);
+      }
+    },
+
     addEcoponto(ecoponto) {
       //this.ecopontos.push(ecoponto);
       console.log(ecoponto);
     }
-  }
+  },
 });

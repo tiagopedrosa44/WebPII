@@ -15,12 +15,12 @@ export const AuthService = {
         confirmPassword: user.confirmPassword,
         email: user.email,
         referredBy: user.referredBy,
-        
+
       }),
     });
     if (response.ok) {
       const data = await response.json();
-      if(data){
+      if (data) {
         return data;
       } else {
         throw Error(data.message);
@@ -59,5 +59,26 @@ export const AuthService = {
   async logout() {
     localStorage.removeItem("user");
   },
+
+  async getEcopontos(token) {
+    const response = await fetch(`${API_URL}/ecopontos`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if (data) {
+        return data;
+      } else {
+        throw Error(data.message);
+      }
+    } else {
+      const data = await response.json();
+      throw Error(data.message);
+    }
+  }
 };
 

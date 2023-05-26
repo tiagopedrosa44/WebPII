@@ -19,21 +19,12 @@
           <div class="custom-scrollbar" id="ecopontos" @scroll="showEcopontos">
             <br />
             <br />
-            <div
-              v-for="(ecoponto, index) in store.getEcopontos"
-              :key="ecoponto.id"
-              class="ecoponto"
-              v-if="index < 4"
-              @click="mostrarEcoponto(index)"
-            >
+            <div v-for="(ecoponto, index) in getEcopontos()" :key="ecoponto.id" class="ecoponto" v-if="index < 4"
+              @click="mostrarEcoponto(index)">
               <v-container>
                 <v-row>
                   <v-col cols="2" id="ecoimg">
-                    <v-img
-                      src="src/assets/imgs/ecoponto.webp"
-                      width="40px"
-                      height="40px"
-                    ></v-img>
+                    <v-img src="src/assets/imgs/ecoponto.webp" width="40px" height="40px"></v-img>
                   </v-col>
                   <v-col>
                     <p id="morada">{{ ecoponto.morada }}</p>
@@ -72,6 +63,7 @@ export default {
     return {
       store: ecopontoStore(),
       index: 0,
+      ecopontos: []
     };
   },
   methods: {
@@ -81,13 +73,22 @@ export default {
     mostrarEcoponto(index) {
       this.$router.push("/ecoponto/" + index);
     },
+    async getEcopontos() {
+      const token=JSON.parse(localStorage.getItem("user")).accessToken
+      console.log(token);
+      try {
+        await this.store.getEcopontos({
+          token: token
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
-  
-};
+}
 </script>
 
 <style scoped>
-
 #home {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
   min-height: 1080px;
@@ -103,7 +104,7 @@ export default {
   max-height: 550px;
   overflow: hidden;
   position: relative;
-  left:20px
+  left: 20px
 }
 
 #ecopontos {
@@ -111,10 +112,12 @@ export default {
   overflow: scroll;
   cursor: pointer;
 }
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 12px;
   background-color: transparent;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #F0CD6E;
@@ -141,7 +144,7 @@ export default {
   top: 10px;
 }
 
-#adicionarBtn{
+#adicionarBtn {
   position: relative;
   left: 20px;
   top: 20px;
@@ -151,6 +154,7 @@ export default {
 }
 
 @media (max-width: 700px) {
+
   .col-ecopontos,
   .col-mapa {
     max-width: 100%;
