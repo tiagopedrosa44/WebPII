@@ -12,8 +12,8 @@
     </v-toolbar-title>
 
     <!-- Links da direita -->
-    <v-btn @click="$router.push('perfil')" icon="fa-regular fa-user"></v-btn>
-    <v-btn @click="logout" icon="fa-solid fa-arrow-right-from-bracket"></v-btn>
+    <v-btn @click="$router.push('perfil')" icon="fa-regular fa-user" id="perfil"></v-btn>
+    <v-btn @click="logout" icon="fa-solid fa-arrow-right-from-bracket" id="logout"></v-btn>
   </v-toolbar>
   <v-toolbar rounded color="#114B5F" id="nav2" v-bind:class="{ expanded: expandNav }" v-else-if="width < 900">
     <v-btn @click="expandNav = !expandNav">
