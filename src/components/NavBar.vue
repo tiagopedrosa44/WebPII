@@ -1,7 +1,7 @@
 <template>
   <v-toolbar rounded color="#114B5F" id="nav" v-if="width > 900">
     <!-- Links da esquerda -->
-    <v-btn v-for="link in leftLinks" :key="link.text" :to="link.route">
+    <v-btn v-for="link in leftLinks" :key="link.text" :to="link.route" :id="link.id">
       {{ link.text }}
     </v-btn>
     <v-btn v-if="admin" @click="$router.push('admin')">Menu Admin</v-btn>
@@ -29,10 +29,10 @@ export default {
     return {
       store: userStore(),
       leftLinks: [
-        { text: "Home", route: "/home" },
-        { text: "Rankings", route: "/rankings" },
-        { text: "Loja", route: "/loja" },
-        { text: "Faq", route: "/faq" },
+        { text: "Home", route: "/home",id:"home" },
+        { text: "Rankings", route: "/rankings",id:"rankings" },
+        { text: "Loja", route: "/loja",id:"loja" },
+        { text: "Faq", route: "/faq",id:"faq" },
       ],
       width: window.innerWidth,
       height: window.innerHeight,

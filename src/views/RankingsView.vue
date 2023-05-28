@@ -16,8 +16,8 @@
       </v-row>
       <v-row>
         <v-col align="center">
-          <v-btn @click="maisPontos" id="pontos">Mais pontos</v-btn>
-          <v-btn @click="ecopontos" id="ecopontos">Ecopontos usados</v-btn>
+          <v-btn @click="changeTable('maisPontos')" :class="{ 'active': tabela === 'maisPontos' }" id="pontos">Mais pontos</v-btn>
+          <v-btn @click="changeTable('ecopontos')" :class="{ 'active': tabela === 'ecopontos' }" id="ecopontos">Ecopontos usados</v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -31,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(user, index) in store.getSortedUsers">
+              <tr v-for="(user, index) in users">
                 <td>{{ index + 1 }}</td>
                 <td>{{ user.nome }}</td>
                 <td>{{ user.pontos }}</td>
@@ -47,10 +47,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(user, index) in store.getSortedUsersByUtilizacoes">
+              <tr v-for="(user, index) in users">
                 <td>{{ index + 1 }}</td>
                 <td>{{ user.nome }}</td>
-                <td>{{ user.utilizacoes }}</td>
+                <td>{{ user.numUsoEcopontos }}</td>
               </tr>
             </tbody>
           </v-table>
@@ -71,14 +71,41 @@ export default {
     return {
       store: userStore(),
       tabela: "maisPontos",
+      users:[],
+      
     };
   },
+  async mounted() {
+    await this.getLeaderboardPoints();
+  },
   methods: {
-    maisPontos() {
-      this.tabela = "maisPontos";
+    async getLeaderboardPoints(){
+      try{
+        const users = await this.store.getLeaderboardPoints();
+        this.users = users;
+        
+
+      } catch (error){
+        console.log(error);
+      }
     },
-    ecopontos() {
-      this.tabela = "ecopontos";
+    async getLeaderboardEcopontos(){
+      try{
+        const users = await this.store.getLeaderboardEcopontos();
+        this.users = users;
+        
+
+      } catch (error){
+        console.log(error);
+      }
+    },
+    async changeTable(table) {
+      this.tabela = table;
+      if (table === "maisPontos") {
+        await this.getLeaderboardPoints();
+      } else if (table === "ecopontos") {
+        await this.getLeaderboardEcopontos();
+      }
     },
   },
 };

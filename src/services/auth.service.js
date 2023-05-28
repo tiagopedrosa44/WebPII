@@ -60,7 +60,9 @@ export const AuthService = {
     localStorage.removeItem("user");
   },
 
-  async getEcopontos(token) {
+  async getEcopontos() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
     const response = await fetch(`${API_URL}/ecopontos`, {
       method: "GET",
       headers: {

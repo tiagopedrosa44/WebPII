@@ -19,7 +19,7 @@
           <div class="custom-scrollbar" id="ecopontos" @scroll="showEcopontos">
             <br />
             <br />
-            <div v-for="(ecoponto, index) in getEcopontos()" :key="ecoponto.id" class="ecoponto" v-if="index < 4"
+            <div v-for="(ecoponto, index) in ecopontos" :key="ecoponto.id" class="ecoponto" v-if="index < 4"
               @click="mostrarEcoponto(index)">
               <v-container>
                 <v-row>
@@ -66,6 +66,9 @@ export default {
       ecopontos: []
     };
   },
+  async mounted() {
+    await this.getEcopontos();
+  },
   methods: {
     showEcopontos() {
       this.showEcopontos = true;
@@ -74,12 +77,9 @@ export default {
       this.$router.push("/ecoponto/" + index);
     },
     async getEcopontos() {
-      const token=JSON.parse(localStorage.getItem("user")).accessToken
-      console.log(token);
       try {
-        await this.store.getEcopontos({
-          token: token
-        });
+        const ecopontos = await this.store.getEcopontos();
+        this.ecopontos = ecopontos;
       } catch (error) {
         console.log(error);
       }

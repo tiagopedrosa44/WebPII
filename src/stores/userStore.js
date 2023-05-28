@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { router } from "../router";
 import { AuthService } from "../services/auth.service";
+import {leaderboardService} from "../services/leaderboard.service";
 
 export const userStore = defineStore("userStore", {
   state: () => ({
@@ -91,6 +92,25 @@ export const userStore = defineStore("userStore", {
       this.loggedIn = false;
       router.push("/");
     },
+    async getLeaderboardPoints() {
+      try {
+        const response = await leaderboardService.getLeaderboardPoints();
+        return response;
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getLeaderboardEcopontos() {
+      try {
+        const response = await leaderboardService.getLeaderboardEcopontos();
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+
+    },
+
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));
     },

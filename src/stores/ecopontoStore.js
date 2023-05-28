@@ -132,18 +132,12 @@ export const ecopontoStore = defineStore("ecoponto", {
     }
   },
   actions: {
-    async getEcopontos(token) {
-      const response = await AuthService.getEcopontos(token)
-      if (response.ok) {
-        const data = await response.json();
-        if (data) {
-          return data;
-        } else {
-          throw Error(data.message);
-        }
-      } else {
-        const data = await response.json();
-        throw Error(data.message);
+    async getEcopontos() {
+      try{
+        const response = await AuthService.getEcopontos();
+        return response;
+      } catch (error) {
+        console.log(error);
       }
     },
 
