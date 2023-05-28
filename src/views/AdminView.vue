@@ -13,27 +13,32 @@
           <th class="text-left">Tipo</th>
           <th class="text-left">Nome</th>
           <th class="text-left">Email</th>
-          <th class="text-left">Password</th>
           <th class="text-left">Pontos</th>
           <th class="text-left">Nível</th>
           <th class="text-left">Moedas</th>
           <th class="text-left">Utilizações</th>
+          <th class="text-left">Ecopontos registados</th>
+          <th class="text-left">Referral</th>
+          <th class="text-left">ReferredBy</th>
           <th class="text-left">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in userStore.getUsers">
-          <td>{{ user.id }}</td>
+        <tr v-for="user in users">
+          <td>{{ user._id }}</td>
           <td>{{ user.tipo }}</td>
           <td>{{ user.nome }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.password }}</td>
           <td>{{ user.pontos }}</td>
           <td>{{ user.nivel }}</td>
           <td>{{ user.moedas }}</td>
-          <td>{{ user.utilizacoes }}</td>
+          <td>{{ user.numUsoEcopontos }}</td>
+          <td>{{ user.ecopontosRegistados }}</td>
+          <td>{{ user.referral }}</td>
+          <td>{{ user.referredBy }}</td>
+
           <td>
-            <v-btn color="error" @click="store.deleteUser(user.id)">Remover</v-btn>
+            <v-btn color="error" @click="deleteUser(user._id)">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -123,7 +128,8 @@ import { lojaStore } from "../stores/lojaStore.js";
 export default {
   data() {
     return {
-      userStore: userStore(),
+      users:[],
+      store: userStore(),
       utilizacaoStore: utilizacaoStore(),
       lojaStore: lojaStore(),
       itensLoja: [],
@@ -156,7 +162,27 @@ export default {
       return this.utilizacaoStore.getUtilizacoesPorAprovar;
     }
   },
+  async mounted() {
+    await this.getUsersList();
+  },
   methods: {
+    async getUsersList(){
+      try{
+        const users = await this.store.getALlUsers();
+        this.users = users;
+        console.log(this.users);
+      } catch (error){
+        console.log(error);
+      }
+    },
+    async deleteUser(id){
+      try{
+        await this.store.deleteUserById(id);
+        this.users = this.users.filter((user) => user._id !== id);
+      } catch (error){
+        console.log(error);
+      }
+    },
     getUsername(idUser) {
       return this.userStore.getUsers.filter(user => user.id == idUser)[0].nome;
     },

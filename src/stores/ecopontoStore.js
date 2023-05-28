@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { AuthService } from "../services/auth.service";
+import { EcopontosService } from "../services/ecopontos.service";
 
 export const ecopontoStore = defineStore("ecoponto", {
   state: () => ({
@@ -134,7 +134,7 @@ export const ecopontoStore = defineStore("ecoponto", {
   actions: {
     async getEcopontos() {
       try{
-        const response = await AuthService.getEcopontos();
+        const response = await EcopontosService.getEcopontos();
         return response;
       } catch (error) {
         console.log(error);

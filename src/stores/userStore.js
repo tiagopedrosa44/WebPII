@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { router } from "../router";
 import { AuthService } from "../services/auth.service";
+import { UserService } from "../services/user.service";
 import {leaderboardService} from "../services/leaderboard.service";
 
 export const userStore = defineStore("userStore", {
@@ -109,6 +110,23 @@ export const userStore = defineStore("userStore", {
         console.log(error);
       }
 
+    },
+    async getALlUsers() {
+      try {
+        const response = await UserService.getALlUsers();
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async deleteUserById(id) {
+      try {
+        const response = await UserService.deleteUserById(id);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     updateLocalStorage() {
