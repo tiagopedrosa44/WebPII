@@ -296,7 +296,9 @@ export const userStore = defineStore("userStore", {
       this.updateLocalStorage();
     },
     calculateProgress(currentPoints) {
-      return (currentPoints % 1000) / 10;
+      console.log(currentPoints);
+      return parseInt((currentPoints % 1000) / 10);
+
     },
     addPontos(idUser, pontos) {
       let user = this.users.find((user) => user.id == idUser);

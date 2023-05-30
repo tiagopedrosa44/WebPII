@@ -256,8 +256,8 @@ export default {
     async getUser(id) {
       try {
         const users = await this.store.getUserByID(id);
-        this.users = users
-        console.log(this.users);
+        this.user = users
+        console.log(this.user);
       } catch (error) {
         console.log(error);
       }
@@ -266,6 +266,7 @@ export default {
   async mounted() {
     this.getUserId();
     await this.getUser(this.userId)
+    this.progresso = this.store.calculateProgress(this.user.pontos);
   },
 
 
@@ -276,10 +277,8 @@ export default {
     } */
   },
   created() {
-   /*  this.user = this.store.getLoggedInUser;
-    this.store.updateLevel(this.user.id, this.user.pontos);
-    this.progresso = this.store.calculateProgress(this.user.pontos);
-    this.referral = this.user.referral; */
+     
+    
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
