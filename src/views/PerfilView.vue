@@ -34,7 +34,7 @@
             </p>
           </v-col>
           <v-col cols="2" align="center">
-            <p id="info">Ecopontos Utilizados <br />{{ user.utilizacoes }}</p>
+            <p id="info">Ecopontos Utilizados <br />{{ user.numUsoEcopontos }}</p>
           </v-col>
           <v-col cols="2" align="center">
             <p id="info">Moedas <br />{{ user.moedas }}</p>
@@ -101,7 +101,7 @@
           <v-row>
             <v-col align="center">
               <p id="infoSmaller">
-                Ecopontos Utilizados <br />{{ user.utilizacoes }}
+                Ecopontos Utilizados <br />{{ user.numUsoEcopontos }}
               </p>
             </v-col>
           </v-row>
@@ -221,6 +221,7 @@
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
 import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import  jwtDecode  from "jwt-decode";
 export default {
   components: {
     NavBar,
@@ -238,6 +239,32 @@ export default {
       referral: "",
     };
   },
+
+// Recolher as informações e guarda as informações no array do user
+  methods: {
+    getUserId(){
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = user.accessToken;
+
+      if(token) {
+        const decoded = jwtDecode(token);
+        return decoded._id;
+      }
+    },
+    async getUser(id) {
+      try {
+        const users = await this.store.getUserByID(id);
+        this.users = users
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  },
+  async mounted() {
+    await this.getUser(getUserId)
+  },
+
+
   computed: {
     utilizacoesFiltradas() {
       const idUser = this.user.id;

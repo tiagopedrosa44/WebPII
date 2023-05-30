@@ -129,6 +129,15 @@ export const userStore = defineStore("userStore", {
       }
     },
 
+    async getUserByID(id) {
+      try {
+        const response = await UserService.getUserByID(id);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));
     },
