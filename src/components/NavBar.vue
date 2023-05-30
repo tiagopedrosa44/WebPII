@@ -96,7 +96,6 @@ export default {
       const token = user.accessToken;
       if (token) {
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken);
         return decodedToken.tipo === "admin";
       }
       return false;

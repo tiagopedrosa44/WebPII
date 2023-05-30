@@ -231,6 +231,7 @@ export default {
       store: userStore(),
       utilizacaoStore: utilizacaoStore(),
       user: [],
+      userId:"",
       width: window.innerWidth,
       height: window.innerHeight,
       length: 3,
@@ -248,40 +249,43 @@ export default {
 
       if(token) {
         const decoded = jwtDecode(token);
-        return decoded._id;
+        this.userId = decoded.id;
+        console.log(this.userId)
       }
     },
     async getUser(id) {
       try {
         const users = await this.store.getUserByID(id);
         this.users = users
+        console.log(this.users);
       } catch (error) {
         console.log(error);
       }
     }
   },
   async mounted() {
-    await this.getUser(getUserId)
+    this.getUserId();
+    await this.getUser(this.userId)
   },
 
 
   computed: {
-    utilizacoesFiltradas() {
+    /* utilizacoesFiltradas() {
       const idUser = this.user.id;
       return  this.utilizacaoStore.getUtilizacoes.filter(utilizacao => utilizacao.idUser === idUser)
-    }
+    } */
   },
   created() {
-    this.user = this.store.getLoggedInUser;
+   /*  this.user = this.store.getLoggedInUser;
     this.store.updateLevel(this.user.id, this.user.pontos);
     this.progresso = this.store.calculateProgress(this.user.pontos);
-    this.referral = this.user.referral;
+    this.referral = this.user.referral; */
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
       console.log(this.width, this.height);
     });
-    console.log(this.user);
+    //console.log(this.user);
   },
 };
 </script>
