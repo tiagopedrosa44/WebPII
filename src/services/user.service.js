@@ -1,5 +1,6 @@
 import API_URL from "./config.js";
 
+
 export const UserService = {
   async getALlUsers() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -18,6 +19,7 @@ export const UserService = {
       throw Error(response.message);
     }
   },
+
   async deleteUserById(id) {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user.accessToken;
@@ -42,7 +44,7 @@ export const UserService = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     if (response.ok) {
