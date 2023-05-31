@@ -11,7 +11,7 @@
           <h1 id="tituloLoja">Loja</h1>
         </v-col>
         <v-col>
-          <p id="moedas">{{ user.moedas }}</p>
+          <p id="moedas">{{ moedas }}</p>
           <v-img
             id="moedaIcon"
             src="src/assets/imgs/imagensLoja/moedaIcon.webp"
@@ -33,7 +33,7 @@
             >
             </v-img>
             <v-card-text id="titulo">{{ item.nome }}</v-card-text>
-            <v-card-text id="pontos">{{ item.preço }}</v-card-text>
+            <v-card-text id="pontos">{{ item.preco }}</v-card-text>
             <v-card-actions>
               <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar" @click="comprar(item)"></v-btn>
             </v-card-actions>
@@ -54,6 +54,8 @@
 import NavBar from "@/components/NavBar.vue";
 import { lojaStore } from "../stores/lojaStore.js";
 import { userStore } from "../stores/userStore.js";
+import jwtDecode from "jwt-decode";
+
 export default {
   components: {
     NavBar,
@@ -63,7 +65,8 @@ export default {
       store: lojaStore(),
       userStore: userStore(),
       items: [],
-      user: [],
+      moedas: 0,
+      userId: "",
       snackbar: false,
       snackbarMessage: "Não tem moedas suficientes para comprar este item",
       snackbar2: false,
@@ -71,6 +74,31 @@ export default {
     };
   },
   methods: {
+    getUserId(){
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = user.accessToken;
+
+      if(token) {
+        const decoded = jwtDecode(token);
+        this.userId = decoded.id;
+      }
+    },
+    async getUser(id) {
+      try {
+        const users = await this.userStore.getUserByID(id);
+        this.moedas = users.moedas
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getItems() {
+      try {
+        const items = await this.store.getItemsUser();
+        this.items = items;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     comprar(item) {
       if(this.user.moedas >= item.preço){
         this.user.moedas -= item.preço;
@@ -82,10 +110,10 @@ export default {
       }
     }
   },
-
-  created() {
-    this.items = this.store.getItens;
-    this.user = this.userStore.getLoggedInUser;
+  async mounted() {
+    this.getUserId();
+    await this.getUser(this.userId);
+    await this.getItems();
   },
 };
 </script>

@@ -250,7 +250,6 @@ export default {
       if(token) {
         const decoded = jwtDecode(token);
         this.userId = decoded.id;
-        console.log(this.userId)
       }
     },
     async getUser(id) {

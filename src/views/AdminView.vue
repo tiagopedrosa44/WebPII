@@ -60,16 +60,16 @@
       </thead>
       <tbody>
         <tr v-for="item in itensLoja">
-          <td>{{ item.idItem }}</td>
+          <td>{{ item._id }}</td>
           <td>{{ item.nome }}</td>
-          <td :id="'preco' + item.idItem">{{ item.preço }}</td>
-          <td :id="'stock' + item.idItem">{{ item.stock }}</td>
+          <td :id="'stock' + item._id">{{ item.stock }}</td>
+          <td :id="'preco' + item._id">{{ item.preco }}</td>
           <td>
-            <v-btn color="success" @click="editarItem(item.idItem)" v-if="editar == item.idItem">Guardar</v-btn>
-            <v-btn color="primary" @click="editarItem(item.idItem)" :id="'botao' + item.idItem" v-else
-              :disabled="editar != null && editar != item.idItem">Editar</v-btn>
-            <v-btn color="error" @click="removerItem(item.idItem)" v-if="editar == item.idItem">Cancelar</v-btn>
-            <v-btn color="error" @click="removerItem(item.idItem)" v-else :disabled="editar != null">Remover</v-btn>
+            <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
+            <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
+              :disabled="editar != null && editar != item._id">Editar</v-btn>
+            <v-btn color="error" @click="removerItem(item._id)" v-if="editar == item._id">Cancelar</v-btn>
+            <v-btn color="error" @click="removerItem(item._id)" v-else :disabled="editar != null">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -155,7 +155,6 @@ export default {
   },
   created() {
     this.utilizacoes = this.utilizacaoStore.getUtilizacoesPorAprovar;
-    this.itensLoja = this.lojaStore.getItens;
   },
   computed: {
     utilizacoes() {
@@ -164,6 +163,7 @@ export default {
   },
   async mounted() {
     await this.getUsersList();
+    await this.getAllItems();
   },
   methods: {
     async getUsersList(){
@@ -179,6 +179,15 @@ export default {
       try{
         await this.store.deleteUserById(id);
         this.users = this.users.filter((user) => user._id !== id);
+      } catch (error){
+        console.log(error);
+      }
+    },
+    async getAllItems(){
+      try{
+        const items = await this.lojaStore.getAllItems();
+        this.itensLoja = items;
+        console.log(this.itensLoja);
       } catch (error){
         console.log(error);
       }
