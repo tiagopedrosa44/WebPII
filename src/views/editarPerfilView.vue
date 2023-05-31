@@ -13,13 +13,30 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="6" id="textfields">
-            <v-text-field label="Biografia" v-model="biografia" multi-line></v-text-field>
-            <v-text-field label="Nova Senha" v-model="novaSenha" type="password"></v-text-field>
-            <v-text-field label="Confirmar nova senha" v-model="confirmarSenha" type="password"></v-text-field>
-            <v-btn color="primary" @click="store.editUser(idUser, biografia, novaSenha)"> Alterar dados </v-btn>
+            <v-text-field
+              label="Biografia"
+              v-model="biografia"
+              multi-line
+            ></v-text-field>
+            <v-text-field
+              label="Nova Senha"
+              v-model="novaSenha"
+              type="password"
+            ></v-text-field>
+            <v-text-field
+              label="Confirmar nova senha"
+              v-model="confirmarSenha"
+              type="password"
+            ></v-text-field>
+            <v-btn
+              color="primary"
+              @click="updateUser(userId, biografia, password)"
+            >
+              Alterar dados
+            </v-btn>
           </v-col>
           <v-col cols="12" md="6">
-            <v-avatar size="120" v-bind:color="color" :src="store.getLoggedInUser.avatar">
+            <v-avatar size="120" v-bind:color="color">
               <template v-slot:placeholder>
                 <v-icon>mdi-camera</v-icon>
               </template>
@@ -38,6 +55,8 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
+import jwtDecode from "jwt-decode";
+
 export default {
   components: {
     NavBar,
@@ -49,14 +68,31 @@ export default {
       novaSenha: "",
       confirmarSenha: "",
       color: "primary",
+      userId: "",
     };
   },
-  computed: {
-    idUser() {
-      return this.store.getLoggedInUser.id;
-    }
-  },
   methods: {
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = user.accessToken;
+
+      if (token) {
+        const decoded = jwtDecode(token);
+        this.userId = decoded.id;
+      }
+    },
+    async updateUser(id) {
+      console.log(this.novaSenha);
+      
+      try {
+        await this.store.editUser(id, {
+          biografia: this.biografia,
+          password: hashednovaSenha,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     alterarImagem() {
       this.$refs.foto.click();
       this.$refs.foto.onchange = (e) => {
@@ -68,7 +104,10 @@ export default {
           console.log(this.filePath);
         };
       };
-    }
+    },
+  },
+  mounted() {
+    this.getUserId();
   },
 };
 </script>

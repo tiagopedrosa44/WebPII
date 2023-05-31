@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { router } from "../router";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
-import {leaderboardService} from "../services/leaderboard.service";
+import { leaderboardService } from "../services/leaderboard.service";
 
 export const userStore = defineStore("userStore", {
   state: () => ({
@@ -97,7 +97,6 @@ export const userStore = defineStore("userStore", {
       try {
         const response = await leaderboardService.getLeaderboardPoints();
         return response;
-        
       } catch (error) {
         console.log(error);
       }
@@ -109,7 +108,6 @@ export const userStore = defineStore("userStore", {
       } catch (error) {
         console.log(error);
       }
-
     },
     async getALlUsers() {
       try {
@@ -133,6 +131,17 @@ export const userStore = defineStore("userStore", {
       try {
         const response = await UserService.getUserByID(id);
         return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async editUser(id, data) {
+      try {
+        const response = await UserService.updateUserById(id, data);
+        if (response) {
+          router.push('/perfil');
+          return response;
+        }
       } catch (error) {
         console.log(error);
       }
@@ -289,16 +298,15 @@ export const userStore = defineStore("userStore", {
       this.users.splice(index, 1);
       this.updateLocalStorage();
     },
-    editUser(idUser, biografia, password) {
+    /* editUser(idUser, biografia, password) {
       let user = this.users.find((user) => user.id == idUser);
       user.biografia = biografia;
       user.password = password;
       this.updateLocalStorage();
-    },
+    }, */
     calculateProgress(currentPoints) {
       console.log(currentPoints);
       return parseInt((currentPoints % 1000) / 10);
-
     },
     addPontos(idUser, pontos) {
       let user = this.users.find((user) => user.id == idUser);
