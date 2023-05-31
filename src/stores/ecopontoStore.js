@@ -127,14 +127,23 @@ export const ecopontoStore = defineStore("ecoponto", {
     /* getEcopontos: (state) => {
       return state.ecopontos;
     }, */
-    getEcopontoById: (state) => (id) => {
+    /* getEcopontoById: (state) => (id) => {
       return state.ecopontos.find((ecoponto) => ecoponto.id == id);
-    }
+    } */
   },
   actions: {
     async getEcopontos() {
-      try{
+      try {
         const response = await EcopontosService.getEcopontos();
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getEcopontoById() {
+      try {
+        const response = await EcopontosService.getEcopontoById();
         return response;
       } catch (error) {
         console.log(error);
