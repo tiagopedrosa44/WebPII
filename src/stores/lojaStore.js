@@ -31,6 +31,14 @@ export const lojaStore = defineStore("loja", {
       } catch (error) {
         console.log(error);
       }
+    },
+    async buyItem(id) {
+      try {
+        const response = await LojaService.buyItem(id);
+        return response;
+      } catch (error) {
+        throw Error(error);
+      }
     }
   },
   

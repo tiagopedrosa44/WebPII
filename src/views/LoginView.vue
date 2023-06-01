@@ -34,7 +34,7 @@
     <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
       {{ snackbarMessage }}
     </v-snackbar>
-    <v-snackbar v-model="snackbar2" :timeout="2000" color="success">
+    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
       {{ snackbarMessage2 }}
     </v-snackbar>
   </div>
@@ -62,7 +62,10 @@ export default {
           password: this.password,
         });
         this.snackbar2 = true;
-        this.snackbar2Message = "Login efetuado com sucesso"
+        this.snackbarMessage2 = "Login efetuado com sucesso"
+        setTimeout(() => {
+          this.$router.push("/home");
+        }, 2000);
       } catch (error) {
         this.snackbar = true;
         this.snackbarMessage = error;

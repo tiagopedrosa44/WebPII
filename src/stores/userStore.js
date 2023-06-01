@@ -85,7 +85,6 @@ export const userStore = defineStore("userStore", {
       if (response.accessToken) {
         localStorage.setItem("user", JSON.stringify(response));
         this.loggedIn = true;
-        router.push("/home");
       }
     },
     logout() {

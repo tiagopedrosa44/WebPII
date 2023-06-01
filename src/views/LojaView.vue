@@ -33,9 +33,9 @@
             >
             </v-img>
             <v-card-text id="titulo">{{ item.nome }}</v-card-text>
-            <v-card-text id="pontos">{{ item.preco }}</v-card-text>
+            <v-card-text id="pontos">{{ item.preco }} </v-card-text>
             <v-card-actions>
-              <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar" @click="comprar(item)"></v-btn>
+              <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar" @click="buyItem(item._id)"></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -68,9 +68,9 @@ export default {
       moedas: 0,
       userId: "",
       snackbar: false,
-      snackbarMessage: "Não tem moedas suficientes para comprar este item",
+      snackbarMessage: "",
       snackbar2: false,
-      snackbarMessage2: "Item comprado com sucesso",
+      snackbarMessage2: "",
     };
   },
   methods: {
@@ -95,11 +95,23 @@ export default {
       try {
         const items = await this.store.getItemsUser();
         this.items = items;
+        console.log(this.items[0])
       } catch (error) {
         console.log(error);
       }
     },
-    comprar(item) {
+    async buyItem(id) {
+      try {
+        await this.store.buyItem(id);
+        await this.getUser(this.userId);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Item comprado com successo";
+      } catch (error) {
+        this.snackbar = true;
+        this.snackbarMessage = error;
+      }
+    },
+    /* comprar(item) {
       if(this.user.moedas >= item.preço){
         this.user.moedas -= item.preço;
         this.userStore.updateLocalStorage()
@@ -108,7 +120,7 @@ export default {
       else{
         this.snackbar = true;
       }
-    }
+    } */
   },
   async mounted() {
     this.getUserId();

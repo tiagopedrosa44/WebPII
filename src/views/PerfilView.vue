@@ -256,7 +256,7 @@ export default {
       try {
         const users = await this.store.getUserByID(id);
         this.user = users
-        console.log(this.user);
+
       } catch (error) {
         console.log(error);
       }
@@ -266,6 +266,7 @@ export default {
     this.getUserId();
     await this.getUser(this.userId)
     this.progresso = this.store.calculateProgress(this.user.pontos);
+    this.referral = this.user.referral;
   },
 
 
