@@ -138,11 +138,10 @@ export const userStore = defineStore("userStore", {
       try {
         const response = await UserService.updateUserById(id, data);
         if (response) {
-          router.push('/perfil');
           return response;
         }
       } catch (error) {
-        console.log(error);
+        throw Error(error);
       }
     },
 

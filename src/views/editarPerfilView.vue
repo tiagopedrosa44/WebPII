@@ -50,6 +50,12 @@
       <input type="file" accept="image/*" ref="foto" style="display: none" />
     </div>
   </div>
+  <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
+      {{ snackbarMessage }}
+    </v-snackbar>
+    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
+      {{ snackbarMessage2 }}
+    </v-snackbar>
 </template>
 
 <script>
@@ -69,6 +75,10 @@ export default {
       confirmarSenha: "",
       color: "primary",
       userId: "",
+      snackbar: false,
+      snackbarMessage: "",
+      snackbar2: false,
+      snackbarMessage2: "",
     };
   },
   methods: {
@@ -86,11 +96,17 @@ export default {
       try {
         await this.store.editUser(id, {
           biografia: this.biografia,
-          password: this.novaSenha
+          password: this.novaSenha,
+          confirmPassword: this.confirmarSenha
         });
-        console.log(this.password);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Dados alterados com sucesso!";
+        setTimeout(() => {
+          this.$router.push("/perfil");
+        }, 2000);
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.snackbarMessage = error
       }
     },
     alterarImagem() {

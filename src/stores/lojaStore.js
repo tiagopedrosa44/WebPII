@@ -13,9 +13,6 @@ export const lojaStore = defineStore("loja", {
     },
   },
   actions: {
-    deleteItem(id) {
-      this.itens = this.itens.filter((item) => item.idItem !== id);
-    },
     async getAllItems() {
       try {
         const response = await LojaService.getAllItems();
@@ -35,6 +32,14 @@ export const lojaStore = defineStore("loja", {
     async buyItem(id) {
       try {
         const response = await LojaService.buyItem(id);
+        return response;
+      } catch (error) {
+        throw Error(error);
+      }
+    },
+    async deleteItem(id) {
+      try {
+        const response = await LojaService.deleteItem(id);
         return response;
       } catch (error) {
         throw Error(error);

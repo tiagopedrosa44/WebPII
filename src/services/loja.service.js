@@ -59,4 +59,21 @@ export const LojaService = {
         }
 
     },
+    async deleteItem(id) {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const token = user.accessToken;
+        const response = await fetch(`${API_URL}/loja/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        if (response.ok) {
+            let data = await response.json();
+            return data;
+        } else {
+            throw Error(response.msg);
+        }
+    },
 }

@@ -37,6 +37,30 @@ export const UserService = {
       throw Error(response.message);
     }
   },
+  async updateUserById(id, data) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/utilizadores/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        biografia: data.biografia,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      }),
+    });
+    if (response.ok) {
+      let data = await response.json();
+      return data;
+    } else {
+      const data = await response.json();
+      throw Error(data.message);
+    }
+    
+  },
   async getUserByID(id) {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user.accessToken;
@@ -59,23 +83,5 @@ export const UserService = {
       throw Error(data.message);
     }
   },
-  async updateUserById(id, data) {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const token = user.accessToken;
-    const response = await fetch(`${API_URL}/utilizadores/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        biografia: data.biografia,
-        password: data.password,
-      }),
-    });
-    if (response.ok) {
-      let data = await response.json();
-      return data;
-    }
-  },
+ 
 };

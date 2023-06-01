@@ -34,7 +34,7 @@
     <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
       {{ snackbarMessage }}
     </v-snackbar>
-    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
+    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" >
       {{ snackbarMessage2 }}
     </v-snackbar>
   </div>

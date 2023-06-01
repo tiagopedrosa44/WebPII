@@ -68,8 +68,8 @@
             <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
             <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
               :disabled="editar != null && editar != item._id">Editar</v-btn>
-            <v-btn color="error" @click="removerItem(item._id)" v-if="editar == item._id">Cancelar</v-btn>
-            <v-btn color="error" @click="removerItem(item._id)" v-else :disabled="editar != null">Remover</v-btn>
+            <v-btn color="error" @click="remover(item._id)" v-if="editar == item._id">Cancelar</v-btn>
+            <v-btn color="error" @click="deleteItem(item._id)" v-else :disabled="editar != null">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -119,6 +119,12 @@
       <br><br><br><br>
     </div>
   </div>
+  <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
+      {{ snackbarMessage }}
+    </v-snackbar>
+    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
+      {{ snackbarMessage2 }}
+    </v-snackbar>
 </template>
 
 <script>
@@ -133,6 +139,10 @@ export default {
       utilizacaoStore: utilizacaoStore(),
       lojaStore: lojaStore(),
       itensLoja: [],
+      snackbar: false,
+      snackbarMessage: "",
+      snackbar2: false,
+      snackbarMessage2: "",
       editar: null,
       editarB: null,
       precoOriginal: null,
@@ -179,8 +189,22 @@ export default {
       try{
         await this.store.deleteUserById(id);
         this.users = this.users.filter((user) => user._id !== id);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Utilizador removido com sucesso!";
       } catch (error){
-        console.log(error);
+        this.snackbar = true;
+        this.snackbarMessage = error;
+      }
+    },
+    async deleteItem(id){
+      try{
+        await this.lojaStore.deleteItem(id);
+        this.itensLoja = this.itensLoja.filter((item) => item._id !== id);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Item removido com sucesso!";
+      } catch (error){
+        this.snackbar = true;
+        this.snackbarMessage = error;
       }
     },
     async getAllItems(){
