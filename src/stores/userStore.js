@@ -151,8 +151,8 @@ export const userStore = defineStore("userStore", {
       } catch (error) {
         console.log(error);
       }
-    }
-
+    },
+    
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));
     },
