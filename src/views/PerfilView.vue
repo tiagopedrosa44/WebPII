@@ -210,7 +210,14 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col> </v-col>
+        <v-col> 
+          <v-carousel show-arrows="hover" prev-icon="fa-solid fa-arrow-left" next-icon="fa-solid fa-arrow-right">
+            <v-carousel-item v-for="badge in badges"
+              :src="badge"
+              cover
+            ></v-carousel-item>
+          </v-carousel>
+        </v-col>
       </v-row>
     </v-container>
    
@@ -238,6 +245,7 @@ export default {
       window: 0,
       progresso: 0,
       referral: "",
+      badges: [],
     };
   },
 
@@ -260,10 +268,21 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+    async getBadgesUser(id) {
+      try {
+        const badges = await this.store.getBadgesUser(id);
+        this.badges = badges
+
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
+
   async mounted() {
     this.getUserId();
+    await this.getBadgesUser(this.userId);
     await this.getUser(this.userId)
     this.progresso = this.store.calculateProgress(this.user.pontos);
     this.referral = this.user.referral;

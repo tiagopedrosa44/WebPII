@@ -144,6 +144,14 @@ export const userStore = defineStore("userStore", {
         throw Error(error);
       }
     },
+    async getBadgesUser(id) {
+      try {
+        const response = await UserService.getBadgesUser(id);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));
