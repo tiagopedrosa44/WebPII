@@ -26,8 +26,14 @@ export const badgeStore = defineStore("badge", {
         } catch (error) {
             console.log(error);
         }
+    }, 
+    async editBadge(id, data) {
+        try{
+            const response = await BadgeService.editBadge(id, data);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
     }
   },
-  
-  
 });

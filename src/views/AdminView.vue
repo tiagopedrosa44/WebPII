@@ -91,8 +91,8 @@
           <td :id="'nome' + badge._id">{{ badge.nome }}</td>
           <td :id="'foto' + badge._id">{{ badge.foto }}</td>
           <td>
-            <v-btn color="success" @click="editarBadge(badge._id)" v-if="editarB == badge._id">Guardar</v-btn>
-            <v-btn color="primary" @click="editarBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
+            <v-btn color="success" @click="editBadge(badge._id)" v-if="editarB == badge._id">Guardar</v-btn>
+            <v-btn color="primary" @click="editBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
               :disabled="editarB != null && editarB != badge._id">Editar</v-btn>
             <v-btn color="error" @click="apagarBadge(badge._id)" v-if="editarB == badge._id">Cancelar</v-btn>
             <v-btn color="error" @click="deleteBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
@@ -210,6 +210,44 @@ export default {
         this.snackbarMessage = error;
       }
     },
+
+    async editBadge(id) {
+      const linhaNome = document.getElementById("nome" + id);
+      this.nomeBadgeOriginal = linhaNome.textContent
+      const linhaFoto = document.getElementById("foto" + id);
+      this.fotoBadgeOriginal = linhaFoto.textContent
+
+      if (this.editarB == null) {
+        this.editarB = id;
+
+        const nomeAtual = linhaNome.textContent;
+        const fotoAtual = linhaFoto.textContent;
+
+        linhaNome.innerHTML = `<input type="text" style="width:50%" value="${nomeAtual}">`;
+        linhaFoto.innerHTML = `<input type="text" style="width:50%" value="${fotoAtual}">`;
+      }
+      else {
+        this.editarB = null;
+        const novoNome = linhaNome.querySelector("input").value;
+        const novaFoto = linhaFoto.querySelector("input").value;
+
+        linhaNome.textContent = novoNome;
+        linhaFoto.textContent = novaFoto;
+
+        try{
+        await this.badgeStore.editBadge(id, {
+          nome: novoNome,
+          foto: novaFoto
+        });
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Badge editada com sucesso!";
+      } catch (error){
+        this.snackbar = true;
+        this.snackbarMessage = error;
+      }
+      }
+    },
+
     async getAllItems(){
       try{
         const items = await this.lojaStore.getAllItems();
@@ -226,6 +264,7 @@ export default {
         console.log(error);
       }
     },
+
     getUsername(idUser) {
       return this.userStore.getUsers.filter(user => user.id == idUser)[0].nome;
     },
@@ -285,7 +324,7 @@ export default {
       }
     },
 
-    editarBadge(id) {
+/*     editarBadge(id) {
       const linhaNome = document.getElementById("nome" + id);
       this.nomeBadgeOriginal = linhaNome.textContent
       const linhaFoto = document.getElementById("foto" + id);
@@ -308,7 +347,7 @@ export default {
         linhaNome.textContent = novoNome;
         linhaFoto.textContent = novaFoto;
       }
-    },
+    }, */
 
     apagarBadge(id) {
       if (this.editarB != null) {
@@ -326,6 +365,7 @@ export default {
     }
   },
 };
+
 </script>
 
 <style scoped>
