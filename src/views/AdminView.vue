@@ -91,11 +91,11 @@
           <td :id="'nome' + badge._id">{{ badge.nome }}</td>
           <td :id="'foto' + badge._id">{{ badge.foto }}</td>
           <td>
-            <v-btn color="success" @click="editarBadge(badge.id)" v-if="editarB == badge.id">Guardar</v-btn>
-            <v-btn color="primary" @click="editarBadge(badge.id)" :id="'botaoBadge' + badge.id" v-else
-              :disabled="editarB != null && editarB != badge.id">Editar</v-btn>
-            <v-btn color="error" @click="apagarBadge(badge.id)" v-if="editarB == badge.id">Cancelar</v-btn>
-            <v-btn color="error" @click="apagarBadge(badge.id)" v-else :disabled="editarB != null">Remover</v-btn>
+            <v-btn color="success" @click="editarBadge(badge._id)" v-if="editarB == badge._id">Guardar</v-btn>
+            <v-btn color="primary" @click="editarBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
+              :disabled="editarB != null && editarB != badge._id">Editar</v-btn>
+            <v-btn color="error" @click="apagarBadge(badge._id)" v-if="editarB == badge._id">Cancelar</v-btn>
+            <v-btn color="error" @click="apagarBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
           </td>
         </tr>
       </tbody>
