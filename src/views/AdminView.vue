@@ -214,7 +214,6 @@ export default {
       try{
         const items = await this.lojaStore.getAllItems();
         this.itensLoja = items;
-        console.log(this.itensLoja);
       } catch (error){
         console.log(error);
       }
