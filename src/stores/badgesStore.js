@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { badgeService } from "../services/loja.service";
+import { BadgeService } from "../services/badge.service";
 
 export const badgeStore = defineStore("badge", {
   state: () => ({
@@ -18,6 +18,14 @@ export const badgeStore = defineStore("badge", {
       } catch (error) {
         throw Error(error);
       }
+    },  
+    async getBadges() {
+        try{
+            const response = await BadgeService.getBadges();
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
     }
   },
   

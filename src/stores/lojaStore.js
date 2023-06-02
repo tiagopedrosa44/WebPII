@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { badgeService } from "../services/loja.service";
+import { LojaService } from "../services/loja.service";
 
 export const lojaStore = defineStore("loja", {
   state: () => ({
