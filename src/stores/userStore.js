@@ -55,7 +55,7 @@ export const userStore = defineStore("userStore", {
   }),
 
   getters: {
-    getUsers: (state) => state.users,
+    //getUsers: (state) => state.users,
     getUserById: (state) => (id) => {
       return state.users.find((user) => user.id == id);
     },

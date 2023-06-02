@@ -102,7 +102,7 @@
     </v-table>
     <br><br><br>
   </div>
-  <div class="divs">
+  <!-- <div class="divs">
     <h1>Utilizações por aprovar</h1>
     <v-divider></v-divider>
     <div v-for="utilizacao in utilizacoes">
@@ -118,7 +118,7 @@
       </v-btn>
       <br><br><br><br>
     </div>
-  </div>
+  </div> -->
   <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
       {{ snackbarMessage }}
     </v-snackbar>
@@ -215,9 +215,6 @@ export default {
       } catch (error){
         console.log(error);
       }
-    },
-    getUsername(idUser) {
-      return this.userStore.getUsers.filter(user => user.id == idUser)[0].nome;
     },
     aprovarUtilizacao(id) {
       let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)

@@ -76,4 +76,28 @@ export const LojaService = {
             throw Error(response.msg);
         }
     },
+
+    async editItem(id, data) {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const token = user.accessToken;
+        const response = await fetch(`${API_URL}/loja/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                nome: data.nome,
+                preço: data.preço,
+                foto: data.foto,
+                stock: data.stock
+            })
+        });
+        if (response.ok) {
+            let data = await response.json();
+            return data;
+        } else {
+            throw Error(response.msg);
+        }
+    }
 }
