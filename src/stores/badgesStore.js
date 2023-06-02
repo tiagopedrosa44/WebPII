@@ -11,7 +11,7 @@ export const badgeStore = defineStore("badge", {
     
   },
   actions: {
-    async deleteBadge() {
+    async deleteBadge(id) {
       try {
         const response = await BadgeService.deleteBadge(id);
         return response;
