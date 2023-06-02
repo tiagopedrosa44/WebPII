@@ -88,8 +88,8 @@
       </thead>
       <tbody>
         <tr v-for="badge in badges">
-          <td :id="'nome' + badge.id">{{ badge.nome }}</td>
-          <td :id="'foto' + badge.id">{{ badge.foto }}</td>
+          <td :id="'nome' + badge._id">{{ badge.nome }}</td>
+          <td :id="'foto' + badge._id">{{ badge.foto }}</td>
           <td>
             <v-btn color="success" @click="editarBadge(badge.id)" v-if="editarB == badge.id">Guardar</v-btn>
             <v-btn color="primary" @click="editarBadge(badge.id)" :id="'botaoBadge' + badge.id" v-else
@@ -131,7 +131,7 @@
 import { userStore } from "../stores/userStore.js";
 import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
 import { lojaStore } from "../stores/lojaStore.js";
-import { badgeStore } from "../stores/badgeStore.js";
+import { badgeStore } from "../stores/badgesStore.js";
 
 export default {
   data() {
@@ -166,6 +166,7 @@ export default {
   async mounted() {
     await this.getUsersList();
     await this.getAllItems();
+    await this.getBadges();
   },
   methods: {
     async getUsersList(){
