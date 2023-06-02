@@ -11,7 +11,14 @@ export const badgeStore = defineStore("badge", {
     
   },
   actions: {
-    
+    async getBadges() {
+        try{
+            const response = await BadgeService.getBadges();
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
   },
   
   

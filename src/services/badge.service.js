@@ -2,7 +2,7 @@ import API_URL from "./config";
 
 export const BadgeService = {
 
-    async gatBadges(){
+    async getBadges(){
         const user = JSON.parse(localStorage.getItem("user"));
         const token = user.accessToken;
         const response = await fetch(`${API_URL}/badges`, {
