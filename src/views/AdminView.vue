@@ -95,7 +95,7 @@
             <v-btn color="primary" @click="editarBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
               :disabled="editarB != null && editarB != badge._id">Editar</v-btn>
             <v-btn color="error" @click="apagarBadge(badge._id)" v-if="editarB == badge._id">Cancelar</v-btn>
-            <v-btn color="error" @click="apagarBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
+            <v-btn color="error" @click="deleteBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -132,6 +132,7 @@ import { userStore } from "../stores/userStore.js";
 import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
 import { lojaStore } from "../stores/lojaStore.js";
 import { badgeStore } from "../stores/badgesStore.js";
+import { log } from 'console';
 
 export default {
   data() {
