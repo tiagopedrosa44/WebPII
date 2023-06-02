@@ -152,7 +152,7 @@ export const userStore = defineStore("userStore", {
         console.log(error);
       }
     },
-
+    
     updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));
     },

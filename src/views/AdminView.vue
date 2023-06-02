@@ -88,8 +88,8 @@
       </thead>
       <tbody>
         <tr v-for="badge in badges">
-          <td :id="'nome' + badge.id">{{ badge.nome }}</td>
-          <td :id="'foto' + badge.id">{{ badge.foto }}</td>
+          <td :id="'nome' + badge._id">{{ badge.nome }}</td>
+          <td :id="'foto' + badge._id">{{ badge.foto }}</td>
           <td>
             <v-btn color="success" @click="editarBadge(badge.id)" v-if="editarB == badge.id">Guardar</v-btn>
             <v-btn color="primary" @click="editarBadge(badge.id)" :id="'botaoBadge' + badge.id" v-else
@@ -131,6 +131,8 @@
 import { userStore } from "../stores/userStore.js";
 import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
 import { lojaStore } from "../stores/lojaStore.js";
+import { badgeStore } from "../stores/badgesStore.js";
+
 export default {
   data() {
     return {
@@ -138,6 +140,7 @@ export default {
       store: userStore(),
       utilizacaoStore: utilizacaoStore(),
       lojaStore: lojaStore(),
+      badgeStore: badgeStore(),
       itensLoja: [],
       snackbar: false,
       snackbarMessage: "",
@@ -149,18 +152,7 @@ export default {
       stockOriginal: null,
       nomeBadgeOriginal: null,
       fotoBadgeOriginal: null,
-      badges: [
-        {
-          id: 0,
-          nome: "Medalha 1",
-          foto: "foto1"
-        },
-        {
-          id: 1,
-          nome: "Medalha 2",
-          foto: "foto2",
-        }
-      ]
+      badges: []
     };
   },
   created() {
@@ -174,13 +166,13 @@ export default {
   async mounted() {
     await this.getUsersList();
     await this.getAllItems();
+    await this.getBadges();
   },
   methods: {
     async getUsersList(){
       try{
         const users = await this.store.getALlUsers();
         this.users = users;
-        console.log(this.users);
       } catch (error){
         console.log(error);
       }
@@ -215,6 +207,17 @@ export default {
       } catch (error){
         console.log(error);
       }
+    },
+    async getBadges(){
+      try{
+        const badges = await this.badgeStore.getBadges();
+        this.badges = badges;
+      } catch (error){
+        console.log(error);
+      }
+    },
+    getUsername(idUser) {
+      return this.userStore.getUsers.filter(user => user.id == idUser)[0].nome;
     },
     aprovarUtilizacao(id) {
       let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
