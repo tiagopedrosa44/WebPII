@@ -199,6 +199,17 @@ export default {
         this.snackbarMessage = error;
       }
     },
+    async deleteBadge(id) {
+      try {
+        await this.badgeStore.deleteBadge(id);
+        this.badges = this.badges.filter((badge) => badge.id !== id);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Badge removida com sucesso!";
+      } catch (error) {
+        this.snackbar = true;
+        this.snackbarMessage = error;
+      }
+    },
     async getAllItems(){
       try{
         const items = await this.lojaStore.getAllItems();
