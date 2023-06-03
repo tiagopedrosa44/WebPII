@@ -45,5 +45,24 @@ export const EcopontosService = {
       const data = await response.json();
       throw Error(data.message);
     }
-  }
+  },
+  async ecopontosPorValidar(){
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/ecopontos/pendentes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.ecopontos)
+      return data.ecopontos
+    } else {
+      const data = await response.json();
+      throw Error(data.message);
+    }
+  },
 };
