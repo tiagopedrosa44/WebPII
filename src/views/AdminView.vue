@@ -171,10 +171,10 @@
       <p>ID do Ecoponto: {{ ecoponto._id }}</p>
       <p>Nome do Utilizador: {{ ecoponto.userId }}</p> 
       <p>Data: {{ ecoponto.dataCriacao }}</p>
-      <v-btn color="success" @click="aprovarUtilizacao(ecoponto.id)">
+      <v-btn color="success" @click="validarEcoponto(ecoponto._id)">
         Aprovar
       </v-btn>
-      <v-btn color="error" @click="rejeitarUtilizacao(ecoponto.id)">
+      <v-btn color="error" @click="rejeitarEcoponto(ecoponto._id)">
         Rejeitar
       </v-btn>
       <br><br><br><br>
@@ -244,8 +244,8 @@ export default {
   methods: {
     async getUsersList() {
       try {
-        const users = await this.store.getALlUsers();
-        this.users = users;
+        await this.store.getALlUsers();
+        this.users = this.store.getUsers;
       } catch (error) {
         console.log(error);
       }
@@ -331,16 +331,34 @@ export default {
 
     async getAllItems() {
       try {
-        const items = await this.lojaStore.getAllItems();
-        this.itensLoja = items;
+        await this.lojaStore.getAllItems();
+        this.itensLoja = this.lojaStore.getItens;
       } catch (error) {
         console.log(error);
       }
     },
     async getBadges() {
       try {
-        const badges = await this.badgeStore.getBadges();
-        this.badges = badges;
+        await this.badgeStore.getBadges();
+        this.badges = this.badgeStore.getAllBadges;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async validarEcoponto(id) {
+      try {
+        await this.ecopontoStore.validarEcoponto(id,{
+          ecopontoAprovado: true
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async rejeitarEcoponto(id) {
+      try {
+        await this.ecopontoStore.validarEcoponto(id,{
+          ecopontoAprovado: false
+        });
       } catch (error) {
         console.log(error);
       }

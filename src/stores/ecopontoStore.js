@@ -8,25 +8,19 @@ export const ecopontoStore = defineStore("ecoponto", {
     ecopontosPendentes: [],
   }),
   getters: {
-
+    getAllEcopontos: (state) => state.ecopontos,
   },
   actions: {
     async getEcopontos() {
       try {
         const response = await EcopontosService.getEcopontos();
-        return response;
+        this.setEcopontos(response);
       } catch (error) {
         console.log(error);
       }
     },
-
-    async getEcopontoById() {
-      try {
-        const response = await EcopontosService.getEcopontoById();
-        return response;
-      } catch (error) {
-        console.log(error);
-      }
+    setEcopontos(ecopontos) {
+      this.ecopontos = ecopontos;
     },
     async getEcopontosPorValidar() {
       try {
@@ -36,5 +30,21 @@ export const ecopontoStore = defineStore("ecoponto", {
         console.log(error);
       }
     },
+    async getEcopontoById(id) {
+      try {
+        const response = await EcopontosService.getEcopontoById(id);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async validarEcoponto(id,data) {
+      try {
+        const response = await EcopontosService.validarEcoponto(id,data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 });

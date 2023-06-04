@@ -2,10 +2,10 @@
   <GoogleMap api-key="AIzaSyAYi2BJ0UcEc3zgu2s6g9UFV-6JHuSkyxE" style="width: 100%; height: 500px" mapTypeId="hybrid"
     :center="center" :zoom="18" ref="map" :click="true" @click="clickMarcador">
     <Marker :options="currentPosMarkerOptions" />
-    <Marker v-for="ecoponto in ecopontos" @click="focarEcoponto(ecoponto.id)" :key="ecoponto.id" :options="{
+    <Marker v-for="ecoponto in ecopontos" @click="focarEcoponto(ecoponto._id)" :key="ecoponto._id" :options="{
       position: {
         lat: ecoponto.coordenadas.lat,
-        lng: ecoponto.coordenadas.lng,
+        lng: ecoponto.coordenadas.lon,
       },
       icon: {
         url: '/src/assets/imgs/iconeEcoponto.png',
@@ -51,9 +51,19 @@ export default defineComponent({
       };
       this.verificarLoc();
     } else this.verificarLoc();
-    this.ecopontos = this.store.ecopontos;
+  },
+  mounted() {
+    this.getEcopontos();
   },
   methods: {
+    async getEcopontos(){
+      try {
+        await this.store.getEcopontos();
+        this.ecopontos = this.store.getAllEcopontos;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     focarEcoponto(id) {
       this.$router.push("/ecoponto/" + id);
       this.center = {

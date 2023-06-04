@@ -6,70 +6,13 @@ import { leaderboardService } from "../services/leaderboard.service";
 
 export const userStore = defineStore("userStore", {
   state: () => ({
-    users: localStorage.users
-      ? JSON.parse(localStorage.users)
-      : [
-          {
-            id: 0,
-            tipo: "admin",
-            nome: "Admin",
-            email: "admin@gmail.com",
-            password: "Esmad_2223",
-            pontos: 1000,
-            nivel: 1,
-            moedas: 0,
-            utilizacoes: 0,
-            ecopontosRegistados: 0,
-            biografia: "",
-            badges: [],
-            referral: "",
-            avatar: "../assets/imgs/avatar.png",
-          },
-          {
-            id: 1,
-            tipo: "user",
-            nome: "User",
-            email: "user@gmail.com",
-            password: "Esmad_2223",
-            pontos: 2500,
-            nivel: 2,
-            moedas: 200000,
-            utilizacoes: 5,
-            ecopontosRegistados: 0,
-            biografia:
-              "Sou um educador de infância e dedico-me a ensinar às pessoas a importância da reciclagem e da conservação do meio ambiente. Sou apaixonado por caminhadas ao ar livre.",
-            badges: [],
-            referral: "",
-            avatar: "../assets/imgs/avatar.png",
-          },
-        ],
-
-    logado: [
-      {
-        bool: false,
-        nome: "",
-      },
-    ],
+    users: [],
     loggedUser: null,
     loggedIn: false,
   }),
 
   getters: {
-    //getUsers: (state) => state.users,
-    getUserById: (state) => (id) => {
-      return state.users.find((user) => user.id == id);
-    },
-    getLoggedInUser: (state) => {
-      return state.users.find(
-        (user) => user.nome == localStorage.getItem("userLogado")
-      );
-    },
-    getSortedUsers: (state) => {
-      return state.users.sort((a, b) => b.pontos - a.pontos);
-    },
-    getSortedUsersByUtilizacoes: (state) => {
-      return state.users.sort((a, b) => b.utilizacoes - a.utilizacoes);
-    },
+    getUsers: (state) => state.users,
   },
 
   actions: {
@@ -111,12 +54,14 @@ export const userStore = defineStore("userStore", {
     async getALlUsers() {
       try {
         const response = await UserService.getALlUsers();
-        return response;
+        this.setUsers(response);
       } catch (error) {
         console.log(error);
       }
     },
-
+    setUsers(users) {
+      this.users = users;
+    },
     async deleteUserById(id) {
       try {
         const response = await UserService.deleteUserById(id);
