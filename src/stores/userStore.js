@@ -94,24 +94,31 @@ export const userStore = defineStore("userStore", {
         const response = await UserService.getBadgesUser(id);
         return response;
       } catch (error) {
-        console.log(error);
+        throw Error(error);
+      }
+    },
+    async getUtilizacoesUser(id) {
+      try {
+        const response = await UserService.getUtilizacoesUser(id);
+        return response;
+      } catch (error) {
+        throw Error(error);
       }
     },
     
-    updateLocalStorage() {
+   /*  updateLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));
     },
     updateLevel(userId, points) {
       // Find the user by id
-      let user = this.users.find((user) => user.id == userId);
+      let user = this.users.find((user) => user._id == userId);
 
       // calculate the new level based on the points
       let newLevel = Math.floor(points / 1000);
 
       //update the user level
       user.nivel = newLevel;
-      localStorage.setItem("users", JSON.stringify(this.users));
-    },
+    }, */
 
     /* login(username, password) {
       const inputUsername = document.querySelector("#username");

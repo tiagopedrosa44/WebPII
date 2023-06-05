@@ -51,11 +51,17 @@
     </div>
   </div>
   <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
-      {{ snackbarMessage }}
-    </v-snackbar>
-    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
-      {{ snackbarMessage2 }}
-    </v-snackbar>
+    {{ snackbarMessage }}
+  </v-snackbar>
+  <v-snackbar
+    ref="snackbar2"
+    v-model="snackbar2"
+    :timeout="2000"
+    color="success"
+    @input="handleSnackbarClose"
+  >
+    {{ snackbarMessage2 }}
+  </v-snackbar>
 </template>
 
 <script>
@@ -92,12 +98,11 @@ export default {
       }
     },
     async updateUser(id) {
-      
       try {
         await this.store.editUser(id, {
           biografia: this.biografia,
           password: this.novaSenha,
-          confirmPassword: this.confirmarSenha
+          confirmPassword: this.confirmarSenha,
         });
         this.snackbar2 = true;
         this.snackbarMessage2 = "Dados alterados com sucesso!";
@@ -106,7 +111,7 @@ export default {
         }, 2000);
       } catch (error) {
         this.snackbar = true;
-        this.snackbarMessage = error
+        this.snackbarMessage = error;
       }
     },
     alterarImagem() {

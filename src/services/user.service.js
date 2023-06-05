@@ -97,12 +97,30 @@ export const UserService = {
       let data = await response.json();
       if (data) {
         return data.badges;
-      } else {
-        throw Error(data.message);
       }
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw Error(data.msg);
     }
-  }
+  },
+  async getUtilizacoesUser(id) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/utilizacao/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      let data = await response.json();
+      if (data) {
+        return data.utilizacoes;
+      }
+    } else {
+      const data = await response.json();
+      throw Error(data.error);
+    }
+  },
 };
