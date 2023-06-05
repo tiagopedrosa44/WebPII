@@ -364,7 +364,7 @@ export default {
 
     async getUtilizacoesPendentes() {
       try {
-        await this.utilizacaoStore.getUtilizacoesPorAprovar();
+        await this.utilizacaoStore.getUtilizacoesPendentes();
         this.utilizacoes = utilizacoes;
       } catch (error) {
         console.log(error);
