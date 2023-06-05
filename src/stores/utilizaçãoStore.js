@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { UtilizacoesService } from '../services/utilizacoes.service'
 
 export const utilizacaoStore = defineStore('utilizacao', {
   state: () => ({
@@ -19,6 +20,15 @@ export const utilizacaoStore = defineStore('utilizacao', {
     },
   },
   actions: {
+    async getUtilizacoesPendentes() {
+      try{
+        const response = await UtilizacoesService.getUtilizacoesPendentes();
+        return (response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    
     updateLocalStorage() {
       localStorage.setItem("utilizacoes", JSON.stringify(this.utilizacoes))
     },
@@ -45,5 +55,13 @@ export const utilizacaoStore = defineStore('utilizacao', {
         throw error
       }
     },
+    async validarUtilizacao(id, data) {
+      try {
+        const response = await UtilizacoesService.validarUtilizacao(id, data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 })

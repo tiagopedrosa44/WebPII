@@ -11,7 +11,7 @@
           <h1 id="tituloLoja">Loja</h1>
         </v-col>
         <v-col>
-          <p id="moedas">{{ user.moedas }}</p>
+          <p id="moedas">{{ moedas }}</p>
           <v-img
             id="moedaIcon"
             src="src/assets/imgs/imagensLoja/moedaIcon.webp"
@@ -33,9 +33,9 @@
             >
             </v-img>
             <v-card-text id="titulo">{{ item.nome }}</v-card-text>
-            <v-card-text id="pontos">{{ item.preço }}</v-card-text>
+            <v-card-text id="pontos">{{ item.preco }} </v-card-text>
             <v-card-actions>
-              <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar" @click="comprar(item)"></v-btn>
+              <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar" @click="buyItem(item._id)"></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -54,6 +54,8 @@
 import NavBar from "@/components/NavBar.vue";
 import { lojaStore } from "../stores/lojaStore.js";
 import { userStore } from "../stores/userStore.js";
+import jwtDecode from "jwt-decode";
+
 export default {
   components: {
     NavBar,
@@ -63,15 +65,53 @@ export default {
       store: lojaStore(),
       userStore: userStore(),
       items: [],
-      user: [],
+      moedas: 0,
+      userId: "",
       snackbar: false,
-      snackbarMessage: "Não tem moedas suficientes para comprar este item",
+      snackbarMessage: "",
       snackbar2: false,
-      snackbarMessage2: "Item comprado com sucesso",
+      snackbarMessage2: "",
     };
   },
   methods: {
-    comprar(item) {
+    getUserId(){
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = user.accessToken;
+
+      if(token) {
+        const decoded = jwtDecode(token);
+        this.userId = decoded.id;
+      }
+    },
+    async getUser(id) {
+      try {
+        const users = await this.userStore.getUserByID(id);
+        this.moedas = users.moedas
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getItems() {
+      try {
+        const items = await this.store.getItemsUser();
+        this.items = items;
+        console.log(this.items[0])
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async buyItem(id) {
+      try {
+        await this.store.buyItem(id);
+        await this.getUser(this.userId);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Item comprado com successo";
+      } catch (error) {
+        this.snackbar = true;
+        this.snackbarMessage = error;
+      }
+    },
+    /* comprar(item) {
       if(this.user.moedas >= item.preço){
         this.user.moedas -= item.preço;
         this.userStore.updateLocalStorage()
@@ -80,12 +120,12 @@ export default {
       else{
         this.snackbar = true;
       }
-    }
+    } */
   },
-
-  created() {
-    this.items = this.store.getItens;
-    this.user = this.userStore.getLoggedInUser;
+  async mounted() {
+    this.getUserId();
+    await this.getUser(this.userId);
+    await this.getItems();
   },
 };
 </script>

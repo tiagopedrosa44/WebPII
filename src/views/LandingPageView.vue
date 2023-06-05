@@ -285,8 +285,6 @@ export default {
       this.height = window.innerHeight;
       console.log(this.width, this.height);
     });
-    this.userStore.updateLocalStorage();
-    this.utilizacaoStore.updateLocalStorage();
   },
 };
 </script>

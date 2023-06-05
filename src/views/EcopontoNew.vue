@@ -20,10 +20,10 @@
               <v-row>
                 <v-col align="center">
                   <p>{{ ecoponto.morada }}</p>
-                  <p>
-                    Coordenadas: {{ ecoponto.coordenadas.lat }}
-                    {{ ecoponto.coordenadas.lng }}
-                  </p>
+                  <!-- <p>
+                    Coordenadas:  {{ ecoponto.coordenadas.lat }} 
+                    {{ ecoponto.coordenadas.lon }}
+                  </p> -->
                 </v-col>
               </v-row>
               <v-row>
@@ -71,6 +71,20 @@ export default {
       ecopontoStore: ecopontoStore(),
       ecoponto: [],
     };
+  },
+  methods: {
+    async getEcopontoById(id) {
+      try {
+        const ecoponto = await this.ecopontoStore.getEcopontoById(id);
+        this.ecoponto = ecoponto;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  },
+  async mounted() {
+    await this.getEcopontoById(this.id);
+    console.log(this.id);
   },
   created() {
     this.ecoponto = this.ecopontoStore.getEcopontoById(this.id);

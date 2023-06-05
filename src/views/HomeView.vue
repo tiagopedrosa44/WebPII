@@ -19,8 +19,8 @@
           <div class="custom-scrollbar" id="ecopontos" @scroll="showEcopontos">
             <br />
             <br />
-            <div v-for="(ecoponto, index) in ecopontos" :key="ecoponto.id" class="ecoponto" v-if="index < 4"
-              @click="mostrarEcoponto(index)">
+            <div v-for="(ecoponto) in ecopontos" :key="ecoponto.id" class="ecoponto"
+              @click="mostrarEcoponto(ecoponto._id)">
               <v-container>
                 <v-row>
                   <v-col cols="2" id="ecoimg">
@@ -78,8 +78,8 @@ export default {
     },
     async getEcopontos() {
       try {
-        const ecopontos = await this.store.getEcopontos();
-        this.ecopontos = ecopontos;
+        await this.store.getEcopontos();
+        this.ecopontos = this.store.getAllEcopontos;
       } catch (error) {
         console.log(error);
       }

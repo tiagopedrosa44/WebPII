@@ -1,36 +1,10 @@
 import { defineStore } from "pinia";
+import { LojaService } from "../services/loja.service";
 
 export const lojaStore = defineStore("loja", {
   state: () => ({
     itens: [
-      {
-        idItem: 0,
-        nome: "Sacos de reciclagem",
-        preço: "10000",
-        foto: "src/assets/imgs/imagensLoja/Sacos de Reciclagem.webp",
-        stock: 200,
-      },
-      {
-        idItem: 1,
-        nome: "Caixotes de reciclagem",
-        preço: "20000",
-        foto: "src/assets/imgs/imagensLoja/Caixotes.webp",
-        stock: 10,
-      },
-      {
-        idItem: 2,
-        nome: "Sacos reutilizáveis",
-        preço: "5000",
-        foto: "src/assets/imgs/imagensLoja/Sacos.webp",
-        stock: 50,
-      },
-      {
-        idItem: 3,
-        nome: "Caixas de compostagem",
-        preço: "40000",
-        foto: "src/assets/imgs/imagensLoja/CaixoteCompostagem.webp",
-        stock: 15,
-      },
+      
     ],
   }),
   getters: {
@@ -39,8 +13,42 @@ export const lojaStore = defineStore("loja", {
     },
   },
   actions: {
-    deleteItem(id) {
-      this.itens = this.itens.filter((item) => item.idItem !== id);
+    async getAllItems() {
+      try {
+        const response = await LojaService.getAllItems();
+        this.setItems(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    setItems(items) {
+      this.itens = items;
+    },
+    async getItemsUser() {
+      try {
+        const response = await LojaService.getItemsUser();
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async buyItem(id) {
+      try {
+        const response = await LojaService.buyItem(id);
+        return response;
+      } catch (error) {
+        throw Error(error);
+      }
+    },
+    async deleteItem(id) {
+      try {
+        const response = await LojaService.deleteItem(id);
+        return response;
+      } catch (error) {
+        throw Error(error);
+      }
     }
-  }
+  },
+  
+  
 });

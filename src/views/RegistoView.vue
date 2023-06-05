@@ -67,7 +67,6 @@ export default {
   methods: {
     async registo() {
       try{
-        console.log("referralCode:", this.referralCode);
         this.referredBy = this.referralCode;
         await this.store.register({
           username :this.username,
