@@ -1,2 +1,2 @@
-const API_URL ='http://127.0.0.1:8000'
+const API_URL ='https://backendgeorecycle.tiagopedrosa44.repl.co'
 export default API_URL
