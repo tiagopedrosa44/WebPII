@@ -53,8 +53,8 @@
         <tr>
           <th class="text-left">Id</th>
           <th class="text-left">Nome</th>
-          <th class="text-left">Preço</th>
           <th class="text-left">Stock</th>
+          <th class="text-left">Preço</th>
           <th class="text-left">Ações</th>
         </tr>
       </thead>
@@ -65,33 +65,11 @@
           <td :id="'stock' + item._id">{{ item.stock }}</td>
           <td :id="'preco' + item._id">{{ item.preco }}</td>
           <td>
-            <v-btn
-              color="success"
-              @click="editarItem(item._id)"
-              v-if="editar == item._id"
-              >Guardar</v-btn
-            >
-            <v-btn
-              color="primary"
-              @click="editarItem(item._id)"
-              :id="'botao' + item._id"
-              v-else
-              :disabled="editar != null && editar != item._id"
-              >Editar</v-btn
-            >
-            <v-btn
-              color="error"
-              @click="remover(item._id)"
-              v-if="editar == item._id"
-              >Cancelar</v-btn
-            >
-            <v-btn
-              color="error"
-              @click="deleteItem(item._id)"
-              v-else
-              :disabled="editar != null"
-              >Remover</v-btn
-            >
+            <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
+            <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
+              :disabled="editar != null && editar != item._id">Editar</v-btn>
+            <v-btn color="error" @click="remover(item._id)" v-if="editar == item._id">Cancelar</v-btn>
+            <v-btn color="error" @click="deleteItem(item._id)" v-else :disabled="editar != null">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -113,33 +91,11 @@
           <td :id="'nome' + badge._id">{{ badge.nome }}</td>
           <td :id="'foto' + badge._id">{{ badge.foto }}</td>
           <td>
-            <v-btn
-              color="success"
-              @click="editBadge(badge._id)"
-              v-if="editarB == badge._id"
-              >Guardar</v-btn
-            >
-            <v-btn
-              color="primary"
-              @click="editBadge(badge._id)"
-              :id="'botaoBadge' + badge._id"
-              v-else
-              :disabled="editarB != null && editarB != badge._id"
-              >Editar</v-btn
-            >
-            <v-btn
-              color="error"
-              @click="apagarBadge(badge._id)"
-              v-if="editarB == badge._id"
-              >Cancelar</v-btn
-            >
-            <v-btn
-              color="error"
-              @click="deleteBadge(badge._id)"
-              v-else
-              :disabled="editarB != null"
-              >Remover</v-btn
-            >
+            <v-btn color="success" @click="editBadge(badge._id)" v-if="editarB == badge._id">Guardar</v-btn>
+            <v-btn color="primary" @click="editBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
+              :disabled="editarB != null && editarB != badge._id">Editar</v-btn>
+            <v-btn color="error" @click="apagarBadge(badge._id)" v-if="editarB == badge._id">Cancelar</v-btn>
+            <v-btn color="error" @click="deleteBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
           </td>
         </tr>
       </tbody>
@@ -164,14 +120,14 @@
       <br><br><br><br>
     </div>
   </div>
-  
+
   <div class="divs">
     <h1>Ecopontos por aprovar</h1>
     <v-divider></v-divider>
     <div v-for="ecoponto in ecopontos">
       <img :src="ecoponto.foto" width="600" height="300" /><br>
       <p>ID do Ecoponto: {{ ecoponto._id }}</p>
-      <p>Nome do Utilizador: {{ ecoponto.userId }}</p> 
+      <p>Nome do Utilizador: {{ ecoponto.userId }}</p>
       <p>Data: {{ ecoponto.dataCriacao }}</p>
       <v-btn color="success" @click="validarEcoponto(ecoponto._id)">
         Aprovar
@@ -185,13 +141,7 @@
   <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
     {{ snackbarMessage }}
   </v-snackbar>
-  <v-snackbar
-    ref="snackbar2"
-    v-model="snackbar2"
-    :timeout="2000"
-    color="success"
-    @input="handleSnackbarClose"
-  >
+  <v-snackbar ref="snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
     {{ snackbarMessage2 }}
   </v-snackbar>
 </template>
@@ -344,7 +294,7 @@ export default {
     },
     async validarEcoponto(id) {
       try {
-        await this.ecopontoStore.validarEcoponto(id,{
+        await this.ecopontoStore.validarEcoponto(id, {
           ecopontoAprovado: true
         });
       } catch (error) {
@@ -353,25 +303,25 @@ export default {
     },
     async rejeitarEcoponto(id) {
       try {
-        await this.ecopontoStore.validarEcoponto(id,{
+        await this.ecopontoStore.validarEcoponto(id, {
           ecopontoAprovado: false
         });
       } catch (error) {
         console.log(error);
       }
     },
-    async validarUtilizacao(id){
+    async validarUtilizacao(id) {
       try {
-        await this.utilizacaoStore.validarUtilizacao(id,{
+        await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: true
         });
       } catch (error) {
         console.log(error);
       }
     },
-    async rejeitarUtilizacao(id){
+    async rejeitarUtilizacao(id) {
       try {
-        await this.utilizacaoStore.validarUtilizacao(id,{
+        await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: false
         });
       } catch (error) {
@@ -394,7 +344,7 @@ export default {
         .nome;
     },
 
-    editarItem(id) {
+    async editarItem(id) {
       const linhaPreco = document.getElementById("preco" + id);
       this.precoOriginal = linhaPreco.textContent;
       const linhaStock = document.getElementById("stock" + id);
@@ -415,6 +365,18 @@ export default {
 
         linhaPreco.textContent = novoPreco;
         linhaStock.textContent = novoStock;
+
+        try {
+          await this.lojaStore.editItem(id, {
+            stock: novoStock,
+            preco: novoPreco,
+          });
+          this.snackbar2 = true;
+          this.snackbarMessage2 = "Item editado com sucesso!";
+        } catch (error) {
+          this.snackbar = true;
+          this.snackbarMessage = error;
+        }
       }
     },
 

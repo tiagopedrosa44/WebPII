@@ -81,23 +81,23 @@ export const LojaService = {
         const user = JSON.parse(localStorage.getItem("user"));
         const token = user.accessToken;
         const response = await fetch(`${API_URL}/loja/${id}`, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-                nome: data.nome,
-                preço: data.preço,
-                foto: data.foto,
-                stock: data.stock
-            })
+                stock: data.stock,
+                preço: data.preço
+            }),
         });
         if (response.ok) {
             let data = await response.json();
-            return data;
-        } else {
-            throw Error(response.msg);
+            if (data) {
+                return data;
+            } else {
+                throw Error(data.message)
+            }
         }
     }
 }
