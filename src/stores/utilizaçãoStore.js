@@ -28,7 +28,15 @@ export const utilizacaoStore = defineStore('utilizacao', {
         console.log(error);
       }
     },
-    
+    async registarUtilizacao(id, data) {
+      try {
+        const response = await UtilizacoesService.registarUtilizacao(id, data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     updateLocalStorage() {
       localStorage.setItem("utilizacoes", JSON.stringify(this.utilizacoes))
     },

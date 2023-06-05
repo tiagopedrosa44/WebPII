@@ -17,7 +17,7 @@
         <img src="../assets/imgs/adFoto.png" id="adFoto" @click="uploadFoto()" />
         <br />
         <v-btn style="background-color: #f0cd6e"
-          @click="this.utilizacaoStore.registarUtilizacao(this.userAtual, this.ecoponto, this.filePath)">Registar</v-btn>
+          @click="this.utilizacaoStore.registarUtilizacao(this.ecoponto)">Registar</v-btn>
       </v-container>
     </div>
   </div>
@@ -38,6 +38,7 @@ export default {
       ecoponto: this.$route.params.id,
       userAtual: "",
       filePath: "",
+      userId: "",
     };
   },
   created() {
@@ -59,8 +60,29 @@ export default {
         document.getElementById("adFoto").src = URL.createObjectURL(file);
       };
     },
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = user.accessToken;
+
+      if (token) {
+        const decoded = jwtDecode(token);
+        this.userId = decoded.id;
+      }
+    },
+    async registarUtilizacao(id) {
+      try {
+        await this.utilizacaoStore.registarUtilizacao(id, {
+          idUser: this.userId,
+          foto: this.filePath
+        })
+      }
+      catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
+
 </script>
 
 <style scoped>

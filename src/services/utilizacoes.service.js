@@ -44,5 +44,27 @@ export const UtilizacoesService = {
             const data = await response.json();
             throw Error(data.msg);
         }
+    },
+    async registarUtilizacao(id, data) {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const token = user.accessToken;
+        const response = await fetch(`${API_URL}/utilizacao/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                idUser: data.idUser,
+                foto: data.foto,
+            })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            const data = await response.json();
+            throw Error(data.msg);
+        }
     }
 };

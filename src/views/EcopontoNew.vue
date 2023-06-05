@@ -30,7 +30,7 @@
                 <v-col align="center">
                   <v-btn
                     id="botaoRegistar"
-                    @click="$router.push('/registarEcoponto/' + ecoponto.id)"
+                    @click="$router.push('/registarEcoponto/' + ecoponto._id)"
                     >Registar</v-btn
                   >
                 </v-col>
