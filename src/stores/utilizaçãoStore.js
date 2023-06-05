@@ -55,5 +55,13 @@ export const utilizacaoStore = defineStore('utilizacao', {
         throw error
       }
     },
+    async validarUtilizacao(id, data) {
+      try {
+        const response = await UtilizacoesService.validarUtilizacao(id, data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 })

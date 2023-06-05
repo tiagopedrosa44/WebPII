@@ -155,10 +155,10 @@
       <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
       <p>Nome do Utilizador: {{ utilizacao.idUser }}</p>
       <p>Data: {{ utilizacao.data }}</p>
-      <v-btn color="success" @click="aprovarUtilizacao(utilizacao.id)">
+      <v-btn color="success" @click="validarUtilizacao(utilizacao._id)">
         Aprovar
       </v-btn>
-      <v-btn color="error" @click="rejeitarUtilizacao(utilizacao.id)">
+      <v-btn color="error" @click="rejeitarUtilizacao(utilizacao._id)">
         Rejeitar
       </v-btn>
       <br><br><br><br>
@@ -360,6 +360,25 @@ export default {
         console.log(error);
       }
     },
+    async validarUtilizacao(id){
+      try {
+        await this.utilizacaoStore.validarUtilizacao(id,{
+          utilizacaoAprovada: true
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async rejeitarUtilizacao(id){
+      try {
+        await this.utilizacaoStore.validarUtilizacao(id,{
+          utilizacaoAprovada: false
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
 
     async getUtilizacoesPendentes() {
       try {
@@ -373,24 +392,6 @@ export default {
     getUsername(idUser) {
       return this.userStore.getUsers.filter((user) => user.id == idUser)[0]
         .nome;
-    },
-    aprovarUtilizacao(id) {
-      let utilizacao = this.utilizacoes.find(
-        (utilizacao) => utilizacao.id == id
-      );
-      utilizacao.aprovado = true;
-      this.userStore.addPontos(utilizacao.idUser, 300);
-      this.userStore.addMoedas(utilizacao.idUser, 1000);
-      this.userStore.addUtilizacao(utilizacao.idUser);
-      this.utilizacaoStore.updateLocalStorage();
-    },
-
-    rejeitarUtilizacao(id) {
-      let utilizacao = this.utilizacoes.find(
-        (utilizacao) => utilizacao.id == id
-      );
-      utilizacao.rejeitado = true;
-      this.utilizacaoStore.updateLocalStorage();
     },
 
     editarItem(id) {
