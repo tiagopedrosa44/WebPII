@@ -146,13 +146,14 @@
     </v-table>
     <br /><br /><br />
   </div>
-  <!-- <div class="divs">
+
+  <div class="divs">
     <h1>Utilizações por aprovar</h1>
     <v-divider></v-divider>
     <div v-for="utilizacao in utilizacoes">
       <img :src="utilizacao.foto" width="600" height="300" /><br>
       <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
-      <p>Nome do Utilizador: {{ getUsername(utilizacao.idUser) }}</p>
+      <p>Nome do Utilizador: {{ utilizacao.idUser }}</p>
       <p>Data: {{ utilizacao.data }}</p>
       <v-btn color="success" @click="aprovarUtilizacao(utilizacao.id)">
         Aprovar
@@ -162,7 +163,8 @@
       </v-btn>
       <br><br><br><br>
     </div>
-  </div> -->
+  </div>
+  
   <div class="divs">
     <h1>Ecopontos por aprovar</h1>
     <v-divider></v-divider>
@@ -201,6 +203,7 @@ import { lojaStore } from "../stores/lojaStore.js";
 import { badgeStore } from "../stores/badgesStore.js";
 import { ecopontoStore } from "../stores/ecopontoStore.js";
 import { EcopontosService } from "../services/ecopontos.service";
+import { log } from 'console';
 
 export default {
   data() {
@@ -225,21 +228,16 @@ export default {
       fotoBadgeOriginal: null,
       badges: [],
       ecopontos: [],
+      utilizacoes: [],
     };
   },
-  created() {
-    this.utilizacoes = this.utilizacaoStore.getUtilizacoesPorAprovar;
-  },
-  computed: {
-    utilizacoes() {
-      return this.utilizacaoStore.getUtilizacoesPorAprovar;
-    },
-  },
+
   async mounted() {
     await this.getUsersList();
     await this.getAllItems();
     await this.getBadges();
     await this.getEcopontos();
+    await this.getUtilizacoesPendentes();
   },
   methods: {
     async getUsersList() {
@@ -359,6 +357,15 @@ export default {
         await this.ecopontoStore.validarEcoponto(id,{
           ecopontoAprovado: false
         });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getUtilizacoesPendentes() {
+      try {
+        await this.utilizacaoStore.getUtilizacoesPorAprovar();
+        this.utilizacoes = utilizacoes;
       } catch (error) {
         console.log(error);
       }
