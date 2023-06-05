@@ -363,7 +363,7 @@ export default {
 
     async getUtilizacoesPendentes() {
       try {
-        await this.utilizacaoStore.getUtilizacoesPendentes();
+        const utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
         this.utilizacoes = utilizacoes;
       } catch (error) {
         console.log(error);
