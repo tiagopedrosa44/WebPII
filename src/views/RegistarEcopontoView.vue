@@ -27,6 +27,7 @@
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
 import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import jwtDecode from "jwt-decode";
 export default {
   components: {
     NavBar,
@@ -41,9 +42,9 @@ export default {
       userId: "",
     };
   },
-  created() {
-    this.userAtual = localStorage.getItem("userLogado");
-    console.log(this.userAtual);
+  async mounted() {
+    this.getUserId();
+    console.log(this.userId);
   },
   methods: {
     uploadFoto() {

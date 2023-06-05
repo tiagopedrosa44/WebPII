@@ -270,7 +270,6 @@ export default {
     };
   },
 
-  // Recolher as informações e guarda as informações no array do user
   methods: {
     getUserId() {
       const user = JSON.parse(localStorage.getItem("user"));
