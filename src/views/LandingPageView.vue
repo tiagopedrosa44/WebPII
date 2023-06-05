@@ -257,7 +257,7 @@
 <script>
 import NavBar from "@/components/NavBar-landing.vue";
 import { userStore } from "../stores/userStore.js";
-import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import { utilizacaoStore } from "../stores/utilizacaoStore.js";
 
 export default {
   components: {
