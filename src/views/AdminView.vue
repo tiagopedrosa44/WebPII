@@ -203,7 +203,6 @@ import { lojaStore } from "../stores/lojaStore.js";
 import { badgeStore } from "../stores/badgesStore.js";
 import { ecopontoStore } from "../stores/ecopontoStore.js";
 import { EcopontosService } from "../services/ecopontos.service";
-import { log } from 'console';
 
 export default {
   data() {
@@ -250,7 +249,7 @@ export default {
     },
     async getEcopontos() {
       try {
-        const ecopontos = await this.ecopontoService.ecopontosPorValidar();
+        const ecopontos = await this.ecopontoStore.getEcopontosPorValidar();
         this.ecopontos = ecopontos;
         console.log(ecopontos);
       } catch (error) {
