@@ -62,8 +62,8 @@
         <tr v-for="item in itensLoja">
           <td>{{ item._id }}</td>
           <td>{{ item.nome }}</td>
-          <td :id="'stock' + item._id">{{ item.stock }}</td>
           <td :id="'preco' + item._id">{{ item.preco }}</td>
+          <td :id="'stock' + item._id">{{ item.stock }}</td>
           <td>
             <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
             <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
@@ -120,11 +120,11 @@
     </div>
   </div> -->
   <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
-      {{ snackbarMessage }}
-    </v-snackbar>
-    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
-      {{ snackbarMessage2 }}
-    </v-snackbar>
+    {{ snackbarMessage }}
+  </v-snackbar>
+  <v-snackbar ref="snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
+    {{ snackbarMessage2 }}
+  </v-snackbar>
 </template>
 
 <script>
@@ -136,7 +136,7 @@ import { badgeStore } from "../stores/badgesStore.js";
 export default {
   data() {
     return {
-      users:[],
+      users: [],
       store: userStore(),
       utilizacaoStore: utilizacaoStore(),
       lojaStore: lojaStore(),
@@ -169,32 +169,32 @@ export default {
     await this.getBadges();
   },
   methods: {
-    async getUsersList(){
-      try{
+    async getUsersList() {
+      try {
         const users = await this.store.getALlUsers();
         this.users = users;
-      } catch (error){
+      } catch (error) {
         console.log(error);
       }
     },
-    async deleteUser(id){
-      try{
+    async deleteUser(id) {
+      try {
         await this.store.deleteUserById(id);
         this.users = this.users.filter((user) => user._id !== id);
         this.snackbar2 = true;
         this.snackbarMessage2 = "Utilizador removido com sucesso!";
-      } catch (error){
+      } catch (error) {
         this.snackbar = true;
         this.snackbarMessage = error;
       }
     },
-    async deleteItem(id){
-      try{
+    async deleteItem(id) {
+      try {
         await this.lojaStore.deleteItem(id);
         this.itensLoja = this.itensLoja.filter((item) => item._id !== id);
         this.snackbar2 = true;
         this.snackbarMessage2 = "Item removido com sucesso!";
-      } catch (error){
+      } catch (error) {
         this.snackbar = true;
         this.snackbarMessage = error;
       }
@@ -210,20 +210,20 @@ export default {
         this.snackbarMessage = error;
       }
     },
-    async getAllItems(){
-      try{
+    async getAllItems() {
+      try {
         const items = await this.lojaStore.getAllItems();
         this.itensLoja = items;
         console.log(this.itensLoja);
-      } catch (error){
+      } catch (error) {
         console.log(error);
       }
     },
-    async getBadges(){
-      try{
+    async getBadges() {
+      try {
         const badges = await this.badgeStore.getBadges();
         this.badges = badges;
-      } catch (error){
+      } catch (error) {
         console.log(error);
       }
     },
@@ -245,7 +245,7 @@ export default {
       this.utilizacaoStore.updateLocalStorage()
     },
 
-    editarItem(id) {
+    async editarItem(id) {
       const linhaPreco = document.getElementById("preco" + id);
       this.precoOriginal = linhaPreco.textContent
       const linhaStock = document.getElementById("stock" + id);
@@ -264,6 +264,10 @@ export default {
         this.editar = null;
         const novoPreco = linhaPreco.querySelector("input").value;
         const novoStock = linhaStock.querySelector("input").value;
+
+        await this.lojaStore.editItem(id, { preco: novoPreco, stock: novoStock })
+
+        this.itensLoja = this.getAllItems()
 
         linhaPreco.textContent = novoPreco;
         linhaStock.textContent = novoStock;

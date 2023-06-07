@@ -4,7 +4,7 @@ import { LojaService } from "../services/loja.service";
 export const lojaStore = defineStore("loja", {
   state: () => ({
     itens: [
-      
+
     ],
   }),
   getters: {
@@ -44,8 +44,17 @@ export const lojaStore = defineStore("loja", {
       } catch (error) {
         throw Error(error);
       }
+    },
+    async editItem(id, data) {
+      try {
+        const response = await LojaService.editItem(id, data);
+        return response;
+      }
+      catch (error) {
+        throw Error(error);
+      }
     }
   },
-  
-  
+
+
 });
