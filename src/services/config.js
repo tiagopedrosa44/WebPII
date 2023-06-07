@@ -1,2 +1,2 @@
-const API_URL ='https://outstanding-windbreaker-mite.cyclic.app'
+const API_URL ='https://georecycle.cyclic.app'
 export default API_URL

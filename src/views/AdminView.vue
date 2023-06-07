@@ -62,8 +62,8 @@
         <tr v-for="item in itensLoja">
           <td>{{ item._id }}</td>
           <td>{{ item.nome }}</td>
-          <td :id="'stock' + item._id">{{ item.stock }}</td>
           <td :id="'preco' + item._id">{{ item.preco }}</td>
+          <td :id="'stock' + item._id">{{ item.stock }}</td>
           <td>
             <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
             <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
@@ -191,17 +191,8 @@ export default {
   methods: {
     async getUsersList() {
       try {
-        await this.store.getALlUsers();
-        this.users = this.store.getUsers;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async getEcopontos() {
-      try {
-        const ecopontos = await this.ecopontoStore.getEcopontosPorValidar();
-        this.ecopontos = ecopontos;
-        console.log(ecopontos);
+        const users = await this.store.getALlUsers();
+        this.users = users;
       } catch (error) {
         console.log(error);
       }
@@ -286,8 +277,8 @@ export default {
     },
     async getBadges() {
       try {
-        await this.badgeStore.getBadges();
-        this.badges = this.badgeStore.getAllBadges;
+        const badges = await this.badgeStore.getBadges();
+        this.badges = badges;
       } catch (error) {
         console.log(error);
       }
@@ -344,6 +335,12 @@ export default {
         .nome;
     },
 
+    rejeitarUtilizacao(id) {
+      let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
+      utilizacao.rejeitado = true
+      this.utilizacaoStore.updateLocalStorage()
+    },
+
     async editarItem(id) {
       const linhaPreco = document.getElementById("preco" + id);
       this.precoOriginal = linhaPreco.textContent;
@@ -362,6 +359,10 @@ export default {
         this.editar = null;
         const novoPreco = linhaPreco.querySelector("input").value;
         const novoStock = linhaStock.querySelector("input").value;
+
+        await this.lojaStore.editItem(id, { preco: novoPreco, stock: novoStock })
+
+        this.itensLoja = this.getAllItems()
 
         linhaPreco.textContent = novoPreco;
         linhaStock.textContent = novoStock;
