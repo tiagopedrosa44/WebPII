@@ -56,7 +56,7 @@ export default defineComponent({
     this.getEcopontos();
   },
   methods: {
-    async getEcopontos(){
+    async getEcopontos() {
       try {
         await this.store.getEcopontos();
         this.ecopontos = this.store.getAllEcopontos;
@@ -99,17 +99,17 @@ export default defineComponent({
           this.jaAdicionado = false;
         }
 
-        const lat = event.latLng.lat();
+        /* const lat = event.latLng.lat();
         const lng = event.latLng.lng();
-        //console.log(lat, lng);
+        console.log(lat, lng); */
 
         const marker = new google.maps.Marker({
-          coordenadas: { lat: lat, lng: lng },
+          coordenadas: { lat: event.latLng.lat(), lng: event.latLng.lat() },
           map: this.$refs.map,
         });
 
         this.ecopontos.push(marker);
-        this.center = { lat: lat, lng: lng };
+        this.center = marker.coordenadas;
 
         //--------------------NÃO FUNCIONA ENQUANTO A API NÃO ESTIVER PAGA--------------------//
         /* const geocoder = new google.maps.Geocoder();
@@ -127,7 +127,7 @@ export default defineComponent({
 
         const ecopontoMap = JSON.stringify(marker.coordenadas)
         localStorage.setItem("ecopontoMap", ecopontoMap);
-        console.log(ecopontoMap);
+        console.log(JSON.parse(ecopontoMap));
         this.jaAdicionado = true;
       }
     },
