@@ -191,29 +191,12 @@ export default {
   methods: {
     async getUsersList() {
       try {
-<<<<<<< HEAD
         const users = await this.store.getALlUsers();
         this.users = users;
-=======
-        await this.store.getALlUsers();
-        this.users = this.store.getUsers;
->>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
       } catch (error) {
         console.log(error);
       }
     },
-<<<<<<< HEAD
-=======
-    async getEcopontos() {
-      try {
-        const ecopontos = await this.ecopontoStore.getEcopontosPorValidar();
-        this.ecopontos = ecopontos;
-        console.log(ecopontos);
-      } catch (error) {
-        console.log(error);
-      }
-    },
->>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
     async deleteUser(id) {
       try {
         await this.store.deleteUserById(id);
@@ -247,13 +230,6 @@ export default {
         this.snackbarMessage = error;
       }
     },
-<<<<<<< HEAD
-    async getAllItems() {
-      try {
-        const items = await this.lojaStore.getAllItems();
-        this.itensLoja = items;
-        console.log(this.itensLoja);
-=======
 
     async editBadge(id) {
       const linhaNome = document.getElementById("nome" + id);
@@ -295,20 +271,14 @@ export default {
       try {
         await this.lojaStore.getAllItems();
         this.itensLoja = this.lojaStore.getItens;
->>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
       } catch (error) {
         console.log(error);
       }
     },
     async getBadges() {
       try {
-<<<<<<< HEAD
         const badges = await this.badgeStore.getBadges();
         this.badges = badges;
-=======
-        await this.badgeStore.getBadges();
-        this.badges = this.badgeStore.getAllBadges;
->>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
       } catch (error) {
         console.log(error);
       }
@@ -365,15 +335,12 @@ export default {
         .nome;
     },
 
-<<<<<<< HEAD
     rejeitarUtilizacao(id) {
       let utilizacao = this.utilizacoes.find((utilizacao) => utilizacao.id == id)
       utilizacao.rejeitado = true
       this.utilizacaoStore.updateLocalStorage()
     },
 
-=======
->>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
     async editarItem(id) {
       const linhaPreco = document.getElementById("preco" + id);
       this.precoOriginal = linhaPreco.textContent;

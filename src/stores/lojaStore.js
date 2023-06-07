@@ -52,12 +52,8 @@ export const lojaStore = defineStore("loja", {
       try {
         const response = await LojaService.editItem(id, data);
         return response;
-<<<<<<< HEAD
       }
       catch (error) {
-=======
-      } catch (error) {
->>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
         throw Error(error);
       }
     }

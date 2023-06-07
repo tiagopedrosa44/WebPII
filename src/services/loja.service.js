@@ -87,15 +87,9 @@ export const LojaService = {
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-<<<<<<< HEAD
                 preco: data.preco,
                 stock: data.stock
             })
-=======
-                stock: data.stock,
-                preço: data.preço
-            }),
->>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
         });
         if (response.ok) {
             let data = await response.json();
