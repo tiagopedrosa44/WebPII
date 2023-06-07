@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="perfil">
     <v-container>
       <v-row>
@@ -278,7 +278,7 @@ export default {
       if (token) {
         const decoded = jwtDecode(token);
         this.userId = decoded.id;
-      }
+      } 
     },
     async getUser(id) {
       try {

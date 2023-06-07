@@ -17,7 +17,7 @@
         <img src="../assets/imgs/adFoto.png" id="adFoto" @click="uploadFoto()" />
         <br />
         <v-btn style="background-color: #f0cd6e"
-          @click="this.utilizacaoStore.registarUtilizacao(this.ecoponto)">Registar</v-btn>
+          @click="registarUtilizacao(this.ecoponto)">Registar</v-btn>
       </v-container>
     </div>
   </div>
@@ -39,12 +39,8 @@ export default {
       ecoponto: this.$route.params.id,
       userAtual: "",
       filePath: "",
-      userId: "",
+      userId: null,
     };
-  },
-  async mounted() {
-    this.getUserId();
-    console.log(this.userId);
   },
   methods: {
     uploadFoto() {
@@ -81,6 +77,11 @@ export default {
         console.log(error);
       }
     },
+  },
+  async mounted() {
+    this.getUserId();
+    console.log(this.userId);
+    console.log(this.ecoponto);
   },
 };
 
