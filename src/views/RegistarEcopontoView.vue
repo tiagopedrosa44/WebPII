@@ -17,7 +17,7 @@
         <img src="../assets/imgs/adFoto.png" id="adFoto" @click="uploadFoto()" />
         <br />
         <v-btn style="background-color: #f0cd6e"
-          @click="this.utilizacaoStore.registarUtilizacao(this.userAtual, this.ecoponto, this.filePath)">Registar</v-btn>
+          @click="this.utilizacaoStore.registarUtilizacao(this.ecoponto)">Registar</v-btn>
       </v-container>
     </div>
   </div>
@@ -26,7 +26,8 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
-import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import { utilizacaoStore } from "../stores/utilizacaoStore.js";
+import jwtDecode from "jwt-decode";
 export default {
   components: {
     NavBar,
@@ -38,11 +39,12 @@ export default {
       ecoponto: this.$route.params.id,
       userAtual: "",
       filePath: "",
+      userId: "",
     };
   },
-  created() {
-    this.userAtual = localStorage.getItem("userLogado");
-    console.log(this.userAtual);
+  async mounted() {
+    this.getUserId();
+    console.log(this.userId);
   },
   methods: {
     uploadFoto() {
@@ -59,8 +61,29 @@ export default {
         document.getElementById("adFoto").src = URL.createObjectURL(file);
       };
     },
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = user.accessToken;
+
+      if (token) {
+        const decoded = jwtDecode(token);
+        this.userId = decoded.id;
+      }
+    },
+    async registarUtilizacao(id) {
+      try {
+        await this.utilizacaoStore.registarUtilizacao(id, {
+          idUser: this.userId,
+          foto: this.filePath
+        })
+      }
+      catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
+
 </script>
 
 <style scoped>

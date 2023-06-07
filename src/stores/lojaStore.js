@@ -16,10 +16,13 @@ export const lojaStore = defineStore("loja", {
     async getAllItems() {
       try {
         const response = await LojaService.getAllItems();
-        return response;
+        this.setItems(response);
       } catch (error) {
         console.log(error);
       }
+    },
+    setItems(items) {
+      this.itens = items;
     },
     async getItemsUser() {
       try {
@@ -49,8 +52,12 @@ export const lojaStore = defineStore("loja", {
       try {
         const response = await LojaService.editItem(id, data);
         return response;
+<<<<<<< HEAD
       }
       catch (error) {
+=======
+      } catch (error) {
+>>>>>>> 5c650a4860186447319a8be1e8a31ce0bcdeda21
         throw Error(error);
       }
     }

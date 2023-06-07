@@ -34,7 +34,9 @@
             </p>
           </v-col>
           <v-col cols="2" align="center">
-            <p id="info">Ecopontos Utilizados <br />{{ user.numUsoEcopontos }}</p>
+            <p id="info">
+              Ecopontos Utilizados <br />{{ user.numUsoEcopontos }}
+            </p>
           </v-col>
           <v-col cols="2" align="center">
             <p id="info">Moedas <br />{{ user.moedas }}</p>
@@ -182,9 +184,9 @@
         <v-col cols="4"></v-col>
       </v-row>
     </v-container>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
     <v-container>
       <v-row>
         <v-col>
@@ -193,26 +195,43 @@
       </v-row>
       <v-row>
         <v-col>
-          <v-carousel show-arrows="hover" prev-icon="fa-solid fa-arrow-left" next-icon="fa-solid fa-arrow-right">
-            <v-carousel-item v-for="utilizacao in utilizacoesFiltradas"
+          <v-carousel
+            show-arrows="hover"
+            prev-icon="fa-solid fa-arrow-left"
+            next-icon="fa-solid fa-arrow-right"
+          >
+            <v-carousel-item
+              v-for="utilizacao in utilizacoes"
               :src="utilizacao.foto"
               cover
             ></v-carousel-item>
-
           </v-carousel>
         </v-col>
       </v-row>
     </v-container>
-    <v-container>
+    <v-container v-if="noBadges">
+      <v-row>
+        <v-col class="d-flex justify-center mb-6 bg-surface-variant">
+          <h1 id="titleBadge">As minhas Badges</h1>
+        </v-col>
+      </v-row>
+      <h2>{{ noBadgesMsg }}</h2>
+    </v-container>
+    <v-container v-else="!noBadges">
       <v-row>
         <v-col class="d-flex justify-center mb-6 bg-surface-variant">
           <h1 id="titleBadge">As minhas Badges</h1>
         </v-col>
       </v-row>
       <v-row>
-        <v-col> 
-          <v-carousel show-arrows="hover" prev-icon="fa-solid fa-arrow-left" next-icon="fa-solid fa-arrow-right">
-            <v-carousel-item v-for="badge in badges"
+        <v-col>
+          <v-carousel
+            show-arrows="hover"
+            prev-icon="fa-solid fa-arrow-left"
+            next-icon="fa-solid fa-arrow-right"
+          >
+            <v-carousel-item
+              v-for="badge in badges"
               :src="badge"
               cover
             ></v-carousel-item>
@@ -220,15 +239,14 @@
         </v-col>
       </v-row>
     </v-container>
-   
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
-import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
-import  jwtDecode  from "jwt-decode";
+import { utilizacaoStore } from "../stores/utilizacaoStore.js";
+import jwtDecode from "jwt-decode";
 export default {
   components: {
     NavBar,
@@ -238,7 +256,7 @@ export default {
       store: userStore(),
       utilizacaoStore: utilizacaoStore(),
       user: [],
-      userId:"",
+      userId: "",
       width: window.innerWidth,
       height: window.innerHeight,
       length: 3,
@@ -246,16 +264,18 @@ export default {
       progresso: 0,
       referral: "",
       badges: [],
+      noBadges: false,
+      noBadgesMsg:"",
+      utilizacoes: [],
     };
   },
 
-// Recolher as informações e guarda as informações no array do user
   methods: {
-    getUserId(){
-      const user = JSON.parse(localStorage.getItem('user'));
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem("user"));
       const token = user.accessToken;
 
-      if(token) {
+      if (token) {
         const decoded = jwtDecode(token);
         this.userId = decoded.id;
       }
@@ -263,8 +283,7 @@ export default {
     async getUser(id) {
       try {
         const users = await this.store.getUserByID(id);
-        this.user = users
-
+        this.user = users;
       } catch (error) {
         console.log(error);
       }
@@ -272,22 +291,30 @@ export default {
     async getBadgesUser(id) {
       try {
         const badges = await this.store.getBadgesUser(id);
-        this.badges = badges
-
+        this.badges = badges;
+      } catch (error) {
+        this.noBadges = true;
+        this.noBadgesMsg = error
+      }
+    },
+    async getUtilizacoesUser(id){
+      try{
+        const utilizacoes = await this.store.getUtilizacoesUser(id);
+        this.utilizacoes = utilizacoes;
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   },
 
   async mounted() {
     this.getUserId();
     await this.getBadgesUser(this.userId);
-    await this.getUser(this.userId)
+    await this.getUtilizacoesUser(this.userId);
+    await this.getUser(this.userId);
     this.progresso = this.store.calculateProgress(this.user.pontos);
     this.referral = this.user.referral;
   },
-
 
   computed: {
     /* utilizacoesFiltradas() {
@@ -296,8 +323,6 @@ export default {
     } */
   },
   created() {
-     
-    
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
@@ -449,7 +474,7 @@ export default {
   height: 700px;
 }
 
-#titulo{
+#titulo {
   color: #fdfcf8;
   font-family: "Exo";
   font-weight: bold;

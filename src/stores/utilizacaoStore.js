@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { UtilizacoesService } from '../services/utilizacoes.service'
 
 export const utilizacaoStore = defineStore('utilizacao', {
   state: () => ({
@@ -19,31 +20,34 @@ export const utilizacaoStore = defineStore('utilizacao', {
     },
   },
   actions: {
+    async getUtilizacoesPendentes() {
+      try{
+        const response = await UtilizacoesService.getUtilizacoesPendentes();
+        return (response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async registarUtilizacao(id, data) {
+      try {
+        const response = await UtilizacoesService.registarUtilizacao(id, data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     updateLocalStorage() {
       localStorage.setItem("utilizacoes", JSON.stringify(this.utilizacoes))
     },
 
-    registarUtilizacao(username, idEcoponto, foto) {
-      let idUser
-      const users = JSON.parse(localStorage.getItem("users"))
-      users.forEach(user => {
-        if (user.nome == username) idUser = user.id;
-      });
+    async validarUtilizacao(id, data) {
       try {
-        this.utilizacoes.push({
-          id: this.utilizacoes.length,
-          idUser: idUser,
-          idEcoponto: idEcoponto,
-          foto: foto,
-          data: new Date().toLocaleDateString(),
-          aprovado: false,
-          rejeitado: false,
-        })
-        this.updateLocalStorage()
-        console.log("Utilização registada com sucesso");
+        const response = await UtilizacoesService.validarUtilizacao(id, data);
+        return response;
       } catch (error) {
-        throw error
+        console.log(error);
       }
-    },
+    }
   },
 })

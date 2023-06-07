@@ -45,5 +45,62 @@ export const EcopontosService = {
       const data = await response.json();
       throw Error(data.message);
     }
-  }
+  },
+  async ecopontosPorValidar() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/ecopontos/pendentes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.ecopontos;
+    } else {
+      const data = await response.json();
+      throw Error(data.message);
+    }
+  },
+  async getEcopontoById(id) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/ecopontos/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.ecoponto;
+    } else {
+      const data = await response.json();
+      throw Error(data.msg);
+    }
+  },
+  async validarEcoponto(id,data) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/ecopontos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        ecopontoAprovado: data.ecopontoAprovado
+      })
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.msg;
+    } else {
+      const data = await response.json();
+      throw Error(data.msg);
+    }
+  },
 };
