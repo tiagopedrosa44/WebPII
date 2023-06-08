@@ -82,7 +82,7 @@ export const EcopontosService = {
       throw Error(data.msg);
     }
   },
-  async validarEcoponto(id,data) {
+  async validarEcoponto(id, data) {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user.accessToken;
     const response = await fetch(`${API_URL}/ecopontos/${id}`, {
@@ -94,6 +94,31 @@ export const EcopontosService = {
       body: JSON.stringify({
         ecopontoAprovado: data.ecopontoAprovado
       })
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.msg;
+    } else {
+      const data = await response.json();
+      throw Error(data.msg);
+    }
+  },
+  async adicionarEcoponto(data) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/ecopontos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId: data.userId,
+        morada: data.morada,
+        coordenadas: data.coordenadas,
+        dataCriacao: data.dataCriacao,
+        foto: data.foto,
+      }),
     });
     if (response.ok) {
       const data = await response.json();

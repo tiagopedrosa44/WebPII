@@ -38,9 +38,17 @@ export const ecopontoStore = defineStore("ecoponto", {
         console.log(error);
       }
     },
-    async validarEcoponto(id,data) {
+    async validarEcoponto(id, data) {
       try {
-        const response = await EcopontosService.validarEcoponto(id,data);
+        const response = await EcopontosService.validarEcoponto(id, data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async adicionarEcoponto(data) {
+      try {
+        const response = await EcopontosService.adicionarEcoponto(data);
         return response;
       } catch (error) {
         console.log(error);

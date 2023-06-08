@@ -53,7 +53,7 @@ export default {
       userStore: userStore(),
       btnAdicionarDisable: true,
       btnRegistarDisable: true,
-      ecopontosMap: localStorage.getItem("ecopontosMap"),
+      ecopontoMap: localStorage.getItem("ecopontoMap"),
       snackbar: false,
       snackbarMessage: "Ecoponto adicionado com sucesso! A voltar à página inicial..."
     };
@@ -75,20 +75,17 @@ export default {
     registar() {
       const ecoponto = [
         {
-          id: this.ecopontoStore.ecopontos.length + 1,
+          userId: localStorage.getItem("userLogado"),
           morada: "",
           coordenadas: {
-            lat: this.ecopontosMap.lat,
-            lng: this.ecopontosMap.lng
+            lat: this.ecopontoMap.lat,
+            lng: this.ecopontoMap.lng
           },
-          utilizacoes: 0,
-          vezesRegistado: 0,
-          quemAdicionou: this.userStore.getLoggedInUser.id,
           dataCriacao: new Date().toLocaleDateString('pt-PT').split('/').reverse().join('-').substr(0, 10),
           foto: "../src/assets/imgs/ecopontos/0.png",
         },
       ];
-      this.ecopontoStore.addEcoponto(ecoponto)
+      this.ecopontoStore.adicionarEcoponto(ecoponto);
       this.snackbar = true;
       setTimeout(() => {
         this.$router.push("/home");

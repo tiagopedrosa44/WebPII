@@ -1,2 +1,2 @@
-const API_URL ='https://backendgeorecycle.tiagopedrosa44.repl.co'
+const API_URL ='https://georecycle.cyclic.app'
 export default API_URL
