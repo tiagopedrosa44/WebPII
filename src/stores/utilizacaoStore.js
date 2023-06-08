@@ -28,33 +28,19 @@ export const utilizacaoStore = defineStore('utilizacao', {
         console.log(error);
       }
     },
-    
+    async registarUtilizacao(id, data) {
+      try {
+        const response = await UtilizacoesService.registarUtilizacao(id, data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     updateLocalStorage() {
       localStorage.setItem("utilizacoes", JSON.stringify(this.utilizacoes))
     },
 
-    registarUtilizacao(username, idEcoponto, foto) {
-      let idUser
-      const users = JSON.parse(localStorage.getItem("users"))
-      users.forEach(user => {
-        if (user.nome == username) idUser = user.id;
-      });
-      try {
-        this.utilizacoes.push({
-          id: this.utilizacoes.length,
-          idUser: idUser,
-          idEcoponto: idEcoponto,
-          foto: foto,
-          data: new Date().toLocaleDateString(),
-          aprovado: false,
-          rejeitado: false,
-        })
-        this.updateLocalStorage()
-        console.log("Utilização registada com sucesso");
-      } catch (error) {
-        throw error
-      }
-    },
     async validarUtilizacao(id, data) {
       try {
         const response = await UtilizacoesService.validarUtilizacao(id, data);

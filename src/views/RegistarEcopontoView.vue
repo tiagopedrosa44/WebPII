@@ -13,11 +13,25 @@
         <span id="voltar" @click="$router.go(-1)"><b>X</b></span>
         <h1 align="center" id="titulo">Registar utilização do ecoponto</h1>
         <br /><br />
-        <input type="file" accept="image/*" ref="foto" style="display: none" />
-        <img src="../assets/imgs/adFoto.png" id="adFoto" @click="uploadFoto()" />
+        <img
+          v-if="!fotoPreview"
+          src="../assets/imgs/adFoto.png"
+          id="adFoto"
+          @click="$refs.fileInput.click()"
+        />
+        <img v-else :src="fotoPreview" id="previewImage" @click="$refs.fileInput.click()" />
+        <form @submit="registarUtilizacao">
+          <input
+            type="file"
+            ref="fileInput"
+            style="display: none"
+            @change="uploadFile"
+          />
+          <v-btn type="submit" style="background-color: #f0cd6e">Registar</v-btn>
+        </form>
+
         <br />
-        <v-btn style="background-color: #f0cd6e"
-          @click="this.utilizacaoStore.registarUtilizacao(this.userAtual, this.ecoponto, this.filePath)">Registar</v-btn>
+        
       </v-container>
     </div>
   </div>
@@ -26,7 +40,9 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
-import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import { utilizacaoStore } from "../stores/utilizacaoStore.js";
+import { UtilizacoesService } from "../services/utilizacoes.service";
+import jwtDecode from "jwt-decode";
 export default {
   components: {
     NavBar,
@@ -37,32 +53,55 @@ export default {
       utilizacaoStore: utilizacaoStore(),
       ecoponto: this.$route.params.id,
       userAtual: "",
+      file: null,
+      fileInput: null,
       filePath: "",
+      userId: "",
+      fotoPreview: null,
     };
   },
-  created() {
-    this.userAtual = localStorage.getItem("userLogado");
-    console.log(this.userAtual);
+  async mounted() {
+    this.getUserId();
+    console.log(this.userId);
+    this.fileInput = this.$refs.fileInput;
+    console.log(this.fileInput);
   },
   methods: {
-    uploadFoto() {
-      this.$refs.foto.click();
-      this.$refs.foto.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e) => {
-          this.filePath = e.target.result;
-          console.log(this.filePath);
-        }
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = user.accessToken;
 
-        document.getElementById("adFoto").src = URL.createObjectURL(file);
+      if (token) {
+        const decoded = jwtDecode(token);
+        this.userId = decoded.id;
+      }
+    },
+    async uploadFile() {
+      this.file = this.$refs.fileInput.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.fotoPreview = e.target.result;
       };
+      reader.readAsDataURL(this.file);
+    },
+    async registarUtilizacao(event){
+      event.preventDefault();
+  
+      const formData = new FormData();
+      formData.append("image", this.file);
+      formData.append("idUser", this.userId);
+      try{
+        await UtilizacoesService.registarUtilizacao(this.ecoponto,formData);
+
+      } catch (error){
+        console.log(error);
+      }
+
     },
   },
 };
 </script>
-
 <style scoped>
 .home {
   background: linear-gradient(180deg, #1a9360 0%, #00ad79 47.71%, #40ddae 100%);
@@ -95,9 +134,9 @@ export default {
   align-self: flex-end;
   margin-right: 20px;
 }
-#titulo{
-  color: #FDFCF8;
-  font-family: 'exo';
+#titulo {
+  color: #fdfcf8;
+  font-family: "exo";
   font-weight: bold;
 }
 </style>

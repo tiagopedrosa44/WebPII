@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="perfil">
     <v-container>
       <v-row>
@@ -245,7 +245,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
-import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import { utilizacaoStore } from "../stores/utilizacaoStore.js";
 import jwtDecode from "jwt-decode";
 export default {
   components: {
@@ -270,7 +270,6 @@ export default {
     };
   },
 
-  // Recolher as informações e guarda as informações no array do user
   methods: {
     getUserId() {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -279,7 +278,7 @@ export default {
       if (token) {
         const decoded = jwtDecode(token);
         this.userId = decoded.id;
-      }
+      } 
     },
     async getUser(id) {
       try {

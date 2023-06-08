@@ -148,7 +148,7 @@
 
 <script>
 import { userStore } from "../stores/userStore.js";
-import { utilizacaoStore } from "../stores/utilizaçãoStore.js";
+import { utilizacaoStore } from "../stores/utilizacaoStore.js";
 import { lojaStore } from "../stores/lojaStore.js";
 import { badgeStore } from "../stores/badgesStore.js";
 import { ecopontoStore } from "../stores/ecopontoStore.js";
