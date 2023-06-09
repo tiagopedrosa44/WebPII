@@ -73,7 +73,7 @@ export default {
       };
     },
     registar() {
-      const ecoponto = [
+      /* const ecoponto = [
         {
           userId: localStorage.getItem("userLogado"),
           morada: "",
@@ -84,7 +84,19 @@ export default {
           dataCriacao: new Date().toLocaleDateString('pt-PT').split('/').reverse().join('-').substr(0, 10),
           foto: "../src/assets/imgs/ecopontos/0.png",
         },
-      ];
+      ]; */
+      const ecoponto = {
+        userId: localStorage.getItem("userLogado"),
+        morada: "",
+        coordenadas: {
+          lat: 41.36611,
+          lng: 41.36611,
+        },
+        dataCriacao: new Date().toLocaleDateString('pt-PT').split('/').reverse().join('-').substr(0, 10),
+        foto: "../src/assets/imgs/ecopontos/0.png",
+      };
+
+      console.log("view");
       this.ecopontoStore.adicionarEcoponto(ecoponto);
       this.snackbar = true;
       setTimeout(() => {

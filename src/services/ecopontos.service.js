@@ -104,6 +104,7 @@ export const EcopontosService = {
     }
   },
   async adicionarEcoponto(data) {
+    console.log("service", data);
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user.accessToken;
     const response = await fetch(`${API_URL}/ecopontos`, {
