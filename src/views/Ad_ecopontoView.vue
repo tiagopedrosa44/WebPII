@@ -87,7 +87,7 @@ export default {
       ]; */
       const ecoponto = {
         userId: localStorage.getItem("userLogado"),
-        morada: "",
+        morada: "teste",
         coordenadas: {
           lat: 41.36611,
           lng: 41.36611,
