@@ -48,7 +48,6 @@ export const ecopontoStore = defineStore("ecoponto", {
     },
     async adicionarEcoponto(data) {
       try {
-        console.log("store", data);
         const response = await EcopontosService.adicionarEcoponto(data);
         return response;
       } catch (error) {

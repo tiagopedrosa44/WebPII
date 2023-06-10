@@ -24,10 +24,13 @@
           os pontos correspondentes.
         </span>
         <br /><br /><br /><br /><br />
-        <v-btn class="botaoAmarelo" @click="uploadFoto()" :disabled="btnAdicionarDisable">Adicionar
+        <v-btn class="botaoAmarelo" @click="$refs.fileInput.click()" :disabled="btnAdicionarDisable">Adicionar
           foto</v-btn><br /><br />
-        <v-btn class="botaoAmarelo" id="btnRegistar" @click="registar()" :disabled="btnRegistarDisable">Confirmar</v-btn>
-        <input type="file" accept="image/*" ref="foto" style="display: none" />
+
+        <form @submit="registarEcoponto">
+          <input type="file" ref="fileInput" @change="uploadFile" style="display: none" />
+          <v-btn class="botaoAmarelo" type="submit" id="btnRegistar" :disabled="btnRegistarDisable">Confirmar</v-btn>
+        </form>
       </div>
     </v-container>
     <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="success">
@@ -41,6 +44,8 @@ import NavBar from "@/components/NavBar.vue";
 import Mapa from "@/components/Mapa.vue";
 import { ecopontoStore } from "../stores/ecopontoStore.js";
 import { userStore } from "../stores/userStore.js";
+import { EcopontosService } from "../services/ecopontos.service";
+import jwtDecode from "jwt-decode";
 
 export default {
   components: {
@@ -53,27 +58,56 @@ export default {
       userStore: userStore(),
       btnAdicionarDisable: true,
       btnRegistarDisable: true,
+      fileInput: null,
+      file: null,
+      lat: null,
+      lng: null,
+      userId: "",
       ecopontoMap: localStorage.getItem("ecopontoMap"),
       snackbar: false,
       snackbarMessage: "Ecoponto adicionado com sucesso! A voltar à página inicial..."
     };
   },
   methods: {
-    uploadFoto() {
-      this.$refs.foto.click();
-      this.$refs.foto.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e) => {
-          this.filePath = e.target.result;
-          console.log(this.filePath);
-        };
-        this.btnRegistarDisable = false;
-      };
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = user.accessToken;
+
+      if (token) {
+        const decoded = jwtDecode(token);
+        this.userId = decoded.id;
+      }
     },
-    registar() {
-      /* const ecoponto = [
+    async uploadFile() {
+      this.file = this.$refs.fileInput.files[0];
+      this.btnRegistarDisable = false;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.fotoPreview = e.target.result;
+      };
+      reader.readAsDataURL(this.file);
+    },
+
+    async registarEcoponto(event){
+      event.preventDefault();
+      const formData = new FormData();
+      formData.append("image", this.file);
+      formData.append("userId", this.userId);
+      formData.append("morada", "teste2");
+      formData.append("coordenadas",{lat: this.lat,lng: this.lng} );
+
+     
+      
+      try {
+        await EcopontosService.adicionarEcoponto(formData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+
+    /* registar() {
+       const ecoponto = [
         {
           userId: localStorage.getItem("userLogado"),
           morada: "",
@@ -84,7 +118,7 @@ export default {
           dataCriacao: new Date().toLocaleDateString('pt-PT').split('/').reverse().join('-').substr(0, 10),
           foto: "../src/assets/imgs/ecopontos/0.png",
         },
-      ]; */
+      ]; 
       const ecoponto = {
         userId: localStorage.getItem("userLogado"),
         morada: "teste",
@@ -102,16 +136,20 @@ export default {
       setTimeout(() => {
         this.$router.push("/home");
       }, 2000);
-    }
+    }  */
   },
   mounted() {
     setInterval(() => {
       this.ecopontosMap = JSON.parse(localStorage.getItem("ecopontoMap"));
-      //console.log(this.ecopontosMap);
       if (this.ecopontosMap != null) {
+        this.lat = this.ecopontosMap.lat;
+        this.lng = this.ecopontosMap.lng;
         this.btnAdicionarDisable = false;
       }
     }, 100);
+    this.fileInput = this.$refs.fileInput;
+    this.getUserId();
+
   },
 };
 </script>

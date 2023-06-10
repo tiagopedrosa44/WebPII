@@ -104,7 +104,7 @@ export default defineComponent({
         console.log(lat, lng); */
 
         const marker = new google.maps.Marker({
-          coordenadas: { lat: event.latLng.lat(), lng: event.latLng.lat() },
+          coordenadas: { lat: event.latLng.lat(), lng: event.latLng.lng() },
           map: this.$refs.map,
         });
 

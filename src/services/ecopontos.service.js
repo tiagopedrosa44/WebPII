@@ -103,23 +103,15 @@ export const EcopontosService = {
       throw Error(data.msg);
     }
   },
-  async adicionarEcoponto(data) {
-    console.log("service", data);
+  async adicionarEcoponto(formData) {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user.accessToken;
     const response = await fetch(`${API_URL}/ecopontos`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json;charset=utf-8",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        userId: data.userId,
-        morada: data.morada,
-        coordenadas: data.coordenadas,
-        dataCriacao: data.dataCriacao,
-        foto: data.foto,
-      }),
+      body: formData,
     });
     if (response.ok) {
       const data = await response.json();
