@@ -55,7 +55,6 @@ export default {
       userAtual: "",
       file: null,
       fileInput: null,
-      filePath: "",
       userId: "",
       fotoPreview: null,
     };

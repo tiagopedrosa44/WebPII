@@ -12,7 +12,7 @@
         <v-row>
           <v-col cols="1" align="center">
             <v-img
-              src="/src/assets/imgs/avatar2.png"
+              :src="user.foto"
               id="avatar"
               width="83px"
               height="90px"

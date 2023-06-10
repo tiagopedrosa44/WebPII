@@ -1,6 +1,5 @@
 import API_URL from "./config.js";
 
-
 export const UserService = {
   async getALlUsers() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -59,8 +58,27 @@ export const UserService = {
       const data = await response.json();
       throw Error(data.message);
     }
-    
   },
+
+  async updateUserPhotoById(id, formData) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/utilizadores/${id}/foto`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      const data = await response.json();
+      throw Error(data.message);
+    }
+  },
+
   async getUserByID(id) {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user.accessToken;

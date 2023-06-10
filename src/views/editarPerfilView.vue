@@ -36,15 +36,38 @@
             </v-btn>
           </v-col>
           <v-col cols="12" md="6">
-            <v-avatar size="120" v-bind:color="color">
-              <template v-slot:placeholder>
-                <v-icon>mdi-camera</v-icon>
-              </template>
-            </v-avatar>
-            <v-btn color="primary" @click="alterarImagem">
-              Alterar imagem
+            <div class="fotoperfil">
+              <v-img 
+              v-if="!fotoPreview"
+              :src="user.foto"
+              id="avatar"
+              width="200px"
+              height="200px"
+            ></v-img>
+            <v-img 
+              v-else
+              :src="fotoPreview"
+              id="avatar"
+              width="200px"
+              height="200px"
+            ></v-img>
+            </div>
+            <v-btn color="primary" @click="$refs.fileInput.click()">
+              Escolher imagem
             </v-btn>
+            <form @submit="updateUserImage">
+              <input
+                type="file"
+                ref="fileInput"
+                style="display: none"
+                @change="uploadFile"
+              />
+              <v-btn color="primary" type="submit" :disabled="btnDisable">
+                Alterar imagem
+              </v-btn>
+            </form>
           </v-col>
+  
         </v-row>
       </v-container>
       <input type="file" accept="image/*" ref="foto" style="display: none" />
@@ -67,6 +90,7 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import { userStore } from "../stores/userStore.js";
+import { UserService } from "../services/user.service";
 import jwtDecode from "jwt-decode";
 
 export default {
@@ -76,6 +100,7 @@ export default {
   data() {
     return {
       store: userStore(),
+      user:[],
       biografia: "",
       novaSenha: "",
       confirmarSenha: "",
@@ -85,6 +110,10 @@ export default {
       snackbarMessage: "",
       snackbar2: false,
       snackbarMessage2: "",
+      fotoPreview:null,
+      file:null,
+      fileInput:null,
+      btnDisable:true,
     };
   },
   methods: {
@@ -95,6 +124,24 @@ export default {
       if (token) {
         const decoded = jwtDecode(token);
         this.userId = decoded.id;
+      }
+    },
+
+    async uploadFile(){
+      this.file = this.$refs.fileInput.files[0];
+      this.btnDisable = false;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.fotoPreview = e.target.result;
+      };
+      reader.readAsDataURL(this.file);
+    },
+    async getUser(id) {
+      try {
+        const users = await this.store.getUserByID(id);
+        this.user = users;
+      } catch (error) {
+        console.log(error);
       }
     },
     async updateUser(id) {
@@ -114,6 +161,16 @@ export default {
         this.snackbarMessage = error;
       }
     },
+    async updateUserImage(event){
+      event.preventDefault()
+      const formData = new FormData();
+      formData.append('image',this.file);
+      try{
+        await UserService.updateUserPhotoById(this.userId,formData);
+      } catch(error){
+        console.log(error);
+      }
+    },
     alterarImagem() {
       this.$refs.foto.click();
       this.$refs.foto.onchange = (e) => {
@@ -127,8 +184,10 @@ export default {
       };
     },
   },
-  mounted() {
+  async mounted() {
     this.getUserId();
+    await this.getUser(this.userId);
+    this.fileInput = this.$refs.fileInput;
   },
 };
 </script>
