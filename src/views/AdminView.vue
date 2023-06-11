@@ -280,8 +280,7 @@
           <v-divider></v-divider>
           <div v-for="utilizacao in utilizacoes">
             <img :src="utilizacao.foto" width="600" height="300" /><br />
-            <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
-            <p>Nome do Utilizador: {{ utilizacao.idUser }}</p>
+            <p>Nome do Utilizador: {{  getUsersNameById(utilizacao.idUser) }}</p>
             <p>Data: {{ utilizacao.data }}</p>
             <v-btn color="success" @click="validarUtilizacao(utilizacao._id)">
               Aprovar
@@ -298,8 +297,7 @@
           <v-divider></v-divider>
           <div v-for="ecoponto in ecopontos">
             <img :src="ecoponto.foto" width="600" height="300" /><br />
-            <p>ID do Ecoponto: {{ ecoponto._id }}</p>
-            <p>Nome do Utilizador: {{ ecoponto.userId }}</p>
+            <p>Nome do Utilizador: {{ getUsersNameById(ecoponto.userId) }}</p>
             <p>Data: {{ ecoponto.dataCriacao }}</p>
             <v-btn color="success" @click="validarEcoponto(ecoponto._id)">
               Aprovar
@@ -567,6 +565,10 @@ export default {
       } catch (error) {
         this.totalEcopoints = error
       }
+    },
+    getUsersNameById(id) {
+      const user = this.users.find((user) => user._id === id);
+      return user.nome;
     },
     async validarEcoponto(id) {
       try {
