@@ -13,6 +13,10 @@ export const userStore = defineStore("userStore", {
 
   getters: {
     getUsers: (state) => state.users,
+    getUserNameById: (state) => (userId) => {
+      const user = state.users.find((user) => user.id === userId);
+      return user ? user.name : '';
+    },
   },
 
   actions: {
