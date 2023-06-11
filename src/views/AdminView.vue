@@ -2,11 +2,7 @@
   <v-app>
     <v-navigation-drawer app v-model="drawer" id="drawer" permanent>
       <v-list dense>
-        <v-list-item
-          v-for="item in menuItems"
-          :key="item.title"
-          @click="changeContainer(item.title)"
-        >
+        <v-list-item v-for="item in menuItems" :key="item.title" @click="changeContainer(item.title)">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -26,17 +22,10 @@
                 <div>
                   <v-card-title class="text-h5"> Utilizadores </v-card-title>
 
-                  <v-card-subtitle
-                    >Número de utilizadores: {{ totalUsers }}</v-card-subtitle
-                  >
+                  <v-card-subtitle>Número de utilizadores: {{ totalUsers }}</v-card-subtitle>
 
                   <v-card-actions>
-                    <v-btn
-                      class="ms-2"
-                      variant="outlined"
-                      @click="changeContainer('Utilizadores')"
-                      size="small"
-                    >
+                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Utilizadores')" size="small">
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -53,17 +42,10 @@
                 <div>
                   <v-card-title class="text-h5"> Loja </v-card-title>
 
-                  <v-card-subtitle
-                    >Número de items:{{ totalItems }}</v-card-subtitle
-                  >
+                  <v-card-subtitle>Número de items:{{ totalItems }}</v-card-subtitle>
 
                   <v-card-actions>
-                    <v-btn
-                      class="ms-2"
-                      variant="outlined"
-                      @click="changeContainer('Itens da Loja')"
-                      size="small"
-                    >
+                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Itens da Loja')" size="small">
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -82,17 +64,10 @@
                     Ecopontos por aprovar
                   </v-card-title>
 
-                  <v-card-subtitle
-                    >Número de ecopontos:{{ totalEcopoints }}</v-card-subtitle
-                  >
+                  <v-card-subtitle>Número de ecopontos:{{ totalEcopoints }}</v-card-subtitle>
 
                   <v-card-actions>
-                    <v-btn
-                      class="ms-2"
-                      variant="outlined"
-                      @click="changeContainer('Ecopontos por Aprovar')"
-                      size="small"
-                    >
+                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Ecopontos por Aprovar')" size="small">
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -111,18 +86,12 @@
                     Utilizações por aprovar
                   </v-card-title>
 
-                  <v-card-subtitle
-                    >Número de ecopontos:{{ totalUtilizacoes }}</v-card-subtitle
-                  >
-                  
+                  <v-card-subtitle>Número de ecopontos:{{ totalUtilizacoes }}</v-card-subtitle>
+
 
                   <v-card-actions>
-                    <v-btn
-                      class="ms-2"
-                      variant="outlined"
-                      @click="changeContainer('Utilizações por Aprovar')"
-                      size="small"
-                    >
+                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Utilizações por Aprovar')"
+                      size="small">
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -168,9 +137,7 @@
                 <td>{{ user.referredBy }}</td>
 
                 <td>
-                  <v-btn color="error" @click="deleteUser(user._id)"
-                    >Remover</v-btn
-                  >
+                  <v-btn color="error" @click="deleteUser(user._id)">Remover</v-btn>
                 </td>
               </tr>
             </tbody>
@@ -194,33 +161,11 @@
                 <td :id="'stock' + item._id">{{ item.stock }}</td>
                 <td :id="'preco' + item._id">{{ item.preco }}</td>
                 <td>
-                  <v-btn
-                    color="success"
-                    @click="editarItem(item._id)"
-                    v-if="editar == item._id"
-                    >Guardar</v-btn
-                  >
-                  <v-btn
-                    color="primary"
-                    @click="editarItem(item._id)"
-                    :id="'botao' + item._id"
-                    v-else
-                    :disabled="editar != null && editar != item._id"
-                    >Editar</v-btn
-                  >
-                  <v-btn
-                    color="error"
-                    @click="cancelarI(item._id)"
-                    v-if="editar == item._id"
-                    >Cancelar</v-btn
-                  >
-                  <v-btn
-                    color="error"
-                    @click="deleteItem(item._id)"
-                    v-else
-                    :disabled="editar != null"
-                    >Remover</v-btn
-                  >
+                  <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
+                  <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
+                    :disabled="editar != null && editar != item._id">Editar</v-btn>
+                  <v-btn color="error" @click="cancelarI(item._id)" v-if="editar == item._id">Cancelar</v-btn>
+                  <v-btn color="error" @click="deleteItem(item._id)" v-else :disabled="editar != null">Remover</v-btn>
                 </td>
               </tr>
             </tbody>
@@ -242,33 +187,11 @@
                 <td :id="'nome' + badge._id">{{ badge.nome }}</td>
                 <td :id="'foto' + badge._id">{{ badge.foto }}</td>
                 <td>
-                  <v-btn
-                    color="success"
-                    @click="editBadge(badge._id)"
-                    v-if="editarB == badge._id"
-                    >Guardar</v-btn
-                  >
-                  <v-btn
-                    color="primary"
-                    @click="editBadge(badge._id)"
-                    :id="'botaoBadge' + badge._id"
-                    v-else
-                    :disabled="editarB != null && editarB != badge._id"
-                    >Editar</v-btn
-                  >
-                  <v-btn
-                    color="error"
-                    @click="cancelarEditB(badge._id)"
-                    v-if="editarB == badge._id"
-                    >Cancelar</v-btn
-                  >
-                  <v-btn
-                    color="error"
-                    @click="deleteBadge(badge._id)"
-                    v-else
-                    :disabled="editarB != null"
-                    >Remover</v-btn
-                  >
+                  <v-btn color="success" @click="editBadge(badge._id)" v-if="editarB == badge._id">Guardar</v-btn>
+                  <v-btn color="primary" @click="editBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
+                    :disabled="editarB != null && editarB != badge._id">Editar</v-btn>
+                  <v-btn color="error" @click="cancelarEditB(badge._id)" v-if="editarB == badge._id">Cancelar</v-btn>
+                  <v-btn color="error" @click="deleteBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
                 </td>
               </tr>
             </tbody>
@@ -280,7 +203,7 @@
           <v-divider></v-divider>
           <div v-for="utilizacao in utilizacoes">
             <img :src="utilizacao.foto" width="600" height="300" /><br />
-            <p>Nome do Utilizador: {{  getUsersNameById(utilizacao.idUser) }}</p>
+            <p>Nome do Utilizador: {{ getUsersNameById(utilizacao.idUser) }}</p>
             <p>Data: {{ utilizacao.data }}</p>
             <v-btn color="success" @click="validarUtilizacao(utilizacao._id)">
               Aprovar
@@ -544,6 +467,7 @@ export default {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: true,
         });
+        this.utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
       } catch (error) {
         console.log(error);
       }
@@ -553,6 +477,7 @@ export default {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: false,
         });
+        this.utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
       } catch (error) {
         console.log(error);
       }
@@ -570,39 +495,45 @@ export default {
       const user = this.users.find((user) => user._id === id);
       return user.nome;
     },
-    async validarEcoponto(id) {
+    async validarUtilizacao(id) {
       try {
-        await this.ecopontoStore.validarEcoponto(id, {
-          ecopontoAprovado: true,
+        await this.utilizacaoStore.validarUtilizacao(id, {
+          utilizacaoAprovada: true,
         });
+        setTimeout(async () => {
+          await this.getUtilizacoesPendentes();
+        }, 2000);
       } catch (error) {
         console.log(error);
       }
     },
-    async rejeitarEcoponto(id) {
+
+    async rejeitarUtilizacao(id) {
       try {
-        await this.ecopontoStore.validarEcoponto(id, {
-          ecopontoAprovado: false,
+        await this.utilizacaoStore.validarUtilizacao(id, {
+          utilizacaoAprovada: false,
         });
+        setTimeout(async () => {
+          await this.getUtilizacoesPendentes();
+        }, 2000);
       } catch (error) {
         console.log(error);
       }
     },
+
   },
 };
 </script>
 
 <style>
-
 #titleAdmin {
   color: #fdfcf8;
   font-family: "exo";
   font-weight: bold;
 }
+
 #drawer {
   background-color: #114b5f;
   color: #fdfcf8;
 }
-
-
 </style>

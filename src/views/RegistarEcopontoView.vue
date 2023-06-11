@@ -92,7 +92,7 @@ export default {
       formData.append("idUser", this.userId);
       try{
         await UtilizacoesService.registarUtilizacao(this.ecoponto,formData);
-
+        this.$router.push("/home");
       } catch (error){
         console.log(error);
       }
