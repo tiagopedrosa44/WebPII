@@ -1,32 +1,30 @@
-import { defineStore } from 'pinia'
-import { UtilizacoesService } from '../services/utilizacoes.service'
+import { defineStore } from "pinia";
+import { UtilizacoesService } from "../services/utilizacoes.service";
 
-export const utilizacaoStore = defineStore('utilizacao', {
+export const utilizacaoStore = defineStore("utilizacao", {
   state: () => ({
     utilizacoes: localStorage.utilizacoes
       ? JSON.parse(localStorage.utilizacoes)
-      : [
-      ],
+      : [],
   }),
   getters: {
     getUtilizacoes: (state) => state.utilizacoes,
 
     getUtilizacaoById: (state) => (id) => {
-      return state.utilizacoes.find((utilizacao) => utilizacao.id == id)
+      return state.utilizacoes.find((utilizacao) => utilizacao.id == id);
     },
 
     getUtilizacoesPorAprovar: (state) => {
-      return state.utilizacoes.filter((utilizacao) => utilizacao.aprovado == false && utilizacao.rejeitado == false)
+      return state.utilizacoes.filter(
+        (utilizacao) =>
+          utilizacao.aprovado == false && utilizacao.rejeitado == false
+      );
     },
   },
   actions: {
     async getUtilizacoesPendentes() {
-      try{
-        const response = await UtilizacoesService.getUtilizacoesPendentes();
-        return (response);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await UtilizacoesService.getUtilizacoesPendentes();
+      return response;
     },
     async registarUtilizacao(id, data) {
       try {
@@ -38,7 +36,7 @@ export const utilizacaoStore = defineStore('utilizacao', {
     },
 
     updateLocalStorage() {
-      localStorage.setItem("utilizacoes", JSON.stringify(this.utilizacoes))
+      localStorage.setItem("utilizacoes", JSON.stringify(this.utilizacoes));
     },
 
     async validarUtilizacao(id, data) {
@@ -48,6 +46,6 @@ export const utilizacaoStore = defineStore('utilizacao', {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
-})
+});

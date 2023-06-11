@@ -1,162 +1,341 @@
 <template>
-  <div class="divs">
-    <v-btn @click="$router.push('home')" color="primary">Voltar</v-btn>
+  <v-app>
+    <v-navigation-drawer app v-model="drawer" id="drawer" permanent>
+      <v-list dense>
+        <v-list-item
+          v-for="item in menuItems"
+          :key="item.title"
+          @click="changeContainer(item.title)"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      <v-btn @click="$router.push('home')" color="primary">Voltar</v-btn>
+    </v-navigation-drawer>
 
-    <h1>Utilizadores</h1>
-    <v-divider></v-divider>
-    <br />
-    <br />
-    <v-table fixed-header height="300px" style="width: 80%">
-      <thead>
-        <tr>
-          <th class="text-left">Id</th>
-          <th class="text-left">Tipo</th>
-          <th class="text-left">Nome</th>
-          <th class="text-left">Email</th>
-          <th class="text-left">Pontos</th>
-          <th class="text-left">Nível</th>
-          <th class="text-left">Moedas</th>
-          <th class="text-left">Utilizações</th>
-          <th class="text-left">Ecopontos registados</th>
-          <th class="text-left">Referral</th>
-          <th class="text-left">ReferredBy</th>
-          <th class="text-left">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="user in users">
-          <td>{{ user._id }}</td>
-          <td>{{ user.tipo }}</td>
-          <td>{{ user.nome }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.pontos }}</td>
-          <td>{{ user.nivel }}</td>
-          <td>{{ user.moedas }}</td>
-          <td>{{ user.numUsoEcopontos }}</td>
-          <td>{{ user.ecopontosRegistados }}</td>
-          <td>{{ user.referral }}</td>
-          <td>{{ user.referredBy }}</td>
+    <v-main>
+      <v-container fluid app>
+        <v-card v-if="currentContainer === 'Dashboard'">
+          <h1>Dashboard</h1>
+          <div class="dashboard-stats">
+            <v-card color="#114b5f" theme="dark">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h5"> Utilizadores </v-card-title>
 
-          <td>
-            <v-btn color="error" @click="deleteUser(user._id)">Remover</v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
+                  <v-card-subtitle
+                    >Número de utilizadores: {{ totalUsers }}</v-card-subtitle
+                  >
 
-    <h1>Itens da loja</h1>
-    <v-divider></v-divider>
-    <br />
-    <br />
-    <v-table fixed-header height="300px" style="width: 80%">
-      <thead>
-        <tr>
-          <th class="text-left">Id</th>
-          <th class="text-left">Nome</th>
-          <th class="text-left">Stock</th>
-          <th class="text-left">Preço</th>
-          <th class="text-left">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in itensLoja">
-          <td>{{ item._id }}</td>
-          <td>{{ item.nome }}</td>
-          <td :id="'stock' + item._id">{{ item.stock }}</td>
-          <td :id="'preco' + item._id">{{ item.preco }}</td>
-          <td>
-            <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
-            <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
-              :disabled="editar != null && editar != item._id">Editar</v-btn>
-            <v-btn color="error" @click="remover(item._id)" v-if="editar == item._id">Cancelar</v-btn>
-            <v-btn color="error" @click="deleteItem(item._id)" v-else :disabled="editar != null">Remover</v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
-    <br /><br /><br /><br />
-    <h1>Badges</h1>
-    <v-divider></v-divider>
-    <br />
-    <v-table fixed-header height="300px" style="width: 80%">
-      <thead>
-        <tr>
-          <th class="text-left">Nome</th>
-          <th class="text-left">Foto</th>
-          <th class="text-left">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="badge in badges">
-          <td :id="'nome' + badge._id">{{ badge.nome }}</td>
-          <td :id="'foto' + badge._id">{{ badge.foto }}</td>
-          <td>
-            <v-btn color="success" @click="editBadge(badge._id)" v-if="editarB == badge._id">Guardar</v-btn>
-            <v-btn color="primary" @click="editBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
-              :disabled="editarB != null && editarB != badge._id">Editar</v-btn>
-            <v-btn color="error" @click="apagarBadge(badge._id)" v-if="editarB == badge._id">Cancelar</v-btn>
-            <v-btn color="error" @click="deleteBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
-    <br /><br /><br />
-  </div>
+                  <v-card-actions>
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Utilizadores')"
+                      size="small"
+                    >
+                      Ver mais
+                    </v-btn>
+                  </v-card-actions>
+                </div>
 
-  <div class="divs">
-    <h1>Utilizações por aprovar</h1>
-    <v-divider></v-divider>
-    <div v-for="utilizacao in utilizacoes">
-      <img :src="utilizacao.foto" width="600" height="300" /><br>
-      <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
-      <p>Nome do Utilizador: {{ utilizacao.idUser }}</p>
-      <p>Data: {{ utilizacao.data }}</p>
-      <v-btn color="success" @click="validarUtilizacao(utilizacao._id)">
-        Aprovar
-      </v-btn>
-      <v-btn color="error" @click="rejeitarUtilizacao(utilizacao._id)">
-        Rejeitar
-      </v-btn>
-      <br><br><br><br>
-    </div>
-  </div>
+                <v-avatar class="ma-3" size="125" rounded="0">
+                  <v-icon size="56" icon="fa-solid fa-users"></v-icon>
+                </v-avatar>
+              </div>
+            </v-card>
+            <br>
+            <v-card color="#114b5f" theme="dark">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h5"> Loja </v-card-title>
 
-  <div class="divs">
-    <h1>Ecopontos por aprovar</h1>
-    <v-divider></v-divider>
-    <div v-for="ecoponto in ecopontos">
-      <img :src="ecoponto.foto" width="600" height="300" /><br>
-      <p>ID do Ecoponto: {{ ecoponto._id }}</p>
-      <p>Nome do Utilizador: {{ ecoponto.userId }}</p>
-      <p>Data: {{ ecoponto.dataCriacao }}</p>
-      <v-btn color="success" @click="validarEcoponto(ecoponto._id)">
-        Aprovar
-      </v-btn>
-      <v-btn color="error" @click="rejeitarEcoponto(ecoponto._id)">
-        Rejeitar
-      </v-btn>
-      <br><br><br><br>
-    </div>
-  </div>
-  <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
-    {{ snackbarMessage }}
-  </v-snackbar>
-  <v-snackbar ref="snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
-    {{ snackbarMessage2 }}
-  </v-snackbar>
+                  <v-card-subtitle
+                    >Número de items:{{ totalItems }}</v-card-subtitle
+                  >
+
+                  <v-card-actions>
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Itens da Loja')"
+                      size="small"
+                    >
+                      Ver mais
+                    </v-btn>
+                  </v-card-actions>
+                </div>
+
+                <v-avatar class="ma-3" size="125" rounded="0">
+                  <v-icon size="56" icon="fa-sharp fa-solid fa-store"></v-icon>
+                </v-avatar>
+              </div>
+            </v-card>
+            <br>
+            <v-card color="#114b5f" theme="dark">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h5">
+                    Ecopontos por aprovar
+                  </v-card-title>
+
+                  <v-card-subtitle
+                    >Número de ecopontos:{{ totalEcopoints }}</v-card-subtitle
+                  >
+
+                  <v-card-actions>
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Ecopontos por Aprovar')"
+                      size="small"
+                    >
+                      Ver mais
+                    </v-btn>
+                  </v-card-actions>
+                </div>
+
+                <v-avatar class="ma-3" size="125" rounded="0">
+                  <v-icon size="56" icon="fa-solid fa-dumpster"></v-icon>
+                </v-avatar>
+              </div>
+            </v-card>
+            <br>
+            <v-card color="#114b5f" theme="dark">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="text-h5">
+                    Utilizações por aprovar
+                  </v-card-title>
+
+                  <v-card-subtitle
+                    >Número de ecopontos:{{ totalUtilizacoes }}</v-card-subtitle
+                  >
+                  
+
+                  <v-card-actions>
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Utilizações por Aprovar')"
+                      size="small"
+                    >
+                      Ver mais
+                    </v-btn>
+                  </v-card-actions>
+                </div>
+
+                <v-avatar class="ma-3" size="125" rounded="0">
+                  <v-icon size="56" icon="fa-solid fa-recycle"></v-icon>
+                </v-avatar>
+              </div>
+            </v-card>
+          </div>
+        </v-card>
+
+        <v-container v-else-if="currentContainer === 'Utilizadores'">
+          <h1>Utilizadores</h1>
+          <v-table fixed-header height="300px" style="width: 100%">
+            <thead>
+              <tr>
+                <th class="text-left">Tipo</th>
+                <th class="text-left">Nome</th>
+                <th class="text-left">Email</th>
+                <th class="text-left">Pontos</th>
+                <th class="text-left">Nível</th>
+                <th class="text-left">Moedas</th>
+                <th class="text-left">Utilizações</th>
+                <th class="text-left">Ecopontos registados</th>
+                <th class="text-left">Referral</th>
+                <th class="text-left">ReferredBy</th>
+                <th class="text-left">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users">
+                <td>{{ user.tipo }}</td>
+                <td>{{ user.nome }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.pontos }}</td>
+                <td>{{ user.nivel }}</td>
+                <td>{{ user.moedas }}</td>
+                <td>{{ user.numUsoEcopontos }}</td>
+                <td>{{ user.ecopontosRegistados }}</td>
+                <td>{{ user.referral }}</td>
+                <td>{{ user.referredBy }}</td>
+
+                <td>
+                  <v-btn color="error" @click="deleteUser(user._id)"
+                    >Remover</v-btn
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </v-table>
+        </v-container>
+
+        <v-container v-else-if="currentContainer === 'Itens da Loja'">
+          <h1>Itens da Loja</h1>
+          <v-table fixed-header height="300px" style="width: 80%">
+            <thead>
+              <tr>
+                <th class="text-left">Nome</th>
+                <th class="text-left">Stock</th>
+                <th class="text-left">Preço</th>
+                <th class="text-left">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in itensLoja">
+                <td>{{ item.nome }}</td>
+                <td :id="'stock' + item._id">{{ item.stock }}</td>
+                <td :id="'preco' + item._id">{{ item.preco }}</td>
+                <td>
+                  <v-btn
+                    color="success"
+                    @click="editarItem(item._id)"
+                    v-if="editar == item._id"
+                    >Guardar</v-btn
+                  >
+                  <v-btn
+                    color="primary"
+                    @click="editarItem(item._id)"
+                    :id="'botao' + item._id"
+                    v-else
+                    :disabled="editar != null && editar != item._id"
+                    >Editar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="cancelarI(item._id)"
+                    v-if="editar == item._id"
+                    >Cancelar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="deleteItem(item._id)"
+                    v-else
+                    :disabled="editar != null"
+                    >Remover</v-btn
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </v-table>
+        </v-container>
+
+        <v-card v-else-if="currentContainer === 'Badges'">
+          <h1>Badges</h1>
+          <v-table fixed-header height="300px" style="width: 80%">
+            <thead>
+              <tr>
+                <th class="text-left">Nome</th>
+                <th class="text-left">Foto</th>
+                <th class="text-left">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="badge in badges">
+                <td :id="'nome' + badge._id">{{ badge.nome }}</td>
+                <td :id="'foto' + badge._id">{{ badge.foto }}</td>
+                <td>
+                  <v-btn
+                    color="success"
+                    @click="editBadge(badge._id)"
+                    v-if="editarB == badge._id"
+                    >Guardar</v-btn
+                  >
+                  <v-btn
+                    color="primary"
+                    @click="editBadge(badge._id)"
+                    :id="'botaoBadge' + badge._id"
+                    v-else
+                    :disabled="editarB != null && editarB != badge._id"
+                    >Editar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="cancelarEditB(badge._id)"
+                    v-if="editarB == badge._id"
+                    >Cancelar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="deleteBadge(badge._id)"
+                    v-else
+                    :disabled="editarB != null"
+                    >Remover</v-btn
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </v-table>
+        </v-card>
+
+        <v-card v-else-if="currentContainer === 'Utilizações por Aprovar'">
+          <h1>Utilizações por Aprovar</h1>
+          <v-divider></v-divider>
+          <div v-for="utilizacao in utilizacoes">
+            <img :src="utilizacao.foto" width="600" height="300" /><br />
+            <p>ID do Ecoponto: {{ utilizacao.idEcoponto }}</p>
+            <p>Nome do Utilizador: {{ utilizacao.idUser }}</p>
+            <p>Data: {{ utilizacao.data }}</p>
+            <v-btn color="success" @click="validarUtilizacao(utilizacao._id)">
+              Aprovar
+            </v-btn>
+            <v-btn color="error" @click="rejeitarUtilizacao(utilizacao._id)">
+              Rejeitar
+            </v-btn>
+            <br /><br /><br /><br />
+          </div>
+        </v-card>
+
+        <v-card v-else-if="currentContainer === 'Ecopontos por Aprovar'">
+          <h1>Ecopontos por Aprovar</h1>
+          <v-divider></v-divider>
+          <div v-for="ecoponto in ecopontos">
+            <img :src="ecoponto.foto" width="600" height="300" /><br />
+            <p>ID do Ecoponto: {{ ecoponto._id }}</p>
+            <p>Nome do Utilizador: {{ ecoponto.userId }}</p>
+            <p>Data: {{ ecoponto.dataCriacao }}</p>
+            <v-btn color="success" @click="validarEcoponto(ecoponto._id)">
+              Aprovar
+            </v-btn>
+            <v-btn color="error" @click="rejeitarEcoponto(ecoponto._id)">
+              Rejeitar
+            </v-btn>
+            <br /><br /><br /><br />
+          </div>
+        </v-card>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 import { userStore } from "../stores/userStore.js";
-import { utilizacaoStore } from "../stores/utilizacaoStore.js";
 import { lojaStore } from "../stores/lojaStore.js";
 import { badgeStore } from "../stores/badgesStore.js";
-import { ecopontoStore } from "../stores/ecopontoStore.js";
+import { utilizacaoStore } from "../stores/utilizacaoStore.js";
 import { EcopontosService } from "../services/ecopontos.service";
+import { ecopontoStore } from "../stores/ecopontoStore.js";
 
 export default {
   data() {
     return {
+      drawer: true,
+      currentContainer: "Dashboard",
+      menuItems: [
+        { title: "Dashboard", icon: "mdi-view-dashboard" },
+        { title: "Utilizadores", icon: "mdi-account-group" },
+        { title: "Itens da Loja", icon: "mdi-cart" },
+        { title: "Badges", icon: "mdi-certificate" },
+        { title: "Utilizações por Aprovar", icon: "mdi-check-circle" },
+        { title: "Ecopontos por Aprovar", icon: "mdi-earth" },
+      ],
       users: [],
       store: userStore(),
       utilizacaoStore: utilizacaoStore(),
@@ -178,30 +357,29 @@ export default {
       badges: [],
       ecopontos: [],
       utilizacoes: [],
+      totalUsers: 0,
+      totalItems: 0,
+      totalEcopoints: "",
+      totalUtilizacoes: "",
+      appBarColor: "#114B5F",
     };
   },
-
   async mounted() {
     await this.getUsersList();
     await this.getAllItems();
     await this.getBadges();
-    await this.getEcopontos();
     await this.getUtilizacoesPendentes();
+    await this.getEcopontos();
   },
   methods: {
+    changeContainer(title) {
+      this.currentContainer = title;
+    },
     async getUsersList() {
       try {
         await this.store.getALlUsers();
         this.users = this.store.getUsers;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async getEcopontos() {
-      try {
-        const ecopontos = await this.ecopontoStore.getEcopontosPorValidar();
-        this.ecopontos = ecopontos;
-        console.log(ecopontos);
+        this.totalUsers = this.users.length;
       } catch (error) {
         console.log(error);
       }
@@ -217,6 +395,15 @@ export default {
         this.snackbarMessage = error;
       }
     },
+    async getAllItems() {
+      try {
+        await this.lojaStore.getAllItems();
+        this.itensLoja = this.lojaStore.getItens;
+        this.totalItems = this.itensLoja.length;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async deleteItem(id) {
       try {
         await this.lojaStore.deleteItem(id);
@@ -228,122 +415,6 @@ export default {
         this.snackbarMessage = error;
       }
     },
-    async deleteBadge(id) {
-      try {
-        await this.badgeStore.deleteBadge(id);
-        this.badges = this.badges.filter((badge) => badge._id !== id);
-        this.snackbar2 = true;
-        this.snackbarMessage2 = "Badge removida com sucesso!";
-      } catch (error) {
-        this.snackbar = true;
-        this.snackbarMessage = error;
-      }
-    },
-
-    async editBadge(id) {
-      const linhaNome = document.getElementById("nome" + id);
-      this.nomeBadgeOriginal = linhaNome.textContent;
-      const linhaFoto = document.getElementById("foto" + id);
-      this.fotoBadgeOriginal = linhaFoto.textContent;
-
-      if (this.editarB == null) {
-        this.editarB = id;
-
-        const nomeAtual = linhaNome.textContent;
-        const fotoAtual = linhaFoto.textContent;
-
-        linhaNome.innerHTML = `<input type="text" style="width:50%" value="${nomeAtual}">`;
-        linhaFoto.innerHTML = `<input type="text" style="width:50%" value="${fotoAtual}">`;
-      } else {
-        this.editarB = null;
-        const novoNome = linhaNome.querySelector("input").value;
-        const novaFoto = linhaFoto.querySelector("input").value;
-
-        linhaNome.textContent = novoNome;
-        linhaFoto.textContent = novaFoto;
-
-        try {
-          await this.badgeStore.editBadge(id, {
-            nome: novoNome,
-            foto: novaFoto,
-          });
-          this.snackbar2 = true;
-          this.snackbarMessage2 = "Badge editada com sucesso!";
-        } catch (error) {
-          this.snackbar = true;
-          this.snackbarMessage = error;
-        }
-      }
-    },
-
-    async getAllItems() {
-      try {
-        await this.lojaStore.getAllItems();
-        this.itensLoja = this.lojaStore.getItens;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async getBadges() {
-      try {
-        await this.badgeStore.getBadges();
-        this.badges = this.badgeStore.getAllBadges;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async validarEcoponto(id) {
-      try {
-        await this.ecopontoStore.validarEcoponto(id, {
-          ecopontoAprovado: true
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async rejeitarEcoponto(id) {
-      try {
-        await this.ecopontoStore.validarEcoponto(id, {
-          ecopontoAprovado: false
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async validarUtilizacao(id) {
-      try {
-        await this.utilizacaoStore.validarUtilizacao(id, {
-          utilizacaoAprovada: true
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async rejeitarUtilizacao(id) {
-      try {
-        await this.utilizacaoStore.validarUtilizacao(id, {
-          utilizacaoAprovada: false
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-
-    async getUtilizacoesPendentes() {
-      try {
-        const utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
-        this.utilizacoes = utilizacoes;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    getUsername(idUser) {
-      return this.userStore.getUsers.filter((user) => user.id == idUser)[0]
-        .nome;
-    },
-
     async editarItem(id) {
       const linhaPreco = document.getElementById("preco" + id);
       this.precoOriginal = linhaPreco.textContent;
@@ -379,8 +450,15 @@ export default {
         }
       }
     },
-
-    removerItem(id) {
+    async getBadges() {
+      try {
+        await this.badgeStore.getBadges();
+        this.badges = this.badgeStore.getAllBadges;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    cancelarI(id) {
       if (this.editar != null) {
         const linhaPreco = document.getElementById("preco" + id);
         const linhaStock = document.getElementById("stock" + id);
@@ -394,12 +472,11 @@ export default {
         this.itensLoja = this.lojaStore.getItens;
       }
     },
-
-    /*     editarBadge(id) {
+    async editBadge(id) {
       const linhaNome = document.getElementById("nome" + id);
-      this.nomeBadgeOriginal = linhaNome.textContent
+      this.nomeBadgeOriginal = linhaNome.textContent;
       const linhaFoto = document.getElementById("foto" + id);
-      this.fotoBadgeOriginal = linhaFoto.textContent
+      this.fotoBadgeOriginal = linhaFoto.textContent;
 
       if (this.editarB == null) {
         this.editarB = id;
@@ -409,18 +486,39 @@ export default {
 
         linhaNome.innerHTML = `<input type="text" style="width:50%" value="${nomeAtual}">`;
         linhaFoto.innerHTML = `<input type="text" style="width:50%" value="${fotoAtual}">`;
-      }
-      else {
+      } else {
         this.editarB = null;
         const novoNome = linhaNome.querySelector("input").value;
         const novaFoto = linhaFoto.querySelector("input").value;
 
         linhaNome.textContent = novoNome;
         linhaFoto.textContent = novaFoto;
-      }
-    }, */
 
-    apagarBadge(id) {
+        try {
+          await this.badgeStore.editBadge(id, {
+            nome: novoNome,
+            foto: novaFoto,
+          });
+          this.snackbar2 = true;
+          this.snackbarMessage2 = "Badge editada com sucesso!";
+        } catch (error) {
+          this.snackbar = true;
+          this.snackbarMessage = error;
+        }
+      }
+    },
+    async deleteBadge(id) {
+      try {
+        await this.badgeStore.deleteBadge(id);
+        this.badges = this.badges.filter((badge) => badge._id !== id);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Badge removida com sucesso!";
+      } catch (error) {
+        this.snackbar = true;
+        this.snackbarMessage = error;
+      }
+    },
+    cancelarEditB(id) {
       if (this.editarB != null) {
         const linhaNome = document.getElementById("nome" + id);
         const linhaFoto = document.getElementById("foto" + id);
@@ -433,16 +531,76 @@ export default {
         this.badges = this.badges.filter((badge) => badge.id != id);
       }
     },
+    async getUtilizacoesPendentes() {
+      try {
+        const utilizacoes =
+          await this.utilizacaoStore.getUtilizacoesPendentes();
+        this.utilizacoes = utilizacoes;
+
+      } catch (error) {
+        this.totalUtilizacoes = error
+      }
+    },
+    async validarUtilizacao(id) {
+      try {
+        await this.utilizacaoStore.validarUtilizacao(id, {
+          utilizacaoAprovada: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async rejeitarUtilizacao(id) {
+      try {
+        await this.utilizacaoStore.validarUtilizacao(id, {
+          utilizacaoAprovada: false,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getEcopontos() {
+      try {
+        const ecopontos = await this.ecopontoStore.getEcopontosPorValidar();
+        this.ecopontos = ecopontos;
+        this.totalEcopoints = ecopontos.length;
+      } catch (error) {
+        this.totalEcopoints = error
+      }
+    },
+    async validarEcoponto(id) {
+      try {
+        await this.ecopontoStore.validarEcoponto(id, {
+          ecopontoAprovado: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async rejeitarEcoponto(id) {
+      try {
+        await this.ecopontoStore.validarEcoponto(id, {
+          ecopontoAprovado: false,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
 
-<style scoped>
-h1 {
-  color: black;
+<style>
+
+#titleAdmin {
+  color: #fdfcf8;
+  font-family: "exo";
+  font-weight: bold;
+}
+#drawer {
+  background-color: #114b5f;
+  color: #fdfcf8;
 }
 
-.divs {
-  margin-left: 10px;
-}
+
 </style>

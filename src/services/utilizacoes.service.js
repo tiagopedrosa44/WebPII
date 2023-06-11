@@ -16,11 +16,11 @@ export const UtilizacoesService = {
       if (data) {
         return data.utilizacoes;
       } else {
-        throw Error(data.message);
+        throw Error(data.error);
       }
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw Error(data.error);
     }
   },
   async validarUtilizacao(id, data) {

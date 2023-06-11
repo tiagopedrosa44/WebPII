@@ -16,11 +16,11 @@ export const EcopontosService = {
       if (data) {
         return data;
       } else {
-        throw Error(data.message);
+        throw Error(data.error);
       }
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw Error(data.error);
     }
   },
 
@@ -61,7 +61,7 @@ export const EcopontosService = {
       return data.ecopontos;
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw Error(data.error);
     }
   },
   async getEcopontoById(id) {

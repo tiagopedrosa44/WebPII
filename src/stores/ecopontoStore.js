@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { EcopontosService } from "../services/ecopontos.service";
 
-
 export const ecopontoStore = defineStore("ecoponto", {
   state: () => ({
     ecopontos: [],
@@ -23,12 +22,8 @@ export const ecopontoStore = defineStore("ecoponto", {
       this.ecopontos = ecopontos;
     },
     async getEcopontosPorValidar() {
-      try {
-        const response = await EcopontosService.ecopontosPorValidar();
-        return response;
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await EcopontosService.ecopontosPorValidar();
+      return response;
     },
     async getEcopontoById(id) {
       try {
@@ -53,6 +48,6 @@ export const ecopontoStore = defineStore("ecoponto", {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
 });
