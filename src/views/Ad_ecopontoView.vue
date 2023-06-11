@@ -88,16 +88,16 @@ export default {
       reader.readAsDataURL(this.file);
     },
 
-    async registarEcoponto(event){
+    async registarEcoponto(event) {
       event.preventDefault();
       const formData = new FormData();
       formData.append("image", this.file);
       formData.append("userId", this.userId);
-      formData.append("morada", "teste2");
-      formData.append("coordenadas",{lat: this.lat,lng: this.lng} );
+      formData.append("morada", "fjhdslogjbs");
+      formData.append("coordenadas", JSON.stringify({ lat: this.lat, lng: this.lng }));
 
-     
-      
+
+
       try {
         await EcopontosService.adicionarEcoponto(formData)
       } catch (error) {
