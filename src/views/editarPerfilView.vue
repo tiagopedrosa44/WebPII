@@ -30,7 +30,7 @@
             ></v-text-field>
             <v-btn
               color="primary"
-              @click="updateUser(userId, biografia, novaSenha)"
+              @click="updateUser()"
             >
               Alterar dados
             </v-btn>
@@ -144,9 +144,9 @@ export default {
         console.log(error);
       }
     },
-    async updateUser(id) {
+    async updateUser() {
       try {
-        await this.store.editUser(id, {
+        await this.store.editUser(this.userId, {
           biografia: this.biografia,
           password: this.novaSenha,
           confirmPassword: this.confirmarSenha,
