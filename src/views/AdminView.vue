@@ -332,6 +332,7 @@ import { badgeStore } from "../stores/badgesStore.js";
 import { utilizacaoStore } from "../stores/utilizacaoStore.js";
 import { EcopontosService } from "../services/ecopontos.service";
 import { ecopontoStore } from "../stores/ecopontoStore.js";
+import { set } from "express/lib/application";
 
 export default {
   data() {
@@ -555,12 +556,11 @@ export default {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: true,
         });
-        this.utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
-        this.snackbar2 = true;
-        this.snackbarMessage2 = "Utilização aprovada com sucesso!";
+        setTimeout(async () => {
+          await this.getUtilizacoesPendentes();
+        }, 2000);
       } catch (error) {
-        this.snackbar = true;
-        this.snackbarMessage = error;
+        console.log(error);
       }
     },
     async rejeitarUtilizacao(id) {
@@ -568,12 +568,11 @@ export default {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: false,
         });
-        this.utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
-        this.snackbar2 = true;
-        this.snackbarMessage2 = "Utilização rejeitada com sucesso!";
+        setTimeout(async () => {
+          await this.getUtilizacoesPendentes();
+        }, 2000);
       } catch (error) {
-        this.snackbar = true;
-        this.snackbarMessage = error;
+        console.log(error);
       }
     },
     async getEcopontos() {
