@@ -25,19 +25,42 @@
         </span>
         <br /><br /><br /><br /><br />
         <div id="morada">
-          <v-text-field label="Morada" v-model="morada" :disabled="inputMoradaDisable"></v-text-field>
+          <v-text-field
+            label="Morada"
+            v-model="morada"
+            :disabled="inputMoradaDisable"
+          ></v-text-field>
         </div>
-        <v-btn class="botaoAmarelo" @click="$refs.fileInput.click()" :disabled="btnAdicionarDisable">Adicionar
-          foto</v-btn><br /><br />
+        <v-btn
+          class="botaoAmarelo"
+          @click="$refs.fileInput.click()"
+          :disabled="btnAdicionarDisable"
+          >Adicionar foto</v-btn
+        ><br /><br />
 
         <form @submit="registarEcoponto">
-          <input type="file" ref="fileInput" @change="uploadFile" style="display: none" />
-          <v-btn class="botaoAmarelo" type="submit" id="btnRegistar"
-            :disabled="btnRegistarDisable">Confirmar</v-btn><br><br>
+          <input
+            type="file"
+            ref="fileInput"
+            @change="uploadFile"
+            style="display: none"
+          />
+          <v-btn
+            class="botaoAmarelo"
+            type="submit"
+            id="btnRegistar"
+            :disabled="btnRegistarDisable"
+            >Confirmar</v-btn
+          ><br /><br />
         </form>
       </div>
     </v-container>
-    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="success">
+    <v-snackbar
+      ref="snackbar"
+      v-model="snackbar"
+      :timeout="2000"
+      color="success"
+    >
       {{ snackbarMessage }}
     </v-snackbar>
   </div>
@@ -69,16 +92,17 @@ export default {
       userId: "",
       ecopontoMap: localStorage.getItem("ecopontoMap"),
       snackbar: false,
-      snackbarMessage: "Ecoponto adicionado com sucesso! A voltar à página inicial...",
+      snackbarMessage:
+        "Ecoponto adicionado com sucesso! A voltar à página inicial...",
       morada: "",
-      inputMoradaDisable: true
+      inputMoradaDisable: true,
     };
   },
   watch: {
     morada(newValue, oldValue) {
-      if (newValue != "") this.btnAdicionarDisable = false
-      else this.btnAdicionarDisable = true
-    }
+      if (newValue != "") this.btnAdicionarDisable = false;
+      else this.btnAdicionarDisable = true;
+    },
   },
   methods: {
     getUserId() {
@@ -92,7 +116,7 @@ export default {
     },
     async uploadFile() {
       this.file = this.$refs.fileInput.files[0];
-      this.btnRegistarDisable = false
+      this.btnRegistarDisable = false;
       const reader = new FileReader();
       reader.onload = (e) => {
         this.fotoPreview = e.target.result;
@@ -106,49 +130,16 @@ export default {
       formData.append("image", this.file);
       formData.append("userId", this.userId);
       formData.append("morada", this.morada);
-      formData.append("coordenadas", JSON.stringify({ lat: this.lat, lng: this.lng }));
-
-
+      formData.append("coordenadas[lat]", parseFloat(this.lat));
+      formData.append("coordenadas[lng]", parseFloat(this.lng));
 
       try {
-        await EcopontosService.adicionarEcoponto(formData)
+        await EcopontosService.adicionarEcoponto(formData);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    },
 
-
-    /* registar() {
-       const ecoponto = [
-        {
-          userId: localStorage.getItem("userLogado"),
-          morada: "",
-          coordenadas: {
-            lat: this.ecopontoMap.lat,
-            lng: this.ecopontoMap.lng
-          },
-          dataCriacao: new Date().toLocaleDateString('pt-PT').split('/').reverse().join('-').substr(0, 10),
-          foto: "../src/assets/imgs/ecopontos/0.png",
-        },
-      ]; 
-      const ecoponto = {
-        userId: localStorage.getItem("userLogado"),
-        morada: "teste",
-        coordenadas: {
-          lat: 41.36611,
-          lng: 41.36611,
-        },
-        dataCriacao: new Date().toLocaleDateString('pt-PT').split('/').reverse().join('-').substr(0, 10),
-        foto: "../src/assets/imgs/ecopontos/0.png",
-      };
-
-      console.log("view");
-      this.ecopontoStore.adicionarEcoponto(ecoponto);
-      this.snackbar = true;
-      setTimeout(() => {
-        this.$router.push("/home");
-      }, 2000);
-    }  */
   },
   mounted() {
     setInterval(() => {
@@ -161,7 +152,6 @@ export default {
     }, 100);
     this.fileInput = this.$refs.fileInput;
     this.getUserId();
-
   },
 };
 </script>
