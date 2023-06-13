@@ -94,11 +94,11 @@ export const UserService = {
       if (data) {
         return data.user;
       } else {
-        throw Error(data.message);
+        throw Error(data.msg);
       }
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw Error(data.msg);
     }
   },
   async getBadgesUser(id) {
