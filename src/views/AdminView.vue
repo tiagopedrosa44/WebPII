@@ -332,7 +332,6 @@ import { badgeStore } from "../stores/badgesStore.js";
 import { utilizacaoStore } from "../stores/utilizacaoStore.js";
 import { EcopontosService } from "../services/ecopontos.service";
 import { ecopontoStore } from "../stores/ecopontoStore.js";
-import { set } from "express/lib/application";
 
 export default {
   data() {
@@ -544,9 +543,9 @@ export default {
     },
     async getUtilizacoesPendentes() {
       try {
-        const utilizacoes =
-          await this.utilizacaoStore.getUtilizacoesPendentes();
-        this.utilizacoes = utilizacoes;
+        await this.utilizacaoStore.getUtilizacoesPendentes();
+        this.utilizacoes = this.utilizacaoStore.getUtilizacoes;
+        this.totalUtilizacoes = this.utilizacoes.length;
       } catch (error) {
         this.totalUtilizacoes = error;
       }
@@ -563,11 +562,26 @@ export default {
         console.log(error);
       }
     },
+    async deleteUser(id) {
+      try {
+        await this.store.deleteUserById(id);
+        this.users = this.users.filter((user) => user._id !== id);
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Utilizador removido com sucesso!";
+      } catch (error) {
+        this.snackbar = true;
+        this.snackbarMessage = error;
+      }
+    },
     async rejeitarUtilizacao(id) {
       try {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: false,
         });
+        this.utilizacoes = this.utilizacoes.filter(
+          (utilizacao) => utilizacao._id !== id
+        );
+
         setTimeout(async () => {
           await this.getUtilizacoesPendentes();
         }, 2000);

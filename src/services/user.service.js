@@ -118,7 +118,7 @@ export const UserService = {
       }
     } else {
       const data = await response.json();
-      throw Error(data.msg);
+      throw (data.msg);
     }
   },
   async getUtilizacoesUser(id) {

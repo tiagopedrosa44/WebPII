@@ -3,9 +3,7 @@ import { UtilizacoesService } from "../services/utilizacoes.service";
 
 export const utilizacaoStore = defineStore("utilizacao", {
   state: () => ({
-    utilizacoes: localStorage.utilizacoes
-      ? JSON.parse(localStorage.utilizacoes)
-      : [],
+    utilizacoes: [],
   }),
   getters: {
     getUtilizacoes: (state) => state.utilizacoes,
@@ -24,7 +22,10 @@ export const utilizacaoStore = defineStore("utilizacao", {
   actions: {
     async getUtilizacoesPendentes() {
       const response = await UtilizacoesService.getUtilizacoesPendentes();
-      return response;
+      this.setUtilizacoes(response);
+    },
+    setUtilizacoes(utilizacoes) {
+      this.utilizacoes = utilizacoes;
     },
     async registarUtilizacao(id, data) {
       try {

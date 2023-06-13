@@ -98,7 +98,7 @@ export const userStore = defineStore("userStore", {
         const response = await UserService.getBadgesUser(id);
         return response;
       } catch (error) {
-        throw Error(error);
+        throw (error);
       }
     },
     async getUtilizacoesUser(id) {
