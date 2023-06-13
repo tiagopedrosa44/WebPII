@@ -25,42 +25,19 @@
         </span>
         <br /><br /><br /><br /><br />
         <div id="morada">
-          <v-text-field
-            label="Morada"
-            v-model="morada"
-            :disabled="inputMoradaDisable"
-          ></v-text-field>
+          <v-text-field label="Morada" v-model="morada" :disabled="inputMoradaDisable"></v-text-field>
         </div>
-        <v-btn
-          class="botaoAmarelo"
-          @click="$refs.fileInput.click()"
-          :disabled="btnAdicionarDisable"
-          >Adicionar foto</v-btn
-        ><br /><br />
+        <v-btn class="botaoAmarelo" @click="$refs.fileInput.click()" :disabled="btnAdicionarDisable">Adicionar
+          foto</v-btn><br /><br />
 
         <form @submit="registarEcoponto">
-          <input
-            type="file"
-            ref="fileInput"
-            @change="uploadFile"
-            style="display: none"
-          />
-          <v-btn
-            class="botaoAmarelo"
-            type="submit"
-            id="btnRegistar"
-            :disabled="btnRegistarDisable"
-            >Confirmar</v-btn
-          ><br /><br />
+          <input type="file" ref="fileInput" @change="uploadFile" style="display: none" />
+          <v-btn class="botaoAmarelo" type="submit" id="btnRegistar"
+            :disabled="btnRegistarDisable">Confirmar</v-btn><br /><br />
         </form>
       </div>
     </v-container>
-    <v-snackbar
-      ref="snackbar"
-      v-model="snackbar"
-      :timeout="2000"
-      color="success"
-    >
+    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="success">
       {{ snackbarMessage }}
     </v-snackbar>
   </div>
@@ -138,6 +115,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      setTimeout(() => {
+        this.$router.push("/home");
+      }, 2000);
     },
 
   },
