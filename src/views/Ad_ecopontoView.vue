@@ -24,12 +24,16 @@
           os pontos correspondentes.
         </span>
         <br /><br /><br /><br /><br />
+        <div id="morada">
+          <v-text-field label="Morada" v-model="morada" :disabled="inputMoradaDisable"></v-text-field>
+        </div>
         <v-btn class="botaoAmarelo" @click="$refs.fileInput.click()" :disabled="btnAdicionarDisable">Adicionar
           foto</v-btn><br /><br />
 
         <form @submit="registarEcoponto">
           <input type="file" ref="fileInput" @change="uploadFile" style="display: none" />
-          <v-btn class="botaoAmarelo" type="submit" id="btnRegistar" :disabled="btnRegistarDisable">Confirmar</v-btn>
+          <v-btn class="botaoAmarelo" type="submit" id="btnRegistar"
+            :disabled="btnRegistarDisable">Confirmar</v-btn><br><br>
         </form>
       </div>
     </v-container>
@@ -65,8 +69,16 @@ export default {
       userId: "",
       ecopontoMap: localStorage.getItem("ecopontoMap"),
       snackbar: false,
-      snackbarMessage: "Ecoponto adicionado com sucesso! A voltar à página inicial..."
+      snackbarMessage: "Ecoponto adicionado com sucesso! A voltar à página inicial...",
+      morada: "",
+      inputMoradaDisable: true
     };
+  },
+  watch: {
+    morada(newValue, oldValue) {
+      if (newValue != "") this.btnAdicionarDisable = false
+      else this.btnAdicionarDisable = true
+    }
   },
   methods: {
     getUserId() {
@@ -80,7 +92,7 @@ export default {
     },
     async uploadFile() {
       this.file = this.$refs.fileInput.files[0];
-      this.btnRegistarDisable = false;
+      this.btnRegistarDisable = false
       const reader = new FileReader();
       reader.onload = (e) => {
         this.fotoPreview = e.target.result;
@@ -93,7 +105,7 @@ export default {
       const formData = new FormData();
       formData.append("image", this.file);
       formData.append("userId", this.userId);
-      formData.append("morada", "fjhdslogjbs");
+      formData.append("morada", this.morada);
       formData.append("coordenadas", JSON.stringify({ lat: this.lat, lng: this.lng }));
 
 
@@ -144,7 +156,7 @@ export default {
       if (this.ecopontosMap != null) {
         this.lat = this.ecopontosMap.lat;
         this.lng = this.ecopontosMap.lng;
-        this.btnAdicionarDisable = false;
+        this.inputMoradaDisable = false;
       }
     }, 100);
     this.fileInput = this.$refs.fileInput;
@@ -195,5 +207,9 @@ span {
   color: white;
   font-family: "Spinnaker", sans-serif;
   font-weight: regular;
+}
+
+#morada {
+  width: 50%;
 }
 </style>

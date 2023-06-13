@@ -222,6 +222,7 @@
             <img :src="ecoponto.foto" width="600" height="300" /><br />
             <p>Nome do Utilizador: {{ getUsersNameById(ecoponto.userId) }}</p>
             <p>Data: {{ ecoponto.dataCriacao }}</p>
+            <p>Morada: {{ ecoponto.morada }}<v-btn>&#9998;</v-btn></p>
             <v-btn color="success" @click="validarEcoponto(ecoponto._id)">
               Aprovar
             </v-btn>
