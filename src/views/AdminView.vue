@@ -2,7 +2,11 @@
   <v-app>
     <v-navigation-drawer app v-model="drawer" id="drawer" permanent>
       <v-list dense>
-        <v-list-item v-for="item in menuItems" :key="item.title" @click="changeContainer(item.title)">
+        <v-list-item
+          v-for="item in menuItems"
+          :key="item.title"
+          @click="changeContainer(item.title)"
+        >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -22,10 +26,17 @@
                 <div>
                   <v-card-title class="text-h5"> Utilizadores </v-card-title>
 
-                  <v-card-subtitle>Número de utilizadores: {{ totalUsers }}</v-card-subtitle>
+                  <v-card-subtitle
+                    >Número de utilizadores: {{ totalUsers }}</v-card-subtitle
+                  >
 
                   <v-card-actions>
-                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Utilizadores')" size="small">
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Utilizadores')"
+                      size="small"
+                    >
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -36,16 +47,23 @@
                 </v-avatar>
               </div>
             </v-card>
-            <br>
+            <br />
             <v-card color="#114b5f" theme="dark">
               <div class="d-flex flex-no-wrap justify-space-between">
                 <div>
                   <v-card-title class="text-h5"> Loja </v-card-title>
 
-                  <v-card-subtitle>Número de items:{{ totalItems }}</v-card-subtitle>
+                  <v-card-subtitle
+                    >Número de items:{{ totalItems }}</v-card-subtitle
+                  >
 
                   <v-card-actions>
-                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Itens da Loja')" size="small">
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Itens da Loja')"
+                      size="small"
+                    >
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -56,7 +74,7 @@
                 </v-avatar>
               </div>
             </v-card>
-            <br>
+            <br />
             <v-card color="#114b5f" theme="dark">
               <div class="d-flex flex-no-wrap justify-space-between">
                 <div>
@@ -64,10 +82,17 @@
                     Ecopontos por aprovar
                   </v-card-title>
 
-                  <v-card-subtitle>Número de ecopontos:{{ totalEcopoints }}</v-card-subtitle>
+                  <v-card-subtitle
+                    >Número de ecopontos:{{ totalEcopoints }}</v-card-subtitle
+                  >
 
                   <v-card-actions>
-                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Ecopontos por Aprovar')" size="small">
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Ecopontos por Aprovar')"
+                      size="small"
+                    >
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -78,7 +103,7 @@
                 </v-avatar>
               </div>
             </v-card>
-            <br>
+            <br />
             <v-card color="#114b5f" theme="dark">
               <div class="d-flex flex-no-wrap justify-space-between">
                 <div>
@@ -86,12 +111,17 @@
                     Utilizações por aprovar
                   </v-card-title>
 
-                  <v-card-subtitle>Número de ecopontos:{{ totalUtilizacoes }}</v-card-subtitle>
-
+                  <v-card-subtitle
+                    >Número de ecopontos:{{ totalUtilizacoes }}</v-card-subtitle
+                  >
 
                   <v-card-actions>
-                    <v-btn class="ms-2" variant="outlined" @click="changeContainer('Utilizações por Aprovar')"
-                      size="small">
+                    <v-btn
+                      class="ms-2"
+                      variant="outlined"
+                      @click="changeContainer('Utilizações por Aprovar')"
+                      size="small"
+                    >
                       Ver mais
                     </v-btn>
                   </v-card-actions>
@@ -137,7 +167,9 @@
                 <td>{{ user.referredBy }}</td>
 
                 <td>
-                  <v-btn color="error" @click="deleteUser(user._id)">Remover</v-btn>
+                  <v-btn color="error" @click="deleteUser(user._id)"
+                    >Remover</v-btn
+                  >
                 </td>
               </tr>
             </tbody>
@@ -161,11 +193,33 @@
                 <td :id="'stock' + item._id">{{ item.stock }}</td>
                 <td :id="'preco' + item._id">{{ item.preco }}</td>
                 <td>
-                  <v-btn color="success" @click="editarItem(item._id)" v-if="editar == item._id">Guardar</v-btn>
-                  <v-btn color="primary" @click="editarItem(item._id)" :id="'botao' + item._id" v-else
-                    :disabled="editar != null && editar != item._id">Editar</v-btn>
-                  <v-btn color="error" @click="cancelarI(item._id)" v-if="editar == item._id">Cancelar</v-btn>
-                  <v-btn color="error" @click="deleteItem(item._id)" v-else :disabled="editar != null">Remover</v-btn>
+                  <v-btn
+                    color="success"
+                    @click="editarItem(item._id)"
+                    v-if="editar == item._id"
+                    >Guardar</v-btn
+                  >
+                  <v-btn
+                    color="primary"
+                    @click="editarItem(item._id)"
+                    :id="'botao' + item._id"
+                    v-else
+                    :disabled="editar != null && editar != item._id"
+                    >Editar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="cancelarI(item._id)"
+                    v-if="editar == item._id"
+                    >Cancelar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="deleteItem(item._id)"
+                    v-else
+                    :disabled="editar != null"
+                    >Remover</v-btn
+                  >
                 </td>
               </tr>
             </tbody>
@@ -187,11 +241,33 @@
                 <td :id="'nome' + badge._id">{{ badge.nome }}</td>
                 <td :id="'foto' + badge._id">{{ badge.foto }}</td>
                 <td>
-                  <v-btn color="success" @click="editBadge(badge._id)" v-if="editarB == badge._id">Guardar</v-btn>
-                  <v-btn color="primary" @click="editBadge(badge._id)" :id="'botaoBadge' + badge._id" v-else
-                    :disabled="editarB != null && editarB != badge._id">Editar</v-btn>
-                  <v-btn color="error" @click="cancelarEditB(badge._id)" v-if="editarB == badge._id">Cancelar</v-btn>
-                  <v-btn color="error" @click="deleteBadge(badge._id)" v-else :disabled="editarB != null">Remover</v-btn>
+                  <v-btn
+                    color="success"
+                    @click="editBadge(badge._id)"
+                    v-if="editarB == badge._id"
+                    >Guardar</v-btn
+                  >
+                  <v-btn
+                    color="primary"
+                    @click="editBadge(badge._id)"
+                    :id="'botaoBadge' + badge._id"
+                    v-else
+                    :disabled="editarB != null && editarB != badge._id"
+                    >Editar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="cancelarEditB(badge._id)"
+                    v-if="editarB == badge._id"
+                    >Cancelar</v-btn
+                  >
+                  <v-btn
+                    color="error"
+                    @click="deleteBadge(badge._id)"
+                    v-else
+                    :disabled="editarB != null"
+                    >Remover</v-btn
+                  >
                 </td>
               </tr>
             </tbody>
@@ -233,6 +309,18 @@
         </v-card>
       </v-container>
     </v-main>
+    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
+      {{ snackbarMessage }}
+    </v-snackbar>
+    <v-snackbar
+      ref="snackbar2"
+      v-model="snackbar2"
+      :timeout="2000"
+      color="success"
+      @input="handleSnackbarClose"
+    >
+      {{ snackbarMessage2 }}
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -457,9 +545,8 @@ export default {
         const utilizacoes =
           await this.utilizacaoStore.getUtilizacoesPendentes();
         this.utilizacoes = utilizacoes;
-
       } catch (error) {
-        this.totalUtilizacoes = error
+        this.totalUtilizacoes = error;
       }
     },
     async validarUtilizacao(id) {
@@ -468,8 +555,11 @@ export default {
           utilizacaoAprovada: true,
         });
         this.utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Utilização aprovada com sucesso!";
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.snackbarMessage = error;
       }
     },
     async rejeitarUtilizacao(id) {
@@ -478,8 +568,11 @@ export default {
           utilizacaoAprovada: false,
         });
         this.utilizacoes = await this.utilizacaoStore.getUtilizacoesPendentes();
+        this.snackbar2 = true;
+        this.snackbarMessage2 = "Utilização rejeitada com sucesso!";
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.snackbarMessage = error;
       }
     },
     async getEcopontos() {
@@ -488,7 +581,25 @@ export default {
         this.ecopontos = ecopontos;
         this.totalEcopoints = ecopontos.length;
       } catch (error) {
-        this.totalEcopoints = error
+        this.totalEcopoints = error;
+      }
+    },
+    async validarEcoponto(id) {
+      try {
+        await this.ecopontoStore.validarEcoponto(id, {
+          ecopontoAprovado: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async rejeitarEcoponto(id) {
+      try {
+        await this.ecopontoStore.validarEcoponto(id, {
+          ecopontoAprovado: false,
+        });
+      } catch (error) {
+        console.log(error);
       }
     },
     getUsersNameById(id) {
@@ -520,7 +631,6 @@ export default {
         console.log(error);
       }
     },
-
   },
 };
 </script>
