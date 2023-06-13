@@ -59,6 +59,8 @@ export default defineComponent({
       try {
         await this.store.getEcopontos();
         this.ecopontos = this.store.getAllEcopontos;
+        //this.ecopontos = this.store.converterCoords(this.ecopontos)
+        console.log(this.ecopontos);
       } catch (error) {
         console.log(error);
       }
@@ -110,7 +112,7 @@ export default defineComponent({
         this.center = marker.coordenadas;
 
         //--------------------NÃO FUNCIONA ENQUANTO A API NÃO ESTIVER PAGA--------------------//
-        const geocoder = new google.maps.Geocoder();
+        /* const geocoder = new google.maps.Geocoder();
         geocoder.geocode({ location: marker.coordenadas }).then((response) => {
           if (response.results[0]) {
             console.log(response.results[0].formatted_address);
@@ -121,7 +123,7 @@ export default defineComponent({
           } else {
             window.alert("No results found");
           }
-        }).catch((e) => window.alert("Geocoder failed due to: " + e));
+        }).catch((e) => window.alert("Geocoder failed due to: " + e)); */
 
         const ecopontoMap = JSON.stringify(marker.coordenadas)
         localStorage.setItem("ecopontoMap", ecopontoMap);

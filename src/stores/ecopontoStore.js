@@ -49,5 +49,13 @@ export const ecopontoStore = defineStore("ecoponto", {
         console.log(error);
       }
     },
+    converterCoords(ecopontos) {
+      ecopontos.forEach((ecoponto) => {
+        ecoponto.coordenadas.lat = parseFloat(ecoponto.coordenadas.lat);
+        ecoponto.coordenadas.lng = parseFloat(ecoponto.coordenadas.lng);
+      }
+      );
+      return ecopontos;
+    },
   },
 });
