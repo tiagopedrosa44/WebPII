@@ -222,8 +222,18 @@
             <p>Nome do Utilizador: {{ getUsersNameById(ecoponto.userId) }}</p>
             <p>Data: {{ ecoponto.dataCriacao }}</p>
             <p>Morada:
-              <v-text-field v-if="editarMorada"></v-text-field><span v-else>{{ ecoponto.morada }}</span>
-              &nbsp;&nbsp;<v-btn size="x-small" @click="editarMorada = true">&#9998;</v-btn>
+              <!-- <input type="text" v-if="editarMorada" :id="'inputEcoponto' + ecoponto._id"><span v-else
+                :id="'morada' + ecoponto._id">{{
+                  ecoponto.morada }}</span>
+              &nbsp;&nbsp;<span v-if="editarMorada"><v-btn size="x-small"
+                  @click="editarM(ecoponto._id)">&#x2713;</v-btn></span><span v-else><v-btn size="x-small"
+                  @click="editarM(ecoponto._id)">&#9998;</v-btn></span> -->
+              <span :id="'ecoponto' + ecoponto._id">
+                {{ ecoponto.morada }}
+              </span>
+              <span>
+                <v-btn size="x-small" :id="'botaoEcoponto' + ecoponto._id" @click="editarM(ecoponto._id)">&#9998;</v-btn>
+              </span>
             </p><br>
             <v-btn color="success" @click="validarEcoponto(ecoponto._id)">
               Aprovar
@@ -280,7 +290,8 @@ export default {
       snackbarMessage2: "",
       editar: null,
       editarB: null,
-      editarMorada: false,
+      editarMorada: null,
+      moradaOriginal: null,
       precoOriginal: null,
       stockOriginal: null,
       nomeBadgeOriginal: null,
@@ -566,6 +577,35 @@ export default {
         console.log(error);
       }
     },
+
+    async editarM(id) {
+      if (this.editarMorada == null) {
+        this.editarMorada = id;
+        const linhaMorada = document.getElementById("ecoponto" + id);
+        const botaoEditarMorada = document.getElementById("botaoEcoponto" + id)
+        this.moradaOriginal = linhaMorada.textContent;
+        linhaMorada.innerHTML = `<input type="text" style="width:50%" value="${this.moradaOriginal}">`;
+        botaoEditarMorada.innerHTML = `<v-btn size="x-small" @click="editarM(${id})">&#x2713;</v-btn>`;
+      } else {
+        this.editarMorada = null;
+        const linhaMorada = document.getElementById("ecoponto" + id);
+        const botaoEditarMorada = document.getElementById("botaoEcoponto" + id)
+        const novaMorada = linhaMorada.querySelector("input").value;
+        linhaMorada.textContent = novaMorada;
+        botaoEditarMorada.innerHTML = `<v-btn size="x-small" @click="editarM(${id})">&#9998;</v-btn>`;
+
+        try {
+          await this.ecopontoStore.editarEcoponto(id, {
+            morada: novaMorada,
+          });
+          this.snackbar2 = true;
+          this.snackbarMessage2 = "Morada editada com sucesso!";
+        } catch (error) {
+          this.snackbar = true;
+          this.snackbarMessage = error;
+        }
+      }
+    }
   },
 };
 </script>

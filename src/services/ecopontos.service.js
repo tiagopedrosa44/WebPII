@@ -121,4 +121,26 @@ export const EcopontosService = {
       throw (data.msg);
     }
   },
+  async editarEcoponto(id, data) {
+    console.log('editando')
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.accessToken;
+    const response = await fetch(`${API_URL}/ecopontos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        morada: data.morada
+      })
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.msg;
+    } else {
+      const data = await response.json();
+      throw (data.msg);
+    }
+  }
 };

@@ -125,7 +125,7 @@ export default defineComponent({
           }
         }).catch((e) => window.alert("Geocoder failed due to: " + e)); */
 
-        const ecopontoMap = JSON.stringify(marker.coordenadas)
+        const ecopontoMap = JSON.stringify({ lat: marker.coordenadas.lat, lon: marker.coordenadas.lng })
         localStorage.setItem("ecopontoMap", ecopontoMap);
         console.log(JSON.parse(ecopontoMap));
         this.jaAdicionado = true;
