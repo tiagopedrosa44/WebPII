@@ -64,7 +64,7 @@
                     Ecopontos por aprovar
                   </v-card-title>
 
-                  <v-card-subtitle>Número de ecopontos:{{ totalEcopoints }}</v-card-subtitle>
+                  <v-card-subtitle>Número de ecopontos: {{ totalEcopoints }}</v-card-subtitle>
 
                   <v-card-actions>
                     <v-btn class="ms-2" variant="outlined" @click="changeContainer('Ecopontos por Aprovar')" size="small">
@@ -86,7 +86,7 @@
                     Utilizações por aprovar
                   </v-card-title>
 
-                  <v-card-subtitle>Número de ecopontos:{{ totalUtilizacoes }}</v-card-subtitle>
+                  <v-card-subtitle>Número de ecopontos: {{ totalUtilizacoes }}</v-card-subtitle>
 
                   <v-card-actions>
                     <v-btn class="ms-2" variant="outlined" @click="changeContainer('Utilizações por Aprovar')"

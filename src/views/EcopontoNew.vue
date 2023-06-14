@@ -20,10 +20,6 @@
               <v-row>
                 <v-col align="center">
                   <p>{{ ecoponto.morada }}</p>
-                  <!-- <p>
-                    Coordenadas:  {{ ecoponto.coordenadas.lat }} 
-                    {{ ecoponto.coordenadas.lon }}
-                  </p> -->
                 </v-col>
               </v-row>
               <v-row>

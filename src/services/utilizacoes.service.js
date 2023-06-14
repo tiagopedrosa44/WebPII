@@ -16,11 +16,11 @@ export const UtilizacoesService = {
       if (data) {
         return data.utilizacoes;
       } else {
-        throw Error(data.error);
+        throw (data.error);
       }
     } else {
       const data = await response.json();
-      throw Error(data.error);
+      throw (data.error);
     }
   },
   async validarUtilizacao(id, data) {
@@ -41,7 +41,7 @@ export const UtilizacoesService = {
       return data;
     } else {
       const data = await response.json();
-      throw Error(data.msg);
+      throw (data.msg);
     }
   },
   async registarUtilizacao(idEcoponto, formData) {
@@ -59,7 +59,7 @@ export const UtilizacoesService = {
       return data;
     } else {
       const data = await response.json();
-      throw Error(data.msg);
+      throw (data.msg);
     }
   },
 };

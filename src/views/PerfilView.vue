@@ -187,10 +187,18 @@
     <br />
     <br />
     <br />
-    <v-container>
+    <v-container v-if="noUtilizacoes">
+      <v-row>
+        <v-col class="d-flex justify-center mb-6 bg-surface-variant">
+          <h1 id="titleBadge">As minhas utilizações</h1>
+        </v-col>
+      </v-row>
+      <h2>{{ noUtilizacoesMsg }}</h2>
+    </v-container>
+    <v-container v-else="!noUtilizacoes">
       <v-row>
         <v-col>
-          <h1 align="center" id="titulo">Utilizações</h1>
+          <h1 align="center" id="titulo">As minhas utilizações</h1>
         </v-col>
       </v-row>
       <v-row>
@@ -233,8 +241,9 @@
             <v-carousel-item
               v-for="badge in badges"
               :src="badge"
-              cover
-            ></v-carousel-item>
+              style="max-height: 200px; max-width: 200px"
+            >
+            </v-carousel-item>
           </v-carousel>
         </v-col>
       </v-row>
@@ -266,6 +275,8 @@ export default {
       badges: [],
       noBadges: false,
       noBadgesMsg:"",
+      noUtilizacoes: false,
+      noUtilizacoesMsg: "",
       utilizacoes: [],
     };
   },
@@ -302,7 +313,8 @@ export default {
         const utilizacoes = await this.store.getUtilizacoesUser(id);
         this.utilizacoes = utilizacoes;
       } catch (error) {
-        console.log(error);
+        this.noUtilizacoes = true;
+        this.noUtilizacoesMsg = error
       }
     }
   },

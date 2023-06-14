@@ -16,7 +16,7 @@ export const LojaService = {
             let data = await response.json();
             return data.items;
         } else {
-            throw Error(response.message);
+            throw (response.message);
         }
     },
     async getItemsUser() {
@@ -33,7 +33,7 @@ export const LojaService = {
             let data = await response.json();
             return data.items;
         } else {
-            throw Error(response.message);
+            throw (response.message);
         }
     },
     async buyItem(id) {
@@ -51,11 +51,11 @@ export const LojaService = {
             if (data) {
                 return data;
             } else {
-                throw Error(data.msg);
+                throw (data.msg);
             }
         } else {
             const data = await response.json();
-            throw Error(data.msg);
+            throw (data.msg);
         }
 
     },
@@ -73,7 +73,7 @@ export const LojaService = {
             let data = await response.json();
             return data;
         } else {
-            throw Error(response.msg);
+            throw (response.msg);
         }
     },
 
@@ -96,7 +96,7 @@ export const LojaService = {
             if (data) {
                 return data;
             } else {
-                throw Error(data.message)
+                throw (data.message)
             }
         }
     }

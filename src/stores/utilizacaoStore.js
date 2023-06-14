@@ -36,9 +36,6 @@ export const utilizacaoStore = defineStore("utilizacao", {
       }
     },
 
-    updateLocalStorage() {
-      localStorage.setItem("utilizacoes", JSON.stringify(this.utilizacoes));
-    },
 
     async validarUtilizacao(id, data) {
       try {

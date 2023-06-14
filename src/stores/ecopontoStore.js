@@ -8,6 +8,9 @@ export const ecopontoStore = defineStore("ecoponto", {
   }),
   getters: {
     getAllEcopontos: (state) => state.ecopontos,
+    getEcoponto(id) {
+      return state.ecopontos.find((ecoponto) => ecoponto.id === id);
+    },
   },
   actions: {
     async getEcopontos() {

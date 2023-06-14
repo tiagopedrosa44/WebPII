@@ -37,7 +37,7 @@ export const lojaStore = defineStore("loja", {
         const response = await LojaService.buyItem(id);
         return response;
       } catch (error) {
-        throw Error(error);
+        throw (error);
       }
     },
     async deleteItem(id) {
@@ -45,7 +45,7 @@ export const lojaStore = defineStore("loja", {
         const response = await LojaService.deleteItem(id);
         return response;
       } catch (error) {
-        throw Error(error);
+        throw (error);
       }
     },
     async editItem(id, data) {
@@ -54,7 +54,7 @@ export const lojaStore = defineStore("loja", {
         return response;
       }
       catch (error) {
-        throw Error(error);
+        throw (error);
       }
     }
   },
