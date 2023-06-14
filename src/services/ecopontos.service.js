@@ -16,11 +16,11 @@ export const EcopontosService = {
       if (data) {
         return data;
       } else {
-        throw Error(data.error);
+        throw (data.error);
       }
     } else {
       const data = await response.json();
-      throw Error(data.error);
+      throw (data.error);
     }
   },
 
@@ -39,11 +39,11 @@ export const EcopontosService = {
       if (data) {
         return data;
       } else {
-        throw Error(data.message);
+        throw (data.message);
       }
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw (data.message);
     }
   },
   async ecopontosPorValidar() {
@@ -61,7 +61,7 @@ export const EcopontosService = {
       return data.ecopontos;
     } else {
       const data = await response.json();
-      throw Error(data.error);
+      throw (data.error);
     }
   },
   async getEcopontoById(id) {
@@ -79,7 +79,7 @@ export const EcopontosService = {
       return data.ecoponto;
     } else {
       const data = await response.json();
-      throw Error(data.msg);
+      throw (data.msg);
     }
   },
   async validarEcoponto(id, data) {
@@ -100,7 +100,7 @@ export const EcopontosService = {
       return data.msg;
     } else {
       const data = await response.json();
-      throw Error(data.msg);
+      throw (data.msg);
     }
   },
   async adicionarEcoponto(formData) {
@@ -118,7 +118,7 @@ export const EcopontosService = {
       return data.msg;
     } else {
       const data = await response.json();
-      throw Error(data.msg);
+      throw (data.msg);
     }
   },
 };

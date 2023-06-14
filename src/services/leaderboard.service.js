@@ -18,7 +18,7 @@ export const leaderboardService = {
             let data = await response.json();
             return data.leaderboard;
         } else {
-            throw Error(response.message);
+            throw (response.message);
         }
     },
     async getLeaderboardEcopontos() {
@@ -35,7 +35,7 @@ export const leaderboardService = {
             let data = await response.json();
             return data.leaderboard;
         } else {
-            throw Error(response.message);
+            throw (response.message);
         }
     },
 }

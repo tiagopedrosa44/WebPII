@@ -15,7 +15,7 @@ export const UserService = {
       let data = await response.json();
       return data.users;
     } else {
-      throw Error(response.message);
+      throw (response.message);
     }
   },
 
@@ -33,7 +33,7 @@ export const UserService = {
       let data = await response.json();
       return data;
     } else {
-      throw Error(response.message);
+      throw (response.message);
     }
   },
   async updateUserById(id, data) {
@@ -56,7 +56,7 @@ export const UserService = {
       return data;
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw (data.message);
     }
   },
 
@@ -75,7 +75,7 @@ export const UserService = {
       return data;
     } else {
       const data = await response.json();
-      throw Error(data.message);
+      throw (data.message);
     }
   },
 
@@ -94,11 +94,11 @@ export const UserService = {
       if (data) {
         return data.user;
       } else {
-        throw Error(data.msg);
+        throw (data.msg);
       }
     } else {
       const data = await response.json();
-      throw Error(data.msg);
+      throw (data.msg);
     }
   },
   async getBadgesUser(id) {
@@ -138,7 +138,7 @@ export const UserService = {
       }
     } else {
       const data = await response.json();
-      throw Error(data.error);
+      throw (data.error);
     }
   },
 };

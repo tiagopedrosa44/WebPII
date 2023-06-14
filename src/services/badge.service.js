@@ -17,7 +17,7 @@ export const BadgeService = {
             if (data) {
                 return data.badges;
             } else {
-                throw Error(data.msg);
+                throw (data.msg);
             }
         }
     },
@@ -37,7 +37,7 @@ export const BadgeService = {
             if (data) {
                 return data;
             } else {
-                throw Error(data.msg);
+                throw (data.msg);
             }
         }
     },
@@ -61,7 +61,7 @@ export const BadgeService = {
             if (data) {
                 return data;
             } else {
-                throw Error(data.msg);
+                throw (data.msg);
             }
         }
     },
