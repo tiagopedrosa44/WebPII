@@ -1,5 +1,5 @@
 <template>
-  <GoogleMap api-key="AIzaSyBrCOmc3Yqq6DK8kBr2O66nt_yvsulC3hw" style="width: 100%; height: 500px" mapTypeId="hybrid"
+  <GoogleMap api-key="" style="width: 100%; height: 500px" mapTypeId="hybrid"
     :center="center" :zoom="18" ref="map" :click="true" @click="clickMarcador">
     <Marker :options="currentPosMarkerOptions" />
     <Marker v-for="ecoponto in ecopontos" @click="focarEcoponto(ecoponto._id)" :key="ecoponto._id" :options="{
