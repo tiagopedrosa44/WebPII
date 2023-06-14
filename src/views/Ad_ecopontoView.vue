@@ -88,7 +88,7 @@ export default {
       fileInput: null,
       file: null,
       lat: null,
-      lng: null,
+      lon: null,
       userId: "",
       ecopontoMap: localStorage.getItem("ecopontoMap"),
       snackbar: false,
@@ -147,7 +147,7 @@ export default {
       this.ecopontosMap = JSON.parse(localStorage.getItem("ecopontoMap"));
       if (this.ecopontosMap != null) {
         this.lat = this.ecopontosMap.lat;
-        this.lng = this.ecopontosMap.lng;
+        this.lon = this.ecopontosMap.lon;
         this.inputMoradaDisable = false;
       }
     }, 100);
