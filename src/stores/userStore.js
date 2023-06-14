@@ -7,8 +7,6 @@ import { leaderboardService } from "../services/leaderboard.service";
 export const userStore = defineStore("userStore", {
   state: () => ({
     users: [],
-    loggedUser: null,
-    loggedIn: false,
   }),
 
   getters: {
@@ -107,29 +105,6 @@ export const userStore = defineStore("userStore", {
         return response;
       } catch (error) {
         throw (error);
-      }
-    },
-    
-    deleteUser(id) {
-      const index = this.users.findIndex((user) => user.id === id);
-      this.users.splice(index, 1);
-      this.updateLocalStorage();
-    },
-    
-    calculateProgress(currentPoints) {
-      console.log(currentPoints);
-      return parseInt((currentPoints % 1000) / 10);
-    },
-    
-    verificarMedalha(user) {
-      if (user.utilizacoes == 10) {
-        user.badges.push("Utilizador Regular");
-      }
-      if (user.utilizacoes == 50) {
-        user.badges.push("Utilizador Experiente");
-      }
-      if (user.utilizacoes == 100) {
-        user.badges.push("Utilizador Veterano");
       }
     },
   },

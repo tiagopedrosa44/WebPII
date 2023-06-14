@@ -324,16 +324,9 @@ export default {
     await this.getBadgesUser(this.userId);
     await this.getUtilizacoesUser(this.userId);
     await this.getUser(this.userId);
-    this.progresso = this.store.calculateProgress(this.user.pontos);
     this.referral = this.user.referral;
   },
 
-  computed: {
-    /* utilizacoesFiltradas() {
-      const idUser = this.user.id;
-      return  this.utilizacaoStore.getUtilizacoes.filter(utilizacao => utilizacao.idUser === idUser)
-    } */
-  },
   created() {
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;

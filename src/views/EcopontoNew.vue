@@ -82,19 +82,6 @@ export default {
     await this.getEcopontoById(this.id);
     console.log(this.id);
   },
-  created() {
-    this.ecoponto = this.ecopontoStore.getEcopontoById(this.id);
-    console.log(this.ecoponto);
-    this.$watch(
-      () => this.$route.params,
-      (toParams, previousParams) => {
-        if (toParams.id !== previousParams.id) {
-          this.id = toParams.id;
-          this.ecoponto = this.ecopontoStore.getEcopontoById(this.id);
-        }
-      }
-    );
-  },
 };
 </script>
 

@@ -1,14 +1,13 @@
 <template>
   <div class="editarPerfil" align="center">
-    <div align="center">
-      <nav>
+  <v-container>
+    <v-row>
+      <v-col>
         <NavBar />
-      </nav>
-    </div>
-    <br />
-    <br />
-    <br />
-    <br />
+      </v-col>
+    </v-row>
+  </v-container>
+
     <div class="blue-background">
       <v-container>
         <v-row>
