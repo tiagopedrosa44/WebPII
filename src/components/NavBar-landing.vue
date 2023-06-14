@@ -15,8 +15,8 @@
     </v-toolbar-title>
 
     <!-- Links da direita -->
-    <v-btn @click="$router.push('login')" class="navlinks">Login</v-btn>
-    <v-btn @click="$router.push('registar')" class="navlinkRegistar"
+    <v-btn @click="$router.push('login')" class="navlinks" id="login">Login</v-btn>
+    <v-btn @click="$router.push('registar')" class="navlinkRegistar" id="registar"
       >Registar</v-btn
     >
   </v-toolbar>
