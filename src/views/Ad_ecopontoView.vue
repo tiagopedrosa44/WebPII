@@ -65,7 +65,7 @@ export default {
       fileInput: null,
       file: null,
       lat: null,
-      lng: null,
+      lon: null,
       userId: "",
       ecopontoMap: localStorage.getItem("ecopontoMap"),
       snackbar: false,
@@ -108,7 +108,7 @@ export default {
       formData.append("userId", this.userId);
       formData.append("morada", this.morada);
       formData.append("coordenadas[lat]", parseFloat(this.lat));
-      formData.append("coordenadas[lng]", parseFloat(this.lng));
+      formData.append("coordenadas[lon]", parseFloat(this.lon));
 
       try {
         await EcopontosService.adicionarEcoponto(formData);
@@ -126,7 +126,7 @@ export default {
       this.ecopontosMap = JSON.parse(localStorage.getItem("ecopontoMap"));
       if (this.ecopontosMap != null) {
         this.lat = this.ecopontosMap.lat;
-        this.lng = this.ecopontosMap.lng;
+        this.lon = this.ecopontosMap.lon;
         this.inputMoradaDisable = false;
       }
     }, 100);

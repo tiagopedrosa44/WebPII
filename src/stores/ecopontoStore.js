@@ -52,7 +52,7 @@ export const ecopontoStore = defineStore("ecoponto", {
     converterCoords(ecopontos) {
       ecopontos.forEach((ecoponto) => {
         ecoponto.coordenadas.lat = parseFloat(ecoponto.coordenadas.lat);
-        ecoponto.coordenadas.lng = parseFloat(ecoponto.coordenadas.lng);
+        ecoponto.coordenadas.lon = parseFloat(ecoponto.coordenadas.lon);
       }
       );
       return ecopontos;
