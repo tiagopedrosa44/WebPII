@@ -55,19 +55,11 @@ export const ecopontoStore = defineStore("ecoponto", {
     },
     async editarEcoponto(id, data) {
       try {
-        const response = await EcopontosService.editarEcoponto(data);
+        const response = await EcopontosService.editarEcoponto(id,data);
         return response;
       } catch (error) {
         console.log(error);
       }
-    },
-    converterCoords(ecopontos) {
-      ecopontos.forEach((ecoponto) => {
-        ecoponto.coordenadas.lat = parseFloat(ecoponto.coordenadas.lat);
-        ecoponto.coordenadas.lon = parseFloat(ecoponto.coordenadas.lon);
-      }
-      );
-      return ecopontos;
     },
   },
 });

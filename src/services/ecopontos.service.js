@@ -122,11 +122,10 @@ export const EcopontosService = {
     }
   },
   async editarEcoponto(id, data) {
-    console.log('editando')
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user.accessToken;
     const response = await fetch(`${API_URL}/ecopontos/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         Authorization: `Bearer ${token}`,
