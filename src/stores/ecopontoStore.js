@@ -52,6 +52,14 @@ export const ecopontoStore = defineStore("ecoponto", {
         console.log(error);
       }
     },
+    async editarEcoponto(id, data) {
+      try {
+        const response = await EcopontosService.editarEcoponto(data);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     converterCoords(ecopontos) {
       ecopontos.forEach((ecoponto) => {
         ecoponto.coordenadas.lat = parseFloat(ecoponto.coordenadas.lat);

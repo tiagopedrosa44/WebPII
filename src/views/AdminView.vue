@@ -578,7 +578,7 @@ export default {
       }
     },
 
-    editarM(id) {
+    async editarM(id) {
       if (this.editarMorada == null) {
         this.editarMorada = id;
         const linhaMorada = document.getElementById("ecoponto" + id);
@@ -593,6 +593,17 @@ export default {
         const novaMorada = linhaMorada.querySelector("input").value;
         linhaMorada.textContent = novaMorada;
         botaoEditarMorada.innerHTML = `<v-btn size="x-small" @click="editarM(${id})">&#9998;</v-btn>`;
+
+        try {
+          await this.ecopontoStore.editarEcoponto(id, {
+            morada: novaMorada,
+          });
+          this.snackbar2 = true;
+          this.snackbarMessage2 = "Morada editada com sucesso!";
+        } catch (error) {
+          this.snackbar = true;
+          this.snackbarMessage = error;
+        }
       }
     }
   },
