@@ -42,7 +42,7 @@ export const utilizacaoStore = defineStore("utilizacao", {
         const response = await UtilizacoesService.validarUtilizacao(id, data);
         return response;
       } catch (error) {
-        console.log(error);
+        throw error;
       }
     },
   },

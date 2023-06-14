@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { EcopontosService } from "../services/ecopontos.service";
+import { triggerRef } from "vue";
 
 export const ecopontoStore = defineStore("ecoponto", {
   state: () => ({
@@ -41,7 +42,7 @@ export const ecopontoStore = defineStore("ecoponto", {
         const response = await EcopontosService.validarEcoponto(id, data);
         return response;
       } catch (error) {
-        console.log(error);
+        throw(error);
       }
     },
     async adicionarEcoponto(data) {

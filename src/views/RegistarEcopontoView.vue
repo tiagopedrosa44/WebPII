@@ -34,6 +34,15 @@
         
       </v-container>
     </div>
+    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
+      {{ snackbarMessage }}
+    </v-snackbar>
+    <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" >
+      {{ snackbarMessage2 }}
+    </v-snackbar>
+    <v-snackbar ref="aguardando" v-model="aguardando" :timeout="50000" color="info">
+      Aguarde, processando...
+    </v-snackbar>
   </div>
 </template>
 
@@ -57,6 +66,11 @@ export default {
       fileInput: null,
       userId: "",
       fotoPreview: null,
+      snackbar: false,
+      snackbarMessage: "",
+      snackbar2: false,
+      snackbarMessage2: "",
+      aguardando: false,
     };
   },
   async mounted() {
@@ -86,15 +100,22 @@ export default {
     },
     async registarUtilizacao(event){
       event.preventDefault();
-  
+      this.aguardando = true;
       const formData = new FormData();
       formData.append("image", this.file);
       formData.append("idUser", this.userId);
       try{
         await UtilizacoesService.registarUtilizacao(this.ecoponto,formData);
-        this.$router.push("/home");
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Utilização registada com sucesso"
+        setTimeout(() => {
+          this.$router.push("/home");
+        }, 2000);
       } catch (error){
-        console.log(error);
+        this.snackbar = true;
+        this.aguardando = false;
+        this.snackbarMessage = error;
       }
 
     },

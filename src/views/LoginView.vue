@@ -37,6 +37,9 @@
     <v-snackbar ref= "snackbar2" v-model="snackbar2" :timeout="2000" color="success" >
       {{ snackbarMessage2 }}
     </v-snackbar>
+    <v-snackbar ref="aguardando" v-model="aguardando" :timeout="10000" color="info">
+      Aguarde, processando...
+    </v-snackbar>
   </div>
 </template>
 
@@ -52,22 +55,26 @@ export default {
       snackbarMessage: "",
       snackbar2: false,
       snackbarMessage2: "",
+      aguardando: false,
     };
   },
   methods: {
     async login() {
+      this.aguardando = true;
       try {
         await this.store.login({
           username: this.username,
           password: this.password,
         });
         this.snackbar2 = true;
+        this.aguardando = false;
         this.snackbarMessage2 = "Login efetuado com sucesso"
         setTimeout(() => {
           this.$router.push("/home");
         }, 2000);
       } catch (error) {
         this.snackbar = true;
+        this.aguardando = false;
         this.snackbarMessage = error;
       }
     },

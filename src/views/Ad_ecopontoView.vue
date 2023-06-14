@@ -55,13 +55,19 @@
         </form>
       </div>
     </v-container>
+    <v-snackbar ref="snackbar" v-model="snackbar" :timeout="2000" color="error">
+      {{ snackbarMessage }}
+    </v-snackbar>
     <v-snackbar
-      ref="snackbar"
-      v-model="snackbar"
+      ref="snackbar2"
+      v-model="snackbar2"
       :timeout="2000"
       color="success"
     >
-      {{ snackbarMessage }}
+      {{ snackbarMessage2 }}
+    </v-snackbar>
+    <v-snackbar ref="aguardando" v-model="aguardando" :timeout="50000" color="info">
+      Aguarde, processando...
     </v-snackbar>
   </div>
 </template>
@@ -91,9 +97,11 @@ export default {
       lon: null,
       userId: "",
       ecopontoMap: localStorage.getItem("ecopontoMap"),
+      snackbar2: false,
+      snackbarMessage2: "",
       snackbar: false,
-      snackbarMessage:
-        "Ecoponto adicionado com sucesso! A voltar à página inicial...",
+      snackbarMessage: "",
+      aguardando: false,
       morada: "",
       inputMoradaDisable: true,
     };
@@ -126,20 +134,26 @@ export default {
 
     async registarEcoponto(event) {
       event.preventDefault();
+      this.aguardando = true;
       const formData = new FormData();
       formData.append("image", this.file);
       formData.append("userId", this.userId);
       formData.append("morada", this.morada);
       formData.append("coordenadas[lat]", parseFloat(this.lat));
-      formData.append("coordenadas[lon]", parseFloat(this.lng));
+      formData.append("coordenadas[lon]", parseFloat(this.lon));
       try {
         await EcopontosService.adicionarEcoponto(formData);
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Ecoponto adicionado com sucesso!";
+        setTimeout(() => {
+          this.$router.push("/home");
+        }, 2000);
       } catch (error) {
-        console.log(error);
-      }
-      setTimeout(() => {
-        this.$router.push("/home");
-      }, 2000);
+        this.snackbar = true;
+        this.aguardando = false;
+        this.snackbarMessage = error;
+      } 
     },
   },
   mounted() {

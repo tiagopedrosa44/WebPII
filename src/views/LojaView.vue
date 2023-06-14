@@ -35,7 +35,11 @@
             <v-card-text id="titulo">{{ item.nome }}</v-card-text>
             <v-card-text id="pontos">{{ item.preco }} </v-card-text>
             <v-card-actions>
-              <v-btn icon="fa-solid fa-cart-shopping" id="btncomprar" @click="buyItem(item._id)"></v-btn>
+              <v-btn
+                icon="fa-solid fa-cart-shopping"
+                id="btncomprar"
+                @click="buyItem(item._id)"
+              ></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -46,7 +50,15 @@
     </v-snackbar>
     <v-snackbar v-model="snackbar2" :timeout="2000" color="success">
       {{ snackbarMessage2 }}
-     </v-snackbar>
+    </v-snackbar>
+    <v-snackbar
+      ref="aguardando"
+      v-model="aguardando"
+      :timeout="10000"
+      color="info"
+    >
+      Aguarde, processando...
+    </v-snackbar>
   </div>
 </template>
 
@@ -71,14 +83,15 @@ export default {
       snackbarMessage: "",
       snackbar2: false,
       snackbarMessage2: "",
+      aguardando: false,
     };
   },
   methods: {
-    getUserId(){
-      const user = JSON.parse(localStorage.getItem('user'));
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem("user"));
       const token = user.accessToken;
 
-      if(token) {
+      if (token) {
         const decoded = jwtDecode(token);
         this.userId = decoded.id;
       }
@@ -86,7 +99,7 @@ export default {
     async getUser(id) {
       try {
         const users = await this.userStore.getUserByID(id);
-        this.moedas = users.moedas
+        this.moedas = users.moedas;
       } catch (error) {
         console.log(error);
       }
@@ -95,32 +108,25 @@ export default {
       try {
         const items = await this.store.getItemsUser();
         this.items = items;
-        console.log(this.items[0])
+        console.log(this.items[0]);
       } catch (error) {
         console.log(error);
       }
     },
     async buyItem(id) {
+      this.aguardando = true;
       try {
         await this.store.buyItem(id);
         await this.getUser(this.userId);
         this.snackbar2 = true;
+        this.aguardando = false;
         this.snackbarMessage2 = "Item comprado com successo";
       } catch (error) {
         this.snackbar = true;
+        this.aguardando = false;
         this.snackbarMessage = error;
       }
     },
-    /* comprar(item) {
-      if(this.user.moedas >= item.preço){
-        this.user.moedas -= item.preço;
-        this.userStore.updateLocalStorage()
-        this.snackbar2 = true;
-      }
-      else{
-        this.snackbar = true;
-      }
-    } */
   },
   async mounted() {
     this.getUserId();

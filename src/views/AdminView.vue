@@ -252,6 +252,9 @@
     <v-snackbar ref="snackbar2" v-model="snackbar2" :timeout="2000" color="success" @input="handleSnackbarClose">
       {{ snackbarMessage2 }}
     </v-snackbar>
+    <v-snackbar ref="aguardando" v-model="aguardando" :timeout="50000" color="info">
+      Aguarde, processando...
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -288,6 +291,7 @@ export default {
       snackbarMessage: "",
       snackbar2: false,
       snackbarMessage2: "",
+      aguardando: false,
       editar: null,
       editarB: null,
       editarMorada: null,
@@ -327,13 +331,16 @@ export default {
       }
     },
     async deleteUser(id) {
+      this.aguardando = true;
       try {
         await this.store.deleteUserById(id);
         this.users = this.users.filter((user) => user._id !== id);
         this.snackbar2 = true;
+        this.aguardando = false;
         this.snackbarMessage2 = "Utilizador removido com sucesso!";
       } catch (error) {
         this.snackbar = true;
+        this.snackbarMessage = error;
         this.snackbarMessage = error;
       }
     },
@@ -347,13 +354,16 @@ export default {
       }
     },
     async deleteItem(id) {
+      this.aguardando = true;
       try {
         await this.lojaStore.deleteItem(id);
         this.itensLoja = this.itensLoja.filter((item) => item._id !== id);
         this.snackbar2 = true;
+        this.aguardando = false;
         this.snackbarMessage2 = "Item removido com sucesso!";
       } catch (error) {
         this.snackbar = true;
+        this.aguardando = false;
         this.snackbarMessage = error;
       }
     },
@@ -378,16 +388,18 @@ export default {
 
         linhaPreco.textContent = novoPreco;
         linhaStock.textContent = novoStock;
-
+        this.aguardando = true;
         try {
           await this.lojaStore.editItem(id, {
             stock: novoStock,
             preco: novoPreco,
           });
           this.snackbar2 = true;
+          this.aguardando = false;
           this.snackbarMessage2 = "Item editado com sucesso!";
         } catch (error) {
           this.snackbar = true;
+          this.aguardando = false;
           this.snackbarMessage = error;
         }
       }
@@ -435,28 +447,33 @@ export default {
 
         linhaNome.textContent = novoNome;
         linhaFoto.textContent = novaFoto;
-
+        this.aguardando = true;
         try {
           await this.badgeStore.editBadge(id, {
             nome: novoNome,
             foto: novaFoto,
           });
           this.snackbar2 = true;
+          this.aguardando = false;
           this.snackbarMessage2 = "Badge editada com sucesso!";
         } catch (error) {
           this.snackbar = true;
+          this.aguardando = false;
           this.snackbarMessage = error;
         }
       }
     },
     async deleteBadge(id) {
+      this.aguardando = true;
       try {
         await this.badgeStore.deleteBadge(id);
         this.badges = this.badges.filter((badge) => badge._id !== id);
         this.snackbar2 = true;
+        this.aguardando = false;
         this.snackbarMessage2 = "Badge removida com sucesso!";
       } catch (error) {
         this.snackbar = true;
+        this.aguardando = false;
         this.snackbarMessage = error;
       }
     },
@@ -483,44 +500,24 @@ export default {
       }
     },
     async validarUtilizacao(id) {
+      this.aguardando = true;
       try {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: true,
         });
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Utilização validada com sucesso!";
         setTimeout(async () => {
           await this.getUtilizacoesPendentes();
         }, 2000);
       } catch (error) {
-        console.log(error);
-      }
-    },
-    async deleteUser(id) {
-      try {
-        await this.store.deleteUserById(id);
-        this.users = this.users.filter((user) => user._id !== id);
-        this.snackbar2 = true;
-        this.snackbarMessage2 = "Utilizador removido com sucesso!";
-      } catch (error) {
         this.snackbar = true;
+        this.aguardando = false;
         this.snackbarMessage = error;
       }
     },
-    async rejeitarUtilizacao(id) {
-      try {
-        await this.utilizacaoStore.validarUtilizacao(id, {
-          utilizacaoAprovada: false,
-        });
-        this.utilizacoes = this.utilizacoes.filter(
-          (utilizacao) => utilizacao._id !== id
-        );
 
-        setTimeout(async () => {
-          await this.getUtilizacoesPendentes();
-        }, 2000);
-      } catch (error) {
-        console.log(error);
-      }
-    },
     async getEcopontos() {
       try {
         const ecopontos = await this.ecopontoStore.getEcopontosPorValidar();
@@ -531,21 +528,39 @@ export default {
       }
     },
     async validarEcoponto(id) {
+      this.aguardando = true;
       try {
         await this.ecopontoStore.validarEcoponto(id, {
           ecopontoAprovado: true,
         });
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Ecoponto validado com sucesso!";
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.aguardando = false;
+        this.snackbarMessage = error;
       }
     },
     async rejeitarEcoponto(id) {
+      this.aguardando = true;
       try {
         await this.ecopontoStore.validarEcoponto(id, {
           ecopontoAprovado: false,
         });
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Ecoponto rejeitado com sucesso!";
+        setTimeout(async () => {
+          await this.getEcopontos();
+        }, 2000);
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.aguardando = false;
+        this.snackbarMessage = error;
+        setTimeout(async () => {
+          await this.getEcopontos();
+        }, 2000);
       }
     },
     getUsersNameById(id) {
@@ -553,28 +568,34 @@ export default {
       return user.nome;
     },
     async validarUtilizacao(id) {
+      this.aguardando = true;
       try {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: true,
         });
-        setTimeout(async () => {
-          await this.getUtilizacoesPendentes();
-        }, 2000);
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Utilização validada com sucesso!";
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.aguardando = false;
+        this.snackbarMessage = error;
       }
     },
 
     async rejeitarUtilizacao(id) {
+      this.aguardando = true;
       try {
         await this.utilizacaoStore.validarUtilizacao(id, {
           utilizacaoAprovada: false,
         });
-        setTimeout(async () => {
-          await this.getUtilizacoesPendentes();
-        }, 2000);
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Utilização rejeitada com sucesso!";
       } catch (error) {
-        console.log(error);
+        this.snackbar = true;
+        this.aguardando = false;
+        this.snackbarMessage = error;
       }
     },
 

@@ -85,6 +85,9 @@
   >
     {{ snackbarMessage2 }}
   </v-snackbar>
+  <v-snackbar ref="aguardando" v-model="aguardando" :timeout="50000" color="info">
+      Aguarde, processando...
+    </v-snackbar>
 </template>
 
 <script>
@@ -110,6 +113,7 @@ export default {
       snackbarMessage: "",
       snackbar2: false,
       snackbarMessage2: "",
+      aguardando: false,
       fotoPreview:null,
       file:null,
       fileInput:null,
@@ -145,6 +149,7 @@ export default {
       }
     },
     async updateUser() {
+      this.aguardando = true;
       try {
         await this.store.editUser(this.userId, {
           biografia: this.biografia,
@@ -152,23 +157,31 @@ export default {
           confirmPassword: this.confirmarSenha,
         });
         this.snackbar2 = true;
+        this.aguardando = false;
         this.snackbarMessage2 = "Dados alterados com sucesso!";
         setTimeout(() => {
           this.$router.push("/perfil");
         }, 2000);
       } catch (error) {
         this.snackbar = true;
+        this.aguardando = false;
         this.snackbarMessage = error;
       }
     },
     async updateUserImage(event){
+      this.aguardando = true;
       event.preventDefault()
       const formData = new FormData();
       formData.append('image',this.file);
       try{
         await UserService.updateUserPhotoById(this.userId,formData);
+        this.snackbar2 = true;
+        this.aguardando = false;
+        this.snackbarMessage2 = "Imagem alterada com sucesso!";
       } catch(error){
-        console.log(error);
+        this.snackbar = true;
+        this.aguardando = false;
+        this.snackbarMessage = error;
       }
     },
     alterarImagem() {
