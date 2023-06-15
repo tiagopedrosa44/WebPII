@@ -85,7 +85,7 @@
     {{ snackbarMessage2 }}
   </v-snackbar>
   <v-snackbar ref="aguardando" v-model="aguardando" :timeout="50000" color="info">
-      Aguarde, processando...
+    Aguarde, a processar...
     </v-snackbar>
 </template>
 

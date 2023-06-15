@@ -57,7 +57,7 @@
       :timeout="10000"
       color="info"
     >
-      Aguarde, processando...
+    Aguarde, a processar...
     </v-snackbar>
   </div>
 </template>
