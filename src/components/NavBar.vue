@@ -9,7 +9,7 @@
     >
       {{ link.text }}
     </v-btn>
-    <v-btn v-if="isAdmin()" @click="$router.push('admin')">Menu Admin</v-btn>
+    <v-btn v-if="isAdmin()" @click="$router.push('/admin')">Menu Admin</v-btn>
 
     <!-- Logo -->
     <v-toolbar-title id="centro">
@@ -22,7 +22,7 @@
 
     <!-- Links da direita -->
     <v-btn
-      @click="$router.push('perfil')"
+      @click="$router.push('/perfil')"
       icon="fa-regular fa-user"
       id="perfil"
     ></v-btn>
